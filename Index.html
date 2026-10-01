@@ -4,7 +4,7 @@
 <base target="_top">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KPI CSIRT — SIEM & MITRE</title>
+<title>KPI CSIRT — SIEM & MITRE · </title>
 <style>
 :root{--bg:#0E1621;--panel:#17202A;--panel2:#1C2526;--ink:#E8EDF2;--muted:#8A9BA8;--line:#2A3743;
 --brand:#27AE60;--accent:#42A5F5;--warn:#E0A64B;--crit:#E05C5C;
@@ -14,7 +14,7 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.4}
 .app{position:fixed;inset:0;display:flex;flex-direction:column}
 .appbar{flex:none;display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
-.appbar img{height:28px}
+.appbar img{height:42px}
 .appbar h1{font-size:15px;margin:0;font-weight:700}
 .appbar .sub{font-size:11px;color:var(--muted);margin:0}
 .appbar .sp{flex:1}
@@ -45,6 +45,57 @@ a.btn{text-decoration:none;display:inline-block}
 .card.kpi.t-bad{border-left-color:var(--crit)}.card.kpi.t-bad .v{color:var(--crit)}
 .card.kpi.t-acc{border-left-color:var(--c2)}  .card.kpi.t-acc .v{color:var(--c2)}
 .card.kpi .v small{color:var(--muted)!important}
+/* ===== CSIRT ===== */
+#v-soc{--sevC:#B57BD8;--sevH:#E05C5C;--sevM:#E0A64B;--sevL:#27AE60}
+#v-soc .row{display:grid;gap:12px;margin-bottom:12px}
+#v-soc .r3{grid-template-columns:repeat(3,1fr)}
+#v-soc .r2{grid-template-columns:1fr 1fr}
+#v-soc .r21{grid-template-columns:1fr 2fr}
+@media(max-width:900px){#v-soc .r3,#v-soc .r2,#v-soc .r21{grid-template-columns:1fr}}
+#v-soc h3{font-size:13px;margin:0 0 10px;font-weight:700}
+#v-soc h3 small{color:var(--muted);font-weight:500}
+#v-soc .funnel{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0}
+#v-soc .ftier{color:#fff;border-radius:8px;padding:12px 10px;text-align:center;font-size:13px;line-height:1.3}
+#v-soc .ftier b{font-size:16px}
+#v-soc .sevleg{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--muted)}
+#v-soc .sevleg .it{display:flex;gap:5px;align-items:center}
+#v-soc .sevleg .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+#v-soc .ev{display:flex;flex-direction:column;gap:7px}
+#v-soc .evrow{display:flex;align-items:center;gap:8px}
+#v-soc .evm{width:60px;font-size:11px;color:var(--muted);text-align:right;flex:none}
+#v-soc .evbar{flex:1;display:flex;height:22px;border-radius:5px;overflow:hidden;background:var(--panel2)}
+#v-soc .evseg{display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;min-width:0}
+#v-soc .therm{position:relative;height:74px;border-radius:8px;overflow:hidden;display:flex;margin-top:6px}
+#v-soc .tzone{flex:1;display:flex;align-items:center;justify-content:center;font-size:12px;color:#0c1420;font-weight:700;opacity:.9}
+#v-soc .tdot{position:absolute;top:34px;width:12px;height:12px;border-radius:50%;background:#2F81F7;border:2px solid #fff;transform:translateX(-50%);box-shadow:0 0 0 3px rgba(47,129,247,.3)}
+#v-soc .tlab{position:absolute;top:50px;font-size:9px;color:var(--ink);transform:translateX(-50%);white-space:nowrap}
+#v-soc .tcur{font-size:11px;color:var(--muted);margin-top:6px}
+#v-soc ul.pts{margin:0;padding-left:18px;font-size:13px;line-height:1.55}
+#v-soc ul.pts li{margin-bottom:5px}
+#v-soc .csupd{font-size:11px;color:var(--muted);margin:2px 0 12px}
+#cs_head{margin-bottom:6px}
+.csper{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.csper-l{font-size:12px;color:var(--muted);font-weight:600;margin-right:2px}
+.cschip{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:5px 13px;font:13px 'Segoe UI';cursor:pointer;transition:.12s}
+.cschip.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+.cschip.csall{background:transparent;border-style:dashed;color:var(--muted);font-weight:600}
+.cschip:hover{filter:brightness(1.1)}
+/* sub-abas Eng. Detecção */
+.subtabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:0 0 12px;overflow-x:auto}
+.subtab{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;padding:9px 14px;cursor:pointer;white-space:nowrap}
+.subtab.active{color:var(--ink);border-bottom-color:var(--brand)}
+#v-eng:not([hidden]){display:flex;flex-direction:column}
+/* termômetro legível */
+#v-soc .tcurbig,#v-soc .tcurbig{font-size:14px;color:var(--muted);margin-bottom:4px}
+#v-soc .tbadge,#v-soc .tbadge{color:#0c1420;font-size:11px;font-weight:700;padding:2px 9px;border-radius:12px;margin-left:6px}
+#v-soc .thermwrap,#v-soc .thermwrap{position:relative;margin:26px 0 22px}
+#v-soc .thermbar,#v-soc .thermbar{position:relative;height:54px;border-radius:10px;overflow:hidden;display:flex}
+#v-soc .tdot2,#v-soc .tdot2{position:absolute;top:27px;width:16px;height:16px;border-radius:50%;border:2px solid var(--panel);transform:translate(-50%,-50%);box-shadow:0 0 0 1.5px rgba(255,255,255,.4);z-index:2}
+#v-soc .tdlab,#v-soc .tdlab{position:absolute;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;white-space:nowrap;background:var(--panel);padding:0 4px;border-radius:4px}
+#v-soc .tptr,#v-soc .tptr{position:absolute;top:-14px;transform:translateX(-50%);color:var(--ink);font-size:12px;text-align:center;line-height:1}
+#v-soc .tptr .tval,#v-soc .tptr .tval{font-weight:700;white-space:nowrap;margin-bottom:1px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 7px;display:inline-block}
+#v-soc .tchips,#v-soc .tchips{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+#v-soc .tchip,#v-soc .tchip{border:1.5px solid;border-radius:14px;padding:3px 10px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
 .callout{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:var(--panel2)}
 .callout .ic{font-size:18px;flex:none}.callout.good{border-color:#2b6b45}.callout.warn{border-color:#7a5e2a}.callout.info{border-color:#385a7a}
 .callout b{display:block;font-size:12.5px;margin-bottom:2px}.callout p{margin:0;font-size:11.5px;color:var(--muted)}
@@ -171,25 +222,32 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 <body>
 <div class="app">
   <div class="appbar">
-    <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,#27AE60,#1565C0);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px">SOC</div>
-    <div><h1>KPI Operacional — SIEM · CSIRT</h1><p class="sub">Gestão de SIEM · Elastic Security · painel v10</p></div>
+    <div style="width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#27AE60,#1565C0);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px">SOC</div>
+    <div><h1>KPI Executivo/Operacional — CSIRT</h1><p class="sub" id="subUpd">Cibersegurança</p></div>
     <div class="sp"></div>
     <span id="perCtrl" class="ctrl"><label for="mes">Período</label><select id="mes"></select></span>
     <button class="btn" id="fs">⛶ Tela cheia</button>
   </div>
   <div class="tabs" id="tabs">
-    <button class="tab active" data-v="geral">Visão geral</button>
-    <button class="tab" data-v="deteccao">Detecção</button>
-    <button class="tab" data-v="alertas">Alertas</button>
-    <button class="tab" data-v="capacidade">Capacidade &amp; Ativos</button>
-    <button class="tab" data-v="mitre" id="tabMitre">Cobertura MITRE</button>
+    <button class="tab active" data-v="soc" id="tabSoc">SOC + CSIRT</button>
+    <button class="tab" data-v="eng" id="tabEng">Eng. Detecção</button>
   </div>
   <div class="content">
-    <div class="view" id="v-geral"></div>
-    <div class="view" id="v-deteccao" hidden></div>
-    <div class="view" id="v-alertas" hidden></div>
-    <div class="view" id="v-capacidade" hidden></div>
-    <div class="view" id="v-mitre" hidden><div class="mtabs" id="mi_tabs"><button class="mtab active" data-mv="matriz">Matriz ATT&CK</button><button class="mtab" data-mv="resumo">Resumo por tática</button><button class="mtab" data-mv="gaps">Gaps prioritários</button><button class="mtab" data-mv="setembro">Casos do mês</button></div><div class="mkpis" id="mi_kpis"></div><div class="miupd" id="mi_upd"></div><div class="mviews"><div class="mview" id="miv-matriz"><div class="controls"><input type="search" id="mi_q" placeholder="Filtrar por técnica, subtécnica, ID ou regra…" aria-label="Filtrar"><label class="tog"><input type="checkbox" id="mi_exptog"> Expandir subtécnicas cobertas</label><label class="tog"><input type="checkbox" id="mi_septog"> Só casos do mês</label><div class="legend"><span class="it"><span class="sw cov"></span>Total</span><span class="it"><span class="sw part"></span>Parcial</span><span class="it"><span class="sw none"></span>Sem cobertura</span><span class="it"><span class="sw new"></span>Caso do mês</span></div></div><div class="fit" id="mi_fit"><div class="matrix" id="mi_matrix"><div class="loading">Carregando cobertura do Elastic…</div></div></div></div><div class="mview" id="miv-resumo" hidden><div class="scroll" id="mi_resumo"></div></div><div class="mview" id="miv-gaps" hidden><div class="scroll" id="mi_gaps"></div></div><div class="mview" id="miv-setembro" hidden><div class="scroll" id="mi_setembro"></div></div></div><div class="mtip" id="mi_tip" role="tooltip" aria-hidden="true"></div></div>
+    <div class="view" id="v-soc"><div id="cs_head"></div><div id="cs_body"><div class="loading">Carregando KPIs do CSIRT…</div></div></div>
+    <div class="view" id="v-eng" hidden>
+      <div class="subtabs" id="engtabs">
+        <button class="subtab active" data-sv="geral">Visão geral</button>
+        <button class="subtab" data-sv="deteccao">Detecção</button>
+        <button class="subtab" data-sv="alertas">Alertas</button>
+        <button class="subtab" data-sv="capacidade">Capacidade &amp; Ativos</button>
+        <button class="subtab" data-sv="mitre">Cobertura MITRE</button>
+      </div>
+      <div class="view" id="v-geral" hidden></div>
+      <div class="view" id="v-deteccao" hidden></div>
+      <div class="view" id="v-alertas" hidden></div>
+      <div class="view" id="v-capacidade" hidden></div>
+      <div class="view" id="v-mitre" hidden><div class="mtabs" id="mi_tabs"><button class="mtab active" data-mv="matriz">Matriz ATT&CK</button><button class="mtab" data-mv="resumo">Resumo por tática</button><button class="mtab" data-mv="gaps">Gaps prioritários</button><button class="mtab" data-mv="setembro">Casos do mês</button></div><div class="mkpis" id="mi_kpis"></div><div class="miupd" id="mi_upd"></div><div class="mviews"><div class="mview" id="miv-matriz"><div class="controls"><input type="search" id="mi_q" placeholder="Filtrar por técnica, subtécnica, ID ou regra…" aria-label="Filtrar"><label class="tog"><input type="checkbox" id="mi_exptog"> Expandir subtécnicas cobertas</label><label class="tog"><input type="checkbox" id="mi_septog"> Só casos do mês</label><div class="legend"><span class="it"><span class="sw cov"></span>Total</span><span class="it"><span class="sw part"></span>Parcial</span><span class="it"><span class="sw none"></span>Sem cobertura</span><span class="it"><span class="sw new"></span>Caso do mês</span></div></div><div class="fit" id="mi_fit"><div class="matrix" id="mi_matrix"><div class="loading">Carregando cobertura do Elastic…</div></div></div></div><div class="mview" id="miv-resumo" hidden><div class="scroll" id="mi_resumo"></div></div><div class="mview" id="miv-gaps" hidden><div class="scroll" id="mi_gaps"></div></div><div class="mview" id="miv-setembro" hidden><div class="scroll" id="mi_setembro"></div></div></div><div class="mtip" id="mi_tip" role="tooltip" aria-hidden="true"></div></div>
+    </div>
   </div>
 </div>
 <script>
@@ -198,14 +256,37 @@ var E=[];
 var fmt=function(n){return (n==null?'—':n.toLocaleString('pt-BR'));};
 var pct=function(a,b){return b?Math.round(a/b*100):0;};
 var findM=function(arr,m){for(var i=0;i<arr.length;i++)if(arr[i].m===m)return arr[i];return null;};
+window.__setUpd=function(ts){var e=document.getElementById('subUpd');if(!e)return;
+  var t=(ts&&ts!=='snapshot')?ts:new Date().toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  e.textContent='Cibersegurança · atualizado em '+t;};
 
 document.getElementById('fs').addEventListener('click',function(){try{var e=document.documentElement;document.fullscreenElement?document.exitFullscreen():e.requestFullscreen&&e.requestFullscreen();}catch(x){}});
+function curSub(){var a=document.querySelector('#engtabs .subtab.active');return a?a.dataset.sv:'geral';}
+function showPer(){ // mostra o seletor global de período só nas sub-abas operacionais
+  var soc=!document.getElementById('v-soc').hidden;
+  var vis=(!soc)&&(curSub()!=='mitre');
+  var pc=document.getElementById('perCtrl');if(pc)pc.style.display=vis?'':'none';
+}
 document.getElementById('tabs').addEventListener('click',function(e){var b=e.target.closest('.tab');if(!b)return;
   document.querySelectorAll('#tabs .tab').forEach(function(t){t.classList.toggle('active',t===b);});
-  ['geral','deteccao','alertas','capacidade','mitre'].forEach(function(k){document.getElementById('v-'+k).hidden=(k!==b.dataset.v);});
-  var isM=b.dataset.v==='mitre';
-  var pc=document.getElementById('perCtrl');if(pc)pc.style.display=isM?'none':'';
-  if(isM&&window.__loadMitre){window.__loadMitre();}});
+  var v=b.dataset.v;
+  document.getElementById('v-soc').hidden=(v!=='soc');
+  document.getElementById('v-eng').hidden=(v!=='eng');
+  if(v==='soc'&&window.__loadCsirt)window.__loadCsirt();
+  if(v==='eng'){ // ativa a sub-aba corrente
+    var sv=curSub();
+    ['geral','deteccao','alertas','capacidade','mitre'].forEach(function(k){var el=document.getElementById('v-'+k);if(el)el.hidden=(k!==sv);});
+    if(sv==='mitre'&&window.__loadMitre)window.__loadMitre();
+  }
+  showPer();
+});
+document.getElementById('engtabs').addEventListener('click',function(e){var b=e.target.closest('.subtab');if(!b)return;
+  document.querySelectorAll('#engtabs .subtab').forEach(function(t){t.classList.toggle('active',t===b);});
+  var sv=b.dataset.sv;
+  ['geral','deteccao','alertas','capacidade','mitre'].forEach(function(k){var el=document.getElementById('v-'+k);if(el)el.hidden=(k!==sv);});
+  if(sv==='mitre'&&window.__loadMitre)window.__loadMitre();
+  showPer();
+});
 
 /* ---------- gráficos ---------- */
 function lineSVG(series,opts){opts=opts||{};var W=opts.w||600,H=opts.h||300,pl=48,pr=26,pt=38,pb=34;
@@ -367,7 +448,7 @@ function renderAll(i){
 /* seletor + carga da planilha (Google Drive) */
 var sel=document.getElementById('mes');
 sel.addEventListener('change',function(){if(DATA)renderAll(parseInt(this.value,10));});
-function initOper(d){DATA=d;var YY=String(new Date().getFullYear()).slice(-2);
+function initOper(d){DATA=d;try{window.__setUpd(d&&d.updated);}catch(e){}var YY=String(new Date().getFullYear()).slice(-2);
   E=(DATA.elastic||[]).filter(function(e){return e.m.split('/')[1]===YY;});if(!E.length)E=DATA.elastic||[];
   sel.innerHTML=E.map(function(e,i){return '<option value="'+i+'">'+e.m+'</option>';}).join('');
   var last=E.length-1;sel.value=String(last);renderAll(last);}
@@ -388,7 +469,7 @@ var STAT={existing:'Cobertura total',partial:'Cobertura parcial',none:'Sem cober
 var pct=function(a,b){return b?Math.round(a/b*100):0;};
 
 function boot(DATA){
-  var S=DATA.summary;
+  var S=DATA.summary;try{window.__setUpd(S&&S.updated);}catch(e){}
   var _u=document.getElementById('mi_upd');var _now=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});if(_u)_u.textContent='Cobertura ao vivo do Elastic · dados de '+(S.updated||'—')+' · verificado '+_now+(DATA.code_version?' · build '+DATA.code_version:'');
     document.getElementById('mi_kpis').innerHTML=[
     ['Técnicas',S.dist_tech_cov+'<small>/'+S.dist_tech_total+'</small>',pct(S.dist_tech_cov,S.dist_tech_total)+'%'],
@@ -542,6 +623,167 @@ function showErr(e){var m=document.getElementById('mi_matrix');if(m)m.innerHTML=
 var _miLoaded=false;
 function loadMitre(){if(_miLoaded)return;_miLoaded=true;if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(boot).withFailureHandler(showErr).getCoverage();setInterval(function(){google.script.run.withSuccessHandler(boot).withFailureHandler(function(){}).getCoverage();},1800000);}else{showErr('Abra pela URL /exec do Web App.');}}
 window.__loadMitre=loadMitre;
+})();
+</script>
+<script>
+(function(){
+/* Snapshot embutido (agregado) — usado até o getCsirt() ao vivo responder. */
+var CSIRT_SNAPSHOT={"updated":"snapshot","months":["Abr/2026","Mai/2026","Jun/2026","Jul/2026","Ago/2026"],"cur":{"mttd":3.1,"mtta":2.8,"mttr":92.4},"funnel":{"m":"Ago/2026","total":4210,"ia":3020,"n1":1190,"csirt":31,"ia_pct":71.7,"n1_pct":28.3,"csirt_pct":0.7},"funnels":[{"m":"Abr/2026","total":9800,"ia":7500,"n1":2300,"csirt":58,"ia_pct":76.5,"n1_pct":23.5,"csirt_pct":0.6},{"m":"Mai/2026","total":7100,"ia":5600,"n1":1500,"csirt":44,"ia_pct":78.9,"n1_pct":21.1,"csirt_pct":0.6},{"m":"Jun/2026","total":5400,"ia":4350,"n1":1050,"csirt":39,"ia_pct":80.6,"n1_pct":19.4,"csirt_pct":0.7},{"m":"Jul/2026","total":4600,"ia":3600,"n1":1000,"csirt":35,"ia_pct":78.3,"n1_pct":21.7,"csirt_pct":0.8},{"m":"Ago/2026","total":4210,"ia":3020,"n1":1190,"csirt":31,"ia_pct":71.7,"n1_pct":28.3,"csirt_pct":0.7}],"incidents":[{"m":"Abr/2026","Critical":2,"High":10,"Medium":40,"Low":6,"total":58},{"m":"Mai/2026","Critical":1,"High":7,"Medium":30,"Low":6,"total":44},{"m":"Jun/2026","Critical":0,"High":8,"Medium":24,"Low":7,"total":39},{"m":"Jul/2026","Critical":0,"High":6,"Medium":23,"Low":6,"total":35},{"m":"Ago/2026","Critical":0,"High":5,"Medium":20,"Low":6,"total":31}],"mttd_ai":[{"m":"Abr/2026","ov":4.5,"Critical":1.2,"High":5.8,"Medium":2.6,"Low":3.7},{"m":"Mai/2026","ov":3.6,"Critical":1.8,"High":4.9,"Medium":2.5,"Low":3.1},{"m":"Jun/2026","ov":3.2,"Critical":2.4,"High":3.3,"Medium":2.7,"Low":2.9},{"m":"Jul/2026","ov":3.05,"Critical":2.9,"High":3.1,"Medium":2.6,"Low":2.8},{"m":"Ago/2026","ov":3.1,"Critical":2.2,"High":3.4,"Medium":2.9,"Low":3.0}],"mtta_csirt":[{"m":"Abr/2026","ov":2.1,"Critical":3.4,"High":3.9,"Medium":1.8,"Low":2.2},{"m":"Mai/2026","ov":2.9,"Critical":null,"High":3.6,"Medium":2.6,"Low":3.1},{"m":"Jun/2026","ov":2.75,"Critical":null,"High":3.2,"Medium":2.7,"Low":2.4},{"m":"Jul/2026","ov":2.85,"Critical":null,"High":3.0,"Medium":2.8,"Low":2.7},{"m":"Ago/2026","ov":2.8,"Critical":null,"High":3.1,"Medium":2.5,"Low":2.9}],"mttr_csirt":[{"m":"Abr/2026","ov":70.0,"Critical":95.0,"High":60.0,"Medium":52.0,"Low":110.0},{"m":"Mai/2026","ov":85.0,"Critical":null,"High":100.0,"Medium":70.0,"Low":115.0},{"m":"Jun/2026","ov":98.0,"Critical":null,"High":80.0,"Medium":92.0,"Low":140.0},{"m":"Jul/2026","ov":95.0,"Critical":null,"High":98.0,"Medium":96.0,"Low":90.0},{"m":"Ago/2026","ov":92.4,"Critical":null,"High":94.0,"Medium":82.0,"Low":120.0}]};
+var SEV=['Critical','High','Medium','Low'], SEVC={Critical:'var(--sevC)',High:'var(--sevH)',Medium:'var(--sevM)',Low:'var(--sevL)'};
+function f2(x){return x==null?'—':(Math.round(x*100)/100).toFixed(2).replace('.',',');}
+function fN(x){return x==null?'—':Math.round(x).toLocaleString('pt-BR');}
+function tone(v,ok,warn){if(v==null)return'';return v<ok?'t-ok':(v<warn?'t-warn':'t-bad');}
+function kpi(v,l,tn,delta){return '<div class="card kpi '+tn+'"><div class="v">'+v+'</div><div class="l">'+l+'</div>'+(delta?'<div class="d '+delta.cls+'">'+delta.txt+'</div>':'')+'</div>';}
+/* variação vs mês anterior — menor é melhor (queda = verde) */
+function kdelta(series){var n=series.length;if(n<2)return null;var L=series[n-1].ov,P=series[n-2].ov;if(L==null||P==null)return null;
+  var d=Math.round((L-P)*100)/100;var arrow=d<=0?'▼':'▲';var cls=d<=0?'up':'down';
+  return {txt:arrow+' '+(d>0?'+':'')+f2(d)+' vs '+series[n-2].m,cls:cls};}
+
+function sevLegend(){return '<div class="sevleg">'+SEV.map(function(s){return '<span class="it"><span class="sw" style="background:'+SEVC[s]+'"></span>'+s+'</span>';}).join('')+'</div>';}
+
+function funnelHTML(f){
+  var tiers=[['Tratados pela IA',f.ia,f.ia_pct,'#6C4AB6',96],['Tratados N1 SOC',f.n1,f.n1_pct,'#1AA0A0',66],['CSIRT',f.csirt,f.csirt_pct,'#27AE60',40]];
+  return '<div class="funnel"><div style="font-size:12px;color:var(--muted);margin-bottom:2px">100% · '+fN(f.total)+' alertas triados ('+f.m+')</div>'+
+    tiers.map(function(t){return '<div class="ftier" style="width:'+t[4]+'%;background:'+t[3]+'"><b>'+fN(t[1])+'</b> · '+f2(t[2])+'%<br><span style="opacity:.9;font-size:11px">'+t[0]+'</span></div>';}).join('')+'</div>';
+}
+
+/* barras verticais empilhadas (incidentes) */
+function incidentsSVG(rows){
+  var W=Math.max(360,rows.length*110),H=250,pl=34,pr=12,pt=24,pb=28;
+  var max=Math.max.apply(null,rows.map(function(r){return r.total;}))||1;
+  var bw=Math.min(52,(W-pl-pr)/rows.length*0.6);
+  var Y=function(v){return pt+(1-v/max)*(H-pt-pb);};
+  var g='<svg viewBox="0 0 '+W+' '+H+'" width="100%" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI">';
+  for(var k=0;k<=4;k++){var gy=pt+k*(H-pt-pb)/4;g+='<line x1="'+pl+'" y1="'+gy.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+gy.toFixed(1)+'" stroke="var(--line)"/>';}
+  rows.forEach(function(r,i){
+    var cx=pl+(i+0.5)*(W-pl-pr)/rows.length, x=cx-bw/2, yb=H-pb;
+    SEV.forEach(function(s){var v=r[s]||0;if(v<=0)return;var h=(v/max)*(H-pt-pb);yb-=h;
+      g+='<rect x="'+x.toFixed(1)+'" y="'+yb.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" fill="'+SEVC[s]+'"/>';});
+    g+='<text x="'+cx.toFixed(1)+'" y="'+(Y(r.total)-6).toFixed(1)+'" fill="var(--ink)" font-size="12" font-weight="700" text-anchor="middle">'+r.total+'</text>';
+    g+='<text x="'+cx.toFixed(1)+'" y="'+(H-9)+'" fill="var(--muted)" font-size="11" text-anchor="middle">'+r.m+'</text>';
+  });
+  return g+'</svg>';
+}
+
+/* barras horizontais empilhadas (evolutivos por severidade) */
+function evHTML(series){
+  var maxSum=0;series.forEach(function(r){var s=0;SEV.forEach(function(k){s+=(r[k]||0);});if(s>maxSum)maxSum=s;});
+  maxSum=maxSum||1;
+  return '<div class="ev">'+series.map(function(r){
+    var segs=SEV.map(function(k){var v=r[k];if(v==null||v<=0)return'';var w=v/maxSum*100;
+      return '<div class="evseg" style="width:'+w.toFixed(1)+'%;background:'+SEVC[k]+'" title="'+k+': '+f2(v)+'">'+(w>7?f2(v):'')+'</div>';}).join('');
+    return '<div class="evrow"><div class="evm">'+r.m+'</div><div class="evbar">'+segs+'</div></div>';
+  }).join('')+'</div>'+sevLegend();
+}
+
+/* termômetro legível: barra com faixas + ponteiro do mês atual + chips por mês */
+function zoneOf(v,bounds){if(v==null)return 1;if(v<bounds[0])return 0;if(v<bounds[1])return 1;return 2;}
+function thermHTML(series,zones,scaleMax,cur,unit,bounds){
+  var zc=['#27AE60','#E0A64B','#E05C5C'];
+  var W=[50,30,20]; // larguras visuais fixas das faixas (%)
+  function xv(v){if(v==null)return 0;
+    if(v<bounds[0])return (v/bounds[0])*W[0];
+    if(v<bounds[1])return W[0]+((v-bounds[0])/(bounds[1]-bounds[0]))*W[1];
+    return W[0]+W[1]+Math.min((v-bounds[1])/bounds[1],1)*W[2];}
+  var zt=zones.map(function(z,i){return '<div class="tzone" style="flex:0 0 '+W[i]+'%;background:'+z[2]+'">'+z[0]+'</div>';}).join('');
+  // bolinhas na barra (posição por valor dentro da faixa; jitter p/ separar as que se agrupam)
+  var dots=series.map(function(r,i){var v=r.ov;if(v==null)return'';var z=zoneOf(v,bounds),x=Math.min(Math.max(xv(v),1.2),98.5),dy=(i-(series.length-1)/2)*9;
+    return '<div class="tdot2" title="'+r.m+': '+f2(v)+' '+unit+'" style="left:'+x.toFixed(1)+'%;margin-top:'+dy.toFixed(0)+'px;background:'+zc[z]+'"></div>';}).join('');
+  var curZ=zoneOf(cur,bounds),curTxt=['Excelente','Aceitável','Ineficiente'][curZ];
+  var head='<div class="tcurbig">Mês atual: <b style="color:'+zc[curZ]+'">'+f2(cur)+' '+unit+'</b> <span class="tbadge" style="background:'+zc[curZ]+'">'+curTxt+'</span></div>';
+  var chips=series.map(function(r){var v=r.ov,z=zoneOf(v,bounds);
+    return '<span class="tchip" style="border-color:'+zc[z]+';color:'+zc[z]+'">'+r.m.split('/')[0]+' · '+f2(v)+'</span>';}).join('');
+  return head+'<div class="thermwrap"><div class="thermbar">'+zt+'</div>'+dots+'</div><div class="tchips">'+chips+'</div>';
+}
+
+function ptsCard(title,arr,cls){return '<div class="card"><h3>'+title+'</h3><ul class="pts">'+arr.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>';}
+
+function renderCsirt(d){
+  var inc=d.incidents,mttd=d.mttd_ai,mtta=d.mtta_csirt,mttr=d.mttr_csirt,c=d.cur;
+  var html=''+
+  '<div class="csupd">Consolidado de Triage_AI + Detalhados_INC · dados de '+(d.updated||'—')+'</div>'+
+  '<div class="row r3">'+
+    kpi(f2(c.mttd),'Tempo Médio de Detecção (MTTD AI · min)'+(mttd.length?' — '+mttd[mttd.length-1].m:''),tone(c.mttd,5,15),kdelta(mttd))+
+    kpi(f2(c.mtta),'Tempo Médio Início da Resposta (MTTA CSIRT · min)'+(mtta.length?' — '+mtta[mtta.length-1].m:''),tone(c.mtta,5,15),kdelta(mtta))+
+    kpi(f2(c.mttr),'Tempo Médio de Resposta (MTTR CSIRT · min)'+(mttr.length?' — '+mttr[mttr.length-1].m:''),tone(c.mttr,1440,2880),kdelta(mttr))+
+  '</div>'+
+  '<div class="row r2">'+
+    '<div class="card"><h3>Atendimento de Chamados</h3>'+funnelHTML(d.funnel)+'</div>'+
+    '<div class="card"><h3>Incidentes (CSIRT) <small>por mês</small></h3>'+incidentsSVG(inc)+sevLegend()+'</div>'+
+  '</div>'+
+  '<div class="row r3">'+
+    '<div class="card"><h3>Evolutivo MTTD AI <small>(min)</small></h3>'+evHTML(mttd)+'</div>'+
+    '<div class="card"><h3>Evolutivo MTTA CSIRT <small>(min)</small></h3>'+evHTML(mtta)+'</div>'+
+    '<div class="card"><h3>Evolutivo MTTR CSIRT <small>(min)</small></h3>'+evHTML(mttr)+'</div>'+
+  '</div>'+
+  '<div class="row"><div class="card"><h3>Termômetro MTTD AI <small>(min)</small></h3>'+
+      thermHTML(mttd,[['Excelente <5','','#d6f0e0'],['Aceitável <15','','#f7eccf'],['Ineficiente >15','','#f6d6d6']],20,c.mttd,'min',[5,15])+'</div></div>'+
+  '<div class="row"><div class="card"><h3>Termômetro MTTR <small>(min)</small></h3>'+
+      thermHTML(mttr,[['Excelente <24h','','#d6f0e0'],['Aceitável <48h','','#f7eccf'],['Ineficiente >48h','','#f6d6d6']],3000,c.mttr,'min',[1440,2880])+'</div></div>'+
+  '<div class="row r2">'+
+    ptsCard('✅ Pontos-chave',d.key_points||[],'ok')+
+    ptsCard('⚠️ Pontos de atenção',d.attention||[],'warn')+
+  '</div>';
+  document.getElementById('cs_body').innerHTML=html;
+}
+
+/* ---- filtro por período ---- */
+function deriveKey(f,mttr,inc,cur){var k=[],L=mttr.length-1,P=L-1;
+  if(f&&f.ia_pct>=60)k.push('Automação por IA em '+f2(f.ia_pct)+'% dos alertas triados ('+fN(f.ia)+' de '+fN(f.total)+') — só '+f2(f.csirt_pct)+'% escalaram ao CSIRT.');
+  if(P>=0&&mttr[L].ov!=null&&mttr[P].ov!=null){var d=mttr[L].ov-mttr[P].ov,pc=mttr[P].ov?Math.round(Math.abs(d)/mttr[P].ov*100):0;if(d<=0)k.push('MTTR caiu de '+f2(mttr[P].ov)+' para '+f2(mttr[L].ov)+' min ('+pc+'%) vs '+mttr[P].m+'.');}
+  if(P>=0){var di=inc[L].total-inc[P].total;if(di<=0)k.push('Incidentes reduziram de '+inc[P].total+' para '+inc[L].total+' vs '+inc[P].m+'.');}
+  if(cur.mtta!=null&&cur.mtta<5)k.push('MTTA CSIRT em '+f2(cur.mtta)+' min — dentro da meta de resposta.');
+  if(!k.length)k.push('Sem destaques positivos no período selecionado.');return k;}
+function deriveAtt(f,mttr,inc,cur){var a=[],L=mttr.length-1,P=L-1;
+  if(P>=0&&mttr[L].ov!=null&&mttr[P].ov!=null){var d=mttr[L].ov-mttr[P].ov,pc=mttr[P].ov?Math.round(Math.abs(d)/mttr[P].ov*100):0;if(d>0)a.push('MTTR subiu de '+f2(mttr[P].ov)+' para '+f2(mttr[L].ov)+' min ('+pc+'%) vs '+mttr[P].m+'.');}
+  if(P>=0){var di=inc[L].total-inc[P].total;if(di>0)a.push('Incidentes aumentaram de '+inc[P].total+' para '+inc[L].total+' vs '+inc[P].m+'.');}
+  var lr=mttr[L];if(lr&&lr.Low!=null&&lr.High!=null&&lr.Low>lr.High)a.push('MTTR de severidade Low ('+f2(lr.Low)+' min) acima de High ('+f2(lr.High)+' min) — revisar priorização de fila.');
+  if(cur.mttr!=null&&cur.mttr>60)a.push('MTTR CSIRT em '+f2(cur.mttr)+' min no mês — acima de 1h; avaliar gargalos de contenção.');
+  if(!a.length)a.push('Nenhum ponto de atenção crítico no período selecionado.');return a;}
+function filterData(d,sel){
+  var inS=function(x){return sel.indexOf(x.m)>=0;}, last=function(a){return a.length?a[a.length-1]:null;};
+  var inc=d.incidents.filter(inS),mttd=d.mttd_ai.filter(inS),mtta=d.mtta_csirt.filter(inS),mttr=d.mttr_csirt.filter(inS),fns=(d.funnels||[]).filter(inS);
+  var fun;
+  if(fns.length){var TT=0,IA=0,N1=0,CS2=0;fns.forEach(function(x){TT+=x.total;IA+=x.ia;N1+=x.n1;CS2+=x.csirt;});
+    fun={m:(fns.length===1?fns[0].m:fns[0].m+'–'+fns[fns.length-1].m),total:TT,ia:IA,n1:N1,csirt:CS2,
+      ia_pct:TT?Math.round(IA/TT*1000)/10:0,n1_pct:TT?Math.round(N1/TT*1000)/10:0,csirt_pct:TT?Math.round(CS2/TT*1000)/10:0};}
+  else fun=d.funnel;
+  var cur={mttd:last(mttd)?last(mttd).ov:null,mtta:last(mtta)?last(mtta).ov:null,mttr:last(mttr)?last(mttr).ov:null};
+  return {updated:d.updated,months:sel,cur:cur,funnel:fun,incidents:inc,mttd_ai:mttd,mtta_csirt:mtta,mttr_csirt:mttr,
+    key_points:deriveKey(fun,mttr,inc,cur),attention:deriveAtt(fun,mttr,inc,cur)};
+}
+var CS=null;
+function selectedMonths(){var a=[];document.querySelectorAll('#cs_head .cschip.on').forEach(function(b){a.push(b.dataset.m);});return a;}
+function applyCs(){var sel=selectedMonths();if(!sel.length)return;renderCsirt(filterData(CS,sel));}
+function buildPeriod(){
+  var head=document.getElementById('cs_head');
+  head.innerHTML='<div class="csper"><span class="csper-l">📅 Período:</span>'+
+    CS.months.map(function(m){return '<button class="cschip on" data-m="'+m+'">'+m+'</button>';}).join('')+
+    '<button class="cschip csall">Todos</button></div>';
+  if(head._wired)return; head._wired=true;
+  head.addEventListener('click',function(e){
+    if(e.target.closest('.csall')){document.querySelectorAll('#cs_head .cschip:not(.csall)').forEach(function(b){b.classList.add('on');});applyCs();return;}
+    var c=e.target.closest('.cschip');if(!c)return;
+    var on=document.querySelectorAll('#cs_head .cschip.on:not(.csall)');
+    if(c.classList.contains('on')&&on.length<=1)return; // manter ao menos 1
+    c.classList.toggle('on');applyCs();
+  });
+}
+var _csLoaded=false;
+function bootCs(d){CS=d;try{window.__setUpd(d&&d.updated);}catch(e){}buildPeriod();applyCs();}
+function loadCsirt(){
+  if(_csLoaded)return; _csLoaded=true;
+  bootCs(CSIRT_SNAPSHOT); // render imediato
+  if(window.google&&google.script&&google.script.run){
+    var ok=function(d){if(d&&d.months&&d.months.length)bootCs(d);};
+    google.script.run.withSuccessHandler(ok).withFailureHandler(function(){}).getCsirt();
+    setInterval(function(){google.script.run.withSuccessHandler(ok).withFailureHandler(function(){}).getCsirt();},2*60*60*1000);
+  }
+}
+window.__loadCsirt=loadCsirt;
+/* CSIRT é a aba padrão: esconde o seletor global de período e carrega ao abrir a página */
+try{var _pc=document.getElementById('perCtrl');if(_pc)_pc.style.display='none';}catch(e){}
+loadCsirt();
 })();
 </script>
 </body>
