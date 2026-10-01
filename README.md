@@ -87,9 +87,11 @@ Duas abas no topo:
 - **Termômetros de SLA** (Excelente/Aceitável/Ineficiente) com bolinhas por mês.
 - **Pontos-chave / Pontos de atenção** gerados automaticamente dos dados.
 - **Seletor de período multi-mês** que recalcula todos os componentes.
+- **Sub-aba Falsos Positivos**: taxa de FP, precisão (TP), % de FP tratados pela IA sem humano, horas poupadas pela IA; tendência de FP mês a mês; barras FP × TP com rótulo de dados; ranking de FP por tecnologia; top regras geradoras de FP (backlog de tuning); heatmap Tecnologia × Severidade.
 
 **Eng. Detecção**
 - Cobertura MITRE ATT&CK ao vivo (matriz, resumo por tática, gaps, casos do mês).
+- **Casos do mês com evolutivo**: seletor de mês + gráfico de barras do nº de casos de uso criados mês a mês (regras custom habilitadas, agrupadas pela data de criação), com detalhamento das regras do mês selecionado.
 - KPIs operacionais, alertas, licenciamento (semáforo), reconciliação SIEM × inventário.
 
 **Plataforma**
