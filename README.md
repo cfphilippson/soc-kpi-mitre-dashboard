@@ -88,6 +88,7 @@ Duas abas no topo:
 - **Pontos-chave / Pontos de atenção** gerados automaticamente dos dados.
 - **Seletor de período multi-mês** que recalcula todos os componentes.
 - **Sub-aba Falsos Positivos**: taxa de FP, precisão (TP), % de FP tratados pela IA sem humano, horas poupadas pela IA; tendência de FP mês a mês; barras FP × TP com rótulo de dados; ranking de FP por tecnologia; top regras geradoras de FP (backlog de tuning); heatmap Tecnologia × Severidade.
+- **Drill-down de Incidentes**: clique no card "Incidentes (CSIRT)" abre um modal comparando o último mês com o anterior do período, com a variação (Δ) por Vetor, Plataforma, Taxonomia, Tipo da taxonomia e os casos de uso que mais cresceram — para explicar rapidamente o que motivou a oscilação mês a mês.
 
 **Eng. Detecção**
 - Cobertura MITRE ATT&CK ao vivo (matriz, resumo por tática, gaps, casos do mês).

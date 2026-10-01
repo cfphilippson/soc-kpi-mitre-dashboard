@@ -112,6 +112,27 @@ a.btn{text-decoration:none;display:inline-block}
 #cs_fp .hm .hd{color:var(--muted);text-align:center;padding:4px}
 #cs_fp .hm .rl{color:var(--ink);display:flex;align-items:center}
 #cs_fp .hm .cell{border-radius:5px;padding:9px 4px;text-align:center;font-weight:700}
+/* ---- Incidentes: card clicável + drill-down ---- */
+#v-soc .inccard{cursor:pointer;transition:border-color .12s,transform .12s}
+#v-soc .inccard:hover{border-color:var(--brand)}
+#v-soc .inccard:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.ddov{position:fixed;inset:0;z-index:80;background:rgba(5,10,16,.66);display:flex;align-items:flex-start;justify-content:center;padding:36px 16px;overflow:auto}
+.ddov[hidden]{display:none}
+.ddpanel{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:1080px;width:100%;padding:20px 22px 24px;box-shadow:0 18px 60px rgba(0,0,0,.5)}
+.ddclose{position:absolute;top:12px;right:14px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:14px}
+.ddclose:hover{border-color:var(--brand)}
+.ddtitle{margin:0 0 4px;font-size:16px}
+.ddhead{font-size:15px;color:var(--muted);margin:6px 0 16px}.ddhead b{color:var(--ink)}
+.ddgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.ddsec h4{margin:0 0 7px;font-size:13px;color:var(--ink)}
+.ddsec.ddwide{grid-column:1/-1;margin-top:4px}
+.ddtbl{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+.ddtbl th{text-align:left;color:var(--muted);font-weight:600;padding:4px 8px;border-bottom:1px solid var(--line)}
+.ddtbl th:not(:first-child),.ddtbl td:not(:first-child){text-align:right;width:52px}
+.ddtbl td{padding:4px 8px;border-bottom:1px solid var(--line)}
+.ddtbl td:first-child{color:var(--ink)}
+.ddtbl .up{color:#ff6b6b;font-weight:700}.ddtbl .down{color:#51cf88;font-weight:700}.ddtbl .flat{color:var(--muted)}
+@media(max-width:820px){.ddgrid{grid-template-columns:1fr}}
 .callout{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:var(--panel2)}
 .callout .ic{font-size:18px;flex:none}.callout.good{border-color:#2b6b45}.callout.warn{border-color:#7a5e2a}.callout.info{border-color:#385a7a}
 .callout b{display:block;font-size:13px;margin-bottom:2px}.callout p{margin:0;font-size:12.5px;color:var(--muted)}
@@ -256,7 +277,7 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
     <button class="tab" data-v="eng" id="tabEng">Eng. Detecção</button>
   </div>
   <div class="content">
-    <div class="view" id="v-soc"><div id="cs_head"></div><div class="subtabs" id="soctabs"><button class="subtab active" data-sq="csirt">Visão geral CSIRT</button><button class="subtab" data-sq="fp">Falsos Positivos</button></div><div id="cs_body"><div class="loading">Carregando KPIs do CSIRT…</div></div><div id="cs_fp" hidden></div></div>
+    <div class="view" id="v-soc"><div id="cs_head"></div><div class="subtabs" id="soctabs"><button class="subtab active" data-sq="csirt">Visão geral CSIRT</button><button class="subtab" data-sq="fp">Falsos Positivos</button></div><div id="cs_body"><div class="loading">Carregando KPIs do CSIRT…</div></div><div id="cs_fp" hidden></div><div id="cs_ddov" class="ddov" hidden><div class="ddpanel"><button id="cs_ddclose" class="ddclose" title="Fechar">✕</button><h3 class="ddtitle">Drill-down — Incidentes CSIRT</h3><div id="cs_ddbody"></div></div></div></div>
     <div class="view" id="v-eng" hidden>
       <div class="subtabs" id="engtabs">
         <button class="subtab active" data-sv="geral">Visão geral</button>
@@ -694,7 +715,7 @@ window.__loadMitre=loadMitre;
 <script>
 (function(){
 /* Snapshot embutido (agregado) — usado até o getCsirt() ao vivo responder. */
-var CSIRT_SNAPSHOT={"updated": "snapshot (demo)", "months": ["Abr/2026", "Mai/2026", "Jun/2026", "Jul/2026", "Ago/2026"], "cur": {"mttd": 3.1, "mtta": 2.8, "mttr": 92.4}, "funnel": {"m": "Ago/2026", "total": 4210, "ia": 3020, "n1": 1190, "csirt": 31, "ia_pct": 71.7, "n1_pct": 28.3, "csirt_pct": 0.7}, "funnels": [{"m": "Abr/2026", "total": 9800, "ia": 7500, "n1": 2300, "csirt": 58, "ia_pct": 76.5, "n1_pct": 23.5, "csirt_pct": 0.6}, {"m": "Mai/2026", "total": 7100, "ia": 5600, "n1": 1500, "csirt": 44, "ia_pct": 78.9, "n1_pct": 21.1, "csirt_pct": 0.6}, {"m": "Jun/2026", "total": 5400, "ia": 4350, "n1": 1050, "csirt": 39, "ia_pct": 80.6, "n1_pct": 19.4, "csirt_pct": 0.7}, {"m": "Jul/2026", "total": 4600, "ia": 3600, "n1": 1000, "csirt": 35, "ia_pct": 78.3, "n1_pct": 21.7, "csirt_pct": 0.8}, {"m": "Ago/2026", "total": 4210, "ia": 3020, "n1": 1190, "csirt": 31, "ia_pct": 71.7, "n1_pct": 28.3, "csirt_pct": 0.7}], "incidents": [{"m": "Abr/2026", "Critical": 2, "High": 10, "Medium": 40, "Low": 6, "total": 58}, {"m": "Mai/2026", "Critical": 1, "High": 7, "Medium": 30, "Low": 6, "total": 44}, {"m": "Jun/2026", "Critical": 0, "High": 8, "Medium": 24, "Low": 7, "total": 39}, {"m": "Jul/2026", "Critical": 0, "High": 6, "Medium": 23, "Low": 6, "total": 35}, {"m": "Ago/2026", "Critical": 0, "High": 5, "Medium": 20, "Low": 6, "total": 31}], "mttd_ai": [{"m": "Abr/2026", "ov": 4.5, "Critical": 1.2, "High": 5.8, "Medium": 2.6, "Low": 3.7}, {"m": "Mai/2026", "ov": 3.6, "Critical": 1.8, "High": 4.9, "Medium": 2.5, "Low": 3.1}, {"m": "Jun/2026", "ov": 3.2, "Critical": 2.4, "High": 3.3, "Medium": 2.7, "Low": 2.9}, {"m": "Jul/2026", "ov": 3.05, "Critical": 2.9, "High": 3.1, "Medium": 2.6, "Low": 2.8}, {"m": "Ago/2026", "ov": 3.1, "Critical": 2.2, "High": 3.4, "Medium": 2.9, "Low": 3.0}], "mtta_csirt": [{"m": "Abr/2026", "ov": 2.1, "Critical": 3.4, "High": 3.9, "Medium": 1.8, "Low": 2.2}, {"m": "Mai/2026", "ov": 2.9, "Critical": null, "High": 3.6, "Medium": 2.6, "Low": 3.1}, {"m": "Jun/2026", "ov": 2.75, "Critical": null, "High": 3.2, "Medium": 2.7, "Low": 2.4}, {"m": "Jul/2026", "ov": 2.85, "Critical": null, "High": 3.0, "Medium": 2.8, "Low": 2.7}, {"m": "Ago/2026", "ov": 2.8, "Critical": null, "High": 3.1, "Medium": 2.5, "Low": 2.9}], "mttr_csirt": [{"m": "Abr/2026", "ov": 70.0, "Critical": 95.0, "High": 60.0, "Medium": 52.0, "Low": 110.0}, {"m": "Mai/2026", "ov": 85.0, "Critical": null, "High": 100.0, "Medium": 70.0, "Low": 115.0}, {"m": "Jun/2026", "ov": 98.0, "Critical": null, "High": 80.0, "Medium": 92.0, "Low": 140.0}, {"m": "Jul/2026", "ov": 95.0, "Critical": null, "High": 98.0, "Medium": 96.0, "Low": 90.0}, {"m": "Ago/2026", "ov": 92.4, "Critical": null, "High": 94.0, "Medium": 82.0, "Low": 120.0}], "fp": {"months": ["Abr/2026", "Mai/2026", "Jun/2026", "Jul/2026", "Ago/2026"], "per_month": [{"m": "Abr/2026", "total": 9800, "fp": 8200, "tp": 1600, "fp_auto": 6200, "auto_min": 28000}, {"m": "Mai/2026", "total": 7100, "fp": 6050, "tp": 1050, "fp_auto": 4900, "auto_min": 13500}, {"m": "Jun/2026", "total": 5400, "fp": 4950, "tp": 450, "fp_auto": 4100, "auto_min": 10800}, {"m": "Jul/2026", "total": 4600, "fp": 4250, "tp": 350, "fp_auto": 3500, "auto_min": 9100}, {"m": "Ago/2026", "total": 4210, "fp": 3650, "tp": 560, "fp_auto": 2800, "auto_min": 7300}], "tech": {"elastic": [7800, 4000, 1400, 800, 650], "visionone": [120, 1400, 3000, 3100, 2500], "cortex": [200, 430, 420, 320, 460], "defender": [80, 180, 120, 30, 40]}, "heat": {"elastic": {"Critical": [180, 120, 60, 40, 0], "High": [4200, 40, 50, 30, 150], "Medium": [2200, 2300, 900, 550, 460], "Low": [1220, 1540, 390, 180, 40]}, "visionone": {"Critical": [0, 0, 0, 0, 0], "High": [2, 2, 20, 30, 30], "Medium": [10, 1200, 2800, 2900, 2200], "Low": [108, 198, 180, 170, 270]}, "cortex": {"Critical": [1, 0, 0, 0, 1], "High": [30, 170, 80, 100, 240], "Medium": [150, 220, 250, 180, 170], "Low": [19, 40, 90, 40, 49]}, "defender": {"Critical": [0, 0, 0, 0, 0], "High": [40, 20, 10, 8, 10], "Medium": [12, 8, 20, 15, 20], "Low": [28, 152, 90, 7, 10]}}, "rules": [{"title": "Default Custom Rule", "tech": "visionone", "pm": [60, 1250, 2900, 3000, 2300], "total": 9510}, {"title": "Potential Credential Access via DCSync", "tech": "elastic", "pm": [4000, 0, 0, 0, 0], "total": 4000}, {"title": "Web Reputation Threat Detection", "tech": "elastic", "pm": [1200, 1300, 30, 0, 0], "total": 2530}, {"title": "Password Spray Attack - Active Directory", "tech": "elastic", "pm": [560, 1600, 200, 0, 0], "total": 2360}, {"title": "PsExec Service File Transfer to Admin Share", "tech": "elastic", "pm": [1000, 70, 18, 3, 5], "total": 1096}, {"title": "Multiple Logon Failure from the same Source Address", "tech": "elastic", "pm": [680, 35, 70, 100, 180], "total": 1065}, {"title": "Suspicious Process Creation", "tech": "cortex", "pm": [20, 20, 22, 60, 36], "total": 158}, {"title": "Anomalous Token involving one user", "tech": "defender", "pm": [140, 140, 18, 12, 46], "total": 356}]}};
+var CSIRT_SNAPSHOT={"updated": "snapshot (demo)", "months": ["Abr/2026", "Mai/2026", "Jun/2026", "Jul/2026", "Ago/2026"], "cur": {"mttd": 3.1, "mtta": 2.8, "mttr": 92.4}, "funnel": {"m": "Ago/2026", "total": 4210, "ia": 3020, "n1": 1190, "csirt": 31, "ia_pct": 71.7, "n1_pct": 28.3, "csirt_pct": 0.7}, "funnels": [{"m": "Abr/2026", "total": 9800, "ia": 7500, "n1": 2300, "csirt": 58, "ia_pct": 76.5, "n1_pct": 23.5, "csirt_pct": 0.6}, {"m": "Mai/2026", "total": 7100, "ia": 5600, "n1": 1500, "csirt": 44, "ia_pct": 78.9, "n1_pct": 21.1, "csirt_pct": 0.6}, {"m": "Jun/2026", "total": 5400, "ia": 4350, "n1": 1050, "csirt": 39, "ia_pct": 80.6, "n1_pct": 19.4, "csirt_pct": 0.7}, {"m": "Jul/2026", "total": 4600, "ia": 3600, "n1": 1000, "csirt": 35, "ia_pct": 78.3, "n1_pct": 21.7, "csirt_pct": 0.8}, {"m": "Ago/2026", "total": 4210, "ia": 3020, "n1": 1190, "csirt": 31, "ia_pct": 71.7, "n1_pct": 28.3, "csirt_pct": 0.7}], "incidents": [{"m": "Abr/2026", "Critical": 2, "High": 10, "Medium": 40, "Low": 6, "total": 58}, {"m": "Mai/2026", "Critical": 1, "High": 7, "Medium": 30, "Low": 6, "total": 44}, {"m": "Jun/2026", "Critical": 0, "High": 8, "Medium": 24, "Low": 7, "total": 39}, {"m": "Jul/2026", "Critical": 0, "High": 6, "Medium": 23, "Low": 6, "total": 35}, {"m": "Ago/2026", "Critical": 0, "High": 5, "Medium": 20, "Low": 6, "total": 31}], "mttd_ai": [{"m": "Abr/2026", "ov": 4.5, "Critical": 1.2, "High": 5.8, "Medium": 2.6, "Low": 3.7}, {"m": "Mai/2026", "ov": 3.6, "Critical": 1.8, "High": 4.9, "Medium": 2.5, "Low": 3.1}, {"m": "Jun/2026", "ov": 3.2, "Critical": 2.4, "High": 3.3, "Medium": 2.7, "Low": 2.9}, {"m": "Jul/2026", "ov": 3.05, "Critical": 2.9, "High": 3.1, "Medium": 2.6, "Low": 2.8}, {"m": "Ago/2026", "ov": 3.1, "Critical": 2.2, "High": 3.4, "Medium": 2.9, "Low": 3.0}], "mtta_csirt": [{"m": "Abr/2026", "ov": 2.1, "Critical": 3.4, "High": 3.9, "Medium": 1.8, "Low": 2.2}, {"m": "Mai/2026", "ov": 2.9, "Critical": null, "High": 3.6, "Medium": 2.6, "Low": 3.1}, {"m": "Jun/2026", "ov": 2.75, "Critical": null, "High": 3.2, "Medium": 2.7, "Low": 2.4}, {"m": "Jul/2026", "ov": 2.85, "Critical": null, "High": 3.0, "Medium": 2.8, "Low": 2.7}, {"m": "Ago/2026", "ov": 2.8, "Critical": null, "High": 3.1, "Medium": 2.5, "Low": 2.9}], "mttr_csirt": [{"m": "Abr/2026", "ov": 70.0, "Critical": 95.0, "High": 60.0, "Medium": 52.0, "Low": 110.0}, {"m": "Mai/2026", "ov": 85.0, "Critical": null, "High": 100.0, "Medium": 70.0, "Low": 115.0}, {"m": "Jun/2026", "ov": 98.0, "Critical": null, "High": 80.0, "Medium": 92.0, "Low": 140.0}, {"m": "Jul/2026", "ov": 95.0, "Critical": null, "High": 98.0, "Medium": 96.0, "Low": 90.0}, {"m": "Ago/2026", "ov": 92.4, "Critical": null, "High": 94.0, "Medium": 82.0, "Low": 120.0}], "fp": {"months": ["Abr/2026", "Mai/2026", "Jun/2026", "Jul/2026", "Ago/2026"], "per_month": [{"m": "Abr/2026", "total": 9800, "fp": 8200, "tp": 1600, "fp_auto": 6200, "auto_min": 28000}, {"m": "Mai/2026", "total": 7100, "fp": 6050, "tp": 1050, "fp_auto": 4900, "auto_min": 13500}, {"m": "Jun/2026", "total": 5400, "fp": 4950, "tp": 450, "fp_auto": 4100, "auto_min": 10800}, {"m": "Jul/2026", "total": 4600, "fp": 4250, "tp": 350, "fp_auto": 3500, "auto_min": 9100}, {"m": "Ago/2026", "total": 4210, "fp": 3650, "tp": 560, "fp_auto": 2800, "auto_min": 7300}], "tech": {"elastic": [7800, 4000, 1400, 800, 650], "visionone": [120, 1400, 3000, 3100, 2500], "cortex": [200, 430, 420, 320, 460], "defender": [80, 180, 120, 30, 40]}, "heat": {"elastic": {"Critical": [180, 120, 60, 40, 0], "High": [4200, 40, 50, 30, 150], "Medium": [2200, 2300, 900, 550, 460], "Low": [1220, 1540, 390, 180, 40]}, "visionone": {"Critical": [0, 0, 0, 0, 0], "High": [2, 2, 20, 30, 30], "Medium": [10, 1200, 2800, 2900, 2200], "Low": [108, 198, 180, 170, 270]}, "cortex": {"Critical": [1, 0, 0, 0, 1], "High": [30, 170, 80, 100, 240], "Medium": [150, 220, 250, 180, 170], "Low": [19, 40, 90, 40, 49]}, "defender": {"Critical": [0, 0, 0, 0, 0], "High": [40, 20, 10, 8, 10], "Medium": [12, 8, 20, 15, 20], "Low": [28, 152, 90, 7, 10]}}, "rules": [{"title": "Default Custom Rule", "tech": "visionone", "pm": [60, 1250, 2900, 3000, 2300], "total": 9510}, {"title": "Potential Credential Access via DCSync", "tech": "elastic", "pm": [4000, 0, 0, 0, 0], "total": 4000}, {"title": "Web Reputation Threat Detection", "tech": "elastic", "pm": [1200, 1300, 30, 0, 0], "total": 2530}, {"title": "Password Spray Attack - Active Directory", "tech": "elastic", "pm": [560, 1600, 200, 0, 0], "total": 2360}, {"title": "PsExec Service File Transfer to Admin Share", "tech": "elastic", "pm": [1000, 70, 18, 3, 5], "total": 1096}, {"title": "Multiple Logon Failure from the same Source Address", "tech": "elastic", "pm": [680, 35, 70, 100, 180], "total": 1065}, {"title": "Suspicious Process Creation", "tech": "cortex", "pm": [20, 20, 22, 60, 36], "total": 158}, {"title": "Anomalous Token involving one user", "tech": "defender", "pm": [140, 140, 18, 12, 46], "total": 356}]}, "inc_detail": [{"m": "Abr/2026", "dims": {"vetor": {"Email": 10, "Malware": 10, "Web": 10, "Improper Usage": 10, "Other": 9, "Attrition": 9}, "plat": {"visionone": 15, "cortex": 15, "defender": 14, "elastic": 14}, "tax": {"Malicious Code": 10, "Fraud": 10, "Intrusion": 10, "Intrusion Attempts": 10, "Information Gathering": 9, "Other": 9}, "tipo": {"Phishing": 10, "Infected System": 10, "Malware Distribution": 10, "Unauthorized Access": 10, "Scanning": 9, "No Type": 9}, "origem": {"Manual": 9, "Automático": 49}, "titulos": {"Suspicious Mailbox Forwarding": 8, "SpearPhishing Link in email": 8, "WildFire Malware": 7, "Anomalous Token involving one user": 7, "Local Analysis Malware": 7, "Port Scan Detected": 7, "Credential Gathering": 7, "Suspicious Process Creation": 7}}}, {"m": "Mai/2026", "dims": {"vetor": {"Email": 8, "Malware": 8, "Web": 7, "Improper Usage": 7, "Other": 7, "Attrition": 7}, "plat": {"visionone": 11, "cortex": 11, "defender": 11, "elastic": 11}, "tax": {"Malicious Code": 8, "Fraud": 8, "Intrusion": 7, "Intrusion Attempts": 7, "Information Gathering": 7, "Other": 7}, "tipo": {"Phishing": 8, "Infected System": 8, "Malware Distribution": 7, "Unauthorized Access": 7, "Scanning": 7, "No Type": 7}, "origem": {"Manual": 8, "Automático": 36}, "titulos": {"Suspicious Mailbox Forwarding": 6, "SpearPhishing Link in email": 6, "WildFire Malware": 6, "Anomalous Token involving one user": 6, "Local Analysis Malware": 5, "Port Scan Detected": 5, "Credential Gathering": 5, "Suspicious Process Creation": 5}}}, {"m": "Jun/2026", "dims": {"vetor": {"Email": 7, "Malware": 7, "Web": 7, "Improper Usage": 6, "Other": 6, "Attrition": 6}, "plat": {"visionone": 10, "cortex": 10, "defender": 10, "elastic": 9}, "tax": {"Malicious Code": 7, "Fraud": 7, "Intrusion": 7, "Intrusion Attempts": 6, "Information Gathering": 6, "Other": 6}, "tipo": {"Phishing": 7, "Infected System": 7, "Malware Distribution": 7, "Unauthorized Access": 6, "Scanning": 6, "No Type": 6}, "origem": {"Manual": 8, "Automático": 31}, "titulos": {"Suspicious Mailbox Forwarding": 5, "SpearPhishing Link in email": 5, "WildFire Malware": 5, "Anomalous Token involving one user": 5, "Local Analysis Malware": 5, "Port Scan Detected": 5, "Credential Gathering": 5, "Suspicious Process Creation": 4}}}, {"m": "Jul/2026", "dims": {"vetor": {"Email": 6, "Malware": 6, "Web": 6, "Improper Usage": 6, "Other": 6, "Attrition": 5}, "plat": {"visionone": 9, "cortex": 9, "defender": 9, "elastic": 8}, "tax": {"Malicious Code": 6, "Fraud": 6, "Intrusion": 6, "Intrusion Attempts": 6, "Information Gathering": 6, "Other": 5}, "tipo": {"Phishing": 6, "Infected System": 6, "Malware Distribution": 6, "Unauthorized Access": 6, "Scanning": 6, "No Type": 5}, "origem": {"Manual": 8, "Automático": 27}, "titulos": {"Suspicious Mailbox Forwarding": 5, "SpearPhishing Link in email": 5, "WildFire Malware": 5, "Anomalous Token involving one user": 4, "Local Analysis Malware": 4, "Port Scan Detected": 4, "Credential Gathering": 4, "Suspicious Process Creation": 4}}}, {"m": "Ago/2026", "dims": {"vetor": {"Email": 6, "Malware": 5, "Web": 5, "Improper Usage": 5, "Other": 5, "Attrition": 5}, "plat": {"visionone": 8, "cortex": 8, "defender": 8, "elastic": 7}, "tax": {"Malicious Code": 6, "Fraud": 5, "Intrusion": 5, "Intrusion Attempts": 5, "Information Gathering": 5, "Other": 5}, "tipo": {"Phishing": 6, "Infected System": 5, "Malware Distribution": 5, "Unauthorized Access": 5, "Scanning": 5, "No Type": 5}, "origem": {"Manual": 8, "Automático": 23}, "titulos": {"Suspicious Mailbox Forwarding": 4, "SpearPhishing Link in email": 4, "WildFire Malware": 4, "Anomalous Token involving one user": 4, "Local Analysis Malware": 4, "Port Scan Detected": 4, "Credential Gathering": 4, "Suspicious Process Creation": 3}}}]};
 var SEV=['Critical','High','Medium','Low'], SEVC={Critical:'var(--sevC)',High:'var(--sevH)',Medium:'var(--sevM)',Low:'var(--sevL)'};
 function f2(x){return x==null?'—':(Math.round(x*100)/100).toFixed(2).replace('.',',');}
 function fN(x){return x==null?'—':Math.round(x).toLocaleString('pt-BR');}
@@ -775,7 +796,7 @@ function renderCsirt(d){
   '</div>'+
   '<div class="row r2">'+
     '<div class="card"><h3>Atendimento de Chamados</h3>'+funnelHTML(d.funnel)+'</div>'+
-    '<div class="card"><h3>Incidentes (CSIRT) <small>por mês</small></h3>'+incidentsSVG(inc)+sevLegend()+'</div>'+
+    '<div class="card inccard" id="cs_inccard" role="button" tabindex="0" title="Clique para detalhar a variação mês a mês"><h3>Incidentes (CSIRT) <small>por mês · clique para detalhar ▸</small></h3>'+incidentsSVG(inc)+sevLegend()+'</div>'+
   '</div>'+
   '<div class="row r3">'+
     '<div class="card"><h3>Evolutivo MTTD AI <small>(min)</small></h3>'+evHTML(mttd)+'</div>'+
@@ -791,7 +812,62 @@ function renderCsirt(d){
     ptsCard('⚠️ Pontos de atenção',d.attention||[],'warn')+
   '</div>';
   document.getElementById('cs_body').innerHTML=html;
+  window.__CS_VIEW=d;
 }
+
+/* ---- Rótulos PT-BR do drill-down (Vetor/Taxonomia/Tipo; Plataforma e títulos ficam como estão) ---- */
+var PT_INC={
+  'Attrition':'Força Bruta','Email':'E-mail','Improper Usage':'Uso Indevido','Malware':'Malware','Other':'Outros','Web':'Web',
+  'Abusive Content':'Conteúdo Abusivo','Availability':'Disponibilidade','Fraud':'Fraude','Information Content Security':'Segurança de Conteúdo','Information Gathering':'Coleta de Informação','Intrusion':'Intrusão','Intrusion Attempts':'Tentativas de Intrusão','Malicious Code':'Código Malicioso','Vulnerable':'Vulnerável',
+  'Application Compromise':'Comprometimento de Aplicação','C2 Server':'Servidor C2','Data Loss':'Perda de Dados','Denial of Service':'Negação de Serviço','Disruption':'Interrupção','Exploitation of Vulnerability':'Exploração de Vulnerabilidade','Infected System':'Sistema Infectado','Information Disclosure':'Divulgação de Informação','Malware Configuration':'Configuração de Malware','Malware Distribution':'Distribuição de Malware','Misconfiguration':'Configuração Incorreta','Misuse of Resources':'Uso Indevido de Recursos','No Type':'Sem Tipo','Phishing':'Phishing','Potentially Unwanted Accessible Services':'Serviços Acessíveis Potencialmente Indesejados','Privileged Account Compromise':'Comprometimento de Conta Privilegiada','Scanning':'Varredura','Unauthorized Access':'Acesso Não Autorizado','Unauthorized Modification':'Modificação Não Autorizada','Undetermined':'Indeterminado','Unprivileged Account Compromise':'Comprometimento de Conta sem Privilégio','Vulnerable System':'Sistema Vulnerável','Weak Cryptography':'Criptografia Fraca'
+};
+function ptLbl(k){return PT_INC[k]||k;}
+/* ---- Drill-down de Incidentes (mês vs mês anterior) ---- */
+function incDrillHTML(idd){
+  if(!idd||idd.length<2) return '<div class="loading">Sem dois meses no período para comparar. Selecione ao menos dois meses (ou "Todos").</div>';
+  var A=idd[idd.length-2], B=idd[idd.length-1];  // anterior, atual
+  var tA=0,tB=0; ['vetor'].forEach(function(){});
+  function tot(x){var s=0,v=(x.dims&&(x.dims.vetor||x.dims.plat))||{};for(var k in v)s+=v[k];return s;}
+  tA=tot(A);tB=tot(B);
+  var dim=function(title,key){
+    var a=A.dims[key]||{},b=B.dims[key]||{},keys={},i;
+    for(i in a)keys[i]=1; for(i in b)keys[i]=1;
+    var rows=Object.keys(keys).map(function(k){return {k:k,a:a[k]||0,b:b[k]||0,d:(b[k]||0)-(a[k]||0)};})
+      .sort(function(x,y){return y.d-x.d || y.b-x.b;});
+    var tr=(key==='plat')?function(x){return x;}:ptLbl;   // Plataforma não traduz
+    var body=rows.map(function(r){
+      var cls=r.d>0?'up':(r.d<0?'down':'flat'),sign=r.d>0?'+':'';
+      return '<tr><td>'+esc(tr(r.k))+'</td><td>'+r.a+'</td><td>'+r.b+'</td><td class="'+cls+'">'+sign+r.d+'</td></tr>';
+    }).join('');
+    return '<div class="ddsec"><h4>'+title+'</h4><table class="ddtbl"><thead><tr><th>'+esc(title)+'</th><th>'+esc(A.m)+'</th><th>'+esc(B.m)+'</th><th>Δ</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+  };
+  var titros=function(){
+    var a=A.dims.titulos||{},b=B.dims.titulos||{},keys={},i;
+    for(i in a)keys[i]=1; for(i in b)keys[i]=1;
+    var rows=Object.keys(keys).map(function(k){return {k:k,a:a[k]||0,b:b[k]||0,d:(b[k]||0)-(a[k]||0)};})
+      .filter(function(r){return r.d>0;}).sort(function(x,y){return y.d-x.d;}).slice(0,12);
+    if(!rows.length)return '';
+    var body=rows.map(function(r){return '<tr><td>'+esc(r.k)+'</td><td>'+r.a+'</td><td>'+r.b+'</td><td class="up">+'+r.d+'</td></tr>';}).join('');
+    return '<div class="ddsec ddwide"><h4>Casos de uso que mais cresceram</h4><table class="ddtbl"><thead><tr><th>Título</th><th>'+esc(A.m)+'</th><th>'+esc(B.m)+'</th><th>Δ</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+  };
+  var dtot=tB-tA, sign=dtot>0?'+':'';
+  return '<div class="ddhead">Incidentes '+esc(A.m)+' → '+esc(B.m)+': <b>'+tA+' → '+tB+'</b> <span class="'+(dtot>0?'up':'down')+'">('+sign+dtot+')</span></div>'+
+    '<div class="ddgrid">'+dim('Vetor','vetor')+dim('Plataforma','plat')+dim('Taxonomia','tax')+dim('Tipo da taxonomia','tipo')+'</div>'+
+    titros();
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function openIncDrill(){
+  var d=window.__CS_VIEW; if(!d)return;
+  var ov=document.getElementById('cs_ddov');
+  document.getElementById('cs_ddbody').innerHTML=incDrillHTML(d.inc_detail);
+  ov.hidden=false;
+}
+function closeIncDrill(){var ov=document.getElementById('cs_ddov');if(ov)ov.hidden=true;}
+document.addEventListener('click',function(e){
+  if(e.target.closest&&e.target.closest('#cs_inccard')){openIncDrill();return;}
+  if(e.target.id==='cs_ddov'||(e.target.closest&&e.target.closest('#cs_ddclose'))){closeIncDrill();}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeIncDrill();});
 
 /* ---- filtro por período ---- */
 function deriveKey(f,mttr,inc,cur){var k=[],L=mttr.length-1,P=L-1;
@@ -815,8 +891,9 @@ function filterData(d,sel){
       ia_pct:TT?Math.round(IA/TT*1000)/10:0,n1_pct:TT?Math.round(N1/TT*1000)/10:0,csirt_pct:TT?Math.round(CS2/TT*1000)/10:0};}
   else fun=d.funnel;
   var cur={mttd:last(mttd)?last(mttd).ov:null,mtta:last(mtta)?last(mtta).ov:null,mttr:last(mttr)?last(mttr).ov:null};
+  var idd=(d.inc_detail||[]).filter(inS);
   return {updated:d.updated,months:sel,cur:cur,funnel:fun,incidents:inc,mttd_ai:mttd,mtta_csirt:mtta,mttr_csirt:mttr,
-    key_points:deriveKey(fun,mttr,inc,cur),attention:deriveAtt(fun,mttr,inc,cur)};
+    inc_detail:idd,key_points:deriveKey(fun,mttr,inc,cur),attention:deriveAtt(fun,mttr,inc,cur)};
 }
 var CS=null;
 function selectedMonths(){var a=[];document.querySelectorAll('#cs_head .cschip.on').forEach(function(b){a.push(b.dataset.m);});return a;}
