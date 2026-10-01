@@ -433,7 +433,7 @@ function doGet(e) {
   if (e && e.parameter && (e.parameter.approve || e.parameter.deny)) return handleApproval_(e);
   if (!isAuthorized_()) return denied_();
   return HtmlService.createHtmlOutputFromFile('Index')
-    .setTitle('KPI CSIRT — SIEM & MITRE')
+    .setTitle('KPI CSIRT — SIEM \& MITRE')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
@@ -524,3 +524,134 @@ function getOperational(){
 
 /* Gatilho de tempo: aquece o cache do operacional (agende a cada 2h). */
 function refreshOperational(){var data=buildOperational_();try{opPut_(CacheService.getScriptCache(),JSON.stringify(data));}catch(e){}}
+
+/* ================== KPIs CSIRT — lê Triage_AI e Detalhados_INC (Google Sheets) ==================
+ * Propriedades do script:
+ *   SHEET_TRIAGE_ID    = <id da planilha Google "Triage_AI_Consolidado">
+ *   SHEET_DETALHADO_ID = <id da planilha Google "Detalhados_INC_Consolidado">
+ *   (aba "Consolidado" em ambas)
+ * Métricas:
+ *   MTTD AI      = coluna "MTTA" do Triage (offense iniciado -> criado/detectado pela IA), em min
+ *   MTTA CSIRT   = coluna "mtta" do Detalhado, em min
+ *   MTTR CSIRT   = coluna "mttr" do Detalhado, em min
+ *   Funil        = Triage: total, IA (Human Review?=falso), N1 (Human Review?=verdadeiro), CSIRT=incidentes
+ *   Incidentes   = Detalhado por mês x severidade (linhas com severidade válida)
+ */
+var CS_KEY = 'csirt_data_v1';
+var CS_TTL = 2 * 60 * 60; // 2h
+var CS_SEV = ['Critical','High','Medium','Low'];
+
+function csPut_(cache,str){var n=Math.ceil(str.length/CHUNK),p={};for(var i=0;i<n;i++)p[CS_KEY+'_'+i]=str.substr(i*CHUNK,CHUNK);p[CS_KEY+'_n']=String(n);cache.putAll(p,CS_TTL);}
+function csGet_(cache){var ns=cache.get(CS_KEY+'_n');if(!ns)return null;var n=parseInt(ns,10),ids=[];for(var i=0;i<n;i++)ids.push(CS_KEY+'_'+i);var got=cache.getAll(ids),o='';for(var j=0;j<n;j++){var s=got[CS_KEY+'_'+j];if(s==null)return null;o+=s;}return o;}
+
+/* "HH:MM:SS" ou "HHHH:MM:SS" -> minutos (número) */
+function _cmin(v){
+  if(v==null) return null;
+  var s=String(v).trim(); var m=s.match(/^(\d+):(\d{2}):(\d{2})/);
+  if(!m) return null;
+  return (+m[1])*60 + (+m[2]) + (+m[3])/60;
+}
+function _avg(a){var s=0,n=0;for(var i=0;i<a.length;i++){if(a[i]!=null&&!isNaN(a[i])){s+=a[i];n++;}}return n?s/n:null;}
+function _r2(x){return x==null?null:Math.round(x*100)/100;}
+
+/* Lê uma planilha (aba Consolidado) e devolve {header, rows} com índice por nome de coluna */
+function _readSheet_(id, propName){
+  if(!id) throw new Error('Defina '+propName+' (id da planilha Google) nas Propriedades do script.');
+  var ss=SpreadsheetApp.openById(id);
+  var sh=ss.getSheetByName('Consolidado')||ss.getSheets()[0];
+  var vals=sh.getDataRange().getValues();
+  var hdr=vals[0].map(function(h){return String(h).trim();});
+  var idx={}; hdr.forEach(function(h,i){idx[h]=i;});
+  return {idx:idx, rows:vals.slice(1)};
+}
+
+function buildCsirt_(){
+  var p=props_();
+  var T=_readSheet_(p.getProperty('SHEET_TRIAGE_ID'),'SHEET_TRIAGE_ID');
+  var D=_readSheet_(p.getProperty('SHEET_DETALHADO_ID'),'SHEET_DETALHADO_ID');
+
+  function col(o,name){ if(o.idx[name]==null) throw new Error('Coluna "'+name+'" não encontrada.'); return o.idx[name]; }
+
+  // ---- agrupa por Competência (YYYY-MM) ----
+  var tC=col(T,'Competência'), tL=col(T,'Mês_Ref'), tSev=col(T,'Severidade'), tHR=col(T,'Human Review?'), tMt=col(T,'MTTA');
+  var dC=col(D,'Competência'), dL=col(D,'Mês_Ref'), dSev=col(D,'Severidade'), dA=col(D,'mtta'), dR=col(D,'mttr');
+
+  var comps={}; // comp -> {label, tri:[], det:[]}
+  function bucket(c,l){ if(!comps[c]) comps[c]={comp:c,label:l,tri:[],det:[]}; return comps[c]; }
+  T.rows.forEach(function(r){ var c=r[tC]; if(c==null||c==='')return; bucket(String(c),String(r[tL])).tri.push(r); });
+  D.rows.forEach(function(r){ var c=r[dC]; if(c==null||c==='')return; bucket(String(c),String(r[dL])).det.push(r); });
+
+  var order=Object.keys(comps).sort();
+  var months=[], incidents=[], mttd=[], mtta=[], mttr=[], funnels=[];
+
+  function sevSeries(rows, sevIdx, valFn){
+    var o={}; CS_SEV.forEach(function(s){o[s]=[];});
+    rows.forEach(function(r){ var s=r[sevIdx]; if(CS_SEV.indexOf(s)<0)return; var v=valFn(r); if(v!=null)o[s].push(v); });
+    var out={}; CS_SEV.forEach(function(s){ out[s]=_r2(_avg(o[s])); }); return out;
+  }
+
+  order.forEach(function(c){
+    var g=comps[c], ml=g.label; months.push(ml);
+    // incidentes por severidade (severidade válida)
+    var cnt={}; CS_SEV.forEach(function(s){cnt[s]=0;}); var tot=0;
+    g.det.forEach(function(r){ var s=r[dSev]; if(CS_SEV.indexOf(s)>=0){cnt[s]++;tot++;} });
+    incidents.push({m:ml, Critical:cnt.Critical, High:cnt.High, Medium:cnt.Medium, Low:cnt.Low, total:tot});
+    // MTTD AI (triage MTTA col)
+    var triVals=g.tri.map(function(r){return _cmin(r[tMt]);});
+    var o1=sevSeries(g.tri,tSev,function(r){return _cmin(r[tMt]);}); o1.m=ml; o1.ov=_r2(_avg(triVals)); mttd.push(o1);
+    // MTTA / MTTR CSIRT (detalhado)
+    var detA=g.det.map(function(r){return _cmin(r[dA]);}), detR=g.det.map(function(r){return _cmin(r[dR]);});
+    var o2=sevSeries(g.det,dSev,function(r){return _cmin(r[dA]);}); o2.m=ml; o2.ov=_r2(_avg(detA)); mtta.push(o2);
+    var o3=sevSeries(g.det,dSev,function(r){return _cmin(r[dR]);}); o3.m=ml; o3.ov=_r2(_avg(detR)); mttr.push(o3);
+    // funil do mês
+    var ftot=g.tri.length, fia=0, fn1=0;
+    g.tri.forEach(function(r){ var hr=r[tHR]; if(hr===true||String(hr).toLowerCase()==='true'||String(hr).toLowerCase()==='sim') fn1++; else fia++; });
+    funnels.push({m:ml,total:ftot,ia:fia,n1:fn1,csirt:tot,
+      ia_pct:ftot?Math.round(fia/ftot*1000)/10:0, n1_pct:ftot?Math.round(fn1/ftot*1000)/10:0, csirt_pct:ftot?Math.round(tot/ftot*1000)/10:0});
+  });
+
+  // funil do último mês
+  var lc=order[order.length-1], g=comps[lc];
+  var tot=g.tri.length, ia=0, n1=0;
+  g.tri.forEach(function(r){ var hr=r[tHR]; if(hr===true||String(hr).toLowerCase()==='true'||String(hr).toLowerCase()==='sim') n1++; else ia++; });
+  var csirt=incidents[incidents.length-1].total;
+  var funnel={m:g.label,total:tot,ia:ia,n1:n1,csirt:csirt,
+    ia_pct:tot?Math.round(ia/tot*1000)/10:0, n1_pct:tot?Math.round(n1/tot*1000)/10:0, csirt_pct:tot?Math.round(csirt/tot*1000)/10:0};
+
+  var cur={mttd:mttd.length?mttd[mttd.length-1].ov:null, mtta:mtta.length?mtta[mtta.length-1].ov:null, mttr:mttr.length?mttr[mttr.length-1].ov:null};
+
+  // ---- Pontos Chave / Pontos de Atenção (derivados) ----
+  var key=[], att=[];
+  var L=mttr.length-1, P=L-1;
+  if(funnel.ia_pct>=60) key.push('Automação por IA em '+funnel.ia_pct+'% dos alertas triados ('+funnel.ia+' de '+funnel.total+') — só '+funnel.csirt_pct+'% escalaram ao CSIRT.');
+  if(P>=0 && mttr[L].ov!=null && mttr[P].ov!=null){
+    var d=mttr[L].ov-mttr[P].ov, pc=mttr[P].ov?Math.round(Math.abs(d)/mttr[P].ov*100):0;
+    (d<=0?key:att).push('MTTR '+(d<=0?'caiu':'subiu')+' de '+mttr[P].ov+' para '+mttr[L].ov+' min ('+pc+'%) vs '+mttr[P].m+'.');
+  }
+  if(P>=0){ var di=incidents[L].total-incidents[P].total;
+    (di<=0?key:att).push('Incidentes '+(di<=0?'reduziram':'aumentaram')+' de '+incidents[P].total+' para '+incidents[L].total+' vs '+incidents[P].m+'.'); }
+  if(cur.mtta!=null && cur.mtta<5) key.push('MTTA CSIRT em '+cur.mtta+' min — dentro da meta de resposta.');
+  // inversão: Low com MTTR > High (sinal de fila/priorização)
+  var lastR=mttr[L];
+  if(lastR && lastR.Low!=null && lastR.High!=null && lastR.Low>lastR.High)
+    att.push('MTTR de severidade Low ('+lastR.Low+' min) acima de High ('+lastR.High+' min) — revisar priorização de fila.');
+  if(cur.mttr!=null && cur.mttr>60) att.push('MTTR CSIRT em '+cur.mttr+' min no mês — acima de 1h; avaliar gargalos de contenção.');
+  if(!key.length) key.push('Sem destaques positivos calculados para o período.');
+  if(!att.length) att.push('Nenhum ponto de atenção crítico no período.');
+
+  return {updated:Utilities.formatDate(new Date(),'America/Sao_Paulo','dd/MM/yyyy HH:mm'),
+    months:months, cur:cur, funnel:funnel, funnels:funnels, incidents:incidents,
+    mttd_ai:mttd, mtta_csirt:mtta, mttr_csirt:mttr, key_points:key, attention:att};
+}
+
+function getCsirt(){
+  if(!isAuthorized_()) throw new Error('Acesso restrito ao time de SOC/CSIRT.');
+  var cache=CacheService.getScriptCache();
+  var hit=csGet_(cache); if(hit){try{return JSON.parse(hit);}catch(e){}}
+  var data=buildCsirt_();
+  try{csPut_(cache,JSON.stringify(data));}catch(e){}
+  return data;
+}
+
+/* Gatilho de tempo: aquece o cache do CSIRT (agende a cada 2h). */
+function refreshCsirt(){var data=buildCsirt_();try{csPut_(CacheService.getScriptCache(),JSON.stringify(data));}catch(e){}}
