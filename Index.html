@@ -8,7 +8,7 @@
 <style>
 :root{--bg:#0E1621;--panel:#17202A;--panel2:#1C2526;--ink:#E8EDF2;--muted:#8A9BA8;--line:#2A3743;
 --brand:#27AE60;--accent:#42A5F5;--warn:#E0A64B;--crit:#E05C5C;
---c1:#27AE60;--c2:#42A5F5;--c3:#E0A64B;--c4:#B57BD8;--cov:#1B6B3A;--cov-b:#27AE60;--part:#256b45;--part-b:#3fae78;--none:#1C2E35;--none-b:#37474F;--sub-cov:#22794a;--sub-cov-b:#38c07a;--new-b:#42A5F5;color-scheme:dark;}
+--c1:#27AE60;--c2:#42A5F5;--c3:#E0A64B;--c4:#B57BD8;--cov:#1B6B3A;--cov-b:#27AE60;--part:#37A86B;--part-b:#6FD6A0;--none:#1C2E35;--none-b:#37474F;--sub-cov:#22794a;--sub-cov-b:#38c07a;--new-b:#42A5F5;color-scheme:dark;}
 :root[data-theme="light"]{--bg:#EEF1F4;--panel:#FFFFFF;--panel2:#F4F6F8;--ink:#1B2733;--muted:#5B6B78;--line:#D7DEE4;--brand:#1B6B3A;--accent:#1565C0;--cov:#1B6B3A;--cov-b:#27AE60;--part:#8fd6ac;--part-b:#27AE60;--none:#E4E9ED;--none-b:#B7C2CC;--sub-cov:#cdeedd;--sub-cov-b:#27AE60;--new-b:#1565C0;color-scheme:light;}
 *{box-sizing:border-box}html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.4}
@@ -289,12 +289,104 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
+<style>
+#capa{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;isolation:isolate;overflow:hidden;color:#EAF1F7;font-family:"Segoe UI",system-ui,sans-serif;background:#0A0F16;transition:opacity .5s ease,visibility .5s ease}
+#capa.cp-gone{opacity:0;visibility:hidden;pointer-events:none}
+#capa .cp-bg{position:absolute;inset:0;z-index:-2;background:radial-gradient(1200px 600px at 78% 12%,rgba(66,165,245,.14),transparent 60%),radial-gradient(1000px 620px at 15% 95%,rgba(39,174,96,.14),transparent 60%),linear-gradient(180deg,#0A0F16,#0c1420)}
+#capa .cp-grid{position:absolute;inset:0;z-index:-2;opacity:.35;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(900px 600px at 50% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(900px 600px at 50% 40%,#000 30%,transparent 80%)}
+#capa .cp-glow{position:absolute;border-radius:50%;filter:blur(60px);z-index:-2;animation:cpfloat 14s ease-in-out infinite}
+#capa .cp-glow.a{width:360px;height:360px;background:rgba(39,174,96,.22);top:-60px;right:8%}
+#capa .cp-glow.b{width:420px;height:420px;background:rgba(66,165,245,.18);bottom:-120px;left:4%;animation-delay:-6s}
+@keyframes cpfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(26px)}}
+#capa svg.cp-net{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.5}
+#capa .cp-bar{display:flex;align-items:center;gap:12px;padding:26px 40px}
+#capa .cp-logo{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#27AE60,#1565C0);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff}
+#capa .cp-logo-img{height:40px;width:auto;display:block}
+#capa .cp-brand{font-size:13px;letter-spacing:3px;color:#8CA0B3;text-transform:uppercase}
+#capa .cp-sp{flex:1}
+#capa .cp-period{font-size:12.5px;color:#8CA0B3;border:1px solid rgba(255,255,255,.08);border-radius:30px;padding:7px 16px;backdrop-filter:blur(4px)}
+#capa .cp-period b{color:#EAF1F7}
+#capa .cp-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 40px;max-width:1040px;margin:0 auto;width:100%}
+#capa .cp-kicker{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#27AE60;margin-bottom:18px}
+#capa .cp-pulse{width:9px;height:9px;border-radius:50%;background:#27AE60;box-shadow:0 0 0 0 rgba(39,174,96,.6);animation:cppulse 2s infinite}
+@keyframes cppulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,.5)}70%{box-shadow:0 0 0 12px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+#capa .cp-h1{font-size:60px;line-height:1.02;margin:0;font-weight:800;letter-spacing:-1px;background:linear-gradient(120deg,#fff 20%,#bfe6cf 60%,#9fd0f5 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#capa .cp-tag{font-size:19px;color:#8CA0B3;margin:18px 0 0;max-width:620px;line-height:1.5}
+#capa .cp-menu{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px}
+#capa .cp-mi{display:flex;align-items:center;gap:10px;background:rgba(23,32,42,.72);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 18px;cursor:pointer;transition:.16s;backdrop-filter:blur(6px);font-size:14.5px;font-weight:600;color:#EAF1F7}
+#capa .cp-mi .ic{font-size:17px}
+#capa .cp-mi:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 12px 30px rgba(0,0,0,.45)}
+#capa .cp-mi .ar{color:#8CA0B3;transition:.16s}#capa .cp-mi:hover .ar{color:var(--ac);transform:translateX(3px)}
+#capa .cp-enter{margin-top:34px}
+#capa .cp-btn{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#27AE60,#1e8a4e);color:#fff;border:none;border-radius:14px;padding:16px 30px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(39,174,96,.3);transition:.16s;font-family:inherit}
+#capa .cp-btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(39,174,96,.45)}
+#capa .cp-foot{display:flex;align-items:center;gap:14px;padding:22px 40px;font-size:12.5px;color:#8CA0B3;border-top:1px solid rgba(255,255,255,.08)}
+#capa .cp-dsep{opacity:.4}
+@media(max-width:720px){#capa .cp-h1{font-size:40px}#capa .cp-tag{font-size:16px}}
+</style>
+<div id="capa">
+  <div class="cp-bg"></div><div class="cp-grid"></div><div class="cp-glow a"></div><div class="cp-glow b"></div>
+  <svg class="cp-net" id="cpNet" preserveAspectRatio="none"></svg>
+  <div class="cp-bar">
+    <div class="cp-logo">SOC</div><div class="cp-brand">SOC · Cibersegurança</div>
+    <div class="cp-sp"></div>
+    <div class="cp-period">Apuração <b id="cpPer">Set/2026</b></div>
+  </div>
+  <div class="cp-hero">
+    <span class="cp-kicker"><span class="cp-pulse"></span>Relatório de Indicadores · SOC / CSIRT</span>
+    <h1 class="cp-h1">KPI Executivo<br>&amp; Operacional — CSIRT</h1>
+    <p class="cp-tag">Resposta a incidentes, falsos positivos, eficiência operacional e cobertura MITRE ATT&amp;CK — em um só painel, ao vivo.</p>
+    <div class="cp-menu" id="cpMenu"></div>
+    <div class="cp-enter"><button class="cp-btn" id="cpEnter">Entrar no painel &nbsp;→</button></div>
+  </div>
+  <div class="cp-foot">
+    <span>Cibersegurança</span><span class="cp-dsep">-</span><span>CSIRT</span>
+    <div class="cp-sp" style="flex:1"></div>
+    <span id="cpUpd">Atualizado em —</span>
+  </div>
+</div>
+<script>
+(function(){
+  var MI=[
+   {t:'SOC + CSIRT',ic:'🛡️',ac:'#27AE60',g:['soc','csirt']},
+   {t:'Falsos Positivos',ic:'🎯',ac:'#E05C5C',g:['soc','fp']},
+   {t:'Eficiência',ic:'⚡',ac:'#42A5F5',g:['soc','eff']},
+   {t:'Eng. Detecção',ic:'📡',ac:'#B57BD8',g:['eng','deteccao']},
+   {t:'Cobertura MITRE',ic:'🧩',ac:'#E0A64B',g:['eng','mitre']}
+  ];
+  var cap=document.getElementById('capa'),mn=document.getElementById('cpMenu'),cpRun=true;
+  function navTab(main){var tb=document.getElementById(main==='soc'?'tabSoc':'tabEng');if(tb)tb.click();}
+  function navSub(main,sub){if(!sub)return;var sel=main==='soc'?'#soctabs .subtab[data-sq="'+sub+'"]':'#engtabs .subtab[data-sv="'+sub+'"]';var el=document.querySelector(sel);if(el)el.click();}
+  function close(){cap.classList.add('cp-gone');cpRun=false;}
+  function open(){cap.classList.remove('cp-gone');if(!cpRun){cpRun=true;draw();}}
+  window.__openCapa=open;
+  function go(g){navTab(g[0]);navSub(g[0],g[1]);close();}
+  MI.forEach(function(m){var e=document.createElement('div');e.className='cp-mi';e.style.setProperty('--ac',m.ac);
+    e.innerHTML='<span class="ic">'+m.ic+'</span>'+m.t+'<span class="ar">→</span>';
+    e.onclick=function(){go(m.g);};mn.appendChild(e);});
+  document.getElementById('cpEnter').onclick=function(){navTab('soc');navSub('soc','csirt');close();};
+  function wireBtn(){var cb=document.getElementById('capaBtn');if(cb)cb.onclick=open;}
+  if(document.getElementById('capaBtn'))wireBtn();else document.addEventListener('DOMContentLoaded',wireBtn);
+  // timestamp dinâmico
+  try{var d=new Date();var p=function(n){return(n<10?'0':'')+n;};
+    document.getElementById('cpUpd').textContent='Atualizado em '+p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}catch(_){}
+  // rede de nós animada
+  var svg=document.getElementById('cpNet'),W=innerWidth,H=innerHeight;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  var N=26,pts=[];for(var i=0;i<N;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});
+  function draw(){if(!cpRun)return;var s='';for(var i=0;i<N;i++){var a=pts[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+    for(var j=i+1;j<N;j++){var b=pts[j],dx=a.x-b.x,dy=a.y-b.y,dd=Math.sqrt(dx*dx+dy*dy);if(dd<170){s+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="rgba(120,170,220,'+(0.12*(1-dd/170))+')" stroke-width="1"/>';}}}
+    for(var k=0;k<N;k++){s+='<circle cx="'+pts[k].x+'" cy="'+pts[k].y+'" r="1.8" fill="rgba(160,200,235,.5)"/>';}
+    svg.innerHTML=s;requestAnimationFrame(draw);}draw();
+})();
+</script>
 <div class="app">
   <div class="appbar">
     <div style="width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#27AE60,#1565C0);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px">SOC</div>
     <div><h1>KPI Executivo/Operacional — CSIRT</h1><p class="sub" id="subUpd">Cibersegurança</p></div>
     <div class="sp"></div>
     <span id="perCtrl" class="ctrl"><label for="mes">Período</label><select id="mes"></select></span>
+    <button class="btn" id="capaBtn" title="Voltar à capa de apresentação">⌂ Capa</button>
     <button class="btn" id="fs">⛶ Tela cheia</button>
   </div>
   <div class="tabs" id="tabs">
