@@ -4,6 +4,7 @@
 <base target="_top">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var _t=localStorage.getItem('kpi_theme')||'system';var _d=_t==='system'?((window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'):_t;document.documentElement.setAttribute('data-theme',_d);document.documentElement.lang=(localStorage.getItem('kpi_lang')==='en')?'en':'pt-BR';if(localStorage.getItem('kpi_side')==='1')document.documentElement.classList.add('side-col');}catch(e){}</script>
 <title>KPI CSIRT — SIEM & MITRE</title>
 <style>
 :root{--bg:#0E1621;--panel:#17202A;--panel2:#1C2526;--ink:#E8EDF2;--muted:#8A9BA8;--line:#2A3743;
@@ -214,6 +215,8 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 #v-mitre .cell.existing{background:var(--cov);border-color:var(--cov-b);color:#fff}
 #v-mitre .cell.partial{background:var(--part);border-color:var(--part-b);color:#fff}
 #v-mitre .cell.none{background:var(--none);border-color:var(--none-b);color:var(--muted)}
+:root[data-theme="light"] #v-mitre .cell.partial{color:#0B3B21}
+:root[data-theme="light"] #v-mitre .scell.cov{color:#0B3B21}
 #v-mitre .cell.dim{opacity:.16}
 #v-mitre .cell .car{font-size:10px;opacity:.8;transition:transform .12s;flex:none;margin-top:2px}
 #v-mitre .cell.open .car{transform:rotate(90deg)}
@@ -287,8 +290,169 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 #v-mitre .mview{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
 #v-mitre .mview[hidden]{display:none}
 </style>
+<style id="shell-css">
+/* ===== layout com menu lateral (v16) ===== */
+.app{flex-direction:row}
+.appmain{flex:1;min-width:0;display:flex;flex-direction:column}
+.tabs{display:none!important}
+.appbar{flex-wrap:nowrap;gap:10px}
+.appbar>div:first-child{min-width:0}
+.appbar h1,.appbar .sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#fs{padding:6px 10px;font-size:15px}
+@media(max-width:1180px){#perCtrl label{display:none}}
+#engtabs .subtab[data-sv="mitre"]{display:none}
+.side{flex:none;width:282px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;transition:width .18s ease;overflow:hidden}
+.side-col .side{width:64px}
+.sbrand{display:flex;align-items:center;gap:10px;padding:12px 12px;border-bottom:1px solid var(--line);min-height:64px}
+.slogo{height:38px;width:auto;flex:none}
+.slogo-ph{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,#27AE60,#1565C0);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px}
+.side-col .slogo-ph{width:40px;height:40px}
+.side-col .slogo{height:auto;width:40px}
+.stt{font-size:13px;font-weight:700;white-space:nowrap;line-height:1.25}
+.stt small{display:block;color:var(--muted);font-weight:400;font-size:11px}
+.side-col .stt,.side-col .side .lbl{display:none}
+.snav{flex:1;overflow-y:auto;padding:10px 8px;display:flex;flex-direction:column;gap:3px}
+.sitem{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;white-space:nowrap;border:1px solid transparent;text-decoration:none;user-select:none}
+.sitem[hidden]{display:none}
+.sitem .ic{flex:none;width:22px;text-align:center;font-size:16px}
+.sitem:hover{background:var(--panel2);color:var(--ink)}
+.sitem.on{background:color-mix(in srgb,var(--brand) 14%,transparent);color:var(--ink);border-color:color-mix(in srgb,var(--brand) 40%,transparent)}
+.ssep{height:1px;background:var(--line);margin:8px 6px}
+.sfoot{padding:8px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.suser{display:flex;align-items:center;gap:11px;padding:8px 9px;white-space:nowrap;min-width:0}
+.suser .lbl{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:13.5px;font-weight:600}
+.suser .lbl small{display:block;color:var(--muted);font-size:11px;font-weight:400}
+.stog{font-size:13px;font-weight:500}
+.av{width:30px;height:30px;border-radius:50%;flex:none;background:linear-gradient(135deg,#42A5F5,#1565C0);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:11.5px;color:#fff;background-size:cover;background-position:center;overflow:hidden}
+.av.lg{width:44px;height:44px;font-size:15px}
+.av.ph{color:transparent}
+/* topo */
+.qseg{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.qseg button{background:none;border:none;color:var(--muted);font-weight:600;font-size:12.5px;font-family:inherit;padding:6px 10px;border-radius:7px;cursor:pointer;white-space:nowrap;line-height:1.2}
+.qseg button:hover{color:var(--ink)}
+.qseg button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.qseg.ic button{font-size:14px;padding:5px 9px}
+.uchip{position:relative;display:flex;align-items:center;gap:9px;background:var(--panel2);border:1px solid var(--line);border-radius:30px;padding:3px 14px 3px 3px;cursor:pointer;outline:none}
+.uchip:hover,.uchip:focus-visible{border-color:var(--accent)}
+.uchip .nm{font-size:13px;font-weight:600;white-space:nowrap}
+.uchip .rl{color:var(--muted);font-weight:400}
+.umenu{position:absolute;right:0;top:calc(100% + 8px);width:290px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.35);padding:14px;display:none;z-index:900;cursor:default}
+.umenu.on{display:block}
+.uhd{display:flex;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.un{font-weight:700;font-size:14px}
+.ue{font-size:12px;color:var(--muted);word-break:break-all}
+.uit{display:block;padding:8px 8px;border-radius:7px;font-size:13px;color:var(--ink);cursor:pointer;text-decoration:none}
+.uit[hidden]{display:none}
+.uit:hover{background:var(--panel2)}
+/* modal de Administração */
+.aov{position:fixed;inset:0;z-index:950;background:rgba(6,10,15,.62);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.aov[hidden]{display:none}
+:root[data-theme="light"] .aov{background:rgba(27,39,51,.35)}
+.amodal{width:960px;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.amhd{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.amhd h2{margin:0;font-size:18px}
+.amsheet{margin-left:auto;font-size:12.5px;color:var(--accent);text-decoration:none}
+.amsheet[hidden]{display:none}
+.amx{margin-left:auto;width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;font-size:15px}
+.amsheet:not([hidden])+.amx{margin-left:0}
+.amtabs{display:flex;gap:4px;padding:12px 22px 0;border-bottom:1px solid var(--line)}
+.amtab{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;font-size:14px;font-family:inherit;padding:9px 14px;cursor:pointer}
+.amtab.on{color:var(--accent);border-bottom-color:var(--accent)}
+.amtab .cnt{display:inline-block;min-width:18px;padding:0 6px;border-radius:10px;background:var(--crit);color:#fff;font-size:11px;margin-left:4px}
+.amtab .cnt:empty{display:none}
+.ambody{padding:18px 22px 22px}
+.amerr{background:color-mix(in srgb,var(--crit) 14%,transparent);border:1px solid color-mix(in srgb,var(--crit) 45%,transparent);color:var(--ink);border-radius:9px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+.amerr[hidden]{display:none}
+.eyebrow{font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:2px 0 12px;font-weight:700}
+.aminfo{font-size:12.5px;color:var(--muted);margin:0 0 14px}
+.amtbl{width:100%;border-collapse:collapse}
+.amtbl th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+.amtbl td{padding:10px 10px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle}
+.amtbl tr.busy{opacity:.45;pointer-events:none}
+.amtbl tr.off td:not(:last-child){color:var(--muted)}
+.amtbl select{padding:5px 8px}
+.you{font-size:10px;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:20px;padding:1px 8px;margin-left:7px;vertical-align:middle}
+.offtag{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:1px 8px;margin-left:7px}
+.chk{width:17px;height:17px;accent-color:var(--brand);cursor:pointer}
+.lnk{color:var(--crit);cursor:pointer;font-size:13px;font-weight:600;background:none;border:none;font-family:inherit;padding:4px 6px}
+.lnk[disabled]{color:var(--muted);cursor:default}
+.lnk.confirm{background:var(--crit);color:#fff;border-radius:6px}
+.amadd{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.amadd input{flex:1;min-width:170px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:8px 10px;font-size:13px;font-family:inherit}
+.btnp{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:600;font-size:13px;font-family:inherit;cursor:pointer}
+.btnp[disabled]{opacity:.5;cursor:default}
+.amnote{font-size:12px;color:var(--muted);margin-top:14px;border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
+.amnote b{color:var(--ink)}
+.req{display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin-bottom:10px;background:var(--panel2)}
+.req.busy{opacity:.45;pointer-events:none}
+.req .info{flex:1;min-width:0}
+.req .em{font-weight:600;font-size:14px;word-break:break-all}
+.req .meta{font-size:12px;color:var(--muted)}
+.req .acts{display:flex;gap:8px;flex:none}
+.bap{background:#2E7D32;color:#fff;border:none;border-radius:8px;padding:8px 15px;font-weight:600;font-size:13px;font-family:inherit;cursor:pointer}
+.bdn{background:none;color:var(--crit);border:1px solid color-mix(in srgb,var(--crit) 55%,transparent);border-radius:8px;padding:8px 15px;font-weight:600;font-size:13px;font-family:inherit;cursor:pointer}
+.amempty{text-align:center;color:var(--muted);padding:28px;font-size:13.5px}
+@media(max-width:900px){.side{width:64px}.side .lbl,.stt{display:none}.slogo{height:auto;width:40px}.uchip .nm{display:none}.uchip{padding-right:3px}}
+</style>
 </head>
 <body>
+<script>window.I18N_EN={"SOC + CSIRT":"SOC + CSIRT","Eng. Detecção":"Detection Eng.","Cobertura MITRE":"MITRE Coverage","Vazamento de Credenciais":"Credential Leaks","Capa":"Cover","Administração":"Administration","⚙️ Administração":"⚙️ Administration","🏠 Voltar à capa":"🏠 Back to cover","Recolher menu":"Collapse menu","Expandir menu":"Expand menu","KPI SOC/CSIRT":"SOC/CSIRT KPI","Cibersegurança":"Cybersecurity","KPI Executivo/Operacional — CSIRT":"Executive/Operational KPI — CSIRT","KPI CSIRT — SIEM & MITRE":"CSIRT KPI — SIEM & MITRE","Cibersegurança · atualizado em {d}":"Cybersecurity · updated {d}","Cibersegurança · atualizado em {d}, {d}":"Cybersecurity · updated {d}, {d}","Período":"Period","📅 Período:":"📅 Period:","⛶ Tela cheia":"⛶ Full screen","Tela cheia":"Full screen","Idioma":"Language","Tema":"Theme","Escuro":"Dark","Claro":"Light","Sistema":"System","Papel:":"Role:","Fechar":"Close","Filtrar":"Filter","Solicitações":"Requests","Membros":"Members","Abrir planilha de Acessos ↗":"Open Access spreadsheet ↗","Carregando…":"Loading…","Todos":"All","Total":"Total","total":"total","ok":"ok","Status":"Status","SOC · Cibersegurança":"SOC · Cybersecurity","Apuração":"Period","Relatório de Indicadores · SOC / CSIRT":"Indicators Report · SOC / CSIRT","KPI Executivo":"Executive","& Operacional — CSIRT":"& Operational KPI — CSIRT","Resposta a incidentes, falsos positivos, eficiência operacional e cobertura MITRE ATT&CK — em um só painel, ao vivo.":"Incident response, false positives, operational efficiency and MITRE ATT&CK coverage — in a single live dashboard.","Falsos Positivos":"False Positives","Eficiência":"Efficiency","Entrar no painel →":"Enter dashboard →","Atualizado em {d}":"Updated {d}","Atualizado em {d} {d}":"Updated {d} {d}","CSIRT":"CSIRT","Visão geral CSIRT":"CSIRT overview","Carregando KPIs do CSIRT…":"Loading CSIRT KPIs…","Consolidado de Triage_AI + Detalhados_INC · dados de snapshot":"Consolidated from Triage_AI + Detalhados_INC · snapshot data","Consolidado de Triage_AI + Detalhados_INC · dados de {d}":"Consolidated from Triage_AI + Detalhados_INC · data from {d}","Consolidado de Triage_AI + Detalhados_INC · dados de {d}, {d}":"Consolidated from Triage_AI + Detalhados_INC · data from {d}, {d}","Tempo Médio de Detecção (MTTD AI · min) — {m}":"Mean Time to Detect (MTTD AI · min) — {m}","Tempo Médio Início da Resposta (MTTA CSIRT · min) — {m}":"Mean Time to Acknowledge (MTTA CSIRT · min) — {m}","Tempo Médio de Resposta (MTTR CSIRT · min) — {m}":"Mean Time to Respond (MTTR CSIRT · min) — {m}","Tempo Médio de Detecção (MTTD AI · min)":"Mean Time to Detect (MTTD AI · min)","Tempo Médio Início da Resposta (MTTA CSIRT · min)":"Mean Time to Acknowledge (MTTA CSIRT · min)","Tempo Médio de Resposta (MTTR CSIRT · min)":"Mean Time to Respond (MTTR CSIRT · min)","▲ {n} vs {m}":"▲ {n} vs {m}","▼ {n} vs {m}":"▼ {n} vs {m}","▼ {n} p.p. vs {m}":"▼ {n} p.p. vs {m}","▲ {n} p.p. vs {m}":"▲ {n} p.p. vs {m}","Atendimento de Chamados":"Ticket Handling","{n}% · {n} alertas triados ({m})":"{n}% · {n} alerts triaged ({m})","Tratados pela IA":"Handled by AI","Tratados N1 SOC":"Handled by SOC L1","Incidentes (CSIRT)":"Incidents (CSIRT)","por mês · clique para detalhar ▸":"per month · click to drill down ▸","Clique para detalhar a variação mês a mês":"Click to drill into the month-over-month change","Evolutivo MTTD AI":"MTTD AI trend","Evolutivo MTTA CSIRT":"MTTA CSIRT trend","Evolutivo MTTR CSIRT":"MTTR CSIRT trend","(min)":"(min)","Termômetro MTTD AI":"MTTD AI gauge","Termômetro MTTR":"MTTR gauge","Mês atual:":"Current month:","Excelente":"Excellent","Aceitável":"Acceptable","Ineficiente":"Inefficient","Excelente <{n}":"Excellent <{n}","Aceitável <{n}":"Acceptable <{n}","Ineficiente >{n}":"Inefficient >{n}","Excelente <{n}h":"Excellent <{n}h","Aceitável <{n}h":"Acceptable <{n}h","Ineficiente >{n}h":"Inefficient >{n}h","Excelente <24h":"Excellent <24h","Ineficiente >48h":"Inefficient >48h","✅ Pontos-chave":"✅ Key points","⚠️ Pontos de atenção":"⚠️ Watch points","Automação por IA em {n}% dos alertas triados ({n} de {n}) — só {n}% escalaram ao CSIRT.":"AI automation on {n}% of triaged alerts ({n} of {n}) — only {n}% escalated to CSIRT.","MTTR caiu de {n} para {n} min ({n}%) vs {m}.":"MTTR dropped from {n} to {n} min ({n}%) vs {m}.","MTTR subiu de {n} para {n} min ({n}%) vs {m}.":"MTTR rose from {n} to {n} min ({n}%) vs {m}.","Incidentes reduziram de {n} para {n} vs {m}.":"Incidents decreased from {n} to {n} vs {m}.","Incidentes aumentaram de {n} para {n} vs {m}.":"Incidents increased from {n} to {n} vs {m}.","MTTA CSIRT em {n} min — dentro da meta de resposta.":"MTTA CSIRT at {n} min — within the response target.","MTTR de severidade Low ({n} min) acima de High ({n} min) — revisar priorização de fila.":"Low-severity MTTR ({n} min) above High ({n} min) — review queue prioritization.","MTTR CSIRT em {n} min no mês — acima de {n}h; avaliar gargalos de contenção.":"MTTR CSIRT at {n} min this month — above {n}h; assess containment bottlenecks.","Sem destaques positivos no período selecionado.":"No positive highlights in the selected period.","Nenhum ponto de atenção crítico no período selecionado.":"No critical watch points in the selected period.","Drill-down — Incidentes CSIRT":"Drill-down — CSIRT Incidents","Incidentes {m} → {m}:":"Incidents {m} → {m}:","Vetor":"Vector","Plataforma":"Platform","Taxonomia":"Taxonomy","Tipo da taxonomia":"Taxonomy type","Casos de uso que mais cresceram":"Use cases that grew the most","Título":"Title","{n} → {n}":"{n} → {n}","Taxa de Falsos Positivos — {m}":"False Positive Rate — {m}","Precisão (True Positive)":"Precision (True Positive)","FP tratados pela IA (sem humano)":"FPs handled by AI (no human)","{n} de {n} FP":"{n} of {n} FP","Horas poupadas pela IA (período)":"Hours saved by AI (period)","FP auto × MTTA de triagem":"Auto FP × triage MTTA","{n} h":"{n} h","Taxa de FP":"FP rate","mês a mês":"month over month","Falsos Positivos × True Positives":"False Positives × True Positives","volume/mês":"volume/month","Falso Positivo":"False Positive","True Positive":"True Positive","FP por Tecnologia":"FP by Technology","(onde tunar primeiro)":"(where to tune first)","Top regras geradoras de FP":"Top FP-generating rules","(backlog de tuning)":"(tuning backlog)","Regra / Título":"Rule / Title","Tecnologia":"Technology","% do total":"% of total","Heatmap — FP por Tecnologia × Severidade":"Heatmap — FP by Technology × Severity","Sem dados de Falsos Positivos.":"No False Positive data.","Jan":"Jan","Fev":"Feb","Mar":"Mar","Abr":"Apr","Mai":"May","Jun":"Jun","Jul":"Jul","Ago":"Aug","Set":"Sep","Out":"Oct","Nov":"Nov","Dez":"Dec","Jan · {n}":"Jan · {n}","Fev · {n}":"Feb · {n}","Mar · {n}":"Mar · {n}","Abr · {n}":"Apr · {n}","Mai · {n}":"May · {n}","Jun · {n}":"Jun · {n}","Jul · {n}":"Jul · {n}","Ago · {n}":"Aug · {n}","Set · {n}":"Sep · {n}","Out · {n}":"Oct · {n}","Nov · {n}":"Nov · {n}","Dez · {n}":"Dec · {n}","Como ler esta aba":"How to read this tab","o que cada indicador mostra":"what each indicator shows","Sem dados de Eficiência.":"No Efficiency data.","Taxa de Impacto Real":"Real Impact Rate","% dos alertas que geraram impacto real no negócio — separa ameaça efetiva do ruído sem impacto.":"% of alerts with real business impact — separates actual threats from impact-free noise.","Precisão por Tecnologia":"Precision by Technology","quanto de cada fonte vira detecção real (TP) vs. falso positivo — aponta onde tunar primeiro.":"how much of each source becomes a real detection (TP) vs. false positive — shows where to tune first.","Decomposição do Tempo":"Time Breakdown","mediana de cada etapa (detectar → reportar → resolver); mostra onde o tempo de resposta é gasto.":"median of each stage (detect → report → resolve); shows where response time is spent.","Aderência ao SLA":"SLA Adherence","% dos incidentes resolvidos dentro da meta de tempo, por severidade.":"% of incidents resolved within the time target, by severity.","Carga por Dia × Hora":"Load by Day × Hour","volume de alertas por dia da semana e faixa horária — base para dimensionar o plantão.":"alert volume by weekday and time band — basis for on-call sizing.","Ameaça vs Conformidade":"Threat vs Compliance","separa incidentes de ameaça real de desvios de política/conformidade.":"separates real-threat incidents from policy/compliance deviations.","quanto do volume impactou o negócio":"how much of the volume impacted the business","Impacto real (período)":"Real impact (period)","With Impact":"With Impact","No Impact":"No Impact","Impacto real = alertas marcados \"With Impact\". O resto é ruído filtrado sem efeito no negócio.":"Real impact = alerts marked \"With Impact\". The rest is filtered noise with no business effect.","Por severidade":"By severity","sinal vs ruído por fonte":"signal vs noise per source","TP · {f}":"TP · {f}","· {f}":"· {f}","tunar":"tune","Precisão = TP / (TP+FP). Fontes abaixo de {n}% são as de maior ganho de tuning.":"Precision = TP / (TP+FP). Sources below {n}% have the biggest tuning gain.","onde o tempo é gasto (medianas)":"where the time goes (medians)","Linha do tempo até o reporte":"Timeline to report","Criar→Detectar":"Create→Detect","Detectar→Reportar":"Detect→Report","Detecção {n}m":"Detection {n}m","Reporte {n}m":"Report {n}m","MTTR mediano mês a mês (min)":"Median MTTR month over month (min)","MTTR (resolução)":"MTTR (resolution)","Medianas do período. O maior trecho é o gargalo a atacar.":"Period medians. The longest segment is the bottleneck to tackle.","% dentro da meta, por severidade":"% within target, by severity","meta ≤{n}m":"target ≤{n}m","Metas de exemplo (Critical ≤{n}m · High ≤{n}m · Medium ≤{n}m · Low ≤{n}m) — defina os alvos reais.":"Example targets (Critical ≤{n}m · High ≤{n}m · Medium ≤{n}m · Low ≤{n}m) — set the real targets.","Carga por Dia × Faixa Horária":"Load by Day × Time Band","planejamento de plantão":"on-call planning","Nº de alertas por dia da semana × faixa de horário — quanto mais quente, maior o volume.":"No. of alerts by weekday × time band — the hotter, the higher the volume.","natureza dos incidentes":"nature of incidents","Threat = ameaça de segurança; Compliance = desvio de política/conformidade.":"Threat = security threat; Compliance = policy/compliance deviation.","Dom":"Sun","Seg":"Mon","Ter":"Tue","Qua":"Wed","Qui":"Thu","Sex":"Fri","Sáb":"Sat","{n}-{n}h":"{n}-{n}h","{n}m":"{n}m","{n} min":"{n} min","{m}: {n} min":"{m}: {n} min","Visão geral":"Overview","Detecção":"Detection","Alertas":"Alerts","Capacidade & Ativos":"Capacity & Assets","Carregando dados da planilha…":"Loading spreadsheet data…","Casos de uso em produção":"Production use cases","Casos em produção ({m})":"Production cases ({m})","Técnicas MITRE":"MITRE techniques","Subtécnicas MITRE":"MITRE sub-techniques","{n}% do framework":"{n}% of the framework","Alertas ({m})":"Alerts ({m})","Consumo licença ({m})":"License usage ({m})","Endpoints Win no SIEM":"Windows endpoints in SIEM","{n} / {n} ECU":"{n} / {n} ECU","{n} / {n} (atual)":"{n} / {n} (current)","(atual)":"(current)","Melhorias do mês":"Improvements this month","Próximas ações":"Next actions","Volume de alertas":"Alert volume","por mês":"per month","Licença":"License","Estouro de licença":"License overrun","Licença em atenção":"License on watch","Licença saudável":"Healthy license","{m}: {n} de {n} ECU ({n}%) — acima do teto.":"{m}: {n} of {n} ECU ({n}%) — above the cap.","{m}: {n} de {n} ECU ({n}%) — próximo do teto.":"{m}: {n} of {n} ECU ({n}%) — close to the cap.","{m}: {n} de {n} ECU ({n}%).":"{m}: {n} of {n} ECU ({n}%).","Gap de inventário — Linux":"Inventory gap — Linux","Gap de inventário — Windows":"Inventory gap — Windows","Inventário alinhado":"Inventory aligned","SIEM não excede o CMDB em nenhuma plataforma.":"SIEM does not exceed the CMDB on any platform.","{n} no SIEM vs {n} no CMDB ({n}) — reconciliar governança.":"{n} in SIEM vs {n} in CMDB ({n}) — reconcile governance.","Sem dado de alertas para {m}.":"No alert data for {m}.","Sem dado de licença para {m}.":"No license data for {m}.","sem dado":"no data","sem dado neste mês":"no data this month","Redução de ruído":"Noise reduction","Aumento de alertas":"Alert increase","Alertas caíram de {n} ({m}) para {n} ({m}) — {n}% — maturação da detecção e tuning.":"Alerts dropped from {n} ({m}) to {n} ({m}) — {n}% — detection maturity and tuning.","Alertas subiram de {n} ({m}) para {n} ({m}) — {n}% — investigar origem.":"Alerts rose from {n} ({m}) to {n} ({m}) — {n}% — investigate the source.","Alertas {n} alertas em {m} (início da série).":"Alerts {n} alerts in {m} (start of series).","{n} alertas em {m} (início da série).":"{n} alerts in {m} (start of series).","Casos por tecnologia":"Cases by technology","Evolução dos casos em produção":"Production cases trend","Cobertura MITRE — técnicas vs subtécnicas":"MITRE coverage — techniques vs sub-techniques","Técnicas":"Techniques","Subtécnicas":"Sub-techniques","Portfólio por criticidade":"Portfolio by criticality","({n} casos · atual)":"({n} cases · current)","Crítica":"Critical","Alta":"High","Média":"Medium","Baixa":"Low","Crítica ({n})":"Critical ({n})","Alta ({n})":"High ({n})","Média ({n})":"Medium ({n})","Baixa ({n})":"Low ({n})","Crítica {n}% ({n})":"Critical {n}% ({n})","Alta {n}% ({n})":"High {n}% ({n})","Média {n}% ({n})":"Medium {n}% ({n})","Baixa {n}% ({n})":"Low {n}% ({n})","Sem dados de tecnologia para {m} (série: Jan–{m}).":"No technology data for {m} (series: Jan–{m}).","Volume por mês":"Volume per month","Sem dados de alertas para {m}. Série disponível: {m}–{m}.":"No alert data for {m}. Available series: {m}–{m}.","Alertas em {m}":"Alerts in {m}","Concentração top 5":"Top 5 concentration","candidatas a tuning":"tuning candidates","Regra mais ruidosa":"Noisiest rule","Top regras em {m}":"Top rules in {m}","(FP/tuning)":"(FP/tuning)","Consumo de licença (ECU)":"License usage (ECU)","Semáforo da licença":"License traffic light","OK (<{n}%)":"OK (<{n}%)","Atenção ({n}–{n}%)":"Watch ({n}–{n}%)","Estouro (>{n}%)":"Overrun (>{n}%)","ATENÇÃO":"WATCH","ESTOUROU":"OVERRUN","teto {n}":"cap {n}","{m}: {n} ECU ({n}% do teto).":"{m}: {n} ECU ({n}% of cap).","Fontes de log coletadas":"Collected log sources","Reconciliação SIEM × Inventário":"SIEM × Inventory reconciliation","Inventário":"Inventory","Servidores":"Servers","Correlação de Data Sources":"Data Source Correlation","Matriz ATT&CK":"ATT&CK Matrix","Resumo por tática":"Summary by tactic","Gaps prioritários":"Priority gaps","Casos do mês":"Cases this month","Técnicas · {n}%":"Techniques · {n}%","Subtécnicas · {n}%":"Sub-techniques · {n}%","Regras habilitadas":"Enabled rules","Criados no mês ({d})":"Created this month ({d})","Cobertura ao vivo do Elastic · dados de {d} · verificado {d} · build {d}":"Live coverage from Elastic · data from {d} · checked {d} · build {d}","Filtrar por técnica, subtécnica, ID ou regra…":"Filter by technique, sub-technique, ID or rule…","Expandir subtécnicas cobertas":"Expand covered sub-techniques","Só casos do mês":"Only this month's cases","Parcial":"Partial","Sem cobertura":"No coverage","Caso do mês":"Case of the month","Carregando cobertura do Elastic…":"Loading coverage from Elastic…","COBERTURA PARCIAL — completar (ordenado por subtécnicas faltantes) · {n} técnicas":"PARTIAL COVERAGE — complete (sorted by missing sub-techniques) · {n} techniques","SEM COBERTURA — priorize (ordenado por nº de subtécnicas expostas) · {n} técnicas":"NO COVERAGE — prioritize (sorted by no. of exposed sub-techniques) · {n} techniques","{f} cobertas":"{f} covered","{n} subtéc.":"{n} sub-tech.","Evolução de casos de uso criados":"Use cases created over time","mês a mês · {n} no total · clique numa barra para detalhar":"month over month · {n} in total · click a bar for details","Casos criados em {d}":"Cases created in {d}","Casos criados em {m}":"Cases created in {m}","Nenhum caso de uso criado neste mês.":"No use cases created this month.","{m} · {n}":"{m} · {n}","Carregando credenciais expostas…":"Loading exposed credentials…","Credenciais expostas":"Exposed credentials","Identidades únicas":"Unique identities","Com senha exposta":"With exposed password","{n} de {n} ·":"{n} of {n} ·","fracas (<{n})":"weak (<{n})","Findings novos":"New findings","{n} novos · {n} tratativa · {n} resolv.":"{n} new · {n} in progress · {n} resolved","PII no vazamento":"PII in the leak","CPF exposto · {n} CNPJ":"Exposed CPF · {n} CNPJ","Corp {n}":"Corp {n}","Ext {n}":"Ext {n}","Evolução mês a mês":"Month-over-month trend","Credenciais expostas por grupo · base":"Exposed credentials by group · based on","· mês selecionado em destaque":"· selected month highlighted","Corporativo":"Corporate","Externo":"External","Exposição por grupo":"Exposure by group","Distribuição total do período":"Total distribution for the period","Distribuição em {m}":"Distribution in {m}","{n} · {n}%":"{n} · {n}%","Qualidade da senha — Corporativo":"Password quality — Corporate","Força das senhas expostas (comprimento)":"Strength of exposed passwords (length)","Forte (≥{n})":"Strong (≥{n})","Média ({n}–{n})":"Medium ({n}–{n})","Fraca (<{n})":"Weak (<{n})","Por fonte de vazamento":"By leak source","Onde a credencial foi encontrada (canal de distribuição)":"Where the credential was found (distribution channel)","Fórum underground":"Underground forum","Other":"Other","Família de stealer":"Stealer family","Malware de roubo identificado":"Identified stealer malware","Sem registros no período":"No records in the period","Status dos findings & tratativa":"Findings status & handling","Fila de tratamento do CSIRT · takedowns via Tempest limitados a 30/mês":"CSIRT handling queue · Tempest takedowns limited to 30/month","Novo ({n})":"New ({n})","Em tratativa ({n})":"In progress ({n})","Resolvido ({n})":"Resolved ({n})","Fonte:":"Source:","= domínios":"= domains","exceto":"except","= demais domínios (loja online, gmail, hotmail, terceiros…).":"= all other domains (online store, gmail, hotmail, third parties…).","✨ IA":"✨ AI","Nome completo":"Full name","nome.sobrenome@example.com":"first.last@example.com","Força Bruta":"Attrition","E-mail":"Email","Uso Indevido":"Improper Usage","Outros":"Other","Conteúdo Abusivo":"Abusive Content","Disponibilidade":"Availability","Fraude":"Fraud","Segurança de Conteúdo":"Information Content Security","Coleta de Informação":"Information Gathering","Intrusão":"Intrusion","Tentativas de Intrusão":"Intrusion Attempts","Código Malicioso":"Malicious Code","Vulnerável":"Vulnerable","Comprometimento de Aplicação":"Application Compromise","Servidor C2":"C2 Server","Perda de Dados":"Data Loss","Negação de Serviço":"Denial of Service","Interrupção":"Disruption","Exploração de Vulnerabilidade":"Exploitation of Vulnerability","Sistema Infectado":"Infected System","Divulgação de Informação":"Information Disclosure","Configuração de Malware":"Malware Configuration","Distribuição de Malware":"Malware Distribution","Configuração Incorreta":"Misconfiguration","Uso Indevido de Recursos":"Misuse of Resources","Sem Tipo":"No Type","Serviços Acessíveis Potencialmente Indesejados":"Potentially Unwanted Accessible Services","Comprometimento de Conta Privilegiada":"Privileged Account Compromise","Varredura":"Scanning","Acesso Não Autorizado":"Unauthorized Access","Modificação Não Autorizada":"Unauthorized Modification","Indeterminado":"Undetermined","Comprometimento de Conta sem Privilégio":"Unprivileged Account Compromise","Sistema Vulnerável":"Vulnerable System","Criptografia Fraca":"Weak Cryptography"};</script>
+<script id="i18n-engine">
+/* ===== i18n PT -> EN (v16) =====
+ * Traduz nós de texto e atributos (title/placeholder/aria-label) por dicionário de "modelos":
+ * números e mês/ano viram {n}/{m} na chave, então "Equipe · 4 ativos" casa com "Equipe · {n} ativos".
+ * Números no formato pt-BR (1.234 / 3,99 / 99,5%) e meses (Set/2026) são convertidos para EN.
+ * Elementos com data-noi18n (e descendentes) não são traduzidos (dados: nomes, e-mails, regras…). */
+(function(){
+var MON={Jan:'Jan',Fev:'Feb',Mar:'Mar',Abr:'Apr',Mai:'May',Jun:'Jun',Jul:'Jul',Ago:'Aug',Set:'Sep',Out:'Oct',Nov:'Nov',Dez:'Dec'};
+var MONRX='(?:[Jj]an|[Ff]ev|[Ff]eb|[Mm]ar|[Aa]br|[Aa]pr|[Mm]ai|[Mm]ay|[Jj]un|[Jj]ul|[Aa]go|[Aa]ug|[Ss]et|[Ss]ep|[Oo]ut|[Oo]ct|[Nn]ov|[Dd]ez|[Dd]ec)';
+var NUM='(?:\\d{1,3}(?:\\.\\d{3}){1,2}(?:,\\d+)?|\\d+,\\d+|\\d+)';
+var TOK=new RegExp(
+  '(\\bv\\d+-\\d{8}\\b|\\b\\d{4}-\\d{2}-\\d{2}(?:[ T]\\d{2}:\\d{2}(?::\\d{2})?)?\\b|\\b\\d{2}\\/\\d{2}\\/\\d{4}\\b|\\b\\d{1,2}:\\d{2}(?::\\d{2})?\\b)'+   // 1 data/hora -> {d}
+  '|(\\b'+MONRX+'\\/\\d{2,4}\\b)'+                                                                        // 2 mês/ano -> {m}
+  '|((?<![\\w.,\\/])'+NUM+'\\/'+NUM+'(?![\\w\\/,]|\\.\\d))'+                                                // 3 fração -> {f}
+  '|((?<![\\w.,\\/:])[+\\-−]?'+NUM+'(?![\\d,\\/:_]|\\.\\d))','g');                                          // 4 número -> {n}
+var ATTRS=['title','placeholder','aria-label'];
+var D=window.I18N_EN||{}, LANG='pt', busy=false;
+try{LANG=localStorage.getItem('kpi_lang')==='en'?'en':'pt';}catch(e){}
+function convNum(t){return /[.,]/.test(t)?t.replace(/\./g,'\u0000').replace(/,/g,'.').replace(/\u0000/g,','):t;}
+function convTok(t){if(/:|^\d{4}-|^\d{2}\/\d{2}\/\d{4}$/.test(t))return t;
+  var m=t.match(/^([A-Za-z]{3})\/(\d{2,4})$/);
+  if(m){var cap=m[1].charAt(0).toUpperCase()+m[1].slice(1).toLowerCase(),en=MON[cap];if(!en)return t;if(m[1].charAt(0)===m[1].charAt(0).toLowerCase())en=en.toLowerCase();return en+'/'+m[2];}
+  if(/\//.test(t))return t.split('/').map(convNum).join('/');
+  return convNum(t);}
+function key(core,toks){return core.replace(TOK,function(all,dt,mo,fr){toks.push(all);return dt?'{d}':(mo?'{m}':(fr?'{f}':'{n}'));}).replace(/\s+/g,' ');}
+function tr(text){
+  var core=text.trim();if(!core)return null;
+  if(MON[core]&&core.length===3)return text.replace(core,MON[core]);
+  var toks=[],k=key(core,toks),en=D[k];
+  if(en==null){if(!toks.length)return null;var i=0;var out=core.replace(TOK,function(all){return convTok(all);});return out===core?null:text.replace(core,out);}
+  var j=0;en=en.replace(/\{[nmdf]\}/g,function(){var t=toks[j++];return t==null?'':convTok(t);});
+  return text.replace(core,en);}
+window.__i18nKey=function(t){var toks=[];return key(String(t).trim(),toks);};
+function skip(el){return !el||(el.closest&&el.closest('[data-noi18n],script,style,textarea'));}
+function doText(n){if(skip(n.parentElement))return;
+  if(LANG==='en'){var cur=n.nodeValue;if(n.__en!==cur)n.__pt=cur;var e=tr(n.__pt);var v=e==null?n.__pt:e;n.__en=v;if(cur!==v)n.nodeValue=v;}
+  else if(n.__pt!=null){if(n.nodeValue===n.__en)n.nodeValue=n.__pt;n.__pt=null;n.__en=null;}}
+function doAttrs(el){if(skip(el))return;ATTRS.forEach(function(a){if(!el.hasAttribute(a))return;var cur=el.getAttribute(a),o='data-i18o-'+a,oe='data-i18e-'+a;
+  if(LANG==='en'){if(el.getAttribute(oe)!==cur)el.setAttribute(o,cur);var pt=el.getAttribute(o),e=tr(pt);var v=e==null?pt:e;el.setAttribute(oe,v);if(cur!==v)el.setAttribute(a,v);}
+  else if(el.hasAttribute(o)){if(cur===el.getAttribute(oe))el.setAttribute(a,el.getAttribute(o));el.removeAttribute(o);el.removeAttribute(oe);}});}
+function walk(root){if(!root)return;if(root.nodeType===3){doText(root);return;}if(root.nodeType!==1&&root.nodeType!==9&&root.nodeType!==11)return;
+  if(root.nodeType===1){if(skip(root))return;doAttrs(root);}
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,null),n;
+  while((n=w.nextNode())){if(n.nodeType===3)doText(n);else if(!skip(n))doAttrs(n);}}
+var mo=new MutationObserver(function(list){if(busy)return;busy=true;try{list.forEach(function(m){
+  if(m.type==='childList')m.addedNodes.forEach(function(n){walk(n);});
+  else if(m.type==='characterData')doText(m.target);
+  else if(m.type==='attributes'&&m.target.nodeType===1)doAttrs(m.target);});}finally{busy=false;}});
+function start(){mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:ATTRS});}
+var T0=document.title;
+function title(){document.title=LANG==='en'?(tr(T0)||T0):T0;}
+window.__i18n={set:function(l){LANG=(l==='en')?'en':'pt';busy=true;try{walk(document.body);}finally{busy=false;}title();},
+  lang:function(){return LANG;},t:function(s){if(LANG!=='en')return s;var e=tr(String(s));return e==null?s:e;},dict:D};
+start();if(LANG==='en'){walk(document.body);title();}
+})();
+</script>
 <style>
 #capa{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;isolation:isolate;overflow:hidden;color:#EAF1F7;font-family:"Segoe UI",system-ui,sans-serif;background:#0A0F16;transition:opacity .5s ease,visibility .5s ease}
 #capa.cp-gone{opacity:0;visibility:hidden;pointer-events:none}
@@ -352,19 +516,20 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
    {t:'Falsos Positivos',ic:'🎯',ac:'#E05C5C',g:['soc','fp']},
    {t:'Eficiência',ic:'⚡',ac:'#42A5F5',g:['soc','eff']},
    {t:'Eng. Detecção',ic:'📡',ac:'#B57BD8',g:['eng','deteccao']},
-   {t:'Cobertura MITRE',ic:'🧩',ac:'#E0A64B',g:['eng','mitre']}
+   {t:'Cobertura MITRE',ic:'🧩',ac:'#E0A64B',g:['eng','mitre']},
+   {t:'Vazamento de Credenciais',ic:'🔐',ac:'#B57BD8',g:['cred',null]}
   ];
   var cap=document.getElementById('capa'),mn=document.getElementById('cpMenu'),cpRun=true;
-  function navTab(main){var tb=document.getElementById(main==='soc'?'tabSoc':'tabEng');if(tb)tb.click();}
+  function navTab(main){var id=main==='soc'?'tabSoc':(main==='cred'?'tabCred':'tabEng');var tb=document.getElementById(id);if(tb)tb.click();}
   function navSub(main,sub){if(!sub)return;var sel=main==='soc'?'#soctabs .subtab[data-sq="'+sub+'"]':'#engtabs .subtab[data-sv="'+sub+'"]';var el=document.querySelector(sel);if(el)el.click();}
   function close(){cap.classList.add('cp-gone');cpRun=false;}
   function open(){cap.classList.remove('cp-gone');if(!cpRun){cpRun=true;draw();}}
   window.__openCapa=open;
-  function go(g){navTab(g[0]);navSub(g[0],g[1]);close();}
+  function go(g){if(window.__nav){if(g[0]==='eng'&&g[1]==='mitre')window.__nav('mitre');else{window.__nav(g[0]);navSub(g[0],g[1]);}}else{navTab(g[0]);navSub(g[0],g[1]);}close();}
   MI.forEach(function(m){var e=document.createElement('div');e.className='cp-mi';e.style.setProperty('--ac',m.ac);
     e.innerHTML='<span class="ic">'+m.ic+'</span>'+m.t+'<span class="ar">→</span>';
     e.onclick=function(){go(m.g);};mn.appendChild(e);});
-  document.getElementById('cpEnter').onclick=function(){navTab('soc');navSub('soc','csirt');close();};
+  document.getElementById('cpEnter').onclick=function(){go(['soc','csirt']);};
   function wireBtn(){var cb=document.getElementById('capaBtn');if(cb)cb.onclick=open;}
   if(document.getElementById('capaBtn'))wireBtn();else document.addEventListener('DOMContentLoaded',wireBtn);
   // timestamp dinâmico
@@ -381,17 +546,42 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
 })();
 </script>
 <div class="app">
+<aside class="side" id="side">
+  <div class="sbrand"><div class="slogo slogo-ph">SOC</div><div class="stt">KPI SOC/CSIRT<small>Cibersegurança</small></div></div>
+  <nav class="snav" id="snav">
+    <a class="sitem on" data-nav="soc" title="SOC + CSIRT"><span class="ic">🛡️</span><span class="lbl">SOC + CSIRT</span></a>
+    <a class="sitem" data-nav="eng" title="Eng. Detecção"><span class="ic">📡</span><span class="lbl">Eng. Detecção</span></a>
+    <a class="sitem" data-nav="mitre" title="Cobertura MITRE"><span class="ic">🧩</span><span class="lbl">Cobertura MITRE</span></a>
+    <a class="sitem" data-nav="cred" title="Vazamento de Credenciais"><span class="ic">🔐</span><span class="lbl">Vazamento de Credenciais</span></a>
+    <div class="ssep"></div>
+    <a class="sitem" data-nav="capa" title="Capa"><span class="ic">🏠</span><span class="lbl">Capa</span></a>
+  </nav>
+  <div class="sfoot">
+    <div class="suser" id="suser" title=""><span class="av" id="sav">··</span><span class="lbl"><span class="snm" id="sname">—</span><small id="srole"></small></span></div>
+    <a class="sitem" data-nav="admin" id="sadmin" hidden title="Administração"><span class="ic">⚙️</span><span class="lbl">Administração</span></a>
+    <a class="sitem stog" id="stog" title="Recolher menu"><span class="ic" id="stogic">«</span><span class="lbl">Recolher menu</span></a>
+  </div>
+</aside>
+<div class="appmain">
   <div class="appbar">
-    <div style="width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#27AE60,#1565C0);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px">SOC</div>
     <div><h1>KPI Executivo/Operacional — CSIRT</h1><p class="sub" id="subUpd">Cibersegurança</p></div>
     <div class="sp"></div>
     <span id="perCtrl" class="ctrl"><label for="mes">Período</label><select id="mes"></select></span>
-    <button class="btn" id="capaBtn" title="Voltar à capa de apresentação">⌂ Capa</button>
-    <button class="btn" id="fs">⛶ Tela cheia</button>
+    <div class="qseg" id="qLang" role="group" aria-label="Idioma"><button data-v="pt">🌐 PT</button><button data-v="en">EN</button></div>
+    <div class="qseg ic" id="qTheme" role="group" aria-label="Tema"><button data-v="dark" title="Escuro">☾</button><button data-v="light" title="Claro">☀︎</button><button data-v="system" title="Sistema">🖥</button></div>
+    <div class="uchip" id="uchip" tabindex="0"><span class="av" id="uav">··</span><span class="nm"><span id="uname" data-noi18n>—</span> <span class="rl" id="urole"></span></span>
+      <div class="umenu" id="umenu">
+        <div class="uhd"><span class="av lg" id="uav2">··</span><div><div class="un" id="uname2" data-noi18n>—</div><div class="ue" id="uemail" data-noi18n></div><div class="ue">Papel: <b id="urole2"></b></div></div></div>
+        <a class="uit" id="uadmin" hidden>⚙️ Administração</a>
+        <a class="uit" id="ucapa">🏠 Voltar à capa</a>
+      </div>
+    </div>
+    <button class="btn" id="fs" title="Tela cheia" aria-label="Tela cheia">⛶</button>
   </div>
   <div class="tabs" id="tabs">
     <button class="tab active" data-v="soc" id="tabSoc">SOC + CSIRT</button>
     <button class="tab" data-v="eng" id="tabEng">Eng. Detecção</button>
+    <button class="tab" data-v="cred" id="tabCred">Vazamento de Credenciais</button>
   </div>
   <div class="content">
     <div class="view" id="v-soc"><div id="cs_head"></div><div class="subtabs" id="soctabs"><button class="subtab active" data-sq="csirt">Visão geral CSIRT</button><button class="subtab" data-sq="fp">Falsos Positivos</button><button class="subtab" data-sq="eff">Eficiência</button></div><div id="cs_body"><div class="loading">Carregando KPIs do CSIRT…</div></div><div id="cs_fp" hidden></div><div id="cs_eff" hidden></div><div id="cs_ddov" class="ddov" hidden><div class="ddpanel"><button id="cs_ddclose" class="ddclose" title="Fechar">✕</button><h3 class="ddtitle">Drill-down — Incidentes CSIRT</h3><div id="cs_ddbody"></div></div></div></div>
@@ -409,8 +599,94 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}
       <div class="view" id="v-capacidade" hidden></div>
       <div class="view" id="v-mitre" hidden><div class="mtabs" id="mi_tabs"><button class="mtab active" data-mv="matriz">Matriz ATT&CK</button><button class="mtab" data-mv="resumo">Resumo por tática</button><button class="mtab" data-mv="gaps">Gaps prioritários</button><button class="mtab" data-mv="setembro">Casos do mês</button></div><div class="mkpis" id="mi_kpis"></div><div class="miupd" id="mi_upd"></div><div class="mviews"><div class="mview" id="miv-matriz"><div class="controls"><input type="search" id="mi_q" placeholder="Filtrar por técnica, subtécnica, ID ou regra…" aria-label="Filtrar"><label class="tog"><input type="checkbox" id="mi_exptog"> Expandir subtécnicas cobertas</label><label class="tog"><input type="checkbox" id="mi_septog"> Só casos do mês</label><div class="legend"><span class="it"><span class="sw cov"></span>Total</span><span class="it"><span class="sw part"></span>Parcial</span><span class="it"><span class="sw none"></span>Sem cobertura</span><span class="it"><span class="sw new"></span>Caso do mês</span></div></div><div class="fit" id="mi_fit"><div class="matrix" id="mi_matrix"><div class="loading">Carregando cobertura do Elastic…</div></div></div></div><div class="mview" id="miv-resumo" hidden><div class="scroll" id="mi_resumo"></div></div><div class="mview" id="miv-gaps" hidden><div class="scroll" id="mi_gaps"></div></div><div class="mview" id="miv-setembro" hidden><div class="scroll" id="mi_setembro"></div></div></div><div class="mtip" id="mi_tip" role="tooltip" aria-hidden="true"></div></div>
     </div>
+    <div class="view" id="v-cred" hidden>
+      <div id="rz_root">
+        <div class="rz-perbar">
+          <span class="rz-lb">📅 Período:</span>
+          <span class="rz-chip" data-m="2026-08">Ago/2026</span>
+          <span class="rz-chip" data-m="2026-09">Set/2026</span>
+          <span class="rz-chip" data-m="2026-10">Out/2026</span>
+          <span class="rz-chip on" data-m="all">Todos</span>
+          <span class="rz-sp"></span>
+          <span class="rz-upd" id="rz_upd"></span>
+        </div>
+        <div class="rz-kpis" id="rz_kpis"><div class="loading">Carregando credenciais expostas…</div></div>
+        <div class="rz-airec">
+          <div class="hd"><h3 id="rz_recTitle" data-noi18n>Recomendações</h3><span class="ia">✨ IA</span></div>
+          <p class="mref" id="rz_recRef" data-noi18n></p>
+          <ul id="rz_recList" data-noi18n></ul>
+        </div>
+        <div class="rz-grid">
+          <div class="rz-card full"><h3>Evolução mês a mês</h3><p class="cap">Credenciais expostas por grupo · base <code>credential.created_at</code> · mês selecionado em destaque</p><svg id="rz_svgEvo" viewBox="0 0 1180 300" width="100%"></svg><div class="rz-legend"><span class="it"><span class="sw" style="background:var(--rzcorp)"></span>Corporativo</span><span class="it"><span class="sw" style="background:var(--rzext)"></span>Externo</span></div></div>
+          <div class="rz-card"><h3>Exposição por grupo</h3><p class="cap" id="rz_capDonut"></p><svg id="rz_svgDonut" viewBox="0 0 560 230" width="100%"></svg></div>
+          <div class="rz-card"><h3>Qualidade da senha — Corporativo</h3><p class="cap">Força das senhas expostas (comprimento)</p><svg id="rz_svgSenha" viewBox="0 0 560 230" width="100%"></svg></div>
+          <div class="rz-card"><h3>Por fonte de vazamento</h3><p class="cap">Onde a credencial foi encontrada (canal de distribuição)</p><svg id="rz_svgFonte" viewBox="0 0 560 300" width="100%"></svg></div>
+          <div class="rz-card"><h3>Família de stealer</h3><p class="cap" id="rz_capStealer"></p><svg id="rz_svgStealer" viewBox="0 0 560 300" width="100%"></svg></div>
+          <div class="rz-card full"><h3>Status dos findings &amp; tratativa</h3><p class="cap">Fila de tratamento do CSIRT · takedowns via Tempest limitados a 30/mês</p><svg id="rz_svgStatus" viewBox="0 0 1180 120" width="100%"></svg></div>
+        </div>
+        <div class="rz-foot">Fonte: <code>logs-resonant_credentials_exposure-resonant</code> (Elastic SIEM). <b>Corporativo</b> = domínios <code>*example*</code> / <code>*examplenet*</code> / <code>us-example.com</code> exceto <code>shop.example.com</code>. <b>Externo</b> = demais domínios (loja online, gmail, hotmail, terceiros…).</div>
+      </div>
+    </div>
   </div>
 </div>
+</div>
+<div class="aov" id="adminOv" hidden>
+  <div class="amodal" role="dialog" aria-modal="true" aria-labelledby="admTitle">
+    <div class="amhd"><h2 id="admTitle">Administração</h2><a class="amsheet" id="admSheet" target="_blank" rel="noopener" hidden>Abrir planilha de Acessos ↗</a><button class="amx" id="admClose" title="Fechar">✕</button></div>
+    <div class="amtabs"><button class="amtab on" data-t="sol">Solicitações <span class="cnt" id="admCnt"></span></button><button class="amtab" data-t="mem">Membros</button></div>
+    <div class="ambody">
+      <div class="amerr" id="admErr" hidden></div>
+      <div id="admSol" data-noi18n><div class="loading">Carregando…</div></div>
+      <div id="admMem" data-noi18n hidden></div>
+    </div>
+  </div>
+</div>
+<style>
+#v-cred{--rzcorp:#42A5F5;--rzext:#E0A64B}
+#v-cred #rz_root{padding:2px 2px 6px}
+#v-cred .rz-perbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+#v-cred .rz-lb{font-size:12.5px;color:var(--muted);font-weight:600}
+#v-cred .rz-sp{flex:1}
+#v-cred .rz-upd{font-size:11.5px;color:var(--muted)}
+#v-cred .rz-chip{font-size:13px;font-weight:600;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:30px;padding:6px 15px;cursor:pointer;transition:.14s}
+#v-cred .rz-chip:hover{border-color:var(--accent);color:var(--ink)}
+#v-cred .rz-chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+#v-cred .rz-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+#v-cred .rz-kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 15px;position:relative;overflow:hidden}
+#v-cred .rz-kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac,var(--accent))}
+#v-cred .rz-kpi .lbl{font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+#v-cred .rz-kpi .big{font-size:26px;font-weight:800;margin:6px 0 2px;color:var(--rzcorp)}
+#v-cred .rz-kpi .split{display:flex;gap:10px;font-size:11.5px;color:var(--muted);margin-top:6px;flex-wrap:wrap}
+#v-cred .rz-kpi .split .c{color:var(--rzcorp);font-weight:700}
+#v-cred .rz-kpi .split .e{color:var(--rzext);font-weight:700}
+#v-cred .rz-kpi .sm{font-size:12px;color:var(--muted);margin-top:3px}
+#v-cred .rz-airec{background:linear-gradient(180deg,rgba(181,123,216,.10),rgba(23,32,42,.55));border:1px solid rgba(181,123,216,.35);border-radius:14px;padding:15px 18px;margin-bottom:14px}
+#v-cred .rz-airec .hd{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+#v-cred .rz-airec .hd h3{margin:0;font-size:15px}
+#v-cred .rz-airec .ia{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:#D4B3EC;border:1px solid rgba(181,123,216,.5);border-radius:20px;padding:2px 9px;font-weight:700}
+#v-cred .rz-airec .mref{font-size:12px;color:var(--muted);margin:0 0 12px}
+#v-cred .rz-airec ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+#v-cred .rz-airec li{display:flex;gap:9px;font-size:13px;line-height:1.45;align-items:flex-start}
+#v-cred .rz-airec li .tag{flex:none;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;border-radius:5px;padding:2px 7px;margin-top:1px}
+#v-cred .rz-airec .alta{background:rgba(224,92,92,.18);color:#F08C8C;border:1px solid rgba(224,92,92,.4)}
+#v-cred .rz-airec .media{background:rgba(224,166,75,.16);color:#E7BE78;border:1px solid rgba(224,166,75,.4)}
+#v-cred .rz-airec .info{background:rgba(66,165,245,.16);color:#8FC4F5;border:1px solid rgba(66,165,245,.4)}
+:root[data-theme="light"] #v-cred .rz-airec{background:linear-gradient(180deg,rgba(155,89,198,.08),var(--panel));border-color:rgba(155,89,198,.35)}
+:root[data-theme="light"] #v-cred .rz-airec .ia{color:#7B3FA8;border-color:rgba(123,63,168,.45)}
+:root[data-theme="light"] #v-cred .rz-airec .alta{color:#A61E1E;background:rgba(214,69,69,.10);border-color:rgba(214,69,69,.45)}
+:root[data-theme="light"] #v-cred .rz-airec .media{color:#7A4E06;background:rgba(217,149,46,.15);border-color:rgba(217,149,46,.5)}
+:root[data-theme="light"] #v-cred .rz-airec .info{color:#0D4F96;background:rgba(21,101,192,.10);border-color:rgba(21,101,192,.4)}
+#v-cred .rz-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#v-cred .rz-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+#v-cred .rz-card.full{grid-column:1/3}
+#v-cred .rz-card h3{margin:0 0 2px;font-size:15px}
+#v-cred .rz-card .cap{font-size:12px;color:var(--muted);margin:0 0 10px}
+#v-cred .rz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+#v-cred .rz-legend .it{display:flex;align-items:center;gap:6px}
+#v-cred .rz-legend .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+#v-cred .rz-foot{font-size:11.5px;color:var(--muted);margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+@media(max-width:900px){#v-cred .rz-kpis{grid-template-columns:repeat(2,1fr)}#v-cred .rz-grid{grid-template-columns:1fr}#v-cred .rz-card.full{grid-column:1}#v-cred .rz-airec ul{grid-template-columns:1fr}}
+</style>
 <script>
 var DATA=null;
 var E=[];
@@ -425,7 +701,8 @@ document.getElementById('fs').addEventListener('click',function(){try{var e=docu
 function curSub(){var a=document.querySelector('#engtabs .subtab.active');return a?a.dataset.sv:'geral';}
 function showPer(){ // mostra o seletor global de período só nas sub-abas operacionais
   var soc=!document.getElementById('v-soc').hidden;
-  var vis=(!soc)&&(curSub()!=='mitre');
+  var vc=document.getElementById('v-cred');var cred=vc&&!vc.hidden;
+  var vis=(!soc)&&(!cred)&&(curSub()!=='mitre');
   var pc=document.getElementById('perCtrl');if(pc)pc.style.display=vis?'':'none';
 }
 document.getElementById('tabs').addEventListener('click',function(e){var b=e.target.closest('.tab');if(!b)return;
@@ -433,6 +710,8 @@ document.getElementById('tabs').addEventListener('click',function(e){var b=e.tar
   var v=b.dataset.v;
   document.getElementById('v-soc').hidden=(v!=='soc');
   document.getElementById('v-eng').hidden=(v!=='eng');
+  var vc=document.getElementById('v-cred');if(vc)vc.hidden=(v!=='cred');
+  if(v==='cred'&&window.__loadResonant)window.__loadResonant();
   if(v==='soc'&&window.__loadCsirt)window.__loadCsirt();
   if(v==='eng'){ // ativa a sub-aba corrente
     var sv=curSub();
@@ -609,7 +888,7 @@ function renderAll(i){
 /* seletor + carga da planilha (Google Drive) */
 var sel=document.getElementById('mes');
 sel.addEventListener('change',function(){if(DATA)renderAll(parseInt(this.value,10));});
-function initOper(d){DATA=d;try{window.__setUpd(d&&d.updated);}catch(e){}var YY=String(new Date().getFullYear()).slice(-2);
+function initOper(d){if(!d||!d.elastic){operErr('a planilha não retornou dados');return;}DATA=d;try{window.__setUpd(d&&d.updated);}catch(e){}var YY=String(new Date().getFullYear()).slice(-2);
   E=(DATA.elastic||[]).filter(function(e){return e.m.split('/')[1]===YY;});if(!E.length)E=DATA.elastic||[];
   sel.innerHTML=E.map(function(e,i){return '<option value="'+i+'">'+e.m+'</option>';}).join('');
   var last=E.length-1;sel.value=String(last);renderAll(last);}
@@ -853,17 +1132,30 @@ function funnelHTML(f){
 
 /* barras verticais empilhadas (incidentes) */
 function incidentsSVG(rows){
-  var W=Math.max(360,rows.length*110),H=250,pl=34,pr=12,pt=24,pb=28;
+  var W=Math.max(360,rows.length*110),H=250,pl=34,pr=40,pt=24,pb=28;
   var max=Math.max.apply(null,rows.map(function(r){return r.total;}))||1;
   var bw=Math.min(52,(W-pl-pr)/rows.length*0.6);
-  var Y=function(v){return pt+(1-v/max)*(H-pt-pb);};
+  var plot=H-pt-pb;
+  var Y=function(v){return pt+(1-v/max)*plot;};
+  var DARKTXT={Medium:1,Low:1}; // severidades claras -> texto escuro p/ contraste
   var g='<svg viewBox="0 0 '+W+' '+H+'" width="100%" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI">';
-  for(var k=0;k<=4;k++){var gy=pt+k*(H-pt-pb)/4;g+='<line x1="'+pl+'" y1="'+gy.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+gy.toFixed(1)+'" stroke="var(--line)"/>';}
+  for(var k=0;k<=4;k++){var gy=pt+k*plot/4;g+='<line x1="'+pl+'" y1="'+gy.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+gy.toFixed(1)+'" stroke="var(--line)"/>';}
   rows.forEach(function(r,i){
-    var cx=pl+(i+0.5)*(W-pl-pr)/rows.length, x=cx-bw/2, yb=H-pb;
-    SEV.forEach(function(s){var v=r[s]||0;if(v<=0)return;var h=(v/max)*(H-pt-pb);yb-=h;
-      g+='<rect x="'+x.toFixed(1)+'" y="'+yb.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" fill="'+SEVC[s]+'"/>';});
-    g+='<text x="'+cx.toFixed(1)+'" y="'+(Y(r.total)-6).toFixed(1)+'" fill="var(--ink)" font-size="12" font-weight="700" text-anchor="middle">'+r.total+'</text>';
+    var cx=pl+(i+0.5)*(W-pl-pr)/rows.length, x=cx-bw/2, yb=H-pb, thin=[];
+    SEV.forEach(function(s){var v=r[s]||0;if(v<=0)return;var h=(v/max)*plot;yb-=h;
+      g+='<rect x="'+x.toFixed(1)+'" y="'+yb.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" fill="'+SEVC[s]+'"/>';
+      var midy=yb+h/2;
+      if(h>=14){ // rótulo dentro do segmento
+        g+='<text x="'+cx.toFixed(1)+'" y="'+(midy+4).toFixed(1)+'" fill="'+(DARKTXT[s]?'#17202A':'#fff')+'" font-size="11" font-weight="700" text-anchor="middle">'+v+'</text>';
+      } else { thin.push({y:midy,v:v,color:SEVC[s]}); } // faixa fina -> chamada lateral
+    });
+    thin.sort(function(a,b){return a.y-b.y;});
+    var lastY=-99, xr=x+bw;
+    thin.forEach(function(t){var ly=t.y; if(ly-lastY<12) ly=lastY+12; lastY=ly;
+      g+='<line x1="'+xr.toFixed(1)+'" y1="'+t.y.toFixed(1)+'" x2="'+(xr+9).toFixed(1)+'" y2="'+ly.toFixed(1)+'" stroke="'+t.color+'" stroke-width="1.2"/>';
+      g+='<text x="'+(xr+12).toFixed(1)+'" y="'+(ly+3.5).toFixed(1)+'" fill="'+t.color+'" font-size="10.5" font-weight="700" text-anchor="start">'+t.v+'</text>';
+    });
+    g+='<text x="'+cx.toFixed(1)+'" y="'+(Y(r.total)-6).toFixed(1)+'" fill="var(--ink)" font-size="12" font-weight="800" text-anchor="middle">'+r.total+'</text>';
     g+='<text x="'+cx.toFixed(1)+'" y="'+(H-9)+'" fill="var(--muted)" font-size="12.5" text-anchor="middle">'+r.m+'</text>';
   });
   return g+'</svg>';
@@ -1226,6 +1518,270 @@ window.__loadCsirt=loadCsirt;
 /* CSIRT é a aba padrão: esconde o seletor global de período e carrega ao abrir a página */
 try{var _pc=document.getElementById('perCtrl');if(_pc)_pc.style.display='none';}catch(e){}
 loadCsirt();
+})();
+</script>
+<script>
+/* ===== Vazamento de Credenciais — Resonant (IIFE isolada) ===== */
+(function(){
+var SNAP={"months": ["2026-08", "2026-09", "2026-10"], "distAll": {"corp": 455, "ext": 690}, "updated": "demo", "data": {"2026-08": {"corp": {"creds": 612, "emails": 198, "senha": 610, "fraca": 41, "cpf": 0, "cnpj": 0}, "ext": {"creds": 845, "emails": 402, "senha": 843, "fraca": 97, "cpf": 12, "cnpj": 2}, "fonte": [["Telegram", 1290], ["Mega", 61], ["Other", 58], ["GoFile", 30], ["MediaFire", 13], ["Upload.ee", 5]], "stealer": [["REDLINE", 3], ["LUMMAC2", 2]], "status": {"Novo": 1457, "Tratativa": 0, "Resolvido": 0}, "senha": {"Forte": 140, "Media": 429, "Fraca": 41}}, "2026-09": {"corp": {"creds": 934, "emails": 371, "senha": 930, "fraca": 168, "cpf": 1, "cnpj": 0}, "ext": {"creds": 702, "emails": 330, "senha": 695, "fraca": 81, "cpf": 19, "cnpj": 4}, "fonte": [["Telegram", 820], ["Mega", 352], ["GoFile", 301], ["Fórum underground", 98], ["Other", 41], ["MediaFire", 17], ["BiteBlob", 7]], "stealer": [["LUMMAC2", 3], ["VIDAR", 1]], "status": {"Novo": 1580, "Tratativa": 49, "Resolvido": 7}, "senha": {"Forte": 201, "Media": 561, "Fraca": 168}}, "2026-10": {"corp": {"creds": 58, "emails": 37, "senha": 55, "fraca": 6, "cpf": 2, "cnpj": 0}, "ext": {"creds": 44, "emails": 29, "senha": 44, "fraca": 5, "cpf": 0, "cnpj": 0}, "fonte": [["Telegram", 88], ["Fórum underground", 9], ["GoFile", 5]], "stealer": [], "status": {"Novo": 0, "Tratativa": 102, "Resolvido": 0}, "senha": {"Forte": 14, "Media": 35, "Fraca": 6}}}};
+var REC={
+ '2026-08':{ref:'Base corporativa controlada (612 credenciais, 41 senhas fracas), mas canal único de distribuição e stealers ativos. [dados de demonstração]',items:[
+   {s:'alta',t:'<b>Telegram concentra ~89%</b> das exposições do mês (1.290). Priorize monitoramento e takedown dos canais Telegram.'},
+   {s:'alta',t:'<b>REDLINE e LUMMAC2</b> presentes: há endpoints infectados. Cruze os hosts com o EDR e force reset + reimage.'},
+   {s:'media',t:'<b>41 senhas corporativas fracas (&lt;8)</b>: lote tratável. Dispare reset forçado e confirme MFA ativo.'},
+   {s:'info',t:'<b>100% dos findings como "Novo"</b>: defina SLA de triagem para a fila não envelhecer.'}]},
+ '2026-09':{ref:'Pico corporativo (934) com deterioração de senha e diversificação de canais — mês de maior risco. [dados de demonstração]',items:[
+   {s:'alta',t:'<b>Senhas fracas corporativas sobem para 168</b> (≈18% do corp, vs. 41 em Ago). Campanha de reset forçado + política de senha.'},
+   {s:'alta',t:'<b>Distribuição se diversifica</b>: Mega (352), GoFile (301) e Fórum underground (98). Amplie coletores além do Telegram.'},
+   {s:'media',t:'<b>Domínio da loja online aparece pela 1ª vez</b> (shop.example.com). Inclua no escopo de monitoramento.'},
+   {s:'media',t:'<b>Takedown abaixo do necessário</b>: 7 resolvidos / 49 em tratativa de 1.636. Use o teto de 30/mês priorizando PII (19 CPF) e senha.'}]},
+ '2026-10':{ref:'Mês parcial (ingestão em curso) — volumes baixos, não comparar linearmente com meses fechados. [dados de demonstração]',items:[
+   {s:'info',t:'<b>Volume parcial</b> (58 corp / 44 ext): aguarde o fechamento antes de concluir tendência de queda.'},
+   {s:'media',t:'<b>100% já em "tratativa" e 0 "Novo"</b>: valide se é triagem imediata real ou artefato de status na coleta.'},
+   {s:'info',t:'<b>Nenhuma família de stealer atribuída</b>: melhore o enriquecimento de <code>resonant.stealer_family</code> no coletor.'},
+   {s:'alta',t:'<b>2 CPF corporativos expostos</b> já neste parcial: priorize — PII corporativo tem maior impacto de LGPD.'}]},
+ 'all':{ref:'Visão consolidada Ago–Out: 1.604 credenciais corporativas e 455 identidades únicas expostas. [dados de demonstração]',items:[
+   {s:'alta',t:'<b>215 senhas corporativas fracas</b> no acumulado: maior alavanca de risco. Reset forçado em lote + MFA.'},
+   {s:'alta',t:'<b>Telegram domina o período</b> (2.198 de ~3,2k). Consolidar monitoramento de Telegram traz o maior ganho de takedown.'},
+   {s:'media',t:'<b>Fila acumula</b>: 3.037 "Novos" vs. 158 tratados. Automatize priorização por (PII + senha + corporativo) p/ caber no teto de 30/mês.'},
+   {s:'info',t:'<b>34 CPF e 6 CNPJ</b> expostos no total. Avalie acionamento de LGPD/DPO para identidades corporativas afetadas.'}]}
+};
+var REC_EN={
+ '2026-08':{ref:'Controlled corporate baseline (612 credentials, 41 weak passwords), but a single distribution channel and active stealers. [demo data]',items:[
+   {s:'alta',t:'<b>Telegram concentrates ~89%</b> of the month\'s exposures (1,290). Prioritize monitoring and takedown of Telegram channels.'},
+   {s:'alta',t:'<b>REDLINE and LUMMAC2</b> present: there are infected endpoints. Cross-check the hosts in the EDR and force reset + reimage.'},
+   {s:'media',t:'<b>41 weak corporate passwords (&lt;8)</b>: a manageable batch. Force a reset and confirm MFA is enabled.'},
+   {s:'info',t:'<b>100% of findings marked "New"</b>: set a triage SLA so the queue does not age.'}]},
+ '2026-09':{ref:'Corporate peak (934) with password degradation and channel diversification — highest-risk month. [demo data]',items:[
+   {s:'alta',t:'<b>Weak corporate passwords rise to 168</b> (≈18% of corporate, vs. 41 in Aug). Forced reset campaign + stronger password policy.'},
+   {s:'alta',t:'<b>Distribution diversifies</b>: Mega (352), GoFile (301) and underground forums (98). Extend collectors beyond Telegram.'},
+   {s:'media',t:'<b>Online store domain appears for the first time</b> (shop.example.com). Add it to the monitoring scope.'},
+   {s:'media',t:'<b>Takedowns below need</b>: 7 resolved / 49 in progress out of 1,636. Use the 30/month cap prioritizing PII (19 CPF) and passwords.'}]},
+ '2026-10':{ref:'Partial month (ingestion in progress) — low volumes, do not compare linearly with closed months. [demo data]',items:[
+   {s:'info',t:'<b>Partial volume</b> (58 corporate / 44 external): wait for month close before concluding a downward trend.'},
+   {s:'media',t:'<b>100% already "in progress" and 0 "New"</b>: validate whether this is real immediate triage or a status artifact in collection.'},
+   {s:'info',t:'<b>No stealer family attributed</b>: improve enrichment of <code>resonant.stealer_family</code> in the collector.'},
+   {s:'alta',t:'<b>2 corporate CPFs exposed</b> already in this partial: prioritize — corporate PII carries the highest LGPD impact.'}]},
+ 'all':{ref:'Consolidated view Aug–Oct: 1,604 corporate credentials and 455 unique identities exposed. [demo data]',items:[
+   {s:'alta',t:'<b>215 weak corporate passwords</b> accumulated: the biggest risk lever. Bulk forced reset + MFA.'},
+   {s:'alta',t:'<b>Telegram dominates the period</b> (2,198 of ~3.2k). Consolidating Telegram monitoring yields the biggest takedown gain.'},
+   {s:'media',t:'<b>Queue builds up</b>: 3,037 "New" vs. 158 handled. Automate prioritization by (PII + password + corporate) to fit the 30/month takedown cap.'},
+   {s:'info',t:'<b>34 CPF and 6 CNPJ</b> exposed in total. Consider engaging LGPD/DPO for affected corporate identities.'}]}
+};
+var MONTHS=SNAP.months.slice(),MLBL={'2026-08':'Ago/2026','2026-09':'Set/2026','2026-10':'Out/2026'},MLBL_EN={'2026-08':'Aug/2026','2026-09':'Sep/2026','2026-10':'Oct/2026'};
+function isEN(){return !!(window.__pref&&window.__pref.lang==='en');}
+var C={corp:'#42A5F5',ext:'#E0A64B',ink:'var(--ink)',mut:'var(--muted)',line:'var(--line)',crit:'#E05C5C',warn:'#E0A64B',brand:'#27AE60',accent:'#42A5F5'};
+var DB=SNAP.data,DIST={all:SNAP.distAll},SEL='all',ALL=null,_booted=false;
+function el(s){return document.getElementById(s);}
+function fmt(n){return (n==null?'—':n.toLocaleString('pt-BR'));}
+function pc(a,b){return b?(100*a/b).toFixed(1).replace('.',','):'0,0';}
+function T(x,y,t,o){o=o||{};return '<text x="'+x+'" y="'+y+'" fill="'+(o.f||C.mut)+'" font-size="'+(o.s||12)+'" font-family="Segoe UI,sans-serif" text-anchor="'+(o.a||'start')+'"'+(o.w?' font-weight="'+o.w+'"':'')+(o.o!=null?' opacity="'+o.o+'"':'')+'>'+t+'</text>';}
+function agg(){var o={corp:{creds:0,senha:0,fraca:0,cpf:0,cnpj:0},ext:{creds:0,senha:0,fraca:0,cpf:0,cnpj:0},fonteM:{},stealerM:{},status:{Novo:0,Tratativa:0,Resolvido:0},senha:{Forte:0,Media:0,Fraca:0}};
+ MONTHS.forEach(function(m){var d=DB[m];if(!d)return;['corp','ext'].forEach(function(g){['creds','senha','fraca','cpf','cnpj'].forEach(function(k){o[g][k]+=d[g][k];});});
+   (d.fonte||[]).forEach(function(f){o.fonteM[f[0]]=(o.fonteM[f[0]]||0)+f[1];});
+   (d.stealer||[]).forEach(function(f){o.stealerM[f[0]]=(o.stealerM[f[0]]||0)+f[1];});
+   ['Novo','Tratativa','Resolvido'].forEach(function(k){o.status[k]+=d.status[k];});
+   ['Forte','Media','Fraca'].forEach(function(k){o.senha[k]+=d.senha[k];});});
+ o.corp.emails=DIST.all.corp;o.ext.emails=DIST.all.ext;
+ o.fonte=Object.keys(o.fonteM).map(function(k){return [k,o.fonteM[k]];}).sort(function(a,b){return b[1]-a[1];});
+ o.stealer=Object.keys(o.stealerM).map(function(k){return [k,o.stealerM[k]];}).sort(function(a,b){return b[1]-a[1];});
+ return o;}
+function get(sel){return sel==='all'?ALL:DB[sel];}
+function renderKpis(d){var c=d.corp,e=d.ext,creds=c.creds+e.creds,emails=c.emails+e.emails,senha=c.senha+e.senha,fraca=c.fraca+e.fraca,cpf=c.cpf+e.cpf,cnpj=c.cnpj+e.cnpj,st=d.status||ALL.status,stot=st.Novo+st.Tratativa+st.Resolvido;
+ var h='';
+ h+='<div class="rz-kpi" style="--ac:var(--rzcorp)"><div class="lbl">Credenciais expostas</div><div class="big">'+fmt(creds)+'</div><div class="split"><span class="c">Corp '+fmt(c.creds)+'</span><span class="e">Ext '+fmt(e.creds)+'</span></div></div>';
+ h+='<div class="rz-kpi" style="--ac:var(--accent)"><div class="lbl">Identidades únicas</div><div class="big">'+fmt(emails)+'</div><div class="split"><span class="c">Corp '+fmt(c.emails)+'</span><span class="e">Ext '+fmt(e.emails)+'</span></div></div>';
+ h+='<div class="rz-kpi" style="--ac:'+C.crit+'"><div class="lbl">Com senha exposta</div><div class="big">'+pc(senha,creds)+'%</div><div class="sm">'+fmt(senha)+' de '+fmt(creds)+' · <b>'+fmt(fraca)+'</b> fracas (&lt;8)</div></div>';
+ h+='<div class="rz-kpi" style="--ac:'+C.warn+'"><div class="lbl">Findings novos</div><div class="big" style="color:'+C.warn+'">'+pc(st.Novo,stot)+'%</div><div class="sm">'+fmt(st.Novo)+' novos · '+fmt(st.Tratativa)+' tratativa · '+fmt(st.Resolvido)+' resolv.</div></div>';
+ h+='<div class="rz-kpi" style="--ac:#B57BD8"><div class="lbl">PII no vazamento</div><div class="big" style="color:#B57BD8">'+fmt(cpf)+'</div><div class="sm">CPF exposto · '+fmt(cnpj)+' CNPJ</div></div>';
+ el('rz_kpis').innerHTML=h;}
+function renderRec(sel){var en=isEN(),R=en?REC_EN:REC,r=R[sel]||R.all,TAG=en?{alta:'High',media:'Medium',info:'Context'}:{alta:'Alta',media:'Média',info:'Contexto'};
+ el('rz_recTitle').textContent=(en?'Recommendations — ':'Recomendações — ')+(sel==='all'?(en?'full period (Aug–Oct/2026)':'período completo (Ago–Out/2026)'):(en?MLBL_EN:MLBL)[sel]);
+ el('rz_recRef').textContent=r.ref;
+ el('rz_recList').innerHTML=r.items.map(function(it){return '<li><span class="tag '+it.s+'">'+TAG[it.s]+'</span><span>'+it.t+'</span></li>';}).join('');}
+function renderEvo(sel){var W=1180,H=300,pl=50,pR=20,pT=20,pB=42,max=2700,gw=(W-pl-pR)/MONTHS.length,bw=58,gap=12,s='';
+ [0,675,1350,2025,2700].forEach(function(v){var y=pT+(H-pT-pB)*(1-v/max);s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pR)+'" y2="'+y+'" stroke="'+C.line+'"/>'+T(pl-8,y+4,fmt(v),{a:'end',s:11});});
+ MONTHS.forEach(function(m,i){var d=DB[m];if(!d)return;var cx=pl+gw*i+gw/2,op=(sel==='all'||sel===m)?1:0.3,vals=[[d.corp.creds,C.corp],[d.ext.creds,C.ext]],startx=cx-(2*bw+gap)/2;
+   vals.forEach(function(v,j){var h=(H-pT-pB)*(v[0]/max),x=startx+j*(bw+gap),y=H-pB-h;s+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+Math.max(h,0)+'" rx="4" fill="'+v[1]+'" opacity="'+op+'"/>';if(v[0]>0)s+=T(x+bw/2,y-6,fmt(v[0]),{a:'middle',s:12,f:C.ink,w:700,o:op});});
+   s+=T(cx,H-pB+22,MLBL[m]||m,{a:'middle',s:13,f:C.ink,o:op,w:(sel===m?700:400)});});
+ el('rz_svgEvo').innerHTML=s;}
+function renderDonut(d,sel){var data=[['Corporativo',d.corp.creds,C.corp],['Externo',d.ext.creds,C.ext]],tot=data[0][1]+data[1][1]||1,cx=130,cy=115,r=78,rin=48,ang=-Math.PI/2,s='';
+ el('rz_capDonut').textContent=(sel==='all'?'Distribuição total do período':'Distribuição em '+(MLBL[sel]||sel));
+ data.forEach(function(x){if(x[1]<=0)return;var a2=ang+2*Math.PI*(x[1]/tot),x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2),xi2=cx+rin*Math.cos(a2),yi2=cy+rin*Math.sin(a2),xi1=cx+rin*Math.cos(ang),yi1=cy+rin*Math.sin(ang),lg=(a2-ang)>Math.PI?1:0;
+   s+='<path d="M'+x1+' '+y1+' A'+r+' '+r+' 0 '+lg+' 1 '+x2+' '+y2+' L'+xi2+' '+yi2+' A'+rin+' '+rin+' 0 '+lg+' 0 '+xi1+' '+yi1+' Z" fill="'+x[2]+'"/>';ang=a2;});
+ s+=T(cx,cy-4,fmt(tot),{a:'middle',s:22,f:C.ink,w:800})+T(cx,cy+15,'total',{a:'middle',s:11});
+ var ly=72;data.forEach(function(x){s+='<rect x="285" y="'+(ly-11)+'" width="12" height="12" rx="3" fill="'+x[2]+'"/>'+T(305,ly,x[0],{s:13,f:C.ink})+T(540,ly,fmt(x[1])+' · '+pc(x[1],tot)+'%',{a:'end',s:12});ly+=40;});
+ el('rz_svgDonut').innerHTML=s;}
+function renderSenha(d){var sq=d.senha,data=[['Forte (≥12)',sq.Forte,C.brand],['Média (8–11)',sq.Media,C.warn],['Fraca (<8)',sq.Fraca,C.crit]],max=Math.max(sq.Forte,sq.Media,sq.Fraca,1),W=560,pl=120,pr=70,y0=40,bh=34,gap=22,s='';
+ data.forEach(function(x,i){var y=y0+i*(bh+gap),w=(W-pl-pr)*(x[1]/max);s+=T(pl-10,y+bh/2+4,x[0],{a:'end',s:13,f:C.ink})+'<rect x="'+pl+'" y="'+y+'" width="'+(W-pl-pr)+'" height="'+bh+'" rx="6" fill="var(--panel2)"/>'+'<rect x="'+pl+'" y="'+y+'" width="'+Math.max(w,2)+'" height="'+bh+'" rx="6" fill="'+x[2]+'"/>'+T(pl+Math.max(w,2)+8,y+bh/2+4,fmt(x[1]),{s:13,f:C.ink,w:700});});
+ el('rz_svgSenha').innerHTML=s;}
+function hbars(id,data,color){var W=560,max=Math.max.apply(null,data.map(function(d){return d[1];}))||1,pl=150,pr=60,y0=24,bh=20,gap=11,s='';
+ if(!data.length){el(id).innerHTML=T(W/2,120,'Sem registros no período',{a:'middle',s:13});return;}
+ data.forEach(function(d,i){var y=y0+i*(bh+gap),w=(W-pl-pr)*(d[1]/max);s+=T(pl-10,y+bh/2+4,d[0],{a:'end',s:12.5,f:C.ink})+'<rect x="'+pl+'" y="'+y+'" width="'+Math.max(w,2)+'" height="'+bh+'" rx="4" fill="'+color+'"/>'+T(pl+Math.max(w,2)+7,y+bh/2+4,fmt(d[1]),{s:12,f:C.mut});});
+ el(id).innerHTML=s;}
+function renderStatus(d){var st=d.status||ALL.status,data=[['Novo',st.Novo,C.crit],['Em tratativa',st.Tratativa,C.warn],['Resolvido',st.Resolvido,C.brand]],tot=data.reduce(function(a,b){return a+b[1];},0)||1,W=1180,pl=10,pr=10,y=24,bh=40,x=pl,s='';
+ data.forEach(function(d){var w=(W-pl-pr)*(d[1]/tot);if(w>0)s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+bh+'" fill="'+d[2]+'"/>';if(w>60)s+=T(x+w/2,y+bh/2+5,fmt(d[1]),{a:'middle',s:13,f:'#0E1621',w:700});x+=w;});
+ var lx=10;data.forEach(function(d){s+='<rect x="'+lx+'" y="84" width="12" height="12" rx="3" fill="'+d[2]+'"/>'+T(lx+18,94,d[0]+' ('+fmt(d[1])+')',{s:12.5,f:C.ink});lx+=220;});
+ el('rz_svgStatus').innerHTML=s;}
+function render(sel){SEL=sel;var d=get(sel);if(!d)return;renderKpis(d);renderRec(sel);renderEvo(sel);renderDonut(d,sel);renderSenha(d);hbars('rz_svgFonte',d.fonte||[],C.accent);el('rz_capStealer').textContent='Malware de roubo identificado';hbars('rz_svgStealer',d.stealer||[],C.crit);renderStatus(d);}
+function boot(snap){if(snap&&snap.months&&snap.months.length){MONTHS=snap.months.slice();DB=snap.data;DIST.all=snap.distAll;if(snap.updated){var u=el('rz_upd');if(u)u.textContent='Atualizado em '+String(snap.updated).replace('T',' ').slice(0,16);}}ALL=agg();render(SEL);}
+var _wired=false;
+function wire(){if(_wired)return;_wired=true;document.querySelectorAll('#v-cred .rz-chip').forEach(function(ch){ch.onclick=function(){document.querySelectorAll('#v-cred .rz-chip').forEach(function(c){c.classList.toggle('on',c===ch);});render(ch.dataset.m);};});}
+function load(){wire();if(!_booted){_booted=true;boot(SNAP);}
+ if(window.google&&google.script&&google.script.run){var ok=function(d){if(d&&d.months&&d.months.length)boot(d);};
+  google.script.run.withSuccessHandler(ok).withFailureHandler(function(){}).getResonant();}}
+window.__loadResonant=load;
+window.addEventListener('kpi-lang',function(){if(_booted)renderRec(SEL);});
+})();
+</script>
+<script>
+/* ===== Shell v16: menu lateral, usuário, idioma/tema, Administração ===== */
+(function(){
+function $(id){return document.getElementById(id);}
+function gsr(){return !!(window.google&&google.script&&google.script.run);}
+function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+var PREF={lang:ls('kpi_lang')==='en'?'en':'pt',theme:({dark:1,light:1,system:1})[ls('kpi_theme')]?ls('kpi_theme'):'system'};
+function tt(pt,en){return PREF.lang==='en'?en:pt;}
+window.__pref=PREF;
+
+/* ---------- navegação ---------- */
+function setActive(k){document.querySelectorAll('#snav .sitem[data-nav]').forEach(function(a){a.classList.toggle('on',a.dataset.nav===k);});}
+function nav(k){
+  if(k==='capa'){if(window.__openCapa)window.__openCapa();return;}
+  if(k==='admin'){openAdmin();return;}
+  var et=$('engtabs');
+  if(k==='soc'){$('tabSoc').click();}
+  else if(k==='cred'){$('tabCred').click();}
+  else if(k==='eng'){if(et)et.style.display='';$('tabEng').click();
+    var cur=document.querySelector('#engtabs .subtab.active');if(cur&&cur.dataset.sv==='mitre'){var g=document.querySelector('#engtabs .subtab[data-sv="geral"]');if(g)g.click();}}
+  else if(k==='mitre'){$('tabEng').click();var mb=document.querySelector('#engtabs .subtab[data-sv="mitre"]');if(mb)mb.click();if(et)et.style.display='none';}
+  setActive(k);
+  setTimeout(function(){try{window.dispatchEvent(new Event('resize'));}catch(e){}},80);
+}
+window.__nav=nav;
+$('side').addEventListener('click',function(e){var a=e.target.closest('.sitem[data-nav]');if(a){e.preventDefault();nav(a.dataset.nav);}});
+function sideState(){var c=document.documentElement.classList.contains('side-col');$('stogic').textContent=c?'»':'«';
+  var lb=$('stog').querySelector('.lbl');if(lb)lb.textContent=c?'Expandir menu':'Recolher menu';$('stog').title=c?'Expandir menu':'Recolher menu';}
+$('stog').addEventListener('click',function(e){e.preventDefault();var h=document.documentElement;h.classList.toggle('side-col');lsSet('kpi_side',h.classList.contains('side-col')?'1':'0');sideState();
+  setTimeout(function(){try{window.dispatchEvent(new Event('resize'));}catch(x){}},220);});
+sideState();
+
+/* ---------- tema ---------- */
+var mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+function segOn(id,v){var g=$(id);if(!g)return;g.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v);});}
+function applyTheme(){var t=PREF.theme==='system'?((mq&&!mq.matches)?'light':'dark'):PREF.theme;
+  if(document.documentElement.getAttribute('data-theme')!==t){document.documentElement.setAttribute('data-theme',t);try{window.dispatchEvent(new CustomEvent('kpi-theme',{detail:t}));}catch(e){}}
+  segOn('qTheme',PREF.theme);}
+function savePrefs(){if(gsr())google.script.run.withFailureHandler(function(){}).savePrefs(PREF.lang,PREF.theme);}
+function setTheme(t,save){PREF.theme=t;lsSet('kpi_theme',t);applyTheme();if(save!==false)savePrefs();}
+if(mq){var onMq=function(){if(PREF.theme==='system')applyTheme();};if(mq.addEventListener)mq.addEventListener('change',onMq);else if(mq.addListener)mq.addListener(onMq);}
+$('qTheme').addEventListener('click',function(e){var b=e.target.closest('button[data-v]');if(b)setTheme(b.dataset.v);});
+applyTheme();
+
+/* ---------- idioma ---------- */
+function setLang(l,save){PREF.lang=(l==='en')?'en':'pt';lsSet('kpi_lang',PREF.lang);segOn('qLang',PREF.lang);
+  document.documentElement.lang=PREF.lang==='en'?'en':'pt-BR';
+  if(window.__i18n)window.__i18n.set(PREF.lang);
+  try{window.dispatchEvent(new CustomEvent('kpi-lang',{detail:PREF.lang}));}catch(e){}
+  if(SESS)paintUser(SESS);
+  if(!$('adminOv').hidden&&ADM)admRender(ADM);
+  if(save!==false)savePrefs();}
+$('qLang').addEventListener('click',function(e){var b=e.target.closest('button[data-v]');if(b)setLang(b.dataset.v);});
+segOn('qLang',PREF.lang);
+window.__setLang=setLang;window.__setTheme=setTheme;
+
+/* ---------- usuário logado ---------- */
+var SESS=null;
+function initials(n){var p=String(n||'').replace(/@.*/,'').split(/[\s._-]+/).filter(Boolean);return ((p[0]||'?').charAt(0)+(p.length>1?p[p.length-1].charAt(0):'')).toUpperCase();}
+var LOWW={de:1,da:1,do:1,das:1,dos:1,e:1,di:1,du:1,van:1,von:1};
+function niceName(n){n=String(n||'').trim();if(!n)return n;if(n!==n.toUpperCase())return n; // só reformata nomes TODO EM MAIÚSCULAS
+  return n.toLowerCase().split(/\s+/).map(function(w,i){return (i&&LOWW[w])?w:w.charAt(0).toUpperCase()+w.slice(1);}).join(' ');}
+function shortName(n){var p=String(n||'').split(/\s+/).filter(function(w){return !LOWW[w.toLowerCase()];});return p.length>2?p[0]+' '+p[p.length-1]:p.join(' ');}
+var PHOTO_OK={};
+function setAvatar(src){['uav','uav2','sav'].forEach(function(id){var e=$(id);if(src){e.style.backgroundImage='url("'+src+'")';e.classList.add('ph');}else{e.style.backgroundImage='';e.classList.remove('ph');}});}
+function paintUser(s){SESS=s;var full=niceName(s.name)||s.email||tt('Usuário','User'),nm=shortName(full)||full,ini=initials(full);
+  ['uav','uav2','sav'].forEach(function(id){$(id).textContent=ini;});
+  if(s.photo)setAvatar(s.photo);
+  else if(s.photoUrl){if(PHOTO_OK[s.photoUrl])setAvatar(s.photoUrl);else{setAvatar('');var im=new Image();im.referrerPolicy='no-referrer';
+    im.onload=function(){if(im.naturalWidth>1){PHOTO_OK[s.photoUrl]=1;setAvatar(s.photoUrl);}};im.src=s.photoUrl;}}
+  else setAvatar('');
+  $('uname').textContent=nm;$('uname2').textContent=full;$('sname').textContent=nm;$('uemail').textContent=s.email||'';
+  $('urole').textContent='· '+(s.isAdmin?'admin':tt('membro','member'));$('srole').textContent=s.isAdmin?'admin':tt('membro','member');
+  $('urole2').textContent=s.isAdmin?'Admin':tt('Membro','Member');
+  $('uadmin').hidden=!s.isAdmin;$('sadmin').hidden=!s.isAdmin;$('suser').title=nm+(s.email?' · '+s.email:'');}
+function loadSession(){
+  if(!gsr()){paintUser({name:'',email:'',isAdmin:false,photo:''});return;}
+  google.script.run.withSuccessHandler(function(s){if(!s)return;paintUser(s);
+      if(s.theme&&s.theme!==PREF.theme)setTheme(s.theme,false);
+      if(s.lang&&s.lang!==PREF.lang)setLang(s.lang,false);})
+    .withFailureHandler(function(){paintUser({name:'',email:'',isAdmin:false,photo:''});}).getSession();}
+var um=$('umenu');
+$('uchip').addEventListener('click',function(e){if(e.target.closest('#umenu'))return;um.classList.toggle('on');});
+$('uchip').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();um.classList.toggle('on');}});
+document.addEventListener('click',function(e){if(!e.target.closest('#uchip'))um.classList.remove('on');});
+$('uadmin').addEventListener('click',function(){um.classList.remove('on');openAdmin();});
+$('ucapa').addEventListener('click',function(){um.classList.remove('on');nav('capa');});
+
+/* ---------- Administração ---------- */
+var ADM=null,TAB='sol';
+function admErr(m){var e=$('admErr');e.textContent=m||'';e.hidden=!m;}
+function admTab(t){TAB=t;document.querySelectorAll('#adminOv .amtab').forEach(function(b){b.classList.toggle('on',b.dataset.t===t);});$('admSol').hidden=(t!=='sol');$('admMem').hidden=(t!=='mem');}
+function openAdmin(){um.classList.remove('on');$('adminOv').hidden=false;admTab('sol');admErr('');
+  if(!gsr()){admErr(tt('Disponível apenas no portal publicado.','Available only in the published portal.'));return;}
+  $('admSol').innerHTML='<div class="loading">'+tt('Carregando…','Loading…')+'</div>';
+  google.script.run.withSuccessHandler(admRender).withFailureHandler(function(e){admErr(e&&e.message||String(e));}).adminList();}
+function closeAdmin(){$('adminOv').hidden=true;}
+window.__openAdmin=openAdmin;
+function admCall(fn,args,onOk){admErr('');var r=google.script.run.withSuccessHandler(function(d){admRender(d);if(onOk)onOk();})
+  .withFailureHandler(function(e){admErr(e&&e.message||String(e));if(fn==='adminAdd'){var b=$('addBtn');if(b)b.disabled=false;}else if(ADM)admRender(ADM);});r[fn].apply(r,args);}
+function fmtTs(ts){if(!ts)return '';var d=new Date(ts);if(isNaN(d))return String(ts);return d.toLocaleString(PREF.lang==='en'?'en-US':'pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+function admRender(d){ADM=d;$('admCnt').textContent=(d.pending&&d.pending.length)?d.pending.length:'';
+  if(d.sheetUrl){$('admSheet').href=d.sheetUrl;$('admSheet').hidden=false;}
+  renderSol(d);renderMem(d);}
+function renderSol(d){var p=d.pending||[],h='<div class="eyebrow">'+tt('Pendentes de aprovação','Pending approval')+' · '+p.length+'</div>'+
+  '<p class="aminfo">'+tt('Os admins também recebem cada pedido por e-mail, com links de Aprovar e Negar. Quem decidir primeiro, pelo portal ou pelo e-mail, resolve o pedido.','Admins also get each request by e-mail, with Approve and Deny links. Whoever decides first, in the portal or by e-mail, resolves the request.')+'</p>';
+  if(!p.length)h+='<div class="amempty">'+tt('Nenhuma solicitação pendente.','No pending requests.')+'</div>';
+  p.forEach(function(r){h+='<div class="req" data-em="'+esc(r.email)+'"><span class="av">'+esc(initials(r.email))+'</span><div class="info"><div class="em">'+esc(r.email)+'</div><div class="meta">'+
+    tt('Solicitado em ','Requested on ')+esc(fmtTs(r.ts))+' · '+(r.just?'"'+esc(r.just)+'"':tt('sem justificativa','no justification'))+'</div></div>'+
+    '<div class="acts"><button class="bap" data-act="ok">✓ '+tt('Aprovar','Approve')+'</button><button class="bdn" data-act="no">✕ '+tt('Negar','Deny')+'</button></div></div>';});
+  $('admSol').innerHTML=h;}
+function renderMem(d){var ms=d.members||[],act=ms.filter(function(m){return m.ativo;}).length;
+  var h='<div class="eyebrow">'+tt('Equipe','Team')+' · '+act+' '+tt(act===1?'ativo':'ativos','active')+(ms.length>act?' · '+(ms.length-act)+' '+tt(ms.length-act===1?'inativo':'inativos','inactive'):'')+'</div>'+
+  '<table class="amtbl"><thead><tr><th>'+tt('Nome','Name')+'</th><th>E-mail</th><th>'+tt('Papel','Role')+'</th><th style="text-align:center">'+tt('Ativo','Active')+'</th><th></th></tr></thead><tbody>';
+  ms.forEach(function(m){var me=(m.email===d.me),dis=me?' disabled':'';
+    h+='<tr data-em="'+esc(m.email)+'" class="'+(m.ativo?'':'off')+'"><td>'+esc(m.nome||m.email)+(me?'<span class="you">'+tt('você','you')+'</span>':'')+(m.ativo?'':'<span class="offtag">'+tt('inativo','inactive')+'</span>')+'</td>'+
+      '<td>'+esc(m.email)+'</td><td><select data-act="role"'+dis+'><option value="Admin"'+(m.papel==='Admin'?' selected':'')+'>Admin</option><option value="Membro"'+(m.papel!=='Admin'?' selected':'')+'>'+tt('Membro','Member')+'</option></select></td>'+
+      '<td style="text-align:center"><input type="checkbox" class="chk" data-act="active"'+(m.ativo?' checked':'')+dis+' aria-label="'+tt('Ativo','Active')+'"></td>'+
+      '<td style="text-align:right"><button class="lnk" data-act="rm"'+dis+'>'+tt('Remover','Remove')+'</button></td></tr>';});
+  h+='</tbody></table><div class="eyebrow" style="margin-top:20px">'+tt('Adicionar membro diretamente','Add member directly')+'</div>'+
+  '<div class="amadd"><input id="addNm" placeholder="'+tt('Nome completo','Full name')+'" autocomplete="off"><input id="addEm" placeholder="'+tt('e-mail da conta Google (ex.: nome@example.com)','Google account e-mail (e.g. name@example.com)')+'" autocomplete="off">'+
+  '<select id="addRl"><option value="Membro">'+tt('Membro','Member')+'</option><option value="Admin">Admin</option></select><button class="btnp" id="addBtn">'+tt('Adicionar','Add')+'</button></div>'+
+  '<div class="amnote">'+tt('<b>Desativar</b> bloqueia o acesso e mantém a pessoa na lista (reativável). <b>Remover</b> tira a pessoa da equipe — o histórico continua na auditoria. Você não pode alterar o próprio acesso e sempre precisa existir ao menos um admin ativo. Tudo é registrado na aba <b>Auditoria</b> da planilha de Acessos.',
+    '<b>Deactivate</b> blocks access and keeps the person on the list (can be reactivated). <b>Remove</b> takes the person off the team — history stays in the audit log. You cannot change your own access and there must always be at least one active admin. Everything is recorded in the <b>Auditoria</b> tab of the Access spreadsheet.')+'</div>';
+  $('admMem').innerHTML=h;}
+$('adminOv').addEventListener('click',function(e){
+  if(e.target===$('adminOv')||e.target.closest('#admClose')){closeAdmin();return;}
+  var tb=e.target.closest('.amtab');if(tb){admTab(tb.dataset.t);return;}
+  var b=e.target.closest('button[data-act]');if(!b)return;
+  var req=b.closest('.req');
+  if(req){req.classList.add('busy');admCall('adminDecide',[req.dataset.em,b.dataset.act==='ok']);return;}
+  var tr=b.closest('tr[data-em]');
+  if(tr&&b.dataset.act==='rm'){
+    if(!b.classList.contains('confirm')){b.classList.add('confirm');b.textContent=tt('Confirmar?','Confirm?');setTimeout(function(){if(b.isConnected){b.classList.remove('confirm');b.textContent=tt('Remover','Remove');}},4000);return;}
+    tr.classList.add('busy');admCall('adminRemove',[tr.dataset.em]);}
+});
+$('adminOv').addEventListener('change',function(e){var el=e.target,tr=el.closest('tr[data-em]');if(!tr)return;
+  if(el.dataset.act==='role'){tr.classList.add('busy');admCall('adminSetRole',[tr.dataset.em,el.value]);}
+  else if(el.dataset.act==='active'){tr.classList.add('busy');admCall('adminSetActive',[tr.dataset.em,el.checked]);}});
+$('adminOv').addEventListener('click',function(e){if(!e.target.closest('#addBtn'))return;
+  var n=$('addNm').value.trim(),em=$('addEm').value.trim(),rl=$('addRl').value,btn=$('addBtn');
+  if(!em){admErr(tt('Informe o e-mail.','Enter the e-mail.'));return;}
+  btn.disabled=true;admCall('adminAdd',[n,em,rl],function(){admTab('mem');});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!$('adminOv').hidden)closeAdmin();um.classList.remove('on');}});
+
+loadSession();
 })();
 </script>
 </body>
