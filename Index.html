@@ -517,10 +517,11 @@ start();if(LANG==='en'){walk(document.body);title();}
    {t:'Eficiência',ic:'⚡',ac:'#42A5F5',g:['soc','eff']},
    {t:'Eng. Detecção',ic:'📡',ac:'#B57BD8',g:['eng','deteccao']},
    {t:'Cobertura MITRE',ic:'🧩',ac:'#E0A64B',g:['eng','mitre']},
-   {t:'Vazamento de Credenciais',ic:'🔐',ac:'#B57BD8',g:['cred',null]}
+   {t:'Vazamento de Credenciais',ic:'🔐',ac:'#B57BD8',g:['cred',null]},
+   {t:'Cyber OT',ic:'🏭',ac:'#F59E0B',g:['ot',null]}
   ];
   var cap=document.getElementById('capa'),mn=document.getElementById('cpMenu'),cpRun=true;
-  function navTab(main){var id=main==='soc'?'tabSoc':(main==='cred'?'tabCred':'tabEng');var tb=document.getElementById(id);if(tb)tb.click();}
+  function navTab(main){var id=main==='soc'?'tabSoc':(main==='cred'?'tabCred':(main==='ot'?'tabOt':'tabEng'));var tb=document.getElementById(id);if(tb)tb.click();}
   function navSub(main,sub){if(!sub)return;var sel=main==='soc'?'#soctabs .subtab[data-sq="'+sub+'"]':'#engtabs .subtab[data-sv="'+sub+'"]';var el=document.querySelector(sel);if(el)el.click();}
   function close(){cap.classList.add('cp-gone');cpRun=false;}
   function open(){cap.classList.remove('cp-gone');if(!cpRun){cpRun=true;draw();}}
@@ -545,6 +546,135 @@ start();if(LANG==='en'){walk(document.body);title();}
     svg.innerHTML=s;requestAnimationFrame(draw);}draw();
 })();
 </script>
+<style>
+/* ===== Cyber OT (Claroty xDome) — v21 ===== */
+#v-ot{--ota:#F59E0B;--oti:#42A5F5;--otr:#E05C5C;--oto:#F97316;--oty:#EAB308;--otv:#A78BFA;--otg:#27AE60;
+ --h3:#8a4b05;--h3b:#F59E0B;--h2:#4a3208;--h2b:#b7791f;--hs:#5b3a07;--hsb:#d97706;--hink:#fff;--ot-stripe:rgba(224,92,92,.06)}
+:root[data-theme="light"] #v-ot{--ota:#D97706;--oti:#1565C0;--otr:#C62828;--oto:#E65100;--oty:#B7791F;--otv:#7E57C2;--otg:#1B6B3A;
+ --h3:#F8C77E;--h3b:#D97706;--h2:#FDEBC8;--h2b:#E0A64B;--hs:#FDE3B5;--hsb:#D97706;--hink:#3B2405;--ot-stripe:rgba(198,40,40,.05)}
+#v-ot #ot_root{padding:2px 2px 6px}
+#v-ot .ot-perbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+#v-ot .ot-lb{font-size:12.5px;color:var(--muted);font-weight:600}
+#v-ot .ot-chip{font-size:12.5px;font-weight:600;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:30px;padding:5px 13px;cursor:pointer;transition:.14s;user-select:none;white-space:nowrap}
+#v-ot .ot-chip:hover{border-color:var(--accent);color:var(--ink)}
+#v-ot .ot-chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+#v-ot .ot-div{width:1px;height:22px;background:var(--line);margin:0 2px}
+#v-ot .ot-cust{display:flex;gap:8px;font-size:12px;color:var(--muted);align-items:center}
+#v-ot .ot-cust select{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 6px;font:inherit;margin-left:4px}
+#v-ot .ot-sp{flex:1}
+#v-ot .ot-upd{font-size:11.5px;color:var(--muted)}
+#v-ot .ot-hdr{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+#v-ot .ot-pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
+#v-ot .ot-pill.w{border-color:var(--oto);color:var(--oto)}
+#v-ot .ot-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:14px}
+#v-ot .ot-kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 14px;position:relative;overflow:hidden}
+#v-ot .ot-kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac,var(--ota))}
+#v-ot .ot-kpi .l{font-size:11px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+#v-ot .ot-kpi .v{font-size:26px;font-weight:800;margin:5px 0 2px;color:var(--ink)}
+#v-ot .ot-kpi .v small{font-size:14px;color:var(--muted);font-weight:600}
+#v-ot .ot-kpi .d{font-size:11.5px;color:var(--muted)}
+#v-ot .ot-kpi .d .o{color:var(--ota);font-weight:700}#v-ot .ot-kpi .d .i{color:var(--oti);font-weight:700}
+#v-ot .ot-sec{margin:18px 0 8px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:8px}
+#v-ot .ot-sec:after{content:"";flex:1;height:1px;background:var(--line)}
+#v-ot .ot-g2{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+#v-ot .ot-g21{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+#v-ot .ot-g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+#v-ot .ot-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px;min-width:0}
+#v-ot .ot-card h3{margin:0 0 10px;font-size:14.5px}
+#v-ot .ot-card h3 small{color:var(--muted);font-weight:500;font-size:12px}
+#v-ot .ot-note{font-size:11.5px;color:var(--muted);margin-top:8px}
+#v-ot code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:var(--panel2);padding:0 4px;border-radius:4px}
+#v-ot .ot-bar{display:flex;align-items:center;gap:8px;margin:6px 0}
+#v-ot .ot-bar .n{width:190px;color:var(--ink);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v-ot .ot-bar .t{flex:1;height:16px;background:var(--panel2);border-radius:4px;overflow:hidden}
+#v-ot .ot-bar .f{height:100%}
+#v-ot .ot-bar .c{width:56px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+#v-ot .ot-bar .x{width:140px;color:var(--muted);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v-ot .ot-leg{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:11.5px;align-items:center}
+#v-ot .ot-leg .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+#v-ot table{width:100%;border-collapse:collapse;font-size:12.5px}
+#v-ot th,#v-ot td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+#v-ot th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase}
+#v-ot .tg{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10.5px;margin:1px 2px 1px 0;font-family:ui-monospace,Menlo,monospace;border:1px solid var(--line)}
+#v-ot .tg.ics{background:var(--h2);border-color:var(--h2b);color:var(--hink)}
+#v-ot .tg.ent{background:var(--panel2);color:var(--oti)}
+#v-ot .sev{font-weight:700;font-size:11px;padding:1px 7px;border-radius:4px;border:1px solid currentColor}
+#v-ot .sev.c{color:var(--otr)}#v-ot .sev.h{color:var(--oto)}#v-ot .sev.m{color:var(--oty)}
+#v-ot .stt{font-size:11.5px;font-weight:600}#v-ot .stt.o{color:var(--otr)}#v-ot .stt.r{color:var(--otg)}
+#v-ot .ot-flow{display:grid;grid-template-columns:1fr 64px 1fr;gap:8px;align-items:center}
+#v-ot .ot-node{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:5px 0;font-size:12.5px;display:flex;justify-content:space-between;gap:8px}
+#v-ot .ot-node.p{border-color:var(--ota)}
+#v-ot .ot-health .row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+#v-ot .ot-health .row:last-child{border:0}
+#v-ot .ok{color:var(--otg)}#v-ot .bad{color:var(--otr)}#v-ot .warn{color:var(--oty)}
+#v-ot .ot-rec{border-left:3px solid var(--accent);background:var(--panel2);padding:9px 12px;border-radius:6px;margin:8px 0;font-size:12.5px;line-height:1.45}
+#v-ot .ot-rec b{color:var(--ink)}
+#v-ot .ot-rec .tgk{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:1px 6px;border-radius:9px;margin-right:6px;border:1px solid currentColor}
+#v-ot .ot-rec.c{border-left-color:var(--otr)}#v-ot .ot-rec.c .tgk{color:var(--otr)}
+#v-ot .ot-rec.h{border-left-color:var(--oto)}#v-ot .ot-rec.h .tgk{color:var(--oto)}
+#v-ot .ot-rec.m{border-left-color:var(--oty)}#v-ot .ot-rec.m .tgk{color:var(--oty)}
+#v-ot .ot-nodata{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px;border:1px dashed var(--otr);border-radius:10px;background:repeating-linear-gradient(45deg,transparent,transparent 10px,var(--ot-stripe) 10px,var(--ot-stripe) 20px);color:var(--otr);text-align:center;padding:14px}
+#v-ot .ot-nodata .big{font-size:28px}
+#v-ot .ot-empty{font-size:12px;color:var(--muted);padding:14px 0}
+#v-ot svg{width:100%;height:auto;display:block}
+#v-ot svg text{fill:var(--muted);font-size:10.5px}
+#v-ot svg text.v{fill:var(--ink);font-weight:700}
+/* --- matriz ICS: mesmo molde de #v-mitre --- */
+#v-ot .ot-mkpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#v-ot .ot-mkpis .k{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+#v-ot .ot-mkpis .k .v{font-size:20px;font-weight:700}#v-ot .ot-mkpis .k .v small{font-size:13px;color:var(--muted)}
+#v-ot .ot-mkpis .k .l{font-size:11.5px;color:var(--muted)}
+#v-ot .ot-ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+#v-ot .ot-ctl input[type=search]{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;min-width:280px;font:inherit;font-size:13px}
+#v-ot .ot-ctl label.tog{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+#v-ot .ot-ctl .legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted)}
+#v-ot .ot-ctl .legend .it{display:flex;gap:6px;align-items:center}
+#v-ot .msw{width:14px;height:14px;border-radius:3px;border:1.5px solid;display:inline-block}
+#v-ot .msw.h3{background:var(--h3);border-color:var(--h3b)}#v-ot .msw.h2{background:var(--h2);border-color:var(--h2b)}#v-ot .msw.h0{background:var(--none);border-color:var(--none-b)}
+#v-ot .msw.nw{background:transparent;border-color:var(--new-b);position:relative}#v-ot .msw.nw::after{content:"";position:absolute;top:-3px;right:-3px;width:7px;height:7px;border-radius:50%;background:var(--new-b)}
+#v-ot .ot-fit{overflow:auto;max-height:720px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+#v-ot .ot-matrix{display:flex;gap:5px;padding:10px;align-items:flex-start;width:max-content}
+#v-ot .ot-matrix .col{flex:0 0 auto;width:132px;display:flex;flex-direction:column;gap:4px}
+#v-ot .ot-matrix .chead{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:7px 6px;text-align:center}
+#v-ot .ot-matrix .chead .nm{font-size:12px;font-weight:700;line-height:1.2;min-height:26px;display:flex;align-items:center;justify-content:center;word-break:break-word}
+#v-ot .ot-matrix .chead .ct{font-size:11.5px;color:var(--muted);margin-top:3px;font-variant-numeric:tabular-nums}
+#v-ot .ot-matrix .chead .bar{height:3px;border-radius:2px;background:var(--none-b);margin-top:5px;overflow:hidden}
+#v-ot .ot-matrix .chead .bar>i{display:block;height:100%;background:var(--h3b)}
+#v-ot .ot-matrix .tw{display:flex;flex-direction:column}
+#v-ot .ot-matrix .cell{border-radius:5px;padding:5px 6px;font-size:11.5px;line-height:1.3;border:1.5px solid;position:relative;min-height:32px;display:flex;align-items:flex-start;gap:4px}
+#v-ot .ot-matrix .cell.has{cursor:pointer}
+#v-ot .ot-matrix .cell.h3{background:var(--h3);border-color:var(--h3b);color:var(--hink)}
+#v-ot .ot-matrix .cell.h2{background:var(--h2);border-color:var(--h2b);color:var(--hink)}
+#v-ot .ot-matrix .cell.h0{background:var(--none);border-color:var(--none-b);color:var(--muted)}
+#v-ot .ot-matrix .cell.dim{opacity:.16}
+#v-ot .ot-matrix .cell .car{font-size:10px;opacity:.8;transition:transform .12s;flex:none;margin-top:2px}
+#v-ot .ot-matrix .cell.open .car{transform:rotate(90deg)}
+#v-ot .ot-matrix .cell .tx{flex:1 1 auto;min-width:0;word-break:break-word;hyphens:auto}
+#v-ot .ot-matrix .cell .sc{font-variant-numeric:tabular-nums;opacity:.9;font-size:10.5px;flex:none;margin-left:2px}
+#v-ot .ot-matrix .cell .badge{position:absolute;top:-4px;right:-4px;width:9px;height:9px;border-radius:50%;background:var(--new-b);border:1.5px solid var(--panel)}
+#v-ot .ot-matrix .subs{display:flex;flex-direction:column;gap:2px;margin:2px 0 2px 8px;padding-left:6px;border-left:1px dashed var(--line)}
+#v-ot .ot-matrix .subs[hidden]{display:none}
+#v-ot .ot-matrix .scell{border-radius:4px;padding:3px 5px;font-size:11px;line-height:1.2;border:1px solid;display:flex;gap:4px;align-items:flex-start}
+#v-ot .ot-matrix .scell.cov,#v-ot .ot-matrix .scell.al{background:var(--hs);border-color:var(--hsb);color:var(--hink)}
+#v-ot .ot-matrix .scell.unc,#v-ot .ot-matrix .scell.res{background:transparent;border-color:var(--none-b);color:var(--muted)}
+#v-ot .ot-matrix .scell .sid{font-family:ui-monospace,Menlo,monospace;font-size:10px;opacity:.85;flex:none}
+#v-ot .ot-matrix .scell .snm{flex:1 1 auto;min-width:0;word-break:break-word}
+#v-ot .ot-matrix .scell .sbadge{width:7px;height:7px;border-radius:50%;background:var(--new-b);flex:none;margin-top:2px}
+#v-ot .ot-matrix .ahead{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:4px 0 1px}
+#v-ot.onlym .ot-matrix .cell:not(.sep){opacity:.13}
+.ottip{position:fixed;z-index:60;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:350px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.35);pointer-events:none;opacity:0;transition:opacity .1s;color:var(--ink)}
+.ottip.on{opacity:1}
+.ottip .tid{color:var(--accent);font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.ottip .tnm{font-weight:600;margin:2px 0 6px}
+.ottip .st{display:inline-block;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:10px;margin-bottom:6px;border:1px solid var(--line)}
+.ottip .st.h3{background:#8a4b05;color:#fff;border-color:#F59E0B}.ottip .st.h2{background:#4a3208;color:#fff;border-color:#b7791f}.ottip .st.h0{color:var(--muted)}
+.ottip .rl{color:var(--muted);margin-top:5px;font-size:12px}
+.ottip .rl b{color:var(--ink);font-weight:600}
+.ottip .sep{color:var(--new-b);font-weight:600;margin-top:5px;font-size:12px}
+@media(max-width:1200px){#v-ot .ot-kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:980px){#v-ot .ot-g2,#v-ot .ot-g21,#v-ot .ot-g3{grid-template-columns:1fr}}
+@media(max-width:560px){#v-ot .ot-kpis{grid-template-columns:repeat(2,1fr)}#v-ot .ot-bar .x{display:none}}
+</style>
 <div class="app">
 <aside class="side" id="side">
   <div class="sbrand"><div class="slogo slogo-ph">SOC</div><div class="stt">KPI SOC/CSIRT<small>Cibersegurança</small></div></div>
@@ -553,6 +683,7 @@ start();if(LANG==='en'){walk(document.body);title();}
     <a class="sitem" data-nav="eng" title="Eng. Detecção"><span class="ic">📡</span><span class="lbl">Eng. Detecção</span></a>
     <a class="sitem" data-nav="mitre" title="Cobertura MITRE"><span class="ic">🧩</span><span class="lbl">Cobertura MITRE</span></a>
     <a class="sitem" data-nav="cred" title="Vazamento de Credenciais"><span class="ic">🔐</span><span class="lbl">Vazamento de Credenciais</span></a>
+    <a class="sitem" data-nav="ot" title="Cyber OT"><span class="ic">🏭</span><span class="lbl">Cyber OT</span></a>
     <div class="ssep"></div>
     <a class="sitem" data-nav="capa" title="Capa"><span class="ic">🏠</span><span class="lbl">Capa</span></a>
   </nav>
@@ -582,6 +713,7 @@ start();if(LANG==='en'){walk(document.body);title();}
     <button class="tab active" data-v="soc" id="tabSoc">SOC + CSIRT</button>
     <button class="tab" data-v="eng" id="tabEng">Eng. Detecção</button>
     <button class="tab" data-v="cred" id="tabCred">Vazamento de Credenciais</button>
+    <button class="tab" data-v="ot" id="tabOt">Cyber OT</button>
   </div>
   <div class="content">
     <div class="view" id="v-soc"><div id="cs_head"></div><div class="subtabs" id="soctabs"><button class="subtab active" data-sq="csirt">Visão geral CSIRT</button><button class="subtab" data-sq="fp">Falsos Positivos</button><button class="subtab" data-sq="eff">Eficiência</button></div><div id="cs_body"><div class="loading">Carregando KPIs do CSIRT…</div></div><div id="cs_fp" hidden></div><div id="cs_eff" hidden></div><div id="cs_ddov" class="ddov" hidden><div class="ddpanel"><button id="cs_ddclose" class="ddclose" title="Fechar">✕</button><h3 class="ddtitle">Drill-down — Incidentes CSIRT</h3><div id="cs_ddbody"></div></div></div></div>
@@ -599,6 +731,7 @@ start();if(LANG==='en'){walk(document.body);title();}
       <div class="view" id="v-capacidade" hidden></div>
       <div class="view" id="v-mitre" hidden><div class="mtabs" id="mi_tabs"><button class="mtab active" data-mv="matriz">Matriz ATT&CK</button><button class="mtab" data-mv="resumo">Resumo por tática</button><button class="mtab" data-mv="gaps">Gaps prioritários</button><button class="mtab" data-mv="setembro">Casos do mês</button></div><div class="mkpis" id="mi_kpis"></div><div class="miupd" id="mi_upd"></div><div class="mviews"><div class="mview" id="miv-matriz"><div class="controls"><input type="search" id="mi_q" placeholder="Filtrar por técnica, subtécnica, ID ou regra…" aria-label="Filtrar"><label class="tog"><input type="checkbox" id="mi_exptog"> Expandir subtécnicas cobertas</label><label class="tog"><input type="checkbox" id="mi_septog"> Só casos do mês</label><div class="legend"><span class="it"><span class="sw cov"></span>Total</span><span class="it"><span class="sw part"></span>Parcial</span><span class="it"><span class="sw none"></span>Sem cobertura</span><span class="it"><span class="sw new"></span>Caso do mês</span></div></div><div class="fit" id="mi_fit"><div class="matrix" id="mi_matrix"><div class="loading">Carregando cobertura do Elastic…</div></div></div></div><div class="mview" id="miv-resumo" hidden><div class="scroll" id="mi_resumo"></div></div><div class="mview" id="miv-gaps" hidden><div class="scroll" id="mi_gaps"></div></div><div class="mview" id="miv-setembro" hidden><div class="scroll" id="mi_setembro"></div></div></div><div class="mtip" id="mi_tip" role="tooltip" aria-hidden="true"></div></div>
     </div>
+    <div class="view" id="v-ot" hidden><div id="ot_root" data-noi18n><div class="loading">Carregando dados OT da Claroty…</div></div></div>
     <div class="view" id="v-cred" hidden>
       <div id="rz_root">
         <div class="rz-perbar">
@@ -702,7 +835,8 @@ function curSub(){var a=document.querySelector('#engtabs .subtab.active');return
 function showPer(){ // mostra o seletor global de período só nas sub-abas operacionais
   var soc=!document.getElementById('v-soc').hidden;
   var vc=document.getElementById('v-cred');var cred=vc&&!vc.hidden;
-  var vis=(!soc)&&(!cred)&&(curSub()!=='mitre');
+  var vo=document.getElementById('v-ot');var otv=vo&&!vo.hidden;
+  var vis=(!soc)&&(!cred)&&(!otv)&&(curSub()!=='mitre');
   var pc=document.getElementById('perCtrl');if(pc)pc.style.display=vis?'':'none';
 }
 document.getElementById('tabs').addEventListener('click',function(e){var b=e.target.closest('.tab');if(!b)return;
@@ -711,7 +845,9 @@ document.getElementById('tabs').addEventListener('click',function(e){var b=e.tar
   document.getElementById('v-soc').hidden=(v!=='soc');
   document.getElementById('v-eng').hidden=(v!=='eng');
   var vc=document.getElementById('v-cred');if(vc)vc.hidden=(v!=='cred');
+  var vo=document.getElementById('v-ot');if(vo)vo.hidden=(v!=='ot');
   if(v==='cred'&&window.__loadResonant)window.__loadResonant();
+  if(v==='ot'&&window.__loadOT)window.__loadOT();
   if(v==='soc'&&window.__loadCsirt)window.__loadCsirt();
   if(v==='eng'){ // ativa a sub-aba corrente
     var sv=curSub();
@@ -1635,6 +1771,287 @@ window.addEventListener('kpi-lang',function(){if(_booted)renderRec(SEL);});
 })();
 </script>
 <script>
+/* ===== Cyber OT — Claroty xDome (v21) =====
+ * Fonte: getClaroty() no Code.gs (data streams logs-claroty_xdome.*-claroty).
+ * Idioma: a view é renderizada pelo próprio script em PT/EN (data-noi18n na raiz) e
+ * re-renderiza no evento 'kpi-lang' — mesmo padrão das recomendações do Resonant.
+ * Matriz: MITRE ATT&CK for ICS v20.0 completa (12 táticas · 78 técnicas · 26 subtécnicas). */
+(function(){
+var SNAP={"alerts": [{"id": "11", "nm": "SMBv1 Communication: Server", "tp": "SMBv1 Communication", "cat": "Risk", "det": "2026-01-14", "ym": "2026-01", "dv": 4, "ot": 0, "it": 4, "sev": 73, "ics": ["T0842", "T0866", "T0867", "T0886"], "ent": ["T1021", "T1071", "T1210", "T1570"], "st": "Unresolved", "seen": ""}, {"id": "12", "nm": "SMBv1 Communication: PC", "tp": "SMBv1 Communication", "cat": "Risk", "det": "2026-02-20", "ym": "2026-02", "dv": 7, "ot": 0, "it": 7, "sev": 99, "ics": ["T0842", "T0866", "T0867", "T0886"], "ent": ["T1021", "T1071", "T1210", "T1570"], "st": "Unresolved", "seen": ""}, {"id": "13", "nm": "SMBv1 Communication: HMI", "tp": "SMBv1 Communication", "cat": "Risk", "det": "2026-03-18", "ym": "2026-03", "dv": 3, "ot": 3, "it": 0, "sev": 99, "ics": ["T0842", "T0866", "T0867", "T0886"], "ent": ["T1021", "T1071", "T1210", "T1570"], "st": "Unresolved", "seen": ""}, {"id": "21", "nm": "Network Scan: Scanner IP 192.0.2.44", "tp": "Network Scan", "cat": "Threat", "det": "2026-05-09", "ym": "2026-05", "dv": 37, "ot": 9, "it": 30, "sev": 99, "ics": ["T0846"], "ent": ["T1595"], "st": "Unresolved", "seen": ""}, {"id": "22", "nm": "Expired TLS Certificate: historian-01.plant-a.example", "tp": "Expired TLS Certificate", "cat": "Risk", "det": "2026-05-27", "ym": "2026-05", "dv": 1, "ot": 0, "it": 1, "sev": 47, "ics": ["T0859"], "ent": ["T1102", "T1649"], "st": "Unresolved", "seen": ""}, {"id": "23", "nm": "Outdated Firmware: PLC Vendor-X Series 5", "tp": "Outdated Firmware", "cat": "Risk", "det": "2026-06-11", "ym": "2026-06", "dv": 5, "ot": 5, "it": 0, "sev": 73, "ics": ["T0820", "T1693"], "ent": ["T1542", "T1588", "T1592"], "st": "Unresolved", "seen": ""}, {"id": "24", "nm": "Network Scan: Scanner IP 198.51.100.7", "tp": "Network Scan", "cat": "Threat", "det": "2026-06-30", "ym": "2026-06", "dv": 2, "ot": 0, "it": 2, "sev": 73, "ics": ["T0846"], "ent": ["T1595"], "st": "Unresolved", "seen": ""}, {"id": "31", "nm": "Expired TLS Certificate: scada-02.plant-a.example", "tp": "Expired TLS Certificate", "cat": "Risk", "det": "2026-07-08", "ym": "2026-07", "dv": 1, "ot": 0, "it": 1, "sev": 47, "ics": ["T0859"], "ent": ["T1102", "T1649"], "st": "Unresolved", "seen": ""}, {"id": "32", "nm": "Device End-of-Life: Industrial Switch Model-A", "tp": "Device End-of-Life", "cat": "Risk", "det": "2026-07-22", "ym": "2026-07", "dv": 14, "ot": 14, "it": 0, "sev": 99, "ics": [], "ent": [], "st": "Unresolved", "seen": ""}, {"id": "33", "nm": "Expired TLS Certificate: 203.0.113.18", "tp": "Expired TLS Certificate", "cat": "Risk", "det": "2026-08-05", "ym": "2026-08", "dv": 1, "ot": 0, "it": 1, "sev": 47, "ics": ["T0859"], "ent": ["T1102", "T1649"], "st": "Resolved", "seen": ""}, {"id": "34", "nm": "Flood Activity: \\ENG-WS-03", "tp": "Flood Activity", "cat": "Threat", "det": "2026-08-19", "ym": "2026-08", "dv": 1, "ot": 0, "it": 1, "sev": 73, "ics": ["T0814", "T1695"], "ent": ["T1498", "T1499"], "st": "Unresolved", "seen": ""}, {"id": "35", "nm": "Device End-of-Life: Industrial Switch Model-B", "tp": "Device End-of-Life", "cat": "Risk", "det": "2026-08-26", "ym": "2026-08", "dv": 9, "ot": 9, "it": 0, "sev": 99, "ics": [], "ent": [], "st": "Unresolved", "seen": ""}, {"id": "41", "nm": "Outdated Firmware: RTU Vendor-Y", "tp": "Outdated Firmware", "cat": "Risk", "det": "2026-09-04", "ym": "2026-09", "dv": 3, "ot": 3, "it": 0, "sev": 99, "ics": ["T0820", "T1693"], "ent": ["T1542", "T1588", "T1592"], "st": "Unresolved", "seen": ""}, {"id": "42", "nm": "Expired TLS Certificate: mes-01.plant-b.example", "tp": "Expired TLS Certificate", "cat": "Risk", "det": "2026-09-15", "ym": "2026-09", "dv": 1, "ot": 0, "it": 1, "sev": 47, "ics": ["T0859"], "ent": ["T1102", "T1649"], "st": "Unresolved", "seen": ""}, {"id": "43", "nm": "Network Scan: Scanner IP 192.0.2.91", "tp": "Network Scan", "cat": "Threat", "det": "2026-09-28", "ym": "2026-09", "dv": 3, "ot": 1, "it": 2, "sev": 73, "ics": ["T0846"], "ent": ["T1595"], "st": "Unresolved", "seen": ""}, {"id": "51", "nm": "Expired TLS Certificate: eng-01.plant-b.example", "tp": "Expired TLS Certificate", "cat": "Risk", "det": "2026-10-03", "ym": "2026-10", "dv": 1, "ot": 0, "it": 1, "sev": 47, "ics": ["T0859"], "ent": ["T1102", "T1649"], "st": "Unresolved", "seen": ""}, {"id": "52", "nm": "Flood Activity: \\SCADA-VM-02", "tp": "Flood Activity", "cat": "Threat", "det": "2026-10-12", "ym": "2026-10", "dv": 1, "ot": 0, "it": 1, "sev": 73, "ics": ["T0814", "T1695"], "ent": ["T1498", "T1499"], "st": "Unresolved", "seen": ""}], "ev": [["2026-05", "Server", "PLC", "PLANT-A\\SRV-OPC-01", 15], ["2026-05", "Server", "PLC", "PLANT-A\\SRV-HIST-02", 5], ["2026-05", "Server", "PLC", "PLANT-B\\SRV-OPC-03", 5], ["2026-05", "Server", "PLC", "PLANT-B\\SRV-BATCH-04", 5], ["2026-05", "Engineering Station", "PLC", "PLANT-A\\ENG-WS-01", 3], ["2026-05", "Engineering Station", "PLC", "PLANT-B\\ENG-WS-02", 3], ["2026-05", "SCADA Server", "HMI", "PLANT-A\\SCADA-01", 2], ["2026-06", "Server", "PLC", "PLANT-A\\SRV-OPC-01", 741], ["2026-06", "Server", "PLC", "PLANT-A\\SRV-HIST-02", 247], ["2026-06", "Server", "PLC", "PLANT-B\\SRV-OPC-03", 247], ["2026-06", "Server", "PLC", "PLANT-B\\SRV-BATCH-04", 247], ["2026-06", "Engineering Station", "PLC", "PLANT-A\\ENG-WS-01", 142], ["2026-06", "Engineering Station", "PLC", "PLANT-B\\ENG-WS-02", 142], ["2026-06", "SCADA Server", "PLC", "PLANT-A\\SCADA-01", 133], ["2026-07", "Server", "PLC", "PLANT-A\\SRV-OPC-01", 643], ["2026-07", "Server", "PLC", "PLANT-A\\SRV-HIST-02", 214], ["2026-07", "Server", "PLC", "PLANT-B\\SRV-OPC-03", 214], ["2026-07", "Server", "PLC", "PLANT-B\\SRV-BATCH-04", 214], ["2026-07", "Engineering Station", "PLC", "PLANT-A\\ENG-WS-01", 123], ["2026-07", "Engineering Station", "PLC", "PLANT-B\\ENG-WS-02", 123], ["2026-07", "SCADA Server", "PLC", "PLANT-A\\SCADA-01", 115], ["2026-08", "Server", "PLC", "PLANT-A\\SRV-OPC-01", 382], ["2026-08", "Server", "PLC", "PLANT-A\\SRV-HIST-02", 127], ["2026-08", "Server", "PLC", "PLANT-B\\SRV-OPC-03", 127], ["2026-08", "Server", "PLC", "PLANT-B\\SRV-BATCH-04", 127], ["2026-08", "Engineering Station", "PLC", "PLANT-A\\ENG-WS-01", 73], ["2026-08", "Engineering Station", "PLC", "PLANT-B\\ENG-WS-02", 73], ["2026-08", "SCADA Server", "PLC", "PLANT-A\\SCADA-01", 68], ["2026-09", "Server", "PLC", "PLANT-A\\SRV-OPC-01", 1053], ["2026-09", "Server", "PLC", "PLANT-A\\SRV-HIST-02", 351], ["2026-09", "Server", "PLC", "PLANT-B\\SRV-OPC-03", 351], ["2026-09", "Server", "PLC", "PLANT-B\\SRV-BATCH-04", 351], ["2026-09", "Engineering Station", "PLC", "PLANT-A\\ENG-WS-01", 202], ["2026-09", "Engineering Station", "PLC", "PLANT-B\\ENG-WS-02", 202], ["2026-09", "SCADA Server", "PLC", "PLANT-A\\SCADA-01", 189], ["2026-10", "Server", "PLC", "PLANT-A\\SRV-OPC-01", 2028], ["2026-10", "Server", "PLC", "PLANT-A\\SRV-HIST-02", 676], ["2026-10", "Server", "PLC", "PLANT-B\\SRV-OPC-03", 676], ["2026-10", "Server", "PLC", "PLANT-B\\SRV-BATCH-04", 676], ["2026-10", "Engineering Station", "PLC", "PLANT-A\\ENG-WS-01", 390], ["2026-10", "Engineering Station", "PLC", "PLANT-B\\ENG-WS-02", 390], ["2026-10", "SCADA Server", "PLC", "PLANT-A\\SCADA-01", 364]], "evTypes": [["2026-05", "Configuration Download", 38], ["2026-06", "Configuration Download", 1899], ["2026-07", "Configuration Download", 1646], ["2026-08", "Configuration Download", 977], ["2026-09", "Configuration Download", 2699], ["2026-10", "Configuration Download", 5200]], "health": {"alert": {"total": 9800, "ok": 6100, "cel": 2600, "api422": 1080, "auth": 0, "transient": 0, "other": 20, "nodev": 210, "last": "", "lastOk": ""}, "event": {"total": 14579, "ok": 12459, "cel": 0, "api422": 2100, "auth": 5, "transient": 6, "other": 9, "nodev": 0, "last": "", "lastOk": ""}, "vulnerability": {"total": 2900, "ok": 0, "cel": 0, "api422": 2870, "auth": 8, "transient": 7, "other": 15, "nodev": 0, "last": "", "lastOk": ""}}, "updated": "demo", "code_version": "demo"};
+var CAT={"tactics": ["Initial Access", "Execution", "Persistence", "Privilege Escalation", "Evasion", "Discovery", "Lateral Movement", "Collection", "Command and Control", "Inhibit Response Function", "Impair Process Control", "Impact"], "tech": {"T0881": {"name": "Service Stop", "tactics": ["Inhibit Response Function"], "subs": []}, "T0836": {"name": "Modify Parameter", "tactics": ["Impair Process Control"], "subs": []}, "T0821": {"name": "Modify Controller Tasking", "tactics": ["Execution"], "subs": []}, "T0887": {"name": "Wireless Sniffing", "tactics": ["Discovery", "Collection"], "subs": []}, "T0829": {"name": "Loss of View", "tactics": ["Impact"], "subs": []}, "T0800": {"name": "Activate Firmware Update Mode", "tactics": ["Inhibit Response Function"], "subs": []}, "T0831": {"name": "Manipulation of Control", "tactics": ["Impact"], "subs": []}, "T0814": {"name": "Denial of Service", "tactics": ["Inhibit Response Function"], "subs": []}, "T0894": {"name": "System Binary Proxy Execution", "tactics": ["Evasion"], "subs": []}, "T0861": {"name": "Point & Tag Identification", "tactics": ["Collection"], "subs": []}, "T0816": {"name": "Device Restart/Shutdown", "tactics": ["Inhibit Response Function"], "subs": []}, "T0863": {"name": "User Execution", "tactics": ["Execution"], "subs": []}, "T0860": {"name": "Wireless Compromise", "tactics": ["Initial Access"], "subs": []}, "T0858": {"name": "Change Operating Mode", "tactics": ["Execution", "Evasion"], "subs": []}, "T0878": {"name": "Alarm Suppression", "tactics": ["Inhibit Response Function"], "subs": []}, "T0868": {"name": "Detect Operating Mode", "tactics": ["Collection"], "subs": []}, "T0837": {"name": "Loss of Protection", "tactics": ["Impact"], "subs": []}, "T0801": {"name": "Monitor Process State", "tactics": ["Collection"], "subs": []}, "T0888": {"name": "Remote System Information Discovery", "tactics": ["Discovery"], "subs": []}, "T0845": {"name": "Program Upload", "tactics": ["Collection"], "subs": []}, "T0819": {"name": "Exploit Public-Facing Application", "tactics": ["Initial Access"], "subs": []}, "T1691": {"name": "Block Operational Technology Message", "tactics": ["Inhibit Response Function"], "subs": [["T1691.001", "Command Message"], ["T1691.002", "Reporting Message"]]}, "T0811": {"name": "Data from Information Repositories", "tactics": ["Collection"], "subs": []}, "T0864": {"name": "Transient Cyber Asset", "tactics": ["Initial Access"], "subs": []}, "T0835": {"name": "Manipulate I/O Image", "tactics": ["Inhibit Response Function"], "subs": []}, "T0842": {"name": "Network Sniffing", "tactics": ["Discovery"], "subs": []}, "T0851": {"name": "Rootkit", "tactics": ["Evasion", "Inhibit Response Function"], "subs": []}, "T0802": {"name": "Automated Collection", "tactics": ["Collection"], "subs": []}, "T1694": {"name": "Insecure Credentials", "tactics": ["Persistence", "Lateral Movement"], "subs": [["T1694.001", "Default Credentials"], ["T1694.002", "Hardcoded Credentials"]]}, "T0809": {"name": "Data Destruction", "tactics": ["Inhibit Response Function"], "subs": []}, "T0832": {"name": "Manipulation of View", "tactics": ["Impact"], "subs": []}, "T0872": {"name": "Indicator Removal on Host", "tactics": ["Evasion"], "subs": []}, "T0877": {"name": "I/O Image", "tactics": ["Collection"], "subs": []}, "T0815": {"name": "Denial of View", "tactics": ["Impact"], "subs": []}, "T0871": {"name": "Execution through API", "tactics": ["Execution"], "subs": []}, "T0862": {"name": "Supply Chain Compromise", "tactics": ["Initial Access"], "subs": []}, "T0880": {"name": "Loss of Safety", "tactics": ["Impact"], "subs": []}, "T0828": {"name": "Loss of Productivity and Revenue", "tactics": ["Impact"], "subs": []}, "T0865": {"name": "Spearphishing Attachment", "tactics": ["Initial Access"], "subs": []}, "T0895": {"name": "Autorun Image", "tactics": ["Execution"], "subs": []}, "T0817": {"name": "Drive-by Compromise", "tactics": ["Initial Access"], "subs": []}, "T1693": {"name": "Modify Firmware", "tactics": ["Persistence", "Inhibit Response Function", "Impair Process Control"], "subs": [["T1693.001", "System Firmware"], ["T1693.002", "Module Firmware"]]}, "T0879": {"name": "Damage to Property", "tactics": ["Impact"], "subs": []}, "T0866": {"name": "Exploitation of Remote Services", "tactics": ["Initial Access", "Lateral Movement"], "subs": []}, "T0822": {"name": "External Remote Services", "tactics": ["Initial Access"], "subs": []}, "T0806": {"name": "Brute Force I/O", "tactics": ["Impair Process Control"], "subs": []}, "T0830": {"name": "Adversary-in-the-Middle", "tactics": ["Collection"], "subs": []}, "T0820": {"name": "Exploitation for Evasion", "tactics": ["Evasion"], "subs": []}, "T0827": {"name": "Loss of Control", "tactics": ["Impact"], "subs": []}, "T0874": {"name": "Hooking", "tactics": ["Execution", "Privilege Escalation"], "subs": []}, "T0823": {"name": "Graphical User Interface", "tactics": ["Execution"], "subs": []}, "T0848": {"name": "Rogue Master", "tactics": ["Initial Access"], "subs": []}, "T0834": {"name": "Native API", "tactics": ["Execution"], "subs": []}, "T0826": {"name": "Loss of Availability", "tactics": ["Impact"], "subs": []}, "T0882": {"name": "Theft of Operational Information", "tactics": ["Impact"], "subs": []}, "T0849": {"name": "Masquerading", "tactics": ["Evasion"], "subs": []}, "T0843": {"name": "Program Download", "tactics": ["Lateral Movement"], "subs": [["T0843.001", "Download All"], ["T0843.002", "Online Edit"], ["T0843.003", "Program Append"]]}, "T0847": {"name": "Replication Through Removable Media", "tactics": ["Initial Access"], "subs": []}, "T0852": {"name": "Screen Capture", "tactics": ["Collection"], "subs": []}, "T0859": {"name": "Valid Accounts", "tactics": ["Persistence", "Lateral Movement"], "subs": []}, "T0890": {"name": "Exploitation for Privilege Escalation", "tactics": ["Privilege Escalation"], "subs": []}, "T0846": {"name": "Remote System Discovery", "tactics": ["Discovery"], "subs": [["T0846.001", "Port Scan"], ["T0846.002", "Broadcast Discovery"], ["T0846.003", "Multicast Discovery"]]}, "T0884": {"name": "Connection Proxy", "tactics": ["Command and Control"], "subs": []}, "T0869": {"name": "Standard Application Layer Protocol", "tactics": ["Command and Control"], "subs": [["T0869.001", "DNS"], ["T0869.002", "Publish/Subscribe Protocols"]]}, "T1692": {"name": "Unauthorized Message", "tactics": ["Evasion", "Impair Process Control"], "subs": [["T1692.001", "Command Message"], ["T1692.002", "Reporting Message"]]}, "T0886": {"name": "Remote Services", "tactics": ["Initial Access", "Lateral Movement"], "subs": []}, "T0813": {"name": "Denial of Control", "tactics": ["Impact"], "subs": []}, "T0838": {"name": "Modify Alarm Settings", "tactics": ["Inhibit Response Function"], "subs": []}, "T0885": {"name": "Commonly Used Port", "tactics": ["Command and Control"], "subs": []}, "T0873": {"name": "Project File Infection", "tactics": ["Persistence"], "subs": [["T0873.001", "Siemens Project File Format"]]}, "T0840": {"name": "Network Connection Enumeration", "tactics": ["Discovery"], "subs": []}, "T0867": {"name": "Lateral Tool Transfer", "tactics": ["Lateral Movement"], "subs": []}, "T0883": {"name": "Internet Accessible Device", "tactics": ["Initial Access"], "subs": []}, "T0893": {"name": "Data from Local System", "tactics": ["Collection"], "subs": []}, "T0892": {"name": "Change Credential", "tactics": ["Inhibit Response Function"], "subs": []}, "T1695": {"name": "Block Communications", "tactics": ["Inhibit Response Function"], "subs": [["T1695.001", "Serial COM"], ["T1695.002", "Ethernet"], ["T1695.003", "Wi-Fi"]]}, "T0889": {"name": "Modify Program", "tactics": ["Persistence"], "subs": []}, "T1701": {"name": "Command and Scripting Interpreter", "tactics": ["Execution"], "subs": [["T1701.001", "PowerShell"], ["T1701.002", "Windows Command Shell"], ["T1701.003", "Unix Shell"], ["T1701.004", "Visual Basic"], ["T1701.005", "Python"], ["T1701.006", "JavaScript"]]}}};
+var D=null,P=null,Q='',EXP=false,ONLYM=false,_booted=false,_wired=false;
+function el(id){return document.getElementById(id);}
+function LG(){try{return (window.__i18n&&window.__i18n.lang())==='en'?'en':'pt';}catch(e){return 'pt';}}
+function L(pt,en){return LG()==='en'?en:pt;}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function f(n){return (n==null?0:n).toLocaleString(LG()==='en'?'en-US':'pt-BR');}
+function pct(a,b){return b?Math.round(a/b*100):0;}
+var MPT=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],MEN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function mlab(ym,full){var m=+ym.slice(5,7)-1,y=ym.slice(0,4);return (LG()==='en'?MEN:MPT)[m]+'/'+(full?y:y.slice(2));}
+function mshort(ym){return (LG()==='en'?MEN:MPT)[+ym.slice(5,7)-1];}
+function dlab(d){if(!d)return '—';return LG()==='en'?d:d.slice(8,10)+'/'+d.slice(5,7)+'/'+d.slice(0,4);}
+function addM(ym,k){var y=+ym.slice(0,4),m=+ym.slice(5,7)-1+k;y+=Math.floor(m/12);m=((m%12)+12)%12;return y+'-'+(m<9?'0':'')+(m+1);}
+function months(){var all=[];D.alerts.forEach(function(a){if(a.ym)all.push(a.ym);});D.ev.forEach(function(r){all.push(r[0]);});
+  if(!all.length)return [];all.sort();var out=[],c=all[0],e=all[all.length-1];while(c<=e&&out.length<60){out.push(c);c=addM(c,1);}return out;}
+function sevc(s){return s>=90?'c':(s>=60?'h':'m');}
+var TCOL={'Expired TLS Certificate':'--oty','Network Scan':'--otr','SMBv1 Communication':'--oto','Device End-of-Life':'--otv','Outdated Firmware':'--otv','Flood Activity':'--otr'};
+function tcol(t){return 'var('+(TCOL[t]||'--oti')+')';}
+var TPEN={'Expired TLS Certificate':'Certificado TLS expirado','Network Scan':'Varredura de rede','SMBv1 Communication':'Comunicação SMBv1','Device End-of-Life':'Dispositivo fim de vida (EoL)','Outdated Firmware':'Firmware desatualizado','Flood Activity':'Atividade de flood (DoS)'};
+var SHT={'Expired TLS Certificate':'TLS','Network Scan':'Scan','SMBv1 Communication':'SMBv1','Device End-of-Life':'EoL','Outdated Firmware':'Firmware','Flood Activity':'Flood'};
+function tpl(t){return LG()==='en'?t:(TPEN[t]||t);}
+function isOpen(a){return a.st!=='Resolved';}
+
+/* ---------------- esqueleto (refeito ao trocar idioma) ---------------- */
+function skeleton(){
+ var r=el('ot_root');
+ r.innerHTML=
+ '<div class="ot-perbar" id="ot_per"></div>'+
+ '<div class="ot-hdr" id="ot_hdr"></div>'+
+ '<div class="ot-kpis" id="ot_kpis"></div>'+
+ '<div class="ot-sec">'+L('MITRE ATT&amp;CK for ICS — matriz','MITRE ATT&amp;CK for ICS — matrix')+'</div>'+
+ '<div class="ot-card">'+
+  '<div class="ot-mkpis" id="ot_mkpis"></div>'+
+  '<div class="ot-ctl"><input type="search" id="ot_q" placeholder="'+L('Filtrar por técnica, subtécnica, ID ou alerta…','Filter by technique, sub-technique, ID or alert…')+'" aria-label="'+L('Filtrar','Filter')+'">'+
+   '<label class="tog"><input type="checkbox" id="ot_exp"> '+L('Expandir subtécnicas e alertas','Expand sub-techniques and alerts')+'</label>'+
+   '<label class="tog"><input type="checkbox" id="ot_onlym"> '+L('Só alertas do último mês','Last month alerts only')+'</label>'+
+   '<div class="legend"><span class="it"><span class="msw h3"></span>'+L('≥3 alertas','≥3 alerts')+'</span><span class="it"><span class="msw h2"></span>'+L('1–2 alertas','1–2 alerts')+'</span><span class="it"><span class="msw h0"></span>'+L('Sem alertas','No alerts')+'</span><span class="it"><span class="msw nw"></span><span id="ot_mlbl"></span></span></div></div>'+
+  '<div class="ot-fit"><div class="ot-matrix" id="ot_matrix"></div></div>'+
+  '<div class="ot-note">'+L('Fonte: <code>claroty_xdome.alert.mitre_technique.ics.ids</code> · catálogo: STIX oficial ATT&amp;CK for ICS v20.0 (12 táticas · 78 técnicas · 26 subtécnicas). Contador da célula = subtécnicas com alerta/total, ou nº de alertas quando a técnica não tem subtécnicas. A Claroty mapeia no nível da técnica.',
+   'Source: <code>claroty_xdome.alert.mitre_technique.ics.ids</code> · catalog: official ATT&amp;CK for ICS v20.0 STIX (12 tactics · 78 techniques · 26 sub-techniques). Cell counter = sub-techniques with alerts/total, or number of alerts when the technique has no sub-techniques. Claroty maps at technique level.')+'</div>'+
+ '</div>'+
+ '<div class="ot-sec">'+L('Alertas','Alerts')+'</div>'+
+ '<div class="ot-g2"><div class="ot-card"><h3>'+L('Alertas por tipo','Alerts by type')+'</h3><div id="ot_tipos"></div><div class="ot-note" id="ot_tiposN"></div></div>'+
+  '<div class="ot-card"><h3>'+L('Novos alertas por mês de detecção','New alerts by detection month')+' <small>· '+L('período em destaque','selected period highlighted')+'</small></h3><svg id="ot_tl" viewBox="0 0 560 220"></svg></div></div>'+
+ '<div class="ot-card" style="margin-top:14px"><h3>'+L('Alertas do período — correlação ICS × Enterprise','Alerts in period — ICS × Enterprise correlation')+'</h3><div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>'+L('Alerta','Alert')+'</th><th>'+L('Detectado','Detected')+'</th><th>'+L('Disp. (OT/IT)','Devices (OT/IT)')+'</th><th>ATT&amp;CK ICS</th><th>ATT&amp;CK Enterprise</th><th>'+L('Sev.','Sev.')+'</th><th>Status</th></tr></thead><tbody id="ot_tbl"></tbody></table></div></div>'+
+ '<div class="ot-sec">'+L('Exposição de ativos OT','OT asset exposure')+'</div>'+
+ '<div class="ot-g2"><div class="ot-card"><h3>'+L('Ativos OT fim de vida / firmware desatualizado','OT assets end-of-life / outdated firmware')+'</h3><div id="ot_assets"></div><div class="ot-note">'+L('EoL não tem técnica ATT&amp;CK associada pela Claroty (risco de postura, sem TTP).','EoL has no ATT&amp;CK technique mapped by Claroty (posture risk, no TTP).')+'</div></div>'+
+  '<div class="ot-card"><h3>'+L('Superfície IT ↔ OT por alerta','IT ↔ OT surface per alert')+'</h3><svg id="ot_otit" viewBox="0 0 560 240"></svg></div></div>'+
+ '<div class="ot-sec">'+L('Atividade OT — eventos','OT activity — events')+'</div>'+
+ '<div class="ot-g21"><div class="ot-card"><h3>'+L('Eventos por mês','Events per month')+' <small>· '+L('período em destaque','selected period highlighted')+'</small></h3><svg id="ot_ev" viewBox="0 0 720 230"></svg>'+
+  '<div class="ot-note">'+L('⚠ O payload não traz <code>event.id</code> nem <code>detection_time</code>: o volume pode conter duplicatas do re-polling da integração. Contagem por <code>@timestamp</code>.','⚠ The payload has no <code>event.id</code> nor <code>detection_time</code>: volume may include duplicates from integration re-polling. Counted by <code>@timestamp</code>.')+'</div></div>'+
+  '<div class="ot-card"><h3>'+L('Fluxo origem → destino','Source → destination flow')+'</h3><div id="ot_flow"></div></div></div>'+
+ '<div class="ot-card" style="margin-top:14px"><h3>'+L('Top estações de origem','Top source stations')+' <small id="ot_topN"></small></h3><div id="ot_top"></div></div>'+
+ '<div class="ot-sec">'+L('Vulnerabilidades, saúde da integração e recomendações','Vulnerabilities, integration health and recommendations')+'</div>'+
+ '<div class="ot-g3"><div class="ot-card"><h3>'+L('Vulnerabilidades OT (CVE)','OT vulnerabilities (CVE)')+'</h3><div id="ot_vuln"></div></div>'+
+  '<div class="ot-card ot-health"><h3>'+L('Saúde da coleta','Collection health')+' <small>· '+L('acumulado, independe do período','cumulative, period-independent')+'</small></h3><div id="ot_health"></div></div>'+
+  '<div class="ot-card"><h3>'+L('Recomendações','Recommendations')+' <small>· '+L('geradas a partir do período','derived from the period')+'</small></h3><div id="ot_rec"></div></div></div>';
+ var tip=el('ot_tip');if(!tip){tip=document.createElement('div');tip.id='ot_tip';tip.className='ottip';tip.setAttribute('role','tooltip');tip.setAttribute('data-noi18n','');document.body.appendChild(tip);}
+ el('ot_q').value=Q;el('ot_exp').checked=EXP;el('ot_onlym').checked=ONLYM;
+ el('ot_q').addEventListener('input',function(){Q=this.value.trim().toLowerCase();filterQ();});
+ el('ot_exp').addEventListener('change',function(){EXP=this.checked;el('ot_matrix').querySelectorAll('.cell.has').forEach(function(c){c.classList.toggle('open',EXP);c.nextSibling.hidden=!EXP;});});
+ el('ot_onlym').addEventListener('change',function(){ONLYM=this.checked;el('v-ot').classList.toggle('onlym',ONLYM);});
+ var M=el('ot_matrix');
+ M.addEventListener('mousemove',function(e){var c=e.target.closest('.scell')||e.target.closest('.cell');if(!c){tip.classList.remove('on');return;}tip.innerHTML=c._r?tipA(c):(c._s?tipS(c):tipT(c));tip.classList.add('on');pos(e,tip);});
+ M.addEventListener('mouseleave',function(){tip.classList.remove('on');});
+ picker();
+}
+
+/* ---------------- seletor de período ---------------- */
+function picker(){
+ var MS=months(),bar=el('ot_per');if(!MS.length){bar.innerHTML='';return;}
+ var last=MS[MS.length-1];
+ if(!P)P={k:'all',from:MS[0],to:last};
+ var pre=[['all',L('Todos','All')],['3m',L('Últimos 3 meses','Last 3 months')],['6m',L('Últimos 6 meses','Last 6 months')]];
+ var opts=function(sel){return MS.map(function(m){return '<option value="'+m+'"'+(m===sel?' selected':'')+'>'+mlab(m,true)+'</option>';}).join('');};
+ bar.innerHTML='<span class="ot-lb">📅 '+L('Período:','Period:')+'</span>'+
+  pre.map(function(p){return '<span class="ot-chip" data-k="'+p[0]+'">'+p[1]+'</span>';}).join('')+'<span class="ot-div"></span>'+
+  MS.map(function(m){return '<span class="ot-chip" data-k="m'+m+'">'+mlab(m)+'</span>';}).join('')+'<span class="ot-div"></span>'+
+  '<span class="ot-cust"><label>'+L('De','From')+' <select id="ot_de">'+opts(P.from)+'</select></label><label>'+L('Até','To')+' <select id="ot_ate">'+opts(P.to)+'</select></label></span>'+
+  '<span class="ot-sp"></span><span class="ot-upd" id="ot_upd"></span>';
+ function first(k){return MS[Math.max(0,MS.length-k)];}
+ function set(k,a,b){if(a>b){var t=a;a=b;b=t;}if(a===b)k='m'+a;P={k:k,from:a,to:b};render();}
+ bar.onclick=function(e){var c=e.target.closest('.ot-chip');if(!c)return;var k=c.dataset.k;
+  if(k==='all')set(k,MS[0],last);else if(k==='3m')set(k,first(3),last);else if(k==='6m')set(k,first(6),last);else set(k,k.slice(1),k.slice(1));};
+ el('ot_de').onchange=el('ot_ate').onchange=function(){set('cust',el('ot_de').value,el('ot_ate').value);};
+}
+
+/* ---------------- render ---------------- */
+function bars(id,lab,val,W,H,col,on){var s=el(id);if(!s)return;var pl=36,pb=24,pt=20,mx=Math.max(1,Math.max.apply(null,val)),bw=(W-pl-10)/Math.max(1,val.length),o='';
+ var fy=function(v){return v>=1000?(LG()==='en'?(v/1000).toFixed(1):(v/1000).toFixed(1).replace('.',','))+'k':String(Math.round(v));};
+ for(var i=0;i<=4;i++){var y=pt+(H-pt-pb)*i/4;o+='<line x1="'+pl+'" x2="'+(W-6)+'" y1="'+y+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(pl-5)+'" y="'+(y+3)+'" text-anchor="end">'+fy(mx*(1-i/4))+'</text>';}
+ val.forEach(function(v,i){var h=(H-pt-pb)*v/mx,x=pl+i*bw+bw*.18,y=H-pb-h,a=on(i);
+  o+='<rect x="'+x+'" y="'+y+'" width="'+(bw*.64)+'" height="'+Math.max(h,v?2:0)+'" rx="3" fill="'+col+'" opacity="'+(a?1:.22)+'"/>'+
+   '<text x="'+(x+bw*.32)+'" y="'+(H-8)+'" text-anchor="middle"'+(a?' class="v"':'')+'>'+lab[i]+'</text>'+
+   (v?'<text class="v" x="'+(x+bw*.32)+'" y="'+(y-5)+'" text-anchor="middle" opacity="'+(a?1:.4)+'">'+f(v)+'</text>':'');});
+ s.innerHTML=o;}
+function hbar(n,c,mx,col,x){return '<div class="ot-bar"><div class="n" title="'+esc(n)+'">'+esc(n)+'</div><div class="t"><div class="f" style="width:'+(mx?c/mx*100:0)+'%;background:'+col+'"></div></div><div class="c">'+f(c)+'</div>'+(x!=null?'<div class="x">'+x+'</div>':'')+'</div>';}
+function empty(t){return '<div class="ot-empty">'+(t||L('Sem registros no período selecionado.','No records in the selected period.'))+'</div>';}
+function tg(a,c){return a&&a.length?a.map(function(x){return '<span class="tg '+c+'">'+esc(x)+'</span>';}).join(''):'<span style="color:var(--muted)">'+L('— sem TTP —','— no TTP —')+'</span>';}
+
+function render(){
+ if(!D||!P)return;
+ var MS=months(),inP=function(m){return m>=P.from&&m<=P.to;};
+ var AL=D.alerts.filter(function(a){return inP(a.ym);}),E=D.ev.filter(function(r){return inP(r[0]);});
+ var per=P.from===P.to?mlab(P.from,true):mlab(P.from,true)+' – '+mlab(P.to,true);
+ // chips
+ el('ot_per').querySelectorAll('.ot-chip').forEach(function(c){c.classList.toggle('on',c.dataset.k===P.k);});
+ el('ot_de').value=P.from;el('ot_ate').value=P.to;
+ var u=D.updated&&D.updated!=='snapshot'?String(D.updated).replace('T',' ').slice(0,16):'snapshot';
+ el('ot_upd').textContent=L('Exibindo ','Showing ')+per+' · '+L('alertas por data de detecção · eventos por @timestamp · atualizado ','alerts by detection date · events by @timestamp · updated ')+u+(D.code_version&&D.code_version!=='snapshot'?' · build '+D.code_version:'');
+ el('ot_hdr').innerHTML='<span class="ot-pill">Claroty xDome</span><span class="ot-pill">MITRE ATT&amp;CK for ICS v20.0</span><span class="ot-pill">'+L('Alertas deduplicados por','Alerts deduplicated by')+' <code>claroty_xdome.alert.id</code></span>'+((D.health.vulnerability&&!D.health.vulnerability.ok)||(D.health.alert&&D.health.alert.cel)?'<span class="ot-pill w">⚠ '+L('Integração com erros — ver saúde da coleta','Integration errors — see collection health')+'</span>':'');
+ /* KPIs */
+ var open=AL.filter(isOpen).length,dev=0,ot=0,it=0;AL.forEach(function(a){dev+=a.dv||0;ot+=a.ot||0;it+=a.it||0;});
+ var ics={};AL.forEach(function(a){a.ics.forEach(function(t){ics[t]=1;});});
+ var tacs={};Object.keys(ics).forEach(function(t){var T=CAT.tech[t.split('.')[0]];if(T)T.tactics.forEach(function(x){tacs[x]=1;});});
+ var eol=0,fw=0;AL.forEach(function(a){if(a.tp==='Device End-of-Life')eol+=(a.ot||a.dv||0);else if(a.tp==='Outdated Firmware')fw+=(a.ot||a.dv||0);});
+ var evT=E.reduce(function(s,r){return s+r[4];},0);
+ var K=[[L('Alertas no período','Alerts in period'),f(AL.length),L('de ','of ')+f(D.alerts.length)+L(' únicos',' unique'),'--accent'],
+  [L('Em aberto','Open'),f(open),f(AL.length-open)+L(' resolvido(s)',' resolved'),'--otr'],
+  [L('Dispositivos impactados','Impacted devices'),f(dev),'<span class="o">'+f(ot)+' OT</span> · <span class="i">'+f(it)+' IT</span>'+(dev-ot-it>0?' · '+f(dev-ot-it)+' '+L('outros','other'):''),'--ota'],
+  [L('Táticas ICS atingidas','ICS tactics hit'),Object.keys(tacs).length+'<small>/'+CAT.tactics.length+'</small>',f(Object.keys(ics).length)+L(' técnicas ICS (de ',' ICS techniques (of ')+Object.keys(CAT.tech).length+')','--ota'],
+  [L('Ativos OT obsoletos','Obsolete OT assets'),f(eol+fw),f(eol)+' EoL · '+f(fw)+L(' firmware desatualizado',' outdated firmware'),'--oto'],
+  [L('Eventos OT','OT events'),f(evT),(D.evTypes.length&&D.evTypes.every(function(x){return x[1]===D.evTypes[0][1];})?esc(D.evTypes[0][1]):L('vários tipos','multiple types'))+' · '+per,'--oti']];
+ el('ot_kpis').innerHTML=K.map(function(k){return '<div class="ot-kpi" style="--ac:var('+k[3]+')"><div class="l">'+k[0]+'</div><div class="v">'+k[1]+'</div><div class="d">'+k[2]+'</div></div>';}).join('');
+ /* tipos */
+ var tc={};AL.forEach(function(a){tc[a.tp]=(tc[a.tp]||0)+1;});var tl=Object.keys(tc).map(function(k){return [k,tc[k]];}).sort(function(a,b){return b[1]-a[1];});
+ var tmx=tl.length?tl[0][1]:1;el('ot_tipos').innerHTML=tl.length?tl.map(function(t){return hbar(tpl(t[0]),t[1],tmx,tcol(t[0]));}).join(''):empty();
+ var thr=AL.filter(function(a){return a.cat==='Threat';}).length;
+ el('ot_tiposN').innerHTML=L('Ameaça (categoria Threat) = ','Threat category = ')+f(thr)+' · '+L('Risco/postura (categoria Risk) = ','Risk/posture category = ')+f(AL.length-thr);
+ /* séries (todas, período em destaque) */
+ bars('ot_tl',MS.map(mshort),MS.map(function(m){return D.alerts.filter(function(a){return a.ym===m;}).length;}),560,220,'var(--accent)',function(i){return inP(MS[i]);});
+ var EM=MS.filter(function(m){return D.ev.some(function(r){return r[0]===m;});});
+ bars('ot_ev',EM.map(mshort),EM.map(function(m){return D.ev.filter(function(r){return r[0]===m;}).reduce(function(s,r){return s+r[4];},0);}),720,230,'var(--ota)',function(i){return inP(EM[i]);});
+ /* tabela */
+ el('ot_tbl').innerHTML=AL.length?AL.slice().sort(function(a,b){return a.det<b.det?1:-1;}).map(function(a){
+  return '<tr><td>'+esc(a.id)+'</td><td>'+esc(a.nm)+'</td><td>'+dlab(a.det)+'</td><td>'+f(a.dv)+' <span style="color:var(--muted)">('+(a.ot==null?'–':f(a.ot))+'/'+(a.it==null?'–':f(a.it))+')</span></td><td>'+tg(a.ics,'ics')+'</td><td>'+tg(a.ent,'ent')+'</td><td>'+(a.sev!=null?'<span class="sev '+sevc(a.sev)+'">'+a.sev+'</span>':'—')+'</td><td class="stt '+(isOpen(a)?'o':'r')+'">'+(isOpen(a)?L('Em aberto','Unresolved'):L('Resolvido','Resolved'))+'</td></tr>';}).join(''):'<tr><td colspan="8">'+empty()+'</td></tr>';
+ /* ativos */
+ var as=AL.filter(function(a){return a.tp==='Device End-of-Life'||a.tp==='Outdated Firmware'||(a.tp==='SMBv1 Communication'&&(a.ot||0)>0);}).map(function(a){
+  var nm=a.nm.indexOf(': ')>0?a.nm.split(': ').slice(1).join(': '):a.nm;if(a.tp==='SMBv1 Communication')nm+=' (SMBv1)';
+  return [nm,a.tp,a.ot||a.dv||0];}).sort(function(a,b){return b[2]-a[2];});
+ var amx=as.length?as[0][2]:1;
+ el('ot_assets').innerHTML=as.length?as.map(function(x){return hbar(x[0],x[2],amx,x[1]==='Device End-of-Life'?'var(--otv)':(x[1]==='Outdated Firmware'?'var(--oto)':'var(--otr)'));}).join('')+
+  '<div class="ot-leg"><span><span class="sw" style="background:var(--otv)"></span>'+L('Fim de vida','End-of-life')+'</span><span><span class="sw" style="background:var(--oto)"></span>Firmware</span><span><span class="sw" style="background:var(--otr)"></span>'+L('Protocolo legado','Legacy protocol')+'</span></div>':empty(L('Nenhum alerta de EoL, firmware ou protocolo legado em OT no período.','No EoL, firmware or OT legacy-protocol alerts in the period.'));
+ /* OT/IT */
+ var oi=AL.filter(function(a){return ((a.ot||0)+(a.it||0))>0;}).map(function(a){return ['#'+a.id+' '+(SHT[a.tp]||a.tp.split(' ')[0]),a.ot||0,a.it||0];}).sort(function(a,b){return (b[1]+b[2])-(a[1]+a[2]);}).slice(0,9);
+ var so=el('ot_otit');
+ if(!oi.length)so.innerHTML='<text x="10" y="30">'+L('Sem alertas com classificação OT/IT no período.','No alerts with OT/IT classification in the period.')+'</text>';
+ else{var W=560,pl=120,mx=Math.max.apply(null,oi.map(function(d){return d[1]+d[2];})),y=10,o='';
+  oi.forEach(function(d){var wo=(W-pl-40)*d[1]/mx,wi=(W-pl-40)*d[2]/mx;o+='<text x="'+(pl-6)+'" y="'+(y+12)+'" text-anchor="end">'+esc(d[0])+'</text><rect x="'+pl+'" y="'+(y+2)+'" width="'+wo+'" height="14" fill="var(--ota)" rx="2"/><rect x="'+(pl+wo)+'" y="'+(y+2)+'" width="'+wi+'" height="14" fill="var(--oti)" rx="2"/><text class="v" x="'+(pl+wo+wi+5)+'" y="'+(y+13)+'">'+f(d[1]+d[2])+'</text>';y+=22;});
+  o+='<rect x="'+pl+'" y="'+(y+6)+'" width="10" height="10" fill="var(--ota)"/><text x="'+(pl+14)+'" y="'+(y+15)+'">OT</text><rect x="'+(pl+44)+'" y="'+(y+6)+'" width="10" height="10" fill="var(--oti)"/><text x="'+(pl+58)+'" y="'+(y+15)+'">IT</text>';
+  so.setAttribute('viewBox','0 0 560 '+(y+26));so.innerHTML=o;}
+ /* fluxo */
+ var sum=function(k){var o={};E.forEach(function(r){o[r[k]]=(o[r[k]]||0)+r[4];});return Object.keys(o).map(function(x){return [x,o[x]];}).sort(function(a,b){return b[1]-a[1];});};
+ var node=function(x,p){return '<div class="ot-node'+(p?' p':'')+'"><span>'+esc(x[0])+'</span><b>'+f(x[1])+'</b></div>';};
+ if(evT){var S=sum(1),Dd=sum(2),srv=(S.filter(function(x){return x[0]==='Server';})[0]||[0,0])[1];
+  var names={},noN=0;E.forEach(function(r){if(r[3])names[r[3]]=1;else noN+=r[4];});
+  el('ot_flow').innerHTML='<div class="ot-flow"><div>'+S.slice(0,5).map(function(x){return node(x);}).join('')+'</div><div style="text-align:center;color:var(--muted);font-size:12px">MMS<br>━━▶</div><div>'+Dd.slice(0,5).map(function(x){return node(x,1);}).join('')+'</div></div>'+
+   '<div class="ot-note">'+f(Object.keys(names).length)+L(' estações-origem nomeadas',' named source stations')+(noN?' (+'+f(noN)+L(' eventos sem nome de origem',' events without source name')+')':'')+' · '+pct(srv,evT)+L('% partem de “Server”','% originate from “Server”')+'</div>';}
+ else el('ot_flow').innerHTML=empty(L('Sem eventos OT no período.','No OT events in the period.'));
+ /* top origens */
+ var ag={};E.forEach(function(r){if(!r[3])return;var k=r[3];ag[k]=ag[k]||{c:0,t:{}};ag[k].c+=r[4];ag[k].t[r[1]]=1;});
+ var top=Object.keys(ag).map(function(k){return [k,ag[k]];}).sort(function(a,b){return b[1].c-a[1].c;}).slice(0,10),tmx2=top.length?top[0][1].c:1;
+ el('ot_topN').textContent=D.evTypes.length?'· '+Array.from(new Set(D.evTypes.map(function(x){return x[1];}))).join(', '):'';
+ el('ot_top').innerHTML=top.length?top.map(function(x){return hbar(x[0],x[1].c,tmx2,'linear-gradient(90deg,var(--oto),var(--ota))',esc(Object.keys(x[1].t).join(' / ')));}).join(''):empty();
+ /* vulnerabilidades + saúde */
+ var H=D.health||{},hv=H.vulnerability;
+ el('ot_vuln').innerHTML=(!hv||!hv.ok)?'<div class="ot-nodata"><div class="big">∅</div><b>'+L('Sem dados','No data')+'</b><div style="font-size:12px;margin-top:4px">logs-claroty_xdome.vulnerability-claroty<br>'+(hv?f(hv.total-hv.ok)+' / '+f(hv.total)+L(' docs são erro de coleta',' docs are collection errors'):L('data stream sem documentos','data stream has no documents'))+'</div></div><div class="ot-note">'+L('Painel previsto: CVEs por CVSS/EPSS/KEV, por fabricante/modelo e por ativo — habilita após correção da integração.','Planned panel: CVEs by CVSS/EPSS/KEV, by vendor/model and by asset — enabled once the integration is fixed.')+'</div>':
+  '<div class="ot-kpi" style="--ac:var(--otr)"><div class="l">'+L('Docs de vulnerabilidade válidos','Valid vulnerability docs')+'</div><div class="v">'+f(hv.ok)+'</div><div class="d">'+L('dados disponíveis — painel de CVEs pode ser habilitado','data available — CVE panel can be enabled')+'</div></div>';
+ var hr=function(lbl,v,cls){return '<div class="row"><span>'+lbl+'</span><b class="'+cls+'">'+v+'</b></div>';},rows='';
+ var nm={alert:L('Alertas','Alerts'),event:L('Eventos','Events'),vulnerability:L('Vulnerabilidades','Vulnerabilities')};
+ ['alert','event','vulnerability'].forEach(function(k){var h=H[k];if(!h)return;var p=pct(h.ok,h.total);rows+=hr(nm[k]+L(' — docs válidos',' — valid docs'),f(h.ok)+' / '+f(h.total)+' ('+p+'%)',p>=90?'ok':(p>=50?'warn':'bad'));});
+ var tot=function(x){return ['alert','event','vulnerability'].reduce(function(s,k){return s+((H[k]&&H[k][x])||0);},0);};
+ rows+=hr('API 422 “valid dictionary”',f(tot('api422')),tot('api422')?'bad':'ok');
+ rows+=hr('CEL <code>size(body.devices)</code> no such overload',f(tot('cel')),tot('cel')?'bad':'ok');
+ rows+=hr(L('Autenticação (1006)','Authentication (1006)'),f(tot('auth')),tot('auth')?'warn':'ok');
+ rows+=hr(L('Transitórios (502/timeout)','Transient (502/timeout)'),f(tot('transient')),tot('transient')?'warn':'ok');
+ rows+=hr(L('Outros erros','Other errors'),f(tot('other')),tot('other')?'warn':'ok');
+ if(H.alert)rows+=hr(L('Alertas sem dispositivo enriquecido','Alerts without device enrichment'),f(H.alert.nodev)+' / '+f(H.alert.ok),H.alert.nodev?'warn':'ok');
+ el('ot_health').innerHTML=rows||empty();
+ /* recomendações */
+ el('ot_rec').innerHTML=recs(AL,E,evT,H);
+ /* matriz */
+ buildMatrix(AL,P.to);
+}
+
+/* ---------------- recomendações por período (PT/EN) ---------------- */
+function recs(AL,E,evT,H){var R=[];
+ var op=AL.filter(isOpen);
+ var smbOT=op.filter(function(a){return a.tp==='SMBv1 Communication'&&(a.ot||0)>0;});
+ if(smbOT.length)R.push(['c',L('Crítica','Critical'),L('SMBv1 em ativo OT','SMBv1 on OT asset'),L('alerta(s) ','alert(s) ')+smbOT.map(function(a){return '#'+a.id;}).join(', ')+L(' — T0866/T0886 abrem Initial Access e Lateral Movement direto no nível 2/3. Desabilitar SMBv1 ou segmentar.',' — T0866/T0886 open Initial Access and Lateral Movement straight into level 2/3. Disable SMBv1 or segment.')]);
+ var smbIT=op.filter(function(a){return a.tp==='SMBv1 Communication'&&!(a.ot||0);});
+ if(smbIT.length)R.push(['h',L('Alta','High'),L('SMBv1 em IT na rede industrial','SMBv1 on IT in the industrial network'),f(smbIT.reduce(function(s,a){return s+(a.dv||0);},0))+L(' dispositivos IT com SMBv1 (',' IT devices with SMBv1 (')+smbIT.map(function(a){return '#'+a.id;}).join(', ')+L(') — pivô para OT via T0866/T0867.',') — pivot into OT via T0866/T0867.')]);
+ var sc=op.filter(function(a){return a.tp==='Network Scan';}).sort(function(a,b){return (b.dv||0)-(a.dv||0);});
+ if(sc.length){var s0=sc[0];R.push([s0.dv>=10?'c':'h',s0.dv>=10?L('Crítica','Critical'):L('Alta','High'),L('Varredura de rede (T0846)','Network scan (T0846)'),esc(s0.nm.replace('Network Scan: ',''))+' — '+f(s0.dv)+L(' ativos',' assets')+(s0.ot?' ('+f(s0.ot)+' OT)':'')+(sc.length>1?'; +'+(sc.length-1)+L(' outra(s) varredura(s)',' other scan(s)'):'')+L('. Confirmar se é scanner autorizado; senão, abrir incidente.','. Confirm it is an authorized scanner; otherwise open an incident.')]);}
+ var fl=op.filter(function(a){return a.tp==='Flood Activity';});
+ if(fl.length)R.push(['h',L('Alta','High'),L('Flood / DoS (T0814)','Flood / DoS (T0814)'),fl.map(function(a){return esc(a.nm.replace('Flood Activity: ',''));}).join(', ')+L(' — validar impacto na disponibilidade do processo e origem do tráfego.',' — validate process availability impact and traffic origin.')]);
+ if(evT){var srv=E.filter(function(r){return r[1]==='Server';}).reduce(function(s,r){return s+r[4];},0),p=pct(srv,evT);
+  if(p>=50)R.push(['h',L('Alta','High'),L('Configuration Download a partir de servidores','Configuration Download from servers'),p+L('% dos downloads de configuração de PLC partem de “Server”, não de Engineering Stations — validar baseline com Automação (T0843 se não autorizado).','% of PLC configuration downloads originate from “Server”, not Engineering Stations — validate the baseline with Automation (T0843 if unauthorized).')]);}
+ var ob=op.filter(function(a){return a.tp==='Device End-of-Life'||a.tp==='Outdated Firmware';});
+ if(ob.length)R.push(['m',L('Média','Medium'),L('Ativos obsoletos','Obsolete assets'),f(ob.reduce(function(s,a){return s+(a.ot||a.dv||0);},0))+L(' ativos OT EoL/firmware desatualizado — plano de substituição ou controles compensatórios (segmentação, allowlist).',' OT assets EoL/outdated firmware — replacement plan or compensating controls (segmentation, allowlist).')]);
+ var tls=op.filter(function(a){return a.tp==='Expired TLS Certificate';});
+ if(tls.length)R.push(['m',L('Média','Medium'),L('Certificados TLS expirados (T0859)','Expired TLS certificates (T0859)'),f(tls.length)+L(' certificado(s) — renovar e incluir no inventário de PKI.',' certificate(s) — renew and add to the PKI inventory.')]);
+ if(H&&H.vulnerability&&!H.vulnerability.ok)R.push(['h',L('Alta','High'),L('Integração Claroty','Claroty integration'),L('stream de vulnerabilidades 100% erro (API 422) — atualizar o pacote da integração para o formato atual da API xDome.','vulnerability stream is 100% errors (API 422) — upgrade the integration package to the current xDome API format.')]);
+ if(!R.length)return empty(L('Nenhuma recomendação para o período.','No recommendations for the period.'));
+ return R.slice(0,5).map(function(r){return '<div class="ot-rec '+r[0]+'"><span class="tgk">'+r[1]+'</span><b>'+r[2]+':</b> '+r[3]+'</div>';}).join('');
+}
+
+/* ---------------- matriz ICS ---------------- */
+var BY={},CUR='';
+function buildMatrix(AL,cur){
+ CUR=cur;BY={};AL.forEach(function(a){a.ics.forEach(function(t){(BY[t]=BY[t]||[]).push(a);});});
+ var techs=Object.keys(CAT.tech),withA=techs.filter(function(t){return BY[t];});
+ var nSub=0,subHit=0;techs.forEach(function(t){CAT.tech[t].subs.forEach(function(s){nSub++;if(BY[s[0]])subHit++;});});
+ var tacHit=CAT.tactics.filter(function(tc){return withA.some(function(t){return CAT.tech[t].tactics.indexOf(tc)>=0;});});
+ var nM=AL.filter(function(a){return a.ym===cur;}).length;
+ el('ot_mkpis').innerHTML=[[L('Técnicas ICS com alerta','ICS techniques with alerts'),withA.length+'<small>/'+techs.length+'</small>',pct(withA.length,techs.length)+'%'],
+  [L('Subtécnicas ICS com alerta','ICS sub-techniques with alerts'),subHit+'<small>/'+nSub+'</small>',pct(subHit,nSub)+'%'],
+  [L('Táticas atingidas','Tactics hit'),tacHit.length+'<small>/'+CAT.tactics.length+'</small>',''],
+  [L('Alertas mapeados','Mapped alerts'),AL.filter(function(a){return a.ics.length;}).length+'<small>/'+AL.length+'</small>',''],
+  [L('Alertas de ','Alerts in ')+mlab(cur,true),nM,'']].map(function(a){return '<div class="k"><div class="v">'+a[1]+'</div><div class="l">'+a[0]+(a[2]?' · '+a[2]:'')+'</div></div>';}).join('');
+ el('ot_mlbl').textContent=L('Alerta de ','Alert in ')+mlab(cur,true);
+ var M=el('ot_matrix');M.textContent='';
+ CAT.tactics.forEach(function(tc){
+  var list=techs.filter(function(t){return CAT.tech[t].tactics.indexOf(tc)>=0;}).sort(function(a,b){return CAT.tech[a].name.localeCompare(CAT.tech[b].name);});
+  var hit=list.filter(function(t){return BY[t];}).length,p=pct(hit,list.length);
+  var col=document.createElement('div');col.className='col';
+  col.innerHTML='<div class="chead"><div class="nm">'+tc+'</div><div class="ct">'+hit+'/'+list.length+' · '+p+'%</div><div class="bar"><i style="width:'+p+'%"></i></div></div>';
+  list.forEach(function(id){
+   var T=CAT.tech[id],al=BY[id]||[],n=al.length,st=n>=3?'h3':(n?'h2':'h0'),sep=al.some(function(a){return a.ym===cur;});
+   var ns=T.subs.length,sh=T.subs.filter(function(s){return BY[s[0]];}).length,exp=ns||n;
+   var tw=document.createElement('div');tw.className='tw';
+   var c=document.createElement('div');c.className='cell '+st+(sep?' sep':'')+(exp?' has':'')+(exp&&EXP?' open':'');
+   c.innerHTML=(exp?'<span class="car">▶</span>':'')+'<span class="tx">'+esc(T.name)+'</span>'+(ns?'<span class="sc">'+sh+'/'+ns+'</span>':(n?'<span class="sc">'+n+'</span>':''))+(sep?'<span class="badge"></span>':'');
+   c._id=id;c._tac=tc;c._al=al;c._st=st;c._sep=sep;
+   c.dataset.q=(id+' '+T.name+' '+T.subs.map(function(s){return s[0]+' '+s[1];}).join(' ')+' '+al.map(function(a){return a.id+' '+a.nm+' '+a.ent.join(' ');}).join(' ')).toLowerCase();
+   tw.appendChild(c);
+   if(exp){var box=document.createElement('div');box.className='subs';box.hidden=!EXP;
+    T.subs.forEach(function(s){var sa=BY[s[0]]||[],e=document.createElement('div');e.className='scell '+(sa.length?'cov':'unc');
+     e.innerHTML='<span class="sid">'+s[0].split('.')[1]+'</span><span class="snm">'+esc(s[1])+'</span>';e._s=s;e._sa=sa;e._tac=tc;e._pid=id;box.appendChild(e);});
+    if(n){var h=document.createElement('div');h.className='ahead';h.textContent=L('Alertas Claroty (','Claroty alerts (')+n+')';box.appendChild(h);
+     al.forEach(function(a){var e=document.createElement('div');e.className='scell '+(isOpen(a)?'al':'res');
+      e.innerHTML='<span class="sid">#'+esc(a.id)+'</span><span class="snm">'+esc(a.nm)+'</span>'+(a.ym===cur?'<span class="sbadge"></span>':'');e._r=a;e._tac=tc;box.appendChild(e);});}
+    tw.appendChild(box);c.addEventListener('click',function(){c.classList.toggle('open');box.hidden=!box.hidden;});}
+   col.appendChild(tw);});
+  M.appendChild(col);});
+ filterQ();
+}
+function filterQ(){var M=el('ot_matrix');if(!M)return;M.querySelectorAll('.cell').forEach(function(c){c.classList.toggle('dim',!!Q&&c.dataset.q.indexOf(Q)<0);});}
+var STL=function(st){return st==='h3'?L('≥3 alertas','≥3 alerts'):(st==='h2'?L('1–2 alertas','1–2 alerts'):L('Sem alertas','No alerts'));};
+function tipT(c){var T=CAT.tech[c._id],al=c._al,dev=0,ent={};al.forEach(function(a){dev+=a.dv||0;a.ent.forEach(function(x){ent[x]=1;});});
+ var oth=T.tactics.filter(function(x){return x!==c._tac;});
+ var sb=T.subs.length?'<div class="rl"><b>'+L('Subtécnicas:','Sub-techniques:')+'</b> '+T.subs.filter(function(s){return BY[s[0]];}).length+'/'+T.subs.length+L(' com alerta',' with alerts')+'<br>'+T.subs.map(function(s){return (BY[s[0]]?'✓ ':'· ')+s[0].split('.')[1]+' '+esc(s[1]);}).join('<br>')+'</div>':'<div class="rl">'+L('Sem subtécnicas','No sub-techniques')+'</div>';
+ return '<span class="tid">'+c._id+'</span> · <span style="color:var(--muted)">'+c._tac+'</span><div class="tnm">'+esc(T.name)+'</div><span class="st '+c._st+'">'+STL(c._st)+'</span>'+
+  (oth.length?'<div class="rl"><b>'+L('Também em:','Also in:')+'</b> '+oth.join(', ')+'</div>':'')+sb+
+  (al.length?'<div class="rl"><b>'+L('Alertas no período (','Alerts in period (')+al.length+') · '+f(dev)+L(' disp.:',' devices:')+'</b><br>'+al.map(function(a){return (isOpen(a)?'· ':'✓ ')+'#'+esc(a.id)+' '+esc(a.nm)+' <span style="opacity:.7">('+dlab(a.det)+', sev '+a.sev+')</span>';}).join('<br>')+'</div><div class="rl"><b>Enterprise:</b> '+(Object.keys(ent).join(', ')||'—')+'</div>'+(T.subs.length?'<div class="rl" style="font-style:italic">'+L('A Claroty mapeia no nível da técnica (sem subtécnica).','Claroty maps at technique level (no sub-technique).')+'</div>':''):'<div class="rl">'+L('Nenhum alerta Claroty no período.','No Claroty alerts in the period.')+'</div>')+
+  (c._sep?'<div class="sep">◆ '+L('Alerta detectado em ','Alert detected in ')+mlab(CUR,true)+'</div>':'');}
+function tipA(e){var a=e._r;return '<span class="tid">#'+esc(a.id)+'</span> · <span style="color:var(--muted)">'+e._tac+'</span><div class="tnm">'+esc(a.nm)+'</div><span class="st '+(isOpen(a)?'h3':'h0')+'">'+(isOpen(a)?L('Em aberto','Unresolved'):L('Resolvido','Resolved'))+'</span>'+
+ '<div class="rl"><b>'+L('Detectado:','Detected:')+'</b> '+dlab(a.det)+' · <b>Sev:</b> '+(a.sev==null?'—':a.sev)+' · <b>'+L('Disp.:','Devices:')+'</b> '+f(a.dv)+' (OT '+(a.ot==null?'–':a.ot)+' / IT '+(a.it==null?'–':a.it)+')</div><div class="rl"><b>ICS:</b> '+(a.ics.join(' ')||'—')+'<br><b>Enterprise:</b> '+(a.ent.join(' ')||'—')+'</div>';}
+function tipS(e){var s=e._s;return '<span class="tid">'+s[0]+'</span> · <span style="color:var(--muted)">'+e._tac+'</span><div class="tnm">'+esc(s[1])+'</div><span class="st '+(e._sa.length?'h3':'h0')+'">'+(e._sa.length?e._sa.length+L(' alerta(s)',' alert(s)'):L('Sem alertas','No alerts'))+'</span><div class="rl">'+L('Subtécnica de ','Sub-technique of ')+e._pid+' '+esc(CAT.tech[e._pid].name)+'</div>';}
+function pos(e,tip){var x=e.clientX+14,y=e.clientY+14,b=tip.getBoundingClientRect();if(x+b.width>innerWidth-8)x=e.clientX-b.width-14;if(y+b.height>innerHeight-8)y=e.clientY-b.height-14;tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(8,y)+'px';}
+
+/* ---------------- boot / carga ---------------- */
+function boot(d){if(!d||!d.alerts)return;var first=!D;D=d;
+ if(first||!P){P=null;}else{var MS=months();if(P.from<MS[0]||P.to>MS[MS.length-1])P=null;}
+ skeleton();render();}
+function err(e){var u=el('ot_upd');if(u)u.textContent=L('Falha ao atualizar do Elastic — exibindo último snapshot. ','Failed to refresh from Elastic — showing last snapshot. ')+(e&&e.message?e.message:'');}
+function load(){if(!_booted){_booted=true;boot(SNAP);}
+ if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(boot).withFailureHandler(err).getClaroty();
+  if(!_wired){_wired=true;setInterval(function(){google.script.run.withSuccessHandler(boot).withFailureHandler(err).getClaroty();},2*60*60*1000);}}}
+window.__loadOT=load;
+window.addEventListener('kpi-lang',function(){if(D){skeleton();render();}});
+})();
+</script>
+<script>
 /* ===== Shell v16: menu lateral, usuário, idioma/tema, Administração ===== */
 (function(){
 function $(id){return document.getElementById(id);}
@@ -1654,6 +2071,7 @@ function nav(k){
   var et=$('engtabs');
   if(k==='soc'){$('tabSoc').click();}
   else if(k==='cred'){$('tabCred').click();}
+  else if(k==='ot'){$('tabOt').click();}
   else if(k==='eng'){if(et)et.style.display='';$('tabEng').click();
     var cur=document.querySelector('#engtabs .subtab.active');if(cur&&cur.dataset.sv==='mitre'){var g=document.querySelector('#engtabs .subtab[data-sv="geral"]');if(g)g.click();}}
   else if(k==='mitre'){$('tabEng').click();var mb=document.querySelector('#engtabs .subtab[data-sv="mitre"]');if(mb)mb.click();if(et)et.style.display='none';}

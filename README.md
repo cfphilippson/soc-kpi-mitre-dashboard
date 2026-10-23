@@ -6,10 +6,11 @@ Painel **executivo/operacional de SOC/CSIRT** servido como **Google Apps Script 
 - **Eng. Detecção** — KPIs operacionais de SIEM, alertas, capacidade/ativos.
 - **Cobertura MITRE ATT&CK** — ao vivo do Elastic Security (matriz, resumo por tática, gaps, casos do mês).
 - **Vazamento de Credenciais** — credenciais expostas (Digital Risk Protection) lidas do data stream do Elastic, separadas em Corporativo × Externo, com recomendações por mês.
+- **Cyber OT** — alertas e eventos da integração **Claroty xDome** no Elastic, com matriz **MITRE ATT&CK for ICS v20.0** completa (78 técnicas + 26 subtécnicas), correlação ICS × Enterprise, exposição de ativos OT, atividade de Configuration Download, saúde da coleta e recomendações por período.
 
 Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | claro | sistema**, usuário logado com foto do Google Workspace e **gestão de acesso com aprovação** (portal + e-mail, com auditoria).
 
-> Stack: Google Apps Script (HtmlService, CacheService, PropertiesService, MailApp, LockService, SpreadsheetApp, People API) · Elastic Security Detection Engine API (Kibana) · Elasticsearch `_search` · Google Sheets · MITRE ATT&CK Enterprise v19.1 (15 táticas).
+> Stack: Google Apps Script (HtmlService, CacheService, PropertiesService, MailApp, LockService, SpreadsheetApp, People API) · Elastic Security Detection Engine API (Kibana) · Elasticsearch `_search` · Google Sheets · MITRE ATT&CK Enterprise v19.1 (15 táticas) · MITRE ATT&CK for ICS v20.0 (12 táticas).
 
 ## Telas
 
@@ -21,6 +22,18 @@ Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | c
 
 ![Vazamento de Credenciais](docs/10_vazamento_credenciais.png)
 *Vazamento de Credenciais — KPIs Corporativo × Externo, recomendações por mês, evolução, fonte do vazamento, família de stealer e status dos findings.*
+
+![Cyber OT](docs/13_cyber_ot.png)
+*Cyber OT — seletor de período, KPIs OT/IT e matriz ATT&CK for ICS no mesmo molde da matriz Enterprise.*
+
+![Matriz ICS](docs/14_cyber_ot_matriz_ics.png)
+*Matriz ICS — tooltip com táticas adicionais, subtécnicas, alertas do período e referência cruzada Enterprise.*
+
+![Saúde e recomendações](docs/15_cyber_ot_saude_recs.png)
+*Top estações de origem, vulnerabilidades, saúde da coleta (erros por classe) e recomendações geradas a partir do período.*
+
+![Cyber OT — claro/EN](docs/16_cyber_ot_light_en.png)
+*Cyber OT em tema claro e inglês, últimos 3 meses.*
 
 ![Administração](docs/11_administracao.png)
 *Administração — Solicitações (aprovar/negar) e Membros (papel, ativo, remover, adicionar).*
@@ -66,6 +79,7 @@ Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | c
                      │     ├─ getOperational()  ─► SpreadsheetApp ─────────┼──► Gestão de SIEM
                      │     ├─ getCoverage()     ─► Kibana Detection Engine ┼──► Elastic Security
                      │     ├─ getResonant()     ─► Elasticsearch _search ──┼──► data stream de credenciais
+                     │     ├─ getClaroty()      ─► Elasticsearch _search ──┼──► logs-claroty_xdome.*
                      │     ├─ getSession()      ─► People API (diretório) ─┼──► Google Workspace
                      │     └─ admin*()          ─► SpreadsheetApp ─────────┼──► planilha "Acessos"
                      │  CacheService (chunked) + gatilhos de tempo          │
@@ -74,7 +88,7 @@ Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | c
 
 - **Execução como o proprietário** (`USER_DEPLOYING`): credenciais (API key do Elastic) e acesso às planilhas ficam centralizados no dono do script; os visitantes recebem apenas o HTML.
 - **Cache + gatilhos**: cada visita lê o cache; gatilhos reaquecem em background.
-- **Snapshot embutido**: as abas CSIRT e Vazamento de Credenciais renderizam na hora a partir de um snapshot e trocam para os dados ao vivo quando o servidor responde.
+- **Snapshot embutido**: as abas CSIRT, Vazamento de Credenciais e Cyber OT renderizam na hora a partir de um snapshot e trocam para os dados ao vivo quando o servidor responde.
 
 ## Navegação
 
@@ -86,6 +100,7 @@ Menu lateral (recolhe para só ícones):
 | **Eng. Detecção** | Visão geral · Detecção · Alertas · Capacidade & Ativos. |
 | **Cobertura MITRE** | Matriz ATT&CK · Resumo por tática · Gaps prioritários · Casos do mês. |
 | **Vazamento de Credenciais** | Seletor Ago/Set/Out/Todos; Corporativo × Externo. |
+| **Cyber OT** | Seletor de período (Todos, últimos 3/6 meses, mês, De/Até); matriz ICS, alertas, ativos, eventos, saúde e recomendações. |
 | **Capa** | Volta à capa de apresentação. |
 | **Administração** | Só para Admin: Solicitações e Membros. |
 
@@ -103,6 +118,15 @@ Menu lateral (recolhe para só ícones):
 - **Corporativo** = domínios da organização (exceto a loja online); **Externo** = demais domínios.
 - Card de **recomendações por mês** (PT e EN).
 
+**Cyber OT (Claroty xDome)**
+- Três `_search` com agregações sobre `logs-claroty_xdome.{alert,event}-claroty` e `logs-claroty_xdome.*-claroty`.
+- **Alertas deduplicados**: a integração re-consulta a API e regrava o estado; o painel agrupa por `claroty_xdome.alert.id` e usa o documento mais recente (`top_hits` por `@timestamp`; empate → *Resolved*).
+- **MITRE**: cada alerta traz `mitre_technique.ics.ids` (ATT&CK for ICS) e `mitre_technique.enterprise.ids`. A matriz lista o framework ICS v20.0 completo, com técnicas multi-tática em cada tática; a Claroty mapeia no nível da técnica.
+- **Eventos**: sem `event.id` no payload — agregados por mês (`@timestamp`) × tipo de origem × tipo de destino × estação.
+- **Saúde da coleta**: documentos de erro por classe (`error.message`: API 422, CEL *no such overload*, autenticação, transitórios) e alertas sem enriquecimento de dispositivo.
+- **Período**: alertas por data de detecção; eventos por `@timestamp`. Séries mensais mostram o ano todo com o período em destaque.
+- **Recomendações** derivadas do período (SMBv1 em OT/IT, varreduras, flood, Configuration Download a partir de servidores, ativos obsoletos, TLS expirado, integração).
+
 **Plataforma**
 - **Capa de apresentação** com menu interativo.
 - **Menu lateral** expansível; preferência lembrada no navegador.
@@ -119,13 +143,15 @@ Menu lateral (recolhe para só ícones):
 | **MTTR CSIRT** | Detalhados_INC, coluna `mttr` | Tempo total de resposta (min). |
 | **Funil** | Triage_AI | Total = linhas; IA = `Human Review?` falso; N1 = `Human Review?` verdadeiro; CSIRT = nº de incidentes. |
 | **Incidentes** | Detalhados_INC | Linhas com severidade válida, por mês × severidade. |
+| **Alertas OT** | `logs-claroty_xdome.alert-claroty` | Únicos por `alert.id`, estado do doc mais recente; mês por `detected_time` (America/Sao_Paulo). |
+| **Eventos OT** | `logs-claroty_xdome.event-claroty` | `date_histogram` mensal de `@timestamp` × `source.device.type` × `destination.device.type` × `source.device.name`. |
 | **Credenciais expostas** | data stream de credenciais | Mês por `credential.created_at`; identidades únicas = `cardinality(user.email)`; senha fraca = `password_length < 8`. |
 
 ## Estrutura do projeto
 
 ```
 .
-├── Code.gs            # Backend: Elastic, planilhas, cobertura ATT&CK, credenciais, acesso, aprovação, sessão
+├── Code.gs            # Backend: Elastic, planilhas, cobertura ATT&CK, credenciais, Cyber OT, acesso, aprovação, sessão
 ├── Index.html         # Frontend: SPA (vira "Index" dentro do Apps Script)
 ├── appsscript.json    # Manifesto: escopos OAuth, People API, config do web app
 └── docs/              # Screenshots (dados fictícios)
@@ -183,6 +209,7 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 | `refreshOperational` | a cada 2 h |
 | `refreshCache` (MITRE) | a cada 1–6 h |
 | `refreshResonant` (credenciais) | a cada 2–6 h |
+| `refreshClaroty` (Cyber OT) | a cada 2 h |
 
 ## Gestão de acesso
 
@@ -199,7 +226,7 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 ## Idioma e tema
 
 - Atalhos no topo: **🌐 PT | EN** e **☾ ☀︎ 🖥** (escuro, claro, sistema). Salvos no navegador e no cadastro da pessoa.
-- Tradução por dicionário de modelos aplicada ao DOM (textos, `title`, `placeholder`, `aria-label`), com conversão de números (`1.234,5` → `1,234.5`) e meses (`Set/2026` → `Sep/2026`). Dados das fontes (nomes de regras, técnicas, plataformas) não são traduzidos.
+- Tradução por dicionário de modelos aplicada ao DOM (textos, `title`, `placeholder`, `aria-label`), com conversão de números (`1.234,5` → `1,234.5`) e meses (`Set/2026` → `Sep/2026`). Dados das fontes (nomes de regras, técnicas, plataformas) não são traduzidos. A aba Cyber OT é renderizada pelo próprio script em PT/EN e se refaz ao trocar o idioma, mantendo período, busca e expansão da matriz.
 
 ## Diagnóstico
 
@@ -209,6 +236,7 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 | `debugAcesso('email')` | Por que a pessoa entra ou não (cadastro exato, aliases, parecidos na planilha). |
 | `debugFoto('email')` | Origem da foto (diretório / perfil da conta) e resultado do download. |
 | `debugResonant()` | Valida a consulta ao data stream de credenciais. |
+| `debugClaroty()` | Lista alertas únicos, total de eventos e saúde por data stream do Claroty. |
 | `debugMonth()` | Regras do mês na cobertura MITRE. |
 
 ## Cache versionado
@@ -222,13 +250,15 @@ O resultado carrega `CODE_VERSION` e as chaves de cache derivam dela; o leitor s
 | **Triage_AI_Consolidado** | `Competência` · `Mês_Ref` · `Severidade` · `AI Veredict` · `Human Review?` · `MTTA` · `Offense started at` · `Criado` · `Resolvido` |
 | **Detalhados_INC_Consolidado** | `Competência` · `Mês_Ref` · `Severidade` · `mtta` · `mttr` · `offense id` · `platforma` |
 | **Gestão de SIEM** | abas `Elastic`, `Alertas`, `Origem do Log`, `Inventário SIEM`, `Licenciamento`, `Highlights`, … |
+| **Claroty xDome** | `claroty_xdome.alert.{id,friendly_name,type_name,category,status,detected_time,devices_count,ot_devices_count,it_devices_count,mitre_technique.ics.ids,mitre_technique.enterprise.ids}` · `event.severity` · `claroty_xdome.event.{type,source.device.type,source.device.name,destination.device.type}` · `error.message` |
 | **Data stream de credenciais** | `credential.created_at`, `user.email`, `user.domain`, `credential.has_password`, `credential.password_length`, `credential.national_id.*`, `resonant.source`, `resonant.stealer_family`, `resonant.finding.status` |
 
 ## Operação e manutenção
 
 - Mudou `Code.gs`/`Index`/manifesto → **Nova versão**. Mudou só propriedade → aplica em runtime.
 - Mantenha **uma única implantação** (arquive as demais).
-- Atualizar catálogo ATT&CK → regenerar o bloco `CATALOG` no `Code.gs` a partir do STIX oficial.
+- Atualizar catálogo ATT&CK → regenerar o bloco `CATALOG` no `Code.gs` a partir do STIX oficial. Catálogo ICS: bloco `CAT` da aba Cyber OT no `Index.html` (STIX `ics-attack`).
+- A API key do Elastic precisa de `read` em `logs-claroty_xdome.*-claroty` para a aba Cyber OT.
 
 ## Segurança
 
