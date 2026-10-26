@@ -24,16 +24,16 @@ Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | c
 *Vazamento de Credenciais — KPIs Corporativo × Externo, recomendações por mês, evolução, fonte do vazamento, família de stealer e status dos findings.*
 
 ![Cyber OT](docs/13_cyber_ot.png)
-*Cyber OT — seletor de período, KPIs OT/IT e matriz ATT&CK for ICS no mesmo molde da matriz Enterprise.*
+*Cyber OT › Visão geral — submenu próprio no menu lateral, seletor de período, KPIs clicáveis, recomendações e táticas ICS atingidas.*
 
 ![Matriz ICS](docs/14_cyber_ot_matriz_ics.png)
-*Matriz ICS — tooltip com táticas adicionais, subtécnicas, alertas do período e referência cruzada Enterprise.*
+*Cyber OT › MITRE ATT&CK ICS — matriz em tela cheia; tooltip com táticas adicionais, subtécnicas, alertas do período e referência cruzada Enterprise.*
 
-![Saúde e recomendações](docs/15_cyber_ot_saude_recs.png)
-*Top estações de origem, vulnerabilidades, saúde da coleta (erros por classe) e recomendações geradas a partir do período.*
+![Ativos & Atividade](docs/15_cyber_ot_ativos.png)
+*Cyber OT › Ativos & Atividade — ativos fim de vida/firmware, superfície IT ↔ OT, eventos por mês e fluxo origem → destino.*
 
 ![Cyber OT — claro/EN](docs/16_cyber_ot_light_en.png)
-*Cyber OT em tema claro e inglês, últimos 3 meses.*
+*Cyber OT › Alerts em tema claro e inglês, últimos 3 meses.*
 
 ![Administração](docs/11_administracao.png)
 *Administração — Solicitações (aprovar/negar) e Membros (papel, ativo, remover, adicionar).*
@@ -100,7 +100,7 @@ Menu lateral (recolhe para só ícones):
 | **Eng. Detecção** | Visão geral · Detecção · Alertas · Capacidade & Ativos. |
 | **Cobertura MITRE** | Matriz ATT&CK · Resumo por tática · Gaps prioritários · Casos do mês. |
 | **Vazamento de Credenciais** | Seletor Ago/Set/Out/Todos; Corporativo × Externo. |
-| **Cyber OT** | Seletor de período (Todos, últimos 3/6 meses, mês, De/Até); matriz ICS, alertas, ativos, eventos, saúde e recomendações. |
+| **Cyber OT** | Submenu: **Visão geral** (KPIs, recomendações, táticas ICS) · **Alertas** · **MITRE ATT&CK ICS** · **Ativos & Atividade** · **Saúde da integração**. Seletor de período comum a todas (Todos, últimos 3/6 meses, mês, De/Até); última tela lembrada no navegador. |
 | **Capa** | Volta à capa de apresentação. |
 | **Administração** | Só para Admin: Solicitações e Membros. |
 
