@@ -21,6 +21,15 @@ Capa de apresentação, menu lateral expansível, carregador animado, **PT | EN*
 ![Menu lateral + SOC/CSIRT](docs/09_menu_lateral.png)
 *Menu lateral expansível, atalhos de idioma/tema no topo e usuário logado. Aba SOC + CSIRT com rótulos por severidade no gráfico de incidentes.*
 
+![Eng. Detecção](docs/17_eng_deteccao.png)
+*Eng. Detecção › Visão geral — casos de uso em produção, cobertura MITRE, alertas do ano e consumo de licença pela API de Billing, com Melhorias/Próximas ações (fatos do Elastic + nota do Admin).*
+
+![Semáforo da licença](docs/18_semaforo_licenca.png)
+*Semáforo da licença — "Por que estourou?": média por dia × limite diário, diferença separada em máquinas (custo fixo por hora) e uso, composição por categoria e camadas de dados.*
+
+![Inventário](docs/19_inventario.png)
+*Inventário › Servidores — CMDB × Cortex XDR × SIEM: universo, cobertura por fonte e lacunas que pedem ação.*
+
 ![Vazamento de Credenciais](docs/10_vazamento_credenciais.png)
 *Vazamento de Credenciais — KPIs Corporativo × Externo, recomendações por mês, evolução, fonte do vazamento, família de stealer e status dos findings.*
 
