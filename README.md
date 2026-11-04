@@ -3,14 +3,15 @@
 Painel **executivo/operacional de SOC/CSIRT** servido como **Google Apps Script Web App**. Reúne, em um único link:
 
 - **SOC + CSIRT** — KPIs de resposta a incidentes (MTTD, MTTA, MTTR), funil de atendimento (IA → N1 → CSIRT), incidentes por mês/severidade com drill-down, Falsos Positivos, Eficiência, evolutivos, termômetros de SLA e pontos-chave/atenção gerados automaticamente.
-- **Eng. Detecção** — KPIs operacionais de SIEM, alertas, capacidade/ativos.
+- **Eng. Detecção** — 100% por API, sem planilha: casos de uso em produção e cobertura MITRE pelas regras do Elastic (com retrato mensal), alertas por mês, fontes de log e **licença pela API de Billing do Elastic Cloud**, com semáforo que explica o consumo (média por dia, máquinas × uso, camadas Hot/Warm/Cold/Frozen, IA).
+- **Inventário** — servidores da CMDB (ServiceNow) × agentes do Cortex XDR × telemetria no SIEM, por hostname normalizado: quem está sem EDR, sem log ou fora da CMDB.
 - **Cobertura MITRE ATT&CK** — ao vivo do Elastic Security (matriz, resumo por tática, gaps, casos do mês).
 - **Vazamento de Credenciais** — credenciais expostas (Digital Risk Protection) lidas do data stream do Elastic, separadas em Corporativo × Externo, com recomendações por mês.
 - **Cyber OT** — alertas e eventos da integração **Claroty xDome** no Elastic, com matriz **MITRE ATT&CK for ICS v20.0** completa (78 técnicas + 26 subtécnicas), correlação ICS × Enterprise, exposição de ativos OT, atividade de Configuration Download, saúde da coleta e recomendações por período.
 
-Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | claro | sistema**, usuário logado com foto do Google Workspace e **gestão de acesso com aprovação** (portal + e-mail, com auditoria).
+Capa de apresentação, menu lateral expansível, carregador animado, **PT | EN**, tema **escuro | claro | sistema**, usuário logado com foto do Google Workspace e **gestão de acesso com aprovação** (portal + e-mail, com auditoria).
 
-> Stack: Google Apps Script (HtmlService, CacheService, PropertiesService, MailApp, LockService, SpreadsheetApp, People API) · Elastic Security Detection Engine API (Kibana) · Elasticsearch `_search` · Google Sheets · MITRE ATT&CK Enterprise v19.1 (15 táticas) · MITRE ATT&CK for ICS v20.0 (12 táticas).
+> Stack: Google Apps Script (HtmlService, CacheService, PropertiesService, MailApp, LockService, SpreadsheetApp, People API) · Elastic Security Detection Engine API (Kibana) · Elasticsearch `_search` · Elastic Cloud Billing API · Google Sheets · MITRE ATT&CK Enterprise v19.1 (15 táticas) · MITRE ATT&CK for ICS v20.0 (12 táticas).
 
 ## Telas
 
@@ -76,7 +77,8 @@ Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | c
    Navegador  ──►    │  doGet() ──► HtmlService (Index.html)               │
    (/exec)           │     │                                               │
                      │     ├─ getCsirt()        ─► SpreadsheetApp ─────────┼──► Triage_AI + Detalhados_INC
-                     │     ├─ getOperational()  ─► SpreadsheetApp ─────────┼──► Gestão de SIEM
+                     │     ├─ getOperational()  ─► Kibana + ES + Billing ──┼──► regras, alertas, logs, licença (ECU)
+                     │     ├─ getInventario()   ─► Elasticsearch _search ──┼──► CMDB × Cortex XDR × SIEM
                      │     ├─ getCoverage()     ─► Kibana Detection Engine ┼──► Elastic Security
                      │     ├─ getResonant()     ─► Elasticsearch _search ──┼──► data stream de credenciais
                      │     ├─ getClaroty()      ─► Elasticsearch _search ──┼──► logs-claroty_xdome.*
@@ -88,7 +90,7 @@ Capa de apresentação, menu lateral expansível, **PT | EN**, tema **escuro | c
 
 - **Execução como o proprietário** (`USER_DEPLOYING`): credenciais (API key do Elastic) e acesso às planilhas ficam centralizados no dono do script; os visitantes recebem apenas o HTML.
 - **Cache + gatilhos**: cada visita lê o cache; gatilhos reaquecem em background.
-- **Snapshot embutido**: as abas CSIRT, Vazamento de Credenciais e Cyber OT renderizam na hora a partir de um snapshot e trocam para os dados ao vivo quando o servidor responde.
+- **Snapshot embutido**: as abas CSIRT, Vazamento de Credenciais, Cyber OT e Inventário renderizam na hora a partir de um snapshot e trocam para os dados ao vivo quando o servidor responde.
 
 ## Navegação
 
@@ -101,6 +103,7 @@ Menu lateral (recolhe para só ícones):
 | **Cobertura MITRE** | Matriz ATT&CK · Resumo por tática · Gaps prioritários · Casos do mês. |
 | **Vazamento de Credenciais** | Seletor Ago/Set/Out/Todos; Corporativo × Externo. |
 | **Cyber OT** | Submenu: **Visão geral** (KPIs, recomendações, táticas ICS) · **Alertas** · **MITRE ATT&CK ICS** · **Ativos & Atividade** · **Saúde da integração**. Seletor de período comum a todas (Todos, últimos 3/6 meses, mês, De/Até); última tela lembrada no navegador. |
+| **Inventário** | Servidores: plataforma (Windows/Linux/Hypervisor), janela do SIEM (24 h / 7 dias), KPIs, lacunas e tabela pesquisável. |
 | **Capa** | Volta à capa de apresentação. |
 | **Administração** | Só para Admin: Solicitações e Membros. |
 
@@ -112,6 +115,17 @@ Menu lateral (recolhe para só ícones):
 - **Incidentes por mês × severidade** com rótulo em cada segmento (chamada lateral para faixas finas) e **drill-down** por Vetor, Plataforma, Taxonomia, Tipo e casos de uso que mais cresceram.
 - **Falsos Positivos**: taxa de FP, precisão, FP tratados pela IA, horas poupadas, FP × TP, ranking por tecnologia, top regras, heatmap.
 - **Eficiência**: impacto real, precisão por tecnologia, decomposição do tempo, aderência ao SLA, carga dia × hora, Ameaça vs Conformidade.
+
+**Eng. Detecção**
+- **Casos em produção e cobertura MITRE** a partir das regras habilitadas no Elastic (`_find`), com tecnologia deduzida do prefixo do nome, das tags *Data Source* ou do índice. Cada mês fica gravado como retrato; meses sem retrato são reconstruídos pela data de criação das regras.
+- **Alertas por mês** (ano do mês selecionado) e regras mais ruidosas; **fontes de log** das últimas 24 h.
+- **Licença (ECU)** pela API de Billing do Elastic Cloud: consumo real (sem projeção), mês corrente "até dd/mm".
+- **Semáforo explicativo** ("Por que estourou?"): média por dia × limite diário (teto ÷ dias do mês), diferença vs mês anterior separada em **máquinas** (custo fixo por hora; mostra se alguma mudou de tamanho ou só rodou mais horas) e **uso** (tráfego entre nós, snapshots, saída), composição por categoria com tamanho de cada nó, camadas de dados e parcela de IA.
+- **Melhorias / Próximas ações**: fatos automáticos do Elastic (regras criadas/alteradas/desligadas, técnicas novas, regras ruidosas, gaps MITRE) + nota editável por Admin, guardada por mês nas Propriedades do script.
+
+**Inventário**
+- Junta CMDB (ServiceNow, janela de 30 dias), agentes do Cortex XDR (`cortex_endpoints_lookup`) e telemetria própria no SIEM por hostname normalizado (minúsculo, sem domínio).
+- KPIs de universo, cobertura por fonte e lacunas (no SIEM sem EDR, com EDR sem log, fora da CMDB), com filtro por plataforma e busca.
 
 **Vazamento de Credenciais**
 - Lê o data stream do Elastic com uma única `_search` com agregações (`date_histogram` mensal × `filters` Corporativo/Externo, `cardinality` de identidades, força de senha, PII, fonte, família de stealer, status do finding).
@@ -130,6 +144,7 @@ Menu lateral (recolhe para só ícones):
 **Plataforma**
 - **Capa de apresentação** com menu interativo.
 - **Menu lateral** expansível; preferência lembrada no navegador.
+- **Carregador** animado com o selo do painel enquanto os dados chegam.
 - **Usuário logado** com nome e foto do diretório (People API) — cai nas iniciais se a foto não estiver disponível.
 - **PT | EN** e **tema escuro | claro | sistema**, salvos no cadastro da pessoa.
 - **Gestão de acesso** por planilha, com papéis, aprovação e auditoria.
@@ -177,7 +192,11 @@ No editor do Apps Script devem existir: `Code.gs`, um HTML chamado `Index` e o m
 | `ES_API_KEY` | `<base64 de id:api_key>` | API key do Elastic (valor `encoded`). |
 | `ES_URL` | `https://es.example.com:9200` | Endpoint do Elasticsearch para `_search`. Opcional no Elastic Cloud: derivado do `KIBANA_URL` trocando `.kb.` por `.es.`. |
 | `KIBANA_SPACE` | `default` | Space do Kibana (opcional). |
-| `SHEET_ID` | `1AbC...` | Planilha "Gestão de SIEM". |
+| `SHEET_ID` | `1AbC...` | Planilha antiga "Gestão de SIEM" — só para importar as notas antigas uma vez (`importarNotasDaPlanilha`). |
+| `EC_BILLING_API_KEY` | `<API key do Elastic Cloud>` | Chave da **organização** no Elastic Cloud (papel Billing), não a do Elasticsearch. Licença da Eng. Detecção. |
+| `EC_ORG_ID` | `1234567890` | Opcional: sem ela, usa a 1ª organização da chave. |
+| `EC_ECU_CAP` | `11000` | Opcional: teto de ECU contratado por mês (padrão 11000). |
+| `CORTEX_INDEX` | `cortex_endpoints_lookup` | Opcional: índice dos agentes do Cortex XDR (Inventário). |
 | `SHEET_TRIAGE_ID` | `1DeF...` | Planilha **Triage_AI_Consolidado**. |
 | `SHEET_DETALHADO_ID` | `1GhI...` | Planilha **Detalhados_INC_Consolidado**. |
 | `ACCESS_SHEET_ID` | `1JkL...` | Planilha de Acessos. **Criada automaticamente** pelo `setupAcessos` se ausente. |
@@ -206,7 +225,8 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 | Função | Frequência |
 |---|---|
 | `refreshCsirt` | a cada 2 h |
-| `refreshOperational` | a cada 2 h |
+| `refreshOperational` | a cada 1 h (regras, alertas e Billing) |
+| `refreshInventario` | a cada 1–2 h |
 | `refreshCache` (MITRE) | a cada 1–6 h |
 | `refreshResonant` (credenciais) | a cada 2–6 h |
 | `refreshClaroty` (Cyber OT) | a cada 2 h |
@@ -226,7 +246,7 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 ## Idioma e tema
 
 - Atalhos no topo: **🌐 PT | EN** e **☾ ☀︎ 🖥** (escuro, claro, sistema). Salvos no navegador e no cadastro da pessoa.
-- Tradução por dicionário de modelos aplicada ao DOM (textos, `title`, `placeholder`, `aria-label`), com conversão de números (`1.234,5` → `1,234.5`) e meses (`Set/2026` → `Sep/2026`). Dados das fontes (nomes de regras, técnicas, plataformas) não são traduzidos. A aba Cyber OT é renderizada pelo próprio script em PT/EN e se refaz ao trocar o idioma, mantendo período, busca e expansão da matriz.
+- Tradução por dicionário de modelos aplicada ao DOM (textos, `title`, `placeholder`, `aria-label`), com conversão de números (`1.234,5` → `1,234.5`) e meses nos dois sentidos (`Set/2026` → `Sep/2026` em EN; meses que vêm em inglês das APIs viram português em PT). Durações (`1h 24min`, `32min 42s`) são um único token, então cada frase precisa de uma só tradução. Dados das fontes (nomes de regras, técnicas, plataformas) não são traduzidos. A aba Cyber OT é renderizada pelo próprio script em PT/EN e se refaz ao trocar o idioma, mantendo período, busca e expansão da matriz.
 
 ## Diagnóstico
 
@@ -238,6 +258,9 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 | `debugResonant()` | Valida a consulta ao data stream de credenciais. |
 | `debugClaroty()` | Lista alertas únicos, total de eventos e saúde por data stream do Claroty. |
 | `debugMonth()` | Regras do mês na cobertura MITRE. |
+| `debugOperacional()` | Cada fonte da Eng. Detecção, erros por fonte e regras sem tecnologia. |
+| `debugBilling()` | Formato da API de Billing, consumo por mês e itens/categorias de cobrança. |
+| `debugInventario()` | Contagens da CMDB, do Cortex e do SIEM usadas no Inventário. |
 
 ## Cache versionado
 
@@ -249,7 +272,8 @@ O resultado carrega `CODE_VERSION` e as chaves de cache derivam dela; o leitor s
 |---|---|
 | **Triage_AI_Consolidado** | `Competência` · `Mês_Ref` · `Severidade` · `AI Veredict` · `Human Review?` · `MTTA` · `Offense started at` · `Criado` · `Resolvido` |
 | **Detalhados_INC_Consolidado** | `Competência` · `Mês_Ref` · `Severidade` · `mtta` · `mttr` · `offense id` · `platforma` |
-| **Gestão de SIEM** | abas `Elastic`, `Alertas`, `Origem do Log`, `Inventário SIEM`, `Licenciamento`, `Highlights`, … |
+| **Elastic (Eng. Detecção)** | regras (`/api/detection_engine/rules/_find`), alertas (`signals/search` ou `.alerts-security.alerts-<space>`), `data_stream.dataset` das últimas 24 h |
+| **Elastic Cloud Billing** | `/api/v1/billing/costs/{org}/charts` (ECU por mês) e `/items` (máquinas: `price`, `price_per_hour`, `hours`; uso: tráfego, snapshots) |
 | **Claroty xDome** | `claroty_xdome.alert.{id,friendly_name,type_name,category,status,detected_time,devices_count,ot_devices_count,it_devices_count,mitre_technique.ics.ids,mitre_technique.enterprise.ids}` · `event.severity` · `claroty_xdome.event.{type,source.device.type,source.device.name,destination.device.type}` · `error.message` |
 | **Data stream de credenciais** | `credential.created_at`, `user.email`, `user.domain`, `credential.has_password`, `credential.password_length`, `credential.national_id.*`, `resonant.source`, `resonant.stealer_family`, `resonant.finding.status` |
 
