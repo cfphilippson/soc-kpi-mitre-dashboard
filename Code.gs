@@ -16,7 +16,7 @@
 
 var CATALOG = {"tactics":[{"id":"TA0043","order":1,"name":"Reconnaissance","src":"TA0043","techniques":[{"id":"T1592","name":"Gather Victim Host Information","subs":[{"id":"T1592.001","name":"Hardware"},{"id":"T1592.002","name":"Software"},{"id":"T1592.003","name":"Firmware"},{"id":"T1592.004","name":"Client Configurations"}]},{"id":"T1682","name":"Query Public AI Services","subs":[]},{"id":"T1594","name":"Search Victim-Owned Websites","subs":[]},{"id":"T1589","name":"Gather Victim Identity Information","subs":[{"id":"T1589.001","name":"Credentials"},{"id":"T1589.002","name":"Email Addresses"},{"id":"T1589.003","name":"Employee Names"}]},{"id":"T1596","name":"Search Open Technical Databases","subs":[{"id":"T1596.001","name":"DNS/Passive DNS"},{"id":"T1596.002","name":"WHOIS"},{"id":"T1596.003","name":"Digital Certificates"},{"id":"T1596.004","name":"CDNs"},{"id":"T1596.005","name":"Scan Databases"}]},{"id":"T1681","name":"Search Threat Vendor Data","subs":[]},{"id":"T1595","name":"Active Scanning","subs":[{"id":"T1595.001","name":"Scanning IP Blocks"},{"id":"T1595.002","name":"Vulnerability Scanning"},{"id":"T1595.003","name":"Wordlist Scanning"}]},{"id":"T1591","name":"Gather Victim Org Information","subs":[{"id":"T1591.001","name":"Determine Physical Locations"},{"id":"T1591.002","name":"Business Relationships"},{"id":"T1591.003","name":"Identify Business Tempo"},{"id":"T1591.004","name":"Identify Roles"}]},{"id":"T1590","name":"Gather Victim Network Information","subs":[{"id":"T1590.001","name":"Domain Properties"},{"id":"T1590.002","name":"DNS"},{"id":"T1590.003","name":"Network Trust Dependencies"},{"id":"T1590.004","name":"Network Topology"},{"id":"T1590.005","name":"IP Addresses"},{"id":"T1590.006","name":"Network Security Appliances"}]},{"id":"T1593","name":"Search Open Websites/Domains","subs":[{"id":"T1593.001","name":"Social Media"},{"id":"T1593.002","name":"Search Engines"},{"id":"T1593.003","name":"Code Repositories"}]},{"id":"T1597","name":"Search Closed Sources","subs":[{"id":"T1597.001","name":"Threat Intel Vendors"},{"id":"T1597.002","name":"Purchase Technical Data"}]},{"id":"T1598","name":"Phishing for Information","subs":[{"id":"T1598.001","name":"Spearphishing Service"},{"id":"T1598.002","name":"Spearphishing Attachment"},{"id":"T1598.003","name":"Spearphishing Link"},{"id":"T1598.004","name":"Spearphishing Voice"}]}]},{"id":"TA0042","order":2,"name":"Resource Development","src":"TA0042","techniques":[{"id":"T1583","name":"Acquire Infrastructure","subs":[{"id":"T1583.001","name":"Domains"},{"id":"T1583.002","name":"DNS Server"},{"id":"T1583.003","name":"Virtual Private Server"},{"id":"T1583.004","name":"Server"},{"id":"T1583.005","name":"Botnet"},{"id":"T1583.006","name":"Web Services"},{"id":"T1583.007","name":"Serverless"},{"id":"T1583.008","name":"Malvertising"}]},{"id":"T1584","name":"Compromise Infrastructure","subs":[{"id":"T1584.001","name":"Domains"},{"id":"T1584.002","name":"DNS Server"},{"id":"T1584.003","name":"Virtual Private Server"},{"id":"T1584.004","name":"Server"},{"id":"T1584.005","name":"Botnet"},{"id":"T1584.006","name":"Web Services"},{"id":"T1584.007","name":"Serverless"},{"id":"T1584.008","name":"Network Devices"}]},{"id":"T1586","name":"Compromise Accounts","subs":[{"id":"T1586.001","name":"Social Media Accounts"},{"id":"T1586.002","name":"Email Accounts"},{"id":"T1586.003","name":"Cloud Accounts"}]},{"id":"T1608","name":"Stage Capabilities","subs":[{"id":"T1608.001","name":"Upload Malware"},{"id":"T1608.002","name":"Upload Tool"},{"id":"T1608.003","name":"Install Digital Certificate"},{"id":"T1608.004","name":"Drive-by Target"},{"id":"T1608.005","name":"Link Target"},{"id":"T1608.006","name":"SEO Poisoning"}]},{"id":"T1683","name":"Generate Content","subs":[{"id":"T1683.001","name":"Written Content"},{"id":"T1683.002","name":"Audio-Visual Content"}]},{"id":"T1585","name":"Establish Accounts","subs":[{"id":"T1585.001","name":"Social Media Accounts"},{"id":"T1585.002","name":"Email Accounts"},{"id":"T1585.003","name":"Cloud Accounts"}]},{"id":"T1588","name":"Obtain Capabilities","subs":[{"id":"T1588.001","name":"Malware"},{"id":"T1588.002","name":"Tool"},{"id":"T1588.003","name":"Code Signing Certificates"},{"id":"T1588.004","name":"Digital Certificates"},{"id":"T1588.005","name":"Exploits"},{"id":"T1588.006","name":"Vulnerabilities"},{"id":"T1588.007","name":"Artificial Intelligence"}]},{"id":"T1650","name":"Acquire Access","subs":[]},{"id":"T1587","name":"Develop Capabilities","subs":[{"id":"T1587.001","name":"Malware"},{"id":"T1587.002","name":"Code Signing Certificates"},{"id":"T1587.003","name":"Digital Certificates"},{"id":"T1587.004","name":"Exploits"}]}]},{"id":"TA0001","order":3,"name":"Initial Access","src":"TA0001","techniques":[{"id":"T1133","name":"External Remote Services","subs":[]},{"id":"T1091","name":"Replication Through Removable Media","subs":[]},{"id":"T1195","name":"Supply Chain Compromise","subs":[{"id":"T1195.001","name":"Compromise Software Dependencies and Development Tools"},{"id":"T1195.002","name":"Compromise Software Supply Chain"},{"id":"T1195.003","name":"Compromise Hardware Supply Chain"}]},{"id":"T1190","name":"Exploit Public-Facing Application","subs":[]},{"id":"T1659","name":"Content Injection","subs":[]},{"id":"T1199","name":"Trusted Relationship","subs":[]},{"id":"T1566","name":"Phishing","subs":[{"id":"T1566.001","name":"Spearphishing Attachment"},{"id":"T1566.002","name":"Spearphishing Link"},{"id":"T1566.003","name":"Spearphishing via Service"},{"id":"T1566.004","name":"Spearphishing Voice"}]},{"id":"T1078","name":"Valid Accounts","subs":[{"id":"T1078.001","name":"Default Accounts"},{"id":"T1078.002","name":"Domain Accounts"},{"id":"T1078.003","name":"Local Accounts"},{"id":"T1078.004","name":"Cloud Accounts"}]},{"id":"T1200","name":"Hardware Additions","subs":[]},{"id":"T1189","name":"Drive-by Compromise","subs":[]},{"id":"T1669","name":"Wi-Fi Networks","subs":[]}]},{"id":"TA0002","order":4,"name":"Execution","src":"TA0002","techniques":[{"id":"T1047","name":"Windows Management Instrumentation","subs":[]},{"id":"T1129","name":"Shared Modules","subs":[]},{"id":"T1675","name":"ESXi Administration Command","subs":[]},{"id":"T1053","name":"Scheduled Task/Job","subs":[{"id":"T1053.002","name":"At"},{"id":"T1053.003","name":"Cron"},{"id":"T1053.005","name":"Scheduled Task"},{"id":"T1053.006","name":"Systemd Timers"},{"id":"T1053.007","name":"Container Orchestration Job"}]},{"id":"T1106","name":"Native API","subs":[]},{"id":"T1610","name":"Deploy Container","subs":[]},{"id":"T1674","name":"Input Injection","subs":[]},{"id":"T1059","name":"Command and Scripting Interpreter","subs":[{"id":"T1059.001","name":"PowerShell"},{"id":"T1059.002","name":"AppleScript"},{"id":"T1059.003","name":"Windows Command Shell"},{"id":"T1059.004","name":"Unix Shell"},{"id":"T1059.005","name":"Visual Basic"},{"id":"T1059.006","name":"Python"},{"id":"T1059.007","name":"JavaScript"},{"id":"T1059.008","name":"Network Device CLI"},{"id":"T1059.009","name":"Cloud API"},{"id":"T1059.010","name":"AutoHotKey & AutoIT"},{"id":"T1059.011","name":"Lua"},{"id":"T1059.012","name":"Hypervisor CLI"},{"id":"T1059.013","name":"Container CLI/API"}]},{"id":"T1677","name":"Poisoned Pipeline Execution","subs":[]},{"id":"T1609","name":"Container Administration Command","subs":[]},{"id":"T1204","name":"User Execution","subs":[{"id":"T1204.001","name":"Malicious Link"},{"id":"T1204.002","name":"Malicious File"},{"id":"T1204.003","name":"Malicious Image"},{"id":"T1204.004","name":"Malicious Copy and Paste"},{"id":"T1204.005","name":"Malicious Library"}]},{"id":"T1072","name":"Software Deployment Tools","subs":[]},{"id":"T1559","name":"Inter-Process Communication","subs":[{"id":"T1559.001","name":"Component Object Model"},{"id":"T1559.002","name":"Dynamic Data Exchange"},{"id":"T1559.003","name":"XPC Services"}]},{"id":"T1574","name":"Hijack Execution Flow","subs":[{"id":"T1574.001","name":"DLL"},{"id":"T1574.004","name":"Dylib Hijacking"},{"id":"T1574.005","name":"Executable Installer File Permissions Weakness"},{"id":"T1574.006","name":"Dynamic Linker Hijacking"},{"id":"T1574.007","name":"Path Interception by PATH Environment Variable"},{"id":"T1574.008","name":"Path Interception by Search Order Hijacking"},{"id":"T1574.009","name":"Path Interception by Unquoted Path"},{"id":"T1574.010","name":"Services File Permissions Weakness"},{"id":"T1574.011","name":"Services Registry Permissions Weakness"},{"id":"T1574.012","name":"COR_PROFILER"},{"id":"T1574.013","name":"KernelCallbackTable"},{"id":"T1574.014","name":"AppDomainManager"}]},{"id":"T1203","name":"Exploitation for Client Execution","subs":[]},{"id":"T1197","name":"BITS Jobs","subs":[]},{"id":"T1569","name":"System Services","subs":[{"id":"T1569.001","name":"Launchctl"},{"id":"T1569.002","name":"Service Execution"},{"id":"T1569.003","name":"Systemctl"}]},{"id":"T1651","name":"Cloud Administration Command","subs":[]},{"id":"T1648","name":"Serverless Execution","subs":[]},{"id":"T1127","name":"Trusted Developer Utilities Proxy Execution","subs":[{"id":"T1127.001","name":"MSBuild"},{"id":"T1127.002","name":"ClickOnce"},{"id":"T1127.003","name":"JamPlus"}]}]},{"id":"TA0003","order":5,"name":"Persistence","src":"TA0003","techniques":[{"id":"T1037","name":"Boot or Logon Initialization Scripts","subs":[{"id":"T1037.001","name":"Logon Script (Windows)"},{"id":"T1037.002","name":"Login Hook"},{"id":"T1037.003","name":"Network Logon Script"},{"id":"T1037.004","name":"RC Scripts"},{"id":"T1037.005","name":"Startup Items"}]},{"id":"T1543","name":"Create or Modify System Process","subs":[{"id":"T1543.001","name":"Launch Agent"},{"id":"T1543.002","name":"Systemd Service"},{"id":"T1543.003","name":"Windows Service"},{"id":"T1543.004","name":"Launch Daemon"},{"id":"T1543.005","name":"Container Service"}]},{"id":"T1133","name":"External Remote Services","subs":[]},{"id":"T1547","name":"Boot or Logon Autostart Execution","subs":[{"id":"T1547.001","name":"Registry Run Keys / Startup Folder"},{"id":"T1547.002","name":"Authentication Package"},{"id":"T1547.003","name":"Time Providers"},{"id":"T1547.004","name":"Winlogon Helper DLL"},{"id":"T1547.005","name":"Security Support Provider"},{"id":"T1547.006","name":"Kernel Modules and Extensions"},{"id":"T1547.007","name":"Re-opened Applications"},{"id":"T1547.008","name":"LSASS Driver"},{"id":"T1547.009","name":"Shortcut Modification"},{"id":"T1547.010","name":"Port Monitors"},{"id":"T1547.012","name":"Print Processors"},{"id":"T1547.013","name":"XDG Autostart Entries"},{"id":"T1547.014","name":"Active Setup"},{"id":"T1547.015","name":"Login Items"}]},{"id":"T1137","name":"Office Application Startup","subs":[{"id":"T1137.001","name":"Office Template Macros"},{"id":"T1137.002","name":"Office Test"},{"id":"T1137.003","name":"Outlook Forms"},{"id":"T1137.004","name":"Outlook Home Page"},{"id":"T1137.005","name":"Outlook Rules"},{"id":"T1137.006","name":"Add-ins"}]},{"id":"T1053","name":"Scheduled Task/Job","subs":[{"id":"T1053.002","name":"At"},{"id":"T1053.003","name":"Cron"},{"id":"T1053.005","name":"Scheduled Task"},{"id":"T1053.006","name":"Systemd Timers"},{"id":"T1053.007","name":"Container Orchestration Job"}]},{"id":"T1176","name":"Software Extensions","subs":[{"id":"T1176.001","name":"Browser Extensions"},{"id":"T1176.002","name":"IDE Extensions"}]},{"id":"T1205","name":"Traffic Signaling","subs":[{"id":"T1205.001","name":"Port Knocking"},{"id":"T1205.002","name":"Socket Filters"}]},{"id":"T1525","name":"Implant Internal Image","subs":[]},{"id":"T1112","name":"Modify Registry","subs":[]},{"id":"T1542","name":"Pre-OS Boot","subs":[{"id":"T1542.001","name":"System Firmware"},{"id":"T1542.002","name":"Component Firmware"},{"id":"T1542.003","name":"Bootkit"},{"id":"T1542.004","name":"ROMMONkit"},{"id":"T1542.005","name":"TFTP Boot"}]},{"id":"T1554","name":"Compromise Host Software Binary","subs":[]},{"id":"T1098","name":"Account Manipulation","subs":[{"id":"T1098.001","name":"Additional Cloud Credentials"},{"id":"T1098.002","name":"Additional Email Delegate Permissions"},{"id":"T1098.003","name":"Additional Cloud Roles"},{"id":"T1098.004","name":"SSH Authorized Keys"},{"id":"T1098.005","name":"Device Registration"},{"id":"T1098.006","name":"Additional Container Cluster Roles"},{"id":"T1098.007","name":"Additional Local or Domain Groups"}]},{"id":"T1078","name":"Valid Accounts","subs":[{"id":"T1078.001","name":"Default Accounts"},{"id":"T1078.002","name":"Domain Accounts"},{"id":"T1078.003","name":"Local Accounts"},{"id":"T1078.004","name":"Cloud Accounts"}]},{"id":"T1546","name":"Event Triggered Execution","subs":[{"id":"T1546.001","name":"Change Default File Association"},{"id":"T1546.002","name":"Screensaver"},{"id":"T1546.003","name":"Windows Management Instrumentation Event Subscription"},{"id":"T1546.004","name":"Unix Shell Configuration Modification"},{"id":"T1546.005","name":"Trap"},{"id":"T1546.006","name":"LC_LOAD_DYLIB Addition"},{"id":"T1546.007","name":"Netsh Helper DLL"},{"id":"T1546.008","name":"Accessibility Features"},{"id":"T1546.009","name":"AppCert DLLs"},{"id":"T1546.010","name":"AppInit DLLs"},{"id":"T1546.011","name":"Application Shimming"},{"id":"T1546.012","name":"Image File Execution Options Injection"},{"id":"T1546.013","name":"PowerShell Profile"},{"id":"T1546.014","name":"Emond"},{"id":"T1546.015","name":"Component Object Model Hijacking"},{"id":"T1546.016","name":"Installer Packages"},{"id":"T1546.017","name":"Udev Rules"},{"id":"T1546.018","name":"Python Startup Hooks"}]},{"id":"T1671","name":"Cloud Application Integration","subs":[]},{"id":"T1197","name":"BITS Jobs","subs":[]},{"id":"T1505","name":"Server Software Component","subs":[{"id":"T1505.001","name":"SQL Stored Procedures"},{"id":"T1505.002","name":"Transport Agent"},{"id":"T1505.003","name":"Web Shell"},{"id":"T1505.004","name":"IIS Components"},{"id":"T1505.005","name":"Terminal Services DLL"},{"id":"T1505.006","name":"vSphere Installation Bundles"}]},{"id":"T1668","name":"Exclusive Control","subs":[]},{"id":"T1136","name":"Create Account","subs":[{"id":"T1136.001","name":"Local Account"},{"id":"T1136.002","name":"Domain Account"},{"id":"T1136.003","name":"Cloud Account"}]},{"id":"T1653","name":"Power Settings","subs":[]},{"id":"T1556","name":"Modify Authentication Process","subs":[{"id":"T1556.001","name":"Domain Controller Authentication"},{"id":"T1556.002","name":"Password Filter DLL"},{"id":"T1556.003","name":"Pluggable Authentication Modules"},{"id":"T1556.004","name":"Network Device Authentication"},{"id":"T1556.005","name":"Reversible Encryption"},{"id":"T1556.006","name":"Multi-Factor Authentication"},{"id":"T1556.007","name":"Hybrid Identity"},{"id":"T1556.008","name":"Network Provider DLL"},{"id":"T1556.009","name":"Conditional Access Policies"}]}]},{"id":"TA0004","order":6,"name":"Privilege Escalation","src":"TA0004","techniques":[{"id":"T1037","name":"Boot or Logon Initialization Scripts","subs":[{"id":"T1037.001","name":"Logon Script (Windows)"},{"id":"T1037.002","name":"Login Hook"},{"id":"T1037.003","name":"Network Logon Script"},{"id":"T1037.004","name":"RC Scripts"},{"id":"T1037.005","name":"Startup Items"}]},{"id":"T1543","name":"Create or Modify System Process","subs":[{"id":"T1543.001","name":"Launch Agent"},{"id":"T1543.002","name":"Systemd Service"},{"id":"T1543.003","name":"Windows Service"},{"id":"T1543.004","name":"Launch Daemon"},{"id":"T1543.005","name":"Container Service"}]},{"id":"T1547","name":"Boot or Logon Autostart Execution","subs":[{"id":"T1547.001","name":"Registry Run Keys / Startup Folder"},{"id":"T1547.002","name":"Authentication Package"},{"id":"T1547.003","name":"Time Providers"},{"id":"T1547.004","name":"Winlogon Helper DLL"},{"id":"T1547.005","name":"Security Support Provider"},{"id":"T1547.006","name":"Kernel Modules and Extensions"},{"id":"T1547.007","name":"Re-opened Applications"},{"id":"T1547.008","name":"LSASS Driver"},{"id":"T1547.009","name":"Shortcut Modification"},{"id":"T1547.010","name":"Port Monitors"},{"id":"T1547.012","name":"Print Processors"},{"id":"T1547.013","name":"XDG Autostart Entries"},{"id":"T1547.014","name":"Active Setup"},{"id":"T1547.015","name":"Login Items"}]},{"id":"T1053","name":"Scheduled Task/Job","subs":[{"id":"T1053.002","name":"At"},{"id":"T1053.003","name":"Cron"},{"id":"T1053.005","name":"Scheduled Task"},{"id":"T1053.006","name":"Systemd Timers"},{"id":"T1053.007","name":"Container Orchestration Job"}]},{"id":"T1055","name":"Process Injection","subs":[{"id":"T1055.001","name":"Dynamic-link Library Injection"},{"id":"T1055.002","name":"Portable Executable Injection"},{"id":"T1055.003","name":"Thread Execution Hijacking"},{"id":"T1055.004","name":"Asynchronous Procedure Call"},{"id":"T1055.005","name":"Thread Local Storage"},{"id":"T1055.008","name":"Ptrace System Calls"},{"id":"T1055.009","name":"Proc Memory"},{"id":"T1055.011","name":"Extra Window Memory Injection"},{"id":"T1055.012","name":"Process Hollowing"},{"id":"T1055.013","name":"Process Doppelgänging"},{"id":"T1055.014","name":"VDSO Hijacking"},{"id":"T1055.015","name":"ListPlanting"}]},{"id":"T1611","name":"Escape to Host","subs":[]},{"id":"T1548","name":"Abuse Elevation Control Mechanism","subs":[{"id":"T1548.001","name":"Setuid and Setgid"},{"id":"T1548.002","name":"Bypass User Account Control"},{"id":"T1548.003","name":"Sudo and Sudo Caching"},{"id":"T1548.004","name":"Elevated Execution with Prompt"},{"id":"T1548.005","name":"Temporary Elevated Cloud Access"},{"id":"T1548.006","name":"TCC Manipulation"}]},{"id":"T1098","name":"Account Manipulation","subs":[{"id":"T1098.001","name":"Additional Cloud Credentials"},{"id":"T1098.002","name":"Additional Email Delegate Permissions"},{"id":"T1098.003","name":"Additional Cloud Roles"},{"id":"T1098.004","name":"SSH Authorized Keys"},{"id":"T1098.005","name":"Device Registration"},{"id":"T1098.006","name":"Additional Container Cluster Roles"},{"id":"T1098.007","name":"Additional Local or Domain Groups"}]},{"id":"T1078","name":"Valid Accounts","subs":[{"id":"T1078.001","name":"Default Accounts"},{"id":"T1078.002","name":"Domain Accounts"},{"id":"T1078.003","name":"Local Accounts"},{"id":"T1078.004","name":"Cloud Accounts"}]},{"id":"T1068","name":"Exploitation for Privilege Escalation","subs":[]},{"id":"T1546","name":"Event Triggered Execution","subs":[{"id":"T1546.001","name":"Change Default File Association"},{"id":"T1546.002","name":"Screensaver"},{"id":"T1546.003","name":"Windows Management Instrumentation Event Subscription"},{"id":"T1546.004","name":"Unix Shell Configuration Modification"},{"id":"T1546.005","name":"Trap"},{"id":"T1546.006","name":"LC_LOAD_DYLIB Addition"},{"id":"T1546.007","name":"Netsh Helper DLL"},{"id":"T1546.008","name":"Accessibility Features"},{"id":"T1546.009","name":"AppCert DLLs"},{"id":"T1546.010","name":"AppInit DLLs"},{"id":"T1546.011","name":"Application Shimming"},{"id":"T1546.012","name":"Image File Execution Options Injection"},{"id":"T1546.013","name":"PowerShell Profile"},{"id":"T1546.014","name":"Emond"},{"id":"T1546.015","name":"Component Object Model Hijacking"},{"id":"T1546.016","name":"Installer Packages"},{"id":"T1546.017","name":"Udev Rules"},{"id":"T1546.018","name":"Python Startup Hooks"}]},{"id":"T1134","name":"Access Token Manipulation","subs":[{"id":"T1134.001","name":"Token Impersonation/Theft"},{"id":"T1134.002","name":"Create Process with Token"},{"id":"T1134.003","name":"Make and Impersonate Token"},{"id":"T1134.004","name":"Parent PID Spoofing"},{"id":"T1134.005","name":"SID-History Injection"}]},{"id":"T1484","name":"Domain or Tenant Policy Modification","subs":[{"id":"T1484.001","name":"Group Policy Modification"},{"id":"T1484.002","name":"Trust Modification"}]}]},{"id":"TA0005","order":7,"name":"Stealth","src":"TA0005","techniques":[{"id":"T1006","name":"Direct Volume Access","subs":[]},{"id":"T1014","name":"Rootkit","subs":[]},{"id":"T1564","name":"Hide Artifacts","subs":[{"id":"T1564.001","name":"Hidden Files and Directories"},{"id":"T1564.002","name":"Hidden Users"},{"id":"T1564.003","name":"Hidden Window"},{"id":"T1564.004","name":"NTFS File Attributes"},{"id":"T1564.005","name":"Hidden File System"},{"id":"T1564.006","name":"Run Virtual Instance"},{"id":"T1564.007","name":"VBA Stomping"},{"id":"T1564.008","name":"Email Hiding Rules"},{"id":"T1564.009","name":"Resource Forking"},{"id":"T1564.010","name":"Process Argument Spoofing"},{"id":"T1564.011","name":"Ignore Process Interrupts"},{"id":"T1564.012","name":"File/Path Exclusions"},{"id":"T1564.013","name":"Bind Mounts"},{"id":"T1564.014","name":"Extended Attributes"}]},{"id":"T1202","name":"Indirect Command Execution","subs":[]},{"id":"T1140","name":"Deobfuscate/Decode Files or Information","subs":[]},{"id":"T1684","name":"Social Engineering","subs":[{"id":"T1684.001","name":"Impersonation"},{"id":"T1684.002","name":"Email Spoofing"}]},{"id":"T1036","name":"Masquerading","subs":[{"id":"T1036.001","name":"Invalid Code Signature"},{"id":"T1036.002","name":"Right-to-Left Override"},{"id":"T1036.003","name":"Rename Legitimate Utilities"},{"id":"T1036.004","name":"Masquerade Task or Service"},{"id":"T1036.005","name":"Match Legitimate Resource Name or Location"},{"id":"T1036.006","name":"Space after Filename"},{"id":"T1036.007","name":"Double File Extension"},{"id":"T1036.008","name":"Masquerade File Type"},{"id":"T1036.009","name":"Break Process Trees"},{"id":"T1036.010","name":"Masquerade Account Name"},{"id":"T1036.011","name":"Overwrite Process Arguments"},{"id":"T1036.012","name":"Browser Fingerprint"}]},{"id":"T1055","name":"Process Injection","subs":[{"id":"T1055.001","name":"Dynamic-link Library Injection"},{"id":"T1055.002","name":"Portable Executable Injection"},{"id":"T1055.003","name":"Thread Execution Hijacking"},{"id":"T1055.004","name":"Asynchronous Procedure Call"},{"id":"T1055.005","name":"Thread Local Storage"},{"id":"T1055.008","name":"Ptrace System Calls"},{"id":"T1055.009","name":"Proc Memory"},{"id":"T1055.011","name":"Extra Window Memory Injection"},{"id":"T1055.012","name":"Process Hollowing"},{"id":"T1055.013","name":"Process Doppelgänging"},{"id":"T1055.014","name":"VDSO Hijacking"},{"id":"T1055.015","name":"ListPlanting"}]},{"id":"T1205","name":"Traffic Signaling","subs":[{"id":"T1205.001","name":"Port Knocking"},{"id":"T1205.002","name":"Socket Filters"}]},{"id":"T1218","name":"System Binary Proxy Execution","subs":[{"id":"T1218.001","name":"Compiled HTML File"},{"id":"T1218.002","name":"Control Panel"},{"id":"T1218.003","name":"CMSTP"},{"id":"T1218.004","name":"InstallUtil"},{"id":"T1218.005","name":"Mshta"},{"id":"T1218.007","name":"Msiexec"},{"id":"T1218.008","name":"Odbcconf"},{"id":"T1218.009","name":"Regsvcs/Regasm"},{"id":"T1218.010","name":"Regsvr32"},{"id":"T1218.011","name":"Rundll32"},{"id":"T1218.012","name":"Verclsid"},{"id":"T1218.013","name":"Mavinject"},{"id":"T1218.014","name":"MMC"},{"id":"T1218.015","name":"Electron Applications"}]},{"id":"T1620","name":"Reflective Code Loading","subs":[]},{"id":"T1535","name":"Unused/Unsupported Cloud Regions","subs":[]},{"id":"T1070","name":"Indicator Removal","subs":[{"id":"T1070.003","name":"Clear Command History"},{"id":"T1070.004","name":"File Deletion"},{"id":"T1070.005","name":"Network Share Connection Removal"},{"id":"T1070.006","name":"Timestomp"},{"id":"T1070.007","name":"Clear Network Connection History and Configurations"},{"id":"T1070.008","name":"Clear Mailbox Data"},{"id":"T1070.009","name":"Clear Persistence"},{"id":"T1070.010","name":"Relocate Malware"}]},{"id":"T1542","name":"Pre-OS Boot","subs":[{"id":"T1542.001","name":"System Firmware"},{"id":"T1542.002","name":"Component Firmware"},{"id":"T1542.003","name":"Bootkit"},{"id":"T1542.004","name":"ROMMONkit"},{"id":"T1542.005","name":"TFTP Boot"}]},{"id":"T1612","name":"Build Image on Host","subs":[]},{"id":"T1497","name":"Virtualization/Sandbox Evasion","subs":[{"id":"T1497.001","name":"System Checks"},{"id":"T1497.002","name":"User Activity Based Checks"},{"id":"T1497.003","name":"Time Based Checks"}]},{"id":"T1480","name":"Execution Guardrails","subs":[{"id":"T1480.001","name":"Environmental Keying"},{"id":"T1480.002","name":"Mutual Exclusion"}]},{"id":"T1679","name":"Selective Exclusion","subs":[]},{"id":"T1678","name":"Delay Execution","subs":[]},{"id":"T1574","name":"Hijack Execution Flow","subs":[{"id":"T1574.001","name":"DLL"},{"id":"T1574.004","name":"Dylib Hijacking"},{"id":"T1574.005","name":"Executable Installer File Permissions Weakness"},{"id":"T1574.006","name":"Dynamic Linker Hijacking"},{"id":"T1574.007","name":"Path Interception by PATH Environment Variable"},{"id":"T1574.008","name":"Path Interception by Search Order Hijacking"},{"id":"T1574.009","name":"Path Interception by Unquoted Path"},{"id":"T1574.010","name":"Services File Permissions Weakness"},{"id":"T1574.011","name":"Services Registry Permissions Weakness"},{"id":"T1574.012","name":"COR_PROFILER"},{"id":"T1574.013","name":"KernelCallbackTable"},{"id":"T1574.014","name":"AppDomainManager"}]},{"id":"T1078","name":"Valid Accounts","subs":[{"id":"T1078.001","name":"Default Accounts"},{"id":"T1078.002","name":"Domain Accounts"},{"id":"T1078.003","name":"Local Accounts"},{"id":"T1078.004","name":"Cloud Accounts"}]},{"id":"T1027","name":"Obfuscated Files or Information","subs":[{"id":"T1027.001","name":"Binary Padding"},{"id":"T1027.002","name":"Software Packing"},{"id":"T1027.003","name":"Steganography"},{"id":"T1027.004","name":"Compile After Delivery"},{"id":"T1027.005","name":"Indicator Removal from Tools"},{"id":"T1027.006","name":"HTML Smuggling"},{"id":"T1027.007","name":"Dynamic API Resolution"},{"id":"T1027.008","name":"Stripped Payloads"},{"id":"T1027.009","name":"Embedded Payloads"},{"id":"T1027.010","name":"Command Obfuscation"},{"id":"T1027.011","name":"Fileless Storage"},{"id":"T1027.012","name":"LNK Icon Smuggling"},{"id":"T1027.013","name":"Encrypted/Encoded File"},{"id":"T1027.014","name":"Polymorphic Code"},{"id":"T1027.015","name":"Compression"},{"id":"T1027.016","name":"Junk Code Insertion"},{"id":"T1027.017","name":"SVG Smuggling"},{"id":"T1027.018","name":"Invisible Unicode"}]},{"id":"T1197","name":"BITS Jobs","subs":[]},{"id":"T1221","name":"Template Injection","subs":[]},{"id":"T1134","name":"Access Token Manipulation","subs":[{"id":"T1134.001","name":"Token Impersonation/Theft"},{"id":"T1134.002","name":"Create Process with Token"},{"id":"T1134.003","name":"Make and Impersonate Token"},{"id":"T1134.004","name":"Parent PID Spoofing"},{"id":"T1134.005","name":"SID-History Injection"}]},{"id":"T1622","name":"Debugger Evasion","subs":[]},{"id":"T1220","name":"XSL Script Processing","subs":[]},{"id":"T1216","name":"System Script Proxy Execution","subs":[{"id":"T1216.001","name":"PubPrn"},{"id":"T1216.002","name":"SyncAppvPublishingServer"}]},{"id":"T1211","name":"Exploitation for Stealth","subs":[]},{"id":"T1127","name":"Trusted Developer Utilities Proxy Execution","subs":[{"id":"T1127.001","name":"MSBuild"},{"id":"T1127.002","name":"ClickOnce"},{"id":"T1127.003","name":"JamPlus"}]}]},{"id":"TA0112","order":8,"name":"Defense Impairment","src":"TA0005","techniques":[{"id":"T1687","name":"Exploitation for Defense Impairment","subs":[]},{"id":"T1666","name":"Modify Cloud Resource Hierarchy","subs":[]},{"id":"T1578","name":"Modify Cloud Compute Infrastructure","subs":[{"id":"T1578.001","name":"Create Snapshot"},{"id":"T1578.002","name":"Create Cloud Instance"},{"id":"T1578.003","name":"Delete Cloud Instance"},{"id":"T1578.004","name":"Revert Cloud Instance"},{"id":"T1578.005","name":"Modify Cloud Compute Configurations"}]},{"id":"T1600","name":"Weaken Encryption","subs":[{"id":"T1600.001","name":"Reduce Key Space"},{"id":"T1600.002","name":"Disable Crypto Hardware"}]},{"id":"T1689","name":"Downgrade Attack","subs":[]},{"id":"T1207","name":"Rogue Domain Controller","subs":[]},{"id":"T1112","name":"Modify Registry","subs":[]},{"id":"T1222","name":"File and Directory Permissions Modification","subs":[{"id":"T1222.001","name":"Windows Permissions"},{"id":"T1222.002","name":"Linux and Mac Permissions"}]},{"id":"T1647","name":"Plist File Modification","subs":[]},{"id":"T1601","name":"Modify System Image","subs":[{"id":"T1601.001","name":"Patch System Image"},{"id":"T1601.002","name":"Downgrade System Image"}]},{"id":"T1599","name":"Network Boundary Bridging","subs":[{"id":"T1599.001","name":"Network Address Translation Traversal"}]},{"id":"T1690","name":"Prevent Command History Logging","subs":[]},{"id":"T1553","name":"Subvert Trust Controls","subs":[{"id":"T1553.001","name":"Gatekeeper Bypass"},{"id":"T1553.002","name":"Code Signing"},{"id":"T1553.003","name":"SIP and Trust Provider Hijacking"},{"id":"T1553.004","name":"Install Root Certificate"},{"id":"T1553.005","name":"Mark-of-the-Web Bypass"},{"id":"T1553.006","name":"Code Signing Policy Modification"}]},{"id":"T1685","name":"Disable or Modify Tools","subs":[{"id":"T1685.001","name":"Disable or Modify Windows Event Log"},{"id":"T1685.002","name":"Disable or Modify Cloud Log"},{"id":"T1685.003","name":"Modify or Spoof Tool UI"},{"id":"T1685.004","name":"Disable or Modify Linux Audit System Log"},{"id":"T1685.005","name":"Clear Windows Event Logs"},{"id":"T1685.006","name":"Clear Linux or Mac System Logs"}]},{"id":"T1688","name":"Safe Mode Boot","subs":[]},{"id":"T1484","name":"Domain or Tenant Policy Modification","subs":[{"id":"T1484.001","name":"Group Policy Modification"},{"id":"T1484.002","name":"Trust Modification"}]},{"id":"T1686","name":"Disable or Modify System Firewall","subs":[{"id":"T1686.001","name":"Cloud Firewall"},{"id":"T1686.002","name":"Network Device Firewall"},{"id":"T1686.003","name":"Windows Host Firewall"}]},{"id":"T1556","name":"Modify Authentication Process","subs":[{"id":"T1556.001","name":"Domain Controller Authentication"},{"id":"T1556.002","name":"Password Filter DLL"},{"id":"T1556.003","name":"Pluggable Authentication Modules"},{"id":"T1556.004","name":"Network Device Authentication"},{"id":"T1556.005","name":"Reversible Encryption"},{"id":"T1556.006","name":"Multi-Factor Authentication"},{"id":"T1556.007","name":"Hybrid Identity"},{"id":"T1556.008","name":"Network Provider DLL"},{"id":"T1556.009","name":"Conditional Access Policies"}]}]},{"id":"TA0006","order":9,"name":"Credential Access","src":"TA0006","techniques":[{"id":"T1557","name":"Adversary-in-the-Middle","subs":[{"id":"T1557.001","name":"Name Resolution Poisoning and SMB Relay"},{"id":"T1557.002","name":"ARP Cache Poisoning"},{"id":"T1557.003","name":"DHCP Spoofing"},{"id":"T1557.004","name":"Evil Twin"}]},{"id":"T1003","name":"OS Credential Dumping","subs":[{"id":"T1003.001","name":"LSASS Memory"},{"id":"T1003.002","name":"Security Account Manager"},{"id":"T1003.003","name":"NTDS"},{"id":"T1003.004","name":"LSA Secrets"},{"id":"T1003.005","name":"Cached Domain Credentials"},{"id":"T1003.006","name":"DCSync"},{"id":"T1003.007","name":"Proc Filesystem"},{"id":"T1003.008","name":"/etc/passwd and /etc/shadow"}]},{"id":"T1539","name":"Steal Web Session Cookie","subs":[]},{"id":"T1040","name":"Network Sniffing","subs":[]},{"id":"T1558","name":"Steal or Forge Kerberos Tickets","subs":[{"id":"T1558.001","name":"Golden Ticket"},{"id":"T1558.002","name":"Silver Ticket"},{"id":"T1558.003","name":"Kerberoasting"},{"id":"T1558.004","name":"AS-REP Roasting"},{"id":"T1558.005","name":"Ccache Files"}]},{"id":"T1555","name":"Credentials from Password Stores","subs":[{"id":"T1555.001","name":"Keychain"},{"id":"T1555.002","name":"Securityd Memory"},{"id":"T1555.003","name":"Credentials from Web Browsers"},{"id":"T1555.004","name":"Windows Credential Manager"},{"id":"T1555.005","name":"Password Managers"},{"id":"T1555.006","name":"Cloud Secrets Management Stores"}]},{"id":"T1552","name":"Unsecured Credentials","subs":[{"id":"T1552.001","name":"Credentials In Files"},{"id":"T1552.002","name":"Credentials in Registry"},{"id":"T1552.003","name":"Shell History"},{"id":"T1552.004","name":"Private Keys"},{"id":"T1552.005","name":"Cloud Instance Metadata API"},{"id":"T1552.006","name":"Group Policy Preferences"},{"id":"T1552.007","name":"Container API"},{"id":"T1552.008","name":"Chat Messages"}]},{"id":"T1649","name":"Steal or Forge Authentication Certificates","subs":[]},{"id":"T1528","name":"Steal Application Access Token","subs":[]},{"id":"T1606","name":"Forge Web Credentials","subs":[{"id":"T1606.001","name":"Web Cookies"},{"id":"T1606.002","name":"SAML Tokens"}]},{"id":"T1621","name":"Multi-Factor Authentication Request Generation","subs":[]},{"id":"T1212","name":"Exploitation for Credential Access","subs":[]},{"id":"T1110","name":"Brute Force","subs":[{"id":"T1110.001","name":"Password Guessing"},{"id":"T1110.002","name":"Password Cracking"},{"id":"T1110.003","name":"Password Spraying"},{"id":"T1110.004","name":"Credential Stuffing"}]},{"id":"T1187","name":"Forced Authentication","subs":[]},{"id":"T1056","name":"Input Capture","subs":[{"id":"T1056.001","name":"Keylogging"},{"id":"T1056.002","name":"GUI Input Capture"},{"id":"T1056.003","name":"Web Portal Capture"},{"id":"T1056.004","name":"Credential API Hooking"}]},{"id":"T1111","name":"Multi-Factor Authentication Interception","subs":[]},{"id":"T1556","name":"Modify Authentication Process","subs":[{"id":"T1556.001","name":"Domain Controller Authentication"},{"id":"T1556.002","name":"Password Filter DLL"},{"id":"T1556.003","name":"Pluggable Authentication Modules"},{"id":"T1556.004","name":"Network Device Authentication"},{"id":"T1556.005","name":"Reversible Encryption"},{"id":"T1556.006","name":"Multi-Factor Authentication"},{"id":"T1556.007","name":"Hybrid Identity"},{"id":"T1556.008","name":"Network Provider DLL"},{"id":"T1556.009","name":"Conditional Access Policies"}]}]},{"id":"TA0007","order":10,"name":"Discovery","src":"TA0007","techniques":[{"id":"T1033","name":"System Owner/User Discovery","subs":[]},{"id":"T1613","name":"Container and Resource Discovery","subs":[]},{"id":"T1069","name":"Permission Groups Discovery","subs":[{"id":"T1069.001","name":"Local Groups"},{"id":"T1069.002","name":"Domain Groups"},{"id":"T1069.003","name":"Cloud Groups"}]},{"id":"T1615","name":"Group Policy Discovery","subs":[]},{"id":"T1652","name":"Device Driver Discovery","subs":[]},{"id":"T1007","name":"System Service Discovery","subs":[]},{"id":"T1040","name":"Network Sniffing","subs":[]},{"id":"T1135","name":"Network Share Discovery","subs":[]},{"id":"T1120","name":"Peripheral Device Discovery","subs":[]},{"id":"T1082","name":"System Information Discovery","subs":[]},{"id":"T1010","name":"Application Window Discovery","subs":[]},{"id":"T1580","name":"Cloud Infrastructure Discovery","subs":[]},{"id":"T1217","name":"Browser Information Discovery","subs":[]},{"id":"T1673","name":"Virtual Machine Discovery","subs":[]},{"id":"T1016","name":"System Network Configuration Discovery","subs":[{"id":"T1016.001","name":"Internet Connection Discovery"},{"id":"T1016.002","name":"Wi-Fi Discovery"}]},{"id":"T1087","name":"Account Discovery","subs":[{"id":"T1087.001","name":"Local Account"},{"id":"T1087.002","name":"Domain Account"},{"id":"T1087.003","name":"Email Account"},{"id":"T1087.004","name":"Cloud Account"}]},{"id":"T1482","name":"Domain Trust Discovery","subs":[]},{"id":"T1083","name":"File and Directory Discovery","subs":[]},{"id":"T1049","name":"System Network Connections Discovery","subs":[]},{"id":"T1497","name":"Virtualization/Sandbox Evasion","subs":[{"id":"T1497.001","name":"System Checks"},{"id":"T1497.002","name":"User Activity Based Checks"},{"id":"T1497.003","name":"Time Based Checks"}]},{"id":"T1619","name":"Cloud Storage Object Discovery","subs":[]},{"id":"T1654","name":"Log Enumeration","subs":[]},{"id":"T1057","name":"Process Discovery","subs":[]},{"id":"T1201","name":"Password Policy Discovery","subs":[]},{"id":"T1012","name":"Query Registry","subs":[]},{"id":"T1614","name":"System Location Discovery","subs":[{"id":"T1614.001","name":"System Language Discovery"}]},{"id":"T1526","name":"Cloud Service Discovery","subs":[]},{"id":"T1018","name":"Remote System Discovery","subs":[]},{"id":"T1046","name":"Network Service Discovery","subs":[]},{"id":"T1518","name":"Software Discovery","subs":[{"id":"T1518.001","name":"Security Software Discovery"},{"id":"T1518.002","name":"Backup Software Discovery"}]},{"id":"T1538","name":"Cloud Service Dashboard","subs":[]},{"id":"T1622","name":"Debugger Evasion","subs":[]},{"id":"T1680","name":"Local Storage Discovery","subs":[]},{"id":"T1124","name":"System Time Discovery","subs":[]}]},{"id":"TA0008","order":11,"name":"Lateral Movement","src":"TA0008","techniques":[{"id":"T1080","name":"Taint Shared Content","subs":[]},{"id":"T1091","name":"Replication Through Removable Media","subs":[]},{"id":"T1550","name":"Use Alternate Authentication Material","subs":[{"id":"T1550.001","name":"Application Access Token"},{"id":"T1550.002","name":"Pass the Hash"},{"id":"T1550.003","name":"Pass the Ticket"},{"id":"T1550.004","name":"Web Session Cookie"}]},{"id":"T1021","name":"Remote Services","subs":[{"id":"T1021.001","name":"Remote Desktop Protocol"},{"id":"T1021.002","name":"SMB/Windows Admin Shares"},{"id":"T1021.003","name":"Distributed Component Object Model"},{"id":"T1021.004","name":"SSH"},{"id":"T1021.005","name":"VNC"},{"id":"T1021.006","name":"Windows Remote Management"},{"id":"T1021.007","name":"Cloud Services"},{"id":"T1021.008","name":"Direct Cloud VM Connections"}]},{"id":"T1563","name":"Remote Service Session Hijacking","subs":[{"id":"T1563.001","name":"SSH Hijacking"},{"id":"T1563.002","name":"RDP Hijacking"}]},{"id":"T1072","name":"Software Deployment Tools","subs":[]},{"id":"T1210","name":"Exploitation of Remote Services","subs":[]},{"id":"T1534","name":"Internal Spearphishing","subs":[]},{"id":"T1570","name":"Lateral Tool Transfer","subs":[]}]},{"id":"TA0009","order":12,"name":"Collection","src":"TA0009","techniques":[{"id":"T1113","name":"Screen Capture","subs":[]},{"id":"T1557","name":"Adversary-in-the-Middle","subs":[{"id":"T1557.001","name":"Name Resolution Poisoning and SMB Relay"},{"id":"T1557.002","name":"ARP Cache Poisoning"},{"id":"T1557.003","name":"DHCP Spoofing"},{"id":"T1557.004","name":"Evil Twin"}]},{"id":"T1602","name":"Data from Configuration Repository","subs":[{"id":"T1602.001","name":"SNMP (MIB Dump)"},{"id":"T1602.002","name":"Network Device Configuration Dump"}]},{"id":"T1123","name":"Audio Capture","subs":[]},{"id":"T1114","name":"Email Collection","subs":[{"id":"T1114.001","name":"Local Email Collection"},{"id":"T1114.002","name":"Remote Email Collection"},{"id":"T1114.003","name":"Email Forwarding Rule"}]},{"id":"T1025","name":"Data from Removable Media","subs":[]},{"id":"T1119","name":"Automated Collection","subs":[]},{"id":"T1115","name":"Clipboard Data","subs":[]},{"id":"T1530","name":"Data from Cloud Storage","subs":[]},{"id":"T1005","name":"Data from Local System","subs":[]},{"id":"T1560","name":"Archive Collected Data","subs":[{"id":"T1560.001","name":"Archive via Utility"},{"id":"T1560.002","name":"Archive via Library"},{"id":"T1560.003","name":"Archive via Custom Method"}]},{"id":"T1185","name":"Browser Session Hijacking","subs":[]},{"id":"T1125","name":"Video Capture","subs":[]},{"id":"T1074","name":"Data Staged","subs":[{"id":"T1074.001","name":"Local Data Staging"},{"id":"T1074.002","name":"Remote Data Staging"}]},{"id":"T1039","name":"Data from Network Shared Drive","subs":[]},{"id":"T1056","name":"Input Capture","subs":[{"id":"T1056.001","name":"Keylogging"},{"id":"T1056.002","name":"GUI Input Capture"},{"id":"T1056.003","name":"Web Portal Capture"},{"id":"T1056.004","name":"Credential API Hooking"}]},{"id":"T1213","name":"Data from Information Repositories","subs":[{"id":"T1213.001","name":"Confluence"},{"id":"T1213.002","name":"Sharepoint"},{"id":"T1213.003","name":"Code Repositories"},{"id":"T1213.004","name":"Customer Relationship Management Software"},{"id":"T1213.005","name":"Messaging Applications"},{"id":"T1213.006","name":"Databases"}]}]},{"id":"TA0011","order":13,"name":"Command and Control","src":"TA0011","techniques":[{"id":"T1071","name":"Application Layer Protocol","subs":[{"id":"T1071.001","name":"Web Protocols"},{"id":"T1071.002","name":"File Transfer Protocols"},{"id":"T1071.003","name":"Mail Protocols"},{"id":"T1071.004","name":"DNS"},{"id":"T1071.005","name":"Publish/Subscribe Protocols"}]},{"id":"T1219","name":"Remote Access Tools","subs":[{"id":"T1219.001","name":"IDE Tunneling"},{"id":"T1219.002","name":"Remote Desktop Software"},{"id":"T1219.003","name":"Remote Access Hardware"}]},{"id":"T1659","name":"Content Injection","subs":[]},{"id":"T1205","name":"Traffic Signaling","subs":[{"id":"T1205.001","name":"Port Knocking"},{"id":"T1205.002","name":"Socket Filters"}]},{"id":"T1572","name":"Protocol Tunneling","subs":[]},{"id":"T1092","name":"Communication Through Removable Media","subs":[]},{"id":"T1090","name":"Proxy","subs":[{"id":"T1090.001","name":"Internal Proxy"},{"id":"T1090.002","name":"External Proxy"},{"id":"T1090.003","name":"Multi-hop Proxy"},{"id":"T1090.004","name":"Domain Fronting"}]},{"id":"T1568","name":"Dynamic Resolution","subs":[{"id":"T1568.001","name":"Fast Flux DNS"},{"id":"T1568.002","name":"Domain Generation Algorithms"},{"id":"T1568.003","name":"DNS Calculation"}]},{"id":"T1102","name":"Web Service","subs":[{"id":"T1102.001","name":"Dead Drop Resolver"},{"id":"T1102.002","name":"Bidirectional Communication"},{"id":"T1102.003","name":"One-Way Communication"}]},{"id":"T1104","name":"Multi-Stage Channels","subs":[]},{"id":"T1001","name":"Data Obfuscation","subs":[{"id":"T1001.001","name":"Junk Data"},{"id":"T1001.002","name":"Steganography"},{"id":"T1001.003","name":"Protocol or Service Impersonation"}]},{"id":"T1571","name":"Non-Standard Port","subs":[]},{"id":"T1573","name":"Encrypted Channel","subs":[{"id":"T1573.001","name":"Symmetric Cryptography"},{"id":"T1573.002","name":"Asymmetric Cryptography"}]},{"id":"T1095","name":"Non-Application Layer Protocol","subs":[]},{"id":"T1132","name":"Data Encoding","subs":[{"id":"T1132.001","name":"Standard Encoding"},{"id":"T1132.002","name":"Non-Standard Encoding"}]},{"id":"T1105","name":"Ingress Tool Transfer","subs":[]},{"id":"T1665","name":"Hide Infrastructure","subs":[]},{"id":"T1008","name":"Fallback Channels","subs":[]}]},{"id":"TA0010","order":14,"name":"Exfiltration","src":"TA0010","techniques":[{"id":"T1567","name":"Exfiltration Over Web Service","subs":[{"id":"T1567.001","name":"Exfiltration to Code Repository"},{"id":"T1567.002","name":"Exfiltration to Cloud Storage"},{"id":"T1567.003","name":"Exfiltration to Text Storage Sites"},{"id":"T1567.004","name":"Exfiltration Over Webhook"}]},{"id":"T1029","name":"Scheduled Transfer","subs":[]},{"id":"T1011","name":"Exfiltration Over Other Network Medium","subs":[{"id":"T1011.001","name":"Exfiltration Over Bluetooth"}]},{"id":"T1020","name":"Automated Exfiltration","subs":[{"id":"T1020.001","name":"Traffic Duplication"}]},{"id":"T1041","name":"Exfiltration Over C2 Channel","subs":[]},{"id":"T1048","name":"Exfiltration Over Alternative Protocol","subs":[{"id":"T1048.001","name":"Exfiltration Over Symmetric Encrypted Non-C2 Protocol"},{"id":"T1048.002","name":"Exfiltration Over Asymmetric Encrypted Non-C2 Protocol"},{"id":"T1048.003","name":"Exfiltration Over Unencrypted Non-C2 Protocol"}]},{"id":"T1030","name":"Data Transfer Size Limits","subs":[]},{"id":"T1537","name":"Transfer Data to Cloud Account","subs":[]},{"id":"T1052","name":"Exfiltration Over Physical Medium","subs":[{"id":"T1052.001","name":"Exfiltration over USB"}]}]},{"id":"TA0040","order":15,"name":"Impact","src":"TA0040","techniques":[{"id":"T1561","name":"Disk Wipe","subs":[{"id":"T1561.001","name":"Disk Content Wipe"},{"id":"T1561.002","name":"Disk Structure Wipe"}]},{"id":"T1489","name":"Service Stop","subs":[]},{"id":"T1491","name":"Defacement","subs":[{"id":"T1491.001","name":"Internal Defacement"},{"id":"T1491.002","name":"External Defacement"}]},{"id":"T1657","name":"Financial Theft","subs":[]},{"id":"T1565","name":"Data Manipulation","subs":[{"id":"T1565.001","name":"Stored Data Manipulation"},{"id":"T1565.002","name":"Transmitted Data Manipulation"},{"id":"T1565.003","name":"Runtime Data Manipulation"}]},{"id":"T1531","name":"Account Access Removal","subs":[]},{"id":"T1486","name":"Data Encrypted for Impact","subs":[]},{"id":"T1667","name":"Email Bombing","subs":[]},{"id":"T1499","name":"Endpoint Denial of Service","subs":[{"id":"T1499.001","name":"OS Exhaustion Flood"},{"id":"T1499.002","name":"Service Exhaustion Flood"},{"id":"T1499.003","name":"Application Exhaustion Flood"},{"id":"T1499.004","name":"Application or System Exploitation"}]},{"id":"T1496","name":"Resource Hijacking","subs":[{"id":"T1496.001","name":"Compute Hijacking"},{"id":"T1496.002","name":"Bandwidth Hijacking"},{"id":"T1496.003","name":"SMS Pumping"},{"id":"T1496.004","name":"Cloud Service Hijacking"}]},{"id":"T1485","name":"Data Destruction","subs":[{"id":"T1485.001","name":"Lifecycle-Triggered Deletion"}]},{"id":"T1498","name":"Network Denial of Service","subs":[{"id":"T1498.001","name":"Direct Network Flood"},{"id":"T1498.002","name":"Reflection Amplification"}]},{"id":"T1495","name":"Firmware Corruption","subs":[]},{"id":"T1490","name":"Inhibit System Recovery","subs":[]},{"id":"T1529","name":"System Shutdown/Reboot","subs":[]}]}]};
 
-var CODE_VERSION = 'v22-20261026';          // muda a cada alteração de lógica
+var CODE_VERSION = 'v29-20261103';          // muda a cada alteração de lógica
 var RULE_CACHE_KEY = 'coverage_' + CODE_VERSION; // chave carimbada -> versões não se misturam
 var CACHE_TTL_SEC = 30 * 60; // 30 min (alinhado ao auto-reload da página)
 
@@ -896,14 +896,14 @@ function getCoverage() {
   return getCoverage_(false);
 }
 
-/* ================== KPI OPERACIONAL — lê a planilha (Google Sheet) do Drive ==================
- * Pré-requisito: a planilha "Gestão de SIEM" precisa estar como GOOGLE SHEETS (não .xlsx).
- *   No Drive: abra o .xlsx → Arquivo → Salvar como Planilhas Google. Copie o ID da URL.
- * Propriedade do script: SHEET_ID = <id da planilha Google>
- * Abas esperadas: Elastic, Caso de uso por tecnologia, Casos de uso em Prod, Alertas,
- *                 Origem do Log, Inventário SIEM, Licenciamento, Highlights
+/* ================== KPI OPERACIONAL (Eng. Detecção) — 100% API, sem planilha (v27) ==================
+ * Regras: Kibana Detection Engine (fetchRules_) · Alertas: Kibana signals/search (CMDB × SIEM fica só na aba Inventário)
+ * Fontes de log: _search em logs-* (24h) · Licença: API de Billing do Elastic Cloud (teto = EC_ECU_CAP, padrão 11000).
+ * Histórico de regras/MITRE: retrato gravado a cada execução no mês corrente (OP_HIST); mês sem retrato é
+ *   reconstruído pela created_at das regras habilitadas hoje (aproximado).
+ * Notas de Melhorias/Próximas ações: Propriedade OP_NOTA_<AAAA-MM>, editadas na tela por Admin (salvarNotaOp).
  */
-var OP_KEY = 'op_data_v1';
+var OP_KEY = 'op_data_v7'; // v7: cats com fixo/pph/h/det (máquinas × uso) · v6: lic[].cats (categorias), itens com máquinas (price) · v5: lic[].dep/itens/ia, sem projeção · v3: tudo pela API (elastic[].ym/fonte, highlights[].fatos/sug, errs) · v4: CMDB 30d, fontes de log
 var OP_TTL = 2 * 60 * 60; // 2h
 
 function _mlab(d){var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return M[d.getMonth()]+'/'+(''+d.getFullYear()).slice(-2);}
@@ -913,56 +913,270 @@ function opPut_(cache,str){var n=Math.ceil(str.length/CHUNK),p={};for(var i=0;i<
 function opGet_(cache){var ns=cache.get(OP_KEY+'_n');if(!ns)return null;var n=parseInt(ns,10),ids=[];for(var i=0;i<n;i++)ids.push(OP_KEY+'_'+i);var got=cache.getAll(ids),o='';for(var j=0;j<n;j++){var s=got[OP_KEY+'_'+j];if(s==null)return null;o+=s;}return o;}
 
 function buildOperational_(){
-  var id=props_().getProperty('SHEET_ID');
-  if(!id) throw new Error('Defina SHEET_ID (planilha Google da Gestão de SIEM) nas Propriedades do script.');
-  var ss=SpreadsheetApp.openById(id);
-  function vals(n){var s=ss.getSheetByName(n); if(!s) throw new Error('Aba não encontrada: '+n); return s.getDataRange().getValues();}
-  function num(x){var v=parseFloat(x);return isNaN(v)?0:v;}
+  var months=_opMeses_(),errs={};
+  var rules=fetchRules_(),R=_opRules_(rules,months),cur=R.elastic[R.elastic.length-1];
+  try{_opHistSave_(cur);}catch(e){errs.hist=e.message;}
 
-  // Elastic
-  var e=vals('Elastic'),elastic=[];
-  for(var i=1;i<e.length;i++){var r=e[i]; if(!(r[0] instanceof Date))continue;
-    elastic.push({m:_mlab(r[0]),prod:num(r[1]),homolog:num(r[2]),ajustes:num(r[3]),
-      taticas:num(r[5]),tecCov:num(r[6]),tecTot:num(r[7]),subCov:num(r[8]),subTot:num(r[9])});}
-
-  // Tecnologia por mês
-  var t=vals('Caso de uso por tecnologia'),th=t[0],techByMonth={};
-  for(var i=1;i<t.length;i++){var r=t[i]; if(!(r[0] instanceof Date))continue;
-    var items=[]; for(var c=1;c<th.length;c++){var v=num(r[c]); if(v>0)items.push({k:String(th[c]),v:v});}
-    items.sort(function(a,b){return b.v-a.v;}); techByMonth[_mlab(r[0])]=items;}
-
-  // Criticidade / tipo (atual)
-  var p=vals('Casos de uso em Prod'),cc={},tipo={},nP=0;
-  for(var i=1;i<p.length;i++){if(p[i][0]===''||p[i][0]==null)continue; nP++;
-    var k=String(p[i][3]||'—'); cc[k]=(cc[k]||0)+1; var tp=String(p[i][4]||'—'); tipo[tp]=(tipo[tp]||0)+1;}
-  var critOrder=['Crítica','Alta','Média','Baixa'],criticidade=critOrder.map(function(k){return {k:k,v:cc[k]||0};});
+  // Criticidade / tipo (regras habilitadas hoje)
+  var en=rules.filter(function(r){return r.enabled;}),cc={},tipo={};
+  en.forEach(function(r){var k=OP_SEV[String(r.severity||'').toLowerCase()]||'—';cc[k]=(cc[k]||0)+1;var t=r.type||'—';tipo[t]=(tipo[t]||0)+1;});
+  var criticidade=['Crítica','Alta','Média','Baixa'].map(function(k){return {k:k,v:cc[k]||0};});
   var tipo_top=Object.keys(tipo).map(function(k){return {k:k,v:tipo[k]};}).sort(function(a,b){return b.v-a.v;}).slice(0,6);
 
-  // Alertas por mês + top regras
-  var a=vals('Alertas'),perm={},tot={},keyOf={};
-  for(var i=1;i<a.length;i++){var nm=a[i][0],m=a[i][1]; if(!(m instanceof Date))continue;
-    var lbl=_mlab(m); keyOf[lbl]=_mkey(m); tot[lbl]=(tot[lbl]||0)+1;
-    if(nm){perm[lbl]=perm[lbl]||{}; perm[lbl][nm]=(perm[lbl][nm]||0)+1;}}
-  var alertsByMonth=Object.keys(tot).sort(function(x,y){return keyOf[x]-keyOf[y];}).map(function(lbl){
-    var top=Object.keys(perm[lbl]||{}).map(function(k){return {k:k,v:perm[lbl][k]};}).sort(function(x,y){return y.v-x.v;}).slice(0,8);
-    return {m:lbl,total:tot[lbl],top:top};});
+  var al={},alertsByMonth=[];
+  try{al=_opAlerts_(months[0].start);}catch(e){errs.alertas=e.message;}
+  months.forEach(function(mm){var a=al[mm.ym];if(a)alertsByMonth.push({m:mm.m,total:a.total,top:a.top.slice(0,8)});});
+  var logs=[];try{logs=_opLogs_();}catch(e){errs.fontes=e.message;}
 
-  // Fontes de log / inventário / licença
-  var lg=vals('Origem do Log'),logs=[];
-  for(var i=1;i<lg.length;i++){if(lg[i][0]===''||lg[i][0]==null)continue; logs.push({k:String(lg[i][0]),v:num(lg[i][1]),prev:num(lg[i][2])});}
-  logs.sort(function(a,b){return b.v-a.v;});
-  var iv=vals('Inventário SIEM'),inv=[];
-  for(var i=1;i<iv.length;i++){if(iv[i][0]===''||iv[i][0]==null)continue; inv.push({k:String(iv[i][0]),siem:num(iv[i][1]),cmdb:num(iv[i][2])});}
-  var lc=vals('Licenciamento'),lic=[];
-  for(var i=1;i<lc.length;i++){if(!(lc[i][0] instanceof Date))continue; lic.push({m:_mlab(lc[i][0]),total:num(lc[i][1]),cons:num(lc[i][2])});}
+  // Licença: consumo pela API de Billing; teto = EC_ECU_CAP
+  var cap=parseFloat(props_().getProperty('EC_ECU_CAP'))||11000,lic=[],licSrc={api:false};
+  if(props_().getProperty('EC_BILLING_API_KEY')){
+    try{var bl=_billing_();lic=bl.months.map(function(a){var l={m:a.m,total:cap,cons:a.cons,src:'api',dep:a.dep};if(a.itens){l.itens=a.itens;l.cats=a.cats;l.ia=a.ia;}if(a.part){l.part=true;l.ate=a.ate;}return l;});licSrc={api:true,via:bl.via,at:bl.at};}
+    catch(e){licSrc={api:false,err:String(e.message||e).slice(0,200)};errs.billing=e.message;}}
+  else errs.billing='EC_BILLING_API_KEY não definida';
 
-  // Highlights
-  var hs=vals('Highlights'),highlights={};
-  for(var i=1;i<hs.length;i++){if(!(hs[i][0] instanceof Date))continue; highlights[_mlab(hs[i][0])]={mel:String(hs[i][1]||'').trim(),prox:String(hs[i][2]||'').trim()};}
+  var highlights=_opHighlights_(rules,months,R,al);
+  for(var k in errs)Logger.log('operacional · %s: %s',k,errs[k]);
+  return {elastic:R.elastic,techByMonth:R.techByMonth,criticidade:criticidade,crit_total:en.length,
+    alertsByMonth:alertsByMonth,logs:logs,lic:lic,lic_src:licSrc,highlights:highlights,tipo_top:tipo_top,
+    errs:errs,fonte:'api',updated:Utilities.formatDate(new Date(),'America/Sao_Paulo','dd/MM/yyyy HH:mm')};
+}
 
-  return {elastic:elastic,techByMonth:techByMonth,criticidade:criticidade,crit_total:nP,
-    alertsByMonth:alertsByMonth,logs:logs,inv:inv,lic:lic,highlights:highlights,tipo_top:tipo_top,
-    updated:Utilities.formatDate(new Date(),'America/Sao_Paulo','dd/MM/yyyy HH:mm')};
+var OP_SEV={critical:'Crítica',high:'Alta',medium:'Média',low:'Baixa'};
+/* Tecnologia da regra: prefixo do nome "[XXX]" → tag "Data Source: …" → índice/consulta → tipo. */
+var OP_TEC_PREF={'WIN-EVT':'Event Viewer (Windows)','WIN':'Event Viewer (Windows)','FW':'Firewall','NDR':'NDR Gigamon','CORR':'Correlação de Data Sources',
+  'CTI':'CTI Tempest','XDR':'Cortex XDR','CORTEX':'Cortex XDR','VISIONONE':'Trend Micro','TREND':'Trend Micro','SO':'SO','WAF':'WAF','DEFENDER':'Defender',
+  'NETSKOPE':'Netskope','NTSKP':'Netskope','BD':'Banco de Dados','DB':'Banco de Dados','SQL':'Banco de Dados','IDM':'IDM','AD':'Active Directory',
+  'LINUX':'Rsyslog (Linux)','LNX':'Rsyslog (Linux)','GUARDICORE':'Guardicore (Health)'};
+// tag "Data Source: …" das regras prebuilt → mesmo nome das próprias
+var OP_TEC_TAG={'PowerShell Logs':'Event Viewer (Windows)','Windows Security Event Logs':'Event Viewer (Windows)','Sysmon':'Event Viewer (Windows)','Windows':'Event Viewer (Windows)','Active Directory':'Active Directory'};
+var OP_TEC_IDX=[[/endpoint|elastic_defend/,'Elastic Defend'],[/windows|winlog/,'Event Viewer (Windows)'],[/panw|fortinet|firewall|checkpoint|cisco_asa/,'Firewall'],
+  [/gigamon|zeek|suricata|ndr/,'NDR Gigamon'],[/cortex|xdr/,'Cortex XDR'],[/trend|visionone|deepsecurity/,'Trend Micro'],[/m365_defender|microsoft_defender/,'Defender'],
+  [/netskope/,'Netskope'],[/auditd|linux|syslog/,'Rsyslog (Linux)'],[/waf|imperva/,'WAF'],[/ti_|threat_intel/,'CTI Tempest']];
+function _opTec_(r){
+  var m=/^\s*\[([^\]]+)\]/.exec(r.name||'');if(m){var k=m[1].trim().toUpperCase();return OP_TEC_PREF[k]||m[1].trim();}
+  var t=(r.tags||[]).filter(function(x){return /^Data Source:/i.test(x);})[0];if(t){t=t.replace(/^Data Source:\s*/i,'');return OP_TEC_TAG[t]||t;}
+  var ix=((r.index||[]).join(' ')+' '+String(r.query||'').slice(0,400)).toLowerCase();
+  for(var i=0;i<OP_TEC_IDX.length;i++)if(OP_TEC_IDX[i][0].test(ix))return OP_TEC_IDX[i][1];
+  return r.type==='machine_learning'?'Machine Learning':'Outros';
+}
+function _opCustom_(r){if(r.immutable===true)return false;if(r.rule_source&&r.rule_source.type==='external')return false;return true;}
+/* Meses de jan do ano anterior até o mês corrente (fuso de Brasília). */
+function _opMeses_(){
+  var ym=Utilities.formatDate(new Date(),'America/Sao_Paulo','yyyy-MM').split('-'),Y=+ym[0],M=+ym[1]-1,out=[];
+  for(var y=Y-1;y<=Y;y++)for(var mo=0;mo<12;mo++){if(y===Y&&mo>M)break;
+    out.push({ym:y+'-'+('0'+(mo+1)).slice(-2),m:_mlab(new Date(y,mo,15)),start:Date.UTC(y,mo,1,3),end:Date.UTC(y,mo+1,1,3),cur:(y===Y&&mo===M)});}
+  return out;
+}
+/* Casos em produção / cobertura MITRE / tecnologia por mês. Mês com retrato gravado (OP_HIST) usa o retrato;
+ * sem retrato, reconstrói pela created_at das regras habilitadas hoje (não enxerga regra desligada/apagada depois). */
+function _opRules_(rules,months){
+  var uT={},uS={};CATALOG.tactics.forEach(function(t){t.techniques.forEach(function(te){uT[te.id]=te.name;te.subs.forEach(function(s){uS[s.id]=1;});});});
+  var en=rules.filter(function(r){return r.enabled;}).map(function(r){var T={},S={},A={};
+    (r.threat||[]).forEach(function(th){if(th.tactic)A[th.tactic.id]=1;(th.technique||[]).forEach(function(te){if(uT[te.id])T[te.id]=1;(te.subtechnique||[]).forEach(function(s){if(uS[s.id])S[s.id]=1;});});});
+    return {c:r.created_at?Date.parse(r.created_at):0,T:T,S:S,A:A,tec:_opTec_(r)};});
+  var hist=_opHistLoad_(),out=[],techByMonth={},sets={};
+  months.forEach(function(mm){var T={},S={},A={},n=0,tc={},k;
+    en.forEach(function(x){if(x.c>=mm.end)return;n++;for(k in x.T)T[k]=1;for(k in x.S)S[k]=1;for(k in x.A)A[k]=1;tc[x.tec]=(tc[x.tec]||0)+1;});
+    var rec={m:mm.m,ym:mm.ym,prod:n,taticas:Object.keys(A).length,tecCov:Object.keys(T).length,tecTot:Object.keys(uT).length,
+      subCov:Object.keys(S).length,subTot:Object.keys(uS).length,fonte:mm.cur?'atual':'reconstruido'};
+    var h=hist[mm.ym];if(h&&!mm.cur){rec.prod=h.prod;rec.taticas=h.taticas;rec.tecCov=h.tecCov;rec.subCov=h.subCov;rec.fonte='retrato';}
+    out.push(rec);sets[mm.ym]=T;
+    techByMonth[mm.m]=Object.keys(tc).map(function(k){return {k:k,v:tc[k]};}).sort(function(a,b){return b.v-a.v;});});
+  return {elastic:out,techByMonth:techByMonth,sets:sets,uT:uT};
+}
+function _opHistLoad_(){try{return JSON.parse(props_().getProperty('OP_HIST')||'{}');}catch(e){return {};}}
+function _opHistSave_(rec){var h=_opHistLoad_();h[rec.ym]={prod:rec.prod,taticas:rec.taticas,tecCov:rec.tecCov,subCov:rec.subCov,at:new Date().toISOString()};
+  var ks=Object.keys(h).sort();while(ks.length>36)delete h[ks.shift()];props_().setProperty('OP_HIST',JSON.stringify(h));}
+/* Alertas do espaço (todos, inclusive building block — igual à antiga aba Alertas) por mês + top regras. */
+function kbAlertsSearch_(body){
+  var p=props_(),base=p.getProperty('KIBANA_URL'),key=p.getProperty('ES_API_KEY'),sp=p.getProperty('KIBANA_SPACE');
+  if(!base||!key)throw new Error('Defina KIBANA_URL e ES_API_KEY nas Propriedades do script.');
+  var url=base.replace(/\/+$/,'')+((sp&&sp!=='default')?'/s/'+sp:'')+'/api/detection_engine/signals/search';
+  var res=UrlFetchApp.fetch(url,{method:'post',headers:{'Authorization':'ApiKey '+key,'kbn-xsrf':'true','Content-Type':'application/json'},payload:JSON.stringify(body),muteHttpExceptions:true});
+  var code=res.getResponseCode();if(code!==200)throw new Error('Kibana signals/search HTTP '+code+': '+res.getContentText().slice(0,300));
+  return JSON.parse(res.getContentText());
+}
+function _opAlerts_(from){
+  var body={size:0,query:{range:{'@timestamp':{gte:new Date(from).toISOString()}}},
+    aggs:{m:{date_histogram:{field:'@timestamp',calendar_interval:'month',time_zone:'America/Sao_Paulo',format:'yyyy-MM',min_doc_count:1},aggs:{r:{terms:{field:'kibana.alert.rule.name',size:40}}}}}};
+  var r;try{r=kbAlertsSearch_(body);}
+  catch(e){var sp=props_().getProperty('KIBANA_SPACE')||'default';Logger.log('signals/search falhou (%s); tentando _search direto',e.message);r=esSearch_('.alerts-security.alerts-'+sp,body);}
+  var out={};(((r.aggregations||{}).m||{}).buckets||[]).forEach(function(b){
+    out[b.key_as_string]={total:b.doc_count,top:((b.r&&b.r.buckets)||[]).map(function(x){return {k:x.key,v:x.doc_count};})};});
+  return out;
+}
+/* Fontes de log coletadas (24h): hosts distintos por integração (máx. entre os datasets da mesma integração). */
+var OP_FONTE={system:'Windows / Linux (System)',windows:'Windows',winlog:'Windows',auditd:'Linux (Auditd)',tcp:'Syslog',udp:'Syslog',panw:'Firewall Palo Alto',
+  endpoint:'Elastic Defend',elastic_agent:'Elastic Agent',panw_cortex_xdr:'Cortex XDR',trend_micro_vision_one:'Vision One',cyberark_pta:'CyberArk',cyberarkpas:'CyberArk',
+  claroty_xdome:'Claroty',tenable_io:'Tenable',tenable_sc:'Tenable'};
+// Integrações que reportam ATIVOS de terceiros (host.name = ativo escaneado/protegido, não quem envia log): contam como 1 fonte.
+var OP_FONTE_TERC=/^(tenable|guardicore|claroty|panw_cortex_xdr|trend_micro|qualys|rapid7|ti_)/;
+function _opLogs_(){
+  var r=esSearch_(INV_SIEM,{size:0,query:{bool:{filter:[{range:{'@timestamp':{gte:'now-24h'}}}]}},aggs:{d:{terms:{field:'data_stream.dataset',size:300},aggs:{h:{cardinality:{field:'host.name'}}}}}});
+  var acc={};(((r.aggregations||{}).d||{}).buckets||[]).forEach(function(b){var it=String(b.key).split('.')[0],k=OP_FONTE[it]||(/^guardicore/.test(it)?'Guardicore':it),h=OP_FONTE_TERC.test(it)?1:((b.h&&b.h.value)||0);if(h>(acc[k]||0))acc[k]=h;});
+  return Object.keys(acc).filter(function(k){return acc[k]>0;}).map(function(k){return {k:k,v:acc[k],prev:acc[k]};}).sort(function(a,b){return b.v-a.v;});
+}
+/* Melhorias / Próximas ações: fatos do Elastic no mês + nota do Admin (Propriedade OP_NOTA_<AAAA-MM>). */
+function _opHighlights_(rules,months,R,al){
+  var out={},cust=rules.filter(_opCustom_),uT=R.uT,YY=months[months.length-1].ym.slice(0,4);
+  // gaps: técnicas do catálogo sem cobertura, com mais subtécnicas expostas
+  var subsOf={};CATALOG.tactics.forEach(function(t){t.techniques.forEach(function(te){subsOf[te.id]=te.subs.length;});});
+  months.forEach(function(mm,i){if(mm.ym.slice(0,4)!==YY)return;
+    var inM=function(s){var t=s?Date.parse(s):0;return t>=mm.start&&t<mm.end;};
+    var criadas=cust.filter(function(r){return r.enabled&&inM(r.created_at);}).map(function(r){return r.name;});
+    var alteradas=cust.filter(function(r){return r.enabled&&inM(r.updated_at)&&!inM(r.created_at);}).map(function(r){return r.name;});
+    var desligadas=cust.filter(function(r){return !r.enabled&&inM(r.updated_at);}).map(function(r){return r.name;});
+    var prev=i?R.sets[months[i-1].ym]:{},curS=R.sets[mm.ym]||{};
+    var tecNovas=Object.keys(curS).filter(function(k){return !prev[k];}).sort().map(function(k){return k+' '+uT[k];});
+    var a=al[mm.ym],pa=i?al[months[i-1].ym]:null,tuning=[];
+    if(a&&pa&&!mm.cur){var now={};a.top.forEach(function(x){now[x.k]=x.v;});
+      pa.top.forEach(function(x){var v=now[x.k]||0;if(x.v>=50&&v<=x.v*0.5)tuning.push({k:x.k,de:x.v,para:v});});
+      tuning.sort(function(p,q){return (q.de-q.para)-(p.de-p.para);});}
+    var gaps=Object.keys(uT).filter(function(k){return !curS[k];}).sort(function(p,q){return subsOf[q]-subsOf[p];}).slice(0,3).map(function(k){return k+' '+uT[k]+(subsOf[k]?' ('+subsOf[k]+' subtéc.)':'');});
+    var nota={};try{nota=JSON.parse(props_().getProperty('OP_NOTA_'+mm.ym)||'{}');}catch(e){}
+    out[mm.m]={ym:mm.ym,mel:nota.mel||'',prox:nota.prox||'',by:nota.by||'',at:nota.at||'',
+      fatos:{criadas:criadas.slice(0,20),nCriadas:criadas.length,alteradas:alteradas.slice(0,10),nAlteradas:alteradas.length,
+        desligadas:desligadas.slice(0,10),nDesligadas:desligadas.length,tecNovas:tecNovas.slice(0,12),tuning:tuning.slice(0,5)},
+      sug:{ruidosas:a?a.top.slice(0,3):[],gaps:gaps}};
+  });
+  return out;
+}
+
+/* ================== BILLING — consumo de ECU pela API do Elastic Cloud (v26) ==================
+ * Propriedades: EC_BILLING_API_KEY = API key do Elastic Cloud (cloud.elastic.co → Organization → API keys,
+ *   papel Billing admin; NÃO é a ES_API_KEY). EC_ORG_ID = ID da organização (opcional: sem ela usa a 1ª da chave).
+ *   EC_API_URL opcional (padrão https://api.elastic-cloud.com).
+ * Soma o custo (ECU) de todos os deployments/projetos da organização, mês a mês (UTC), últimos 12 meses.
+ * Por mês: deployments (dos próprios buckets) e, no ano corrente, itens de cobrança (ecItems_) com a parte de IA.
+ * Mês corrente = parcial (consumo real até agora, sem projeção).
+ */
+var EC_API='https://api.elastic-cloud.com';
+function ecFetch_(path){
+  var p=props_(),key=p.getProperty('EC_BILLING_API_KEY');if(!key)throw new Error('Defina EC_BILLING_API_KEY nas Propriedades do script.');
+  var base=(p.getProperty('EC_API_URL')||EC_API).replace(/\/+$/,'');
+  var res=UrlFetchApp.fetch(base+path,{method:'get',headers:{'Authorization':'ApiKey '+key,'Accept':'application/json'},muteHttpExceptions:true});
+  var code=res.getResponseCode();
+  if(code!==200){var e=new Error('Elastic Cloud '+path.split('?')[0]+' HTTP '+code+': '+res.getContentText().slice(0,300));e.code=code;throw e;}
+  return JSON.parse(res.getContentText());
+}
+function ecOrg_(){var id=props_().getProperty('EC_ORG_ID');if(id)return id.trim();
+  var r=ecFetch_('/api/v1/organizations'),o=(r.organizations||[])[0];
+  if(!o||!o.id)throw new Error('Defina EC_ORG_ID (a chave não listou organizações).');return o.id;}
+/* Série mensal (buckets) — tenta a API v2 (hosted + serverless) e cai para a v1 se não existir. */
+function ecCharts_(org,from,to){
+  var q='?from='+encodeURIComponent(from)+'&to='+encodeURIComponent(to)+'&bucketing_strategy=monthly';
+  var paths=['/api/v2/billing/organizations/'+org+'/costs/charts'+q,'/api/v1/billing/costs/'+org+'/charts'+q],last;
+  var errs=[];
+  for(var i=0;i<paths.length;i++){try{return {via:i?'v1':'v2',r:ecFetch_(paths[i])};}catch(e){last=e;errs.push(e.message);if(e.code!==404&&e.code!==400)throw e;}}
+  throw new Error(errs.join(' | ')+' — confira EC_ORG_ID (ID numérico da organização no Elastic Cloud, não o ID da API key).');
+}
+function _ecTs_(t){if(typeof t==='number')return new Date(t<1e12?t*1000:t);return new Date(t);}
+function _ecVal_(b){if(b.values&&b.values.length){var s=0;b.values.forEach(function(v){s+=parseFloat(v.value)||0;});return s;}return parseFloat(b.value!=null?b.value:b.cost)||0;}
+function _billing_(){
+  var now=new Date(),y=now.getUTCFullYear(),mo=now.getUTCMonth(),org=ecOrg_();
+  var from=new Date(Date.UTC(y,mo-11,1)).toISOString();
+  var c=ecCharts_(org,from,now.toISOString()),acc={},dep={};
+  ((c.r&&c.r.data)||[]).forEach(function(b){var d=_ecTs_(b.timestamp);if(isNaN(d))return;
+    var k=d.getUTCFullYear()*12+d.getUTCMonth();acc[k]=(acc[k]||0)+_ecVal_(b);
+    (b.values||[]).forEach(function(v){var n=v.name||v.id||'—';(dep[k]||(dep[k]={}))[n]=((dep[k]||{})[n]||0)+(parseFloat(v.value)||0);});});
+  var curK=y*12+mo,top=function(o){return Object.keys(o||{}).map(function(n){return {k:n,v:Math.round(o[n])};}).filter(function(x){return x.v>0;}).sort(function(p,q){return q.v-p.v;}).slice(0,6);};
+  var months=Object.keys(acc).map(Number).sort(function(a,b){return a-b;}).map(function(k){
+    var r={k:k,m:_mlab(new Date(Math.floor(k/12),k%12,15)),cons:Math.round(acc[k]),dep:top(dep[k])};
+    if(Math.floor(k/12)===y){ // itens só no ano corrente (1 chamada por mês)
+      try{var it=ecItems_(org,new Date(Date.UTC(Math.floor(k/12),k%12,1)).toISOString(),(k===curK?now:new Date(Date.UTC(Math.floor(k/12),k%12+1,1))).toISOString());
+      r.itens=it.slice(0,8);r.cats=_ecCats_(it,r.cons);r.ia=Math.round(it.filter(function(x){return x.ia;}).reduce(function(s,x){return s+x.v;},0));}catch(e){Logger.log('billing itens %s: %s',r.m,e.message);}}
+    if(k===curK){r.part=true;r.ate=now.toISOString();}return r;});
+  return {months:months,via:c.via,at:now.toISOString()};
+}
+/* Itens de cobrança do período (por produto/recurso), somados por nome. Lê só as "folhas" da resposta (objetos com
+ * nome + custo, sem filhos com custo) para servir tanto à v1 quanto à v2; "dimensions" (resumo por tipo) é ignorado. */
+var EC_IA_RX=/\b(llm|inference|inferência|ai|genai|gen ai|tokens?|eis|elser|e5|rerank|openai|anthropic|claude|gemini|bedrock|assistant|agent builder)\b/i;
+function ecItems_(org,from,to){
+  var q='?from='+encodeURIComponent(from)+'&to='+encodeURIComponent(to),r,last;
+  var paths=['/api/v1/billing/costs/'+org+'/items'+q,'/api/v2/billing/organizations/'+org+'/costs/items'+q];
+  for(var i=0;i<paths.length&&!r;i++){try{r=ecFetch_(paths[i]);}catch(e){last=e;if(e.code!==404&&e.code!==400)throw e;}}
+  if(!r)throw last;
+  var leaves=[];_ecLeaves_(r,leaves,'');var acc={};
+  leaves.forEach(function(x){var a=acc[x.k]||(acc[x.k]={v:0,h:0,pph:null});a.v+=x.v;if(x.h!=null){a.h+=x.h;a.pph=x.pph;}});
+  return Object.keys(acc).map(function(k){var a=acc[k],r={k:k,v:Math.round(a.v),ia:EC_IA_RX.test(k)};if(a.pph!=null){r.h=a.h;r.pph=a.pph;}return r;}).filter(function(x){return x.v>0;}).sort(function(a,b){return b.v-a.v;});
+}
+/* Categoria em linguagem simples de cada item de cobrança (a 1ª regra que casar). */
+var EC_CATS=[[EC_IA_RX,'IA'],[/inter-?node/i,'Tráfego interno'],[/transfer out|egress/i,'Saída de dados'],[/transfer in\b|data in\b/i,'Entrada de dados'],
+  [/snapshot/i,'Backup (snapshots)'],[/storage/i,'Armazenamento'],[/\.ml\.|\bml\b|machine.?learning/i,'Machine Learning'],[/kibana/i,'Kibana'],
+  [/integrations?.?server|\bapm\b|fleet/i,'Fleet / APM'],[/frozen/i,'Elasticsearch · frozen'],[/cold/i,'Elasticsearch · cold'],[/warm/i,'Elasticsearch · warm'],
+  [/hot|content/i,'Elasticsearch · hot'],[/\.es\.|elasticsearch|master|coordinat/i,'Elasticsearch · outros nós']];
+/* Soma os itens por categoria; o que faltar para o total do mês (gráfico de custos) vira "Não detalhado pela API". */
+/* Máquinas (fixo = cobradas por hora): pph = ECU/hora somado, h = horas da maior máquina, det = tamanho ("64GB × 2 zonas"). */
+function _ecCats_(it,tot){var a={},s=0;
+  it.forEach(function(x){var c='Outros itens';for(var i=0;i<EC_CATS.length;i++)if(EC_CATS[i][0].test(x.k)){c=EC_CATS[i][1];break;}
+    var g=a[c]||(a[c]={v:0});g.v+=x.v;s+=x.v;
+    if(x.pph!=null){g.fixo=true;g.pph=Math.round(((g.pph||0)+x.pph)*1e4)/1e4;g.h=Math.max(g.h||0,x.h||0);var z=String(x.k).match(/(\d+)\s*GB,\s*(\d+)\s*AZ/i);if(z)g.det=(g.det?g.det+' + ':'')+z[1]+' GB × '+z[2]+(z[2]==='1'?' zona':' zonas');}});
+  var o=Object.keys(a).map(function(k){var g=a[k],r={k:k,v:Math.round(g.v),ia:k==='IA'};if(g.fixo){r.fixo=true;r.pph=g.pph;r.h=g.h;if(g.det)r.det=g.det;}return r;}).filter(function(x){return x.v>0;});
+  if(tot-s>tot*0.01)o.push({k:'Não detalhado pela API',v:Math.round(tot-s)});
+  return o.sort(function(p,q){return q.v-p.v;});}
+function _ecLeaves_(o,out,key){
+  if(key==='dimensions')return 0;
+  if(Array.isArray(o)){var n0=0;o.forEach(function(x){n0+=_ecLeaves_(x,out,'');});return n0;}
+  if(!o||typeof o!=='object')return 0;
+  var kids=0;for(var k in o){var v=o[k];if(v&&typeof v==='object')kids+=_ecLeaves_(v,out,k);}
+  var c=parseFloat(o.cost!=null?o.cost:(o.total_cost!=null?o.total_cost:o.price)),nm=o.name||o.display_name||o.sku; // price = máquinas (resources)
+  if(!kids&&!isNaN(c)&&typeof nm==='string'){out.push({k:nm,v:c,h:o.hours,pph:o.price_per_hour});return 1;} // hours/price_per_hour = máquinas
+  return kids;
+}
+/* DIAGNÓSTICO — rode no editor: mostra o formato da resposta da API de Billing (não registra a chave). */
+function debugBilling(){
+  try{var os=ecFetch_('/api/v1/organizations').organizations||[];Logger.log('Organizações visíveis pela chave: %s',os.map(function(o){return o.id+' ('+o.name+')';}).join(', ')||'(nenhuma)');}
+  catch(e){Logger.log('Listar organizações falhou: %s',e.message);}
+  var org=ecOrg_();Logger.log('Organização usada: %s%s',org,props_().getProperty('EC_ORG_ID')?' (EC_ORG_ID)':' (1ª da chave)');
+  var now=new Date(),from=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth()-2,1)).toISOString();
+  var c=ecCharts_(org,from,now.toISOString()),d=(c.r&&c.r.data)||[];
+  Logger.log('Endpoint %s · chaves da resposta: %s · buckets: %s',c.via,Object.keys(c.r||{}).join(', '),d.length);
+  if(d[0])Logger.log('1º bucket: %s',JSON.stringify(d[0]).slice(0,1500));
+  var b=_billing_();
+  b.months.forEach(function(m){Logger.log('%s · %s ECU%s · deployments %s · IA %s · itens %s',m.m,m.cons,m.part?' (parcial)':'',JSON.stringify(m.dep),m.ia,JSON.stringify(m.itens||[]));Logger.log('   categorias: %s',JSON.stringify(m.cats||[]));});
+  var pm=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth()-1,1)).toISOString(),pe=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),1)).toISOString();
+  try{var q='?from='+encodeURIComponent(pm)+'&to='+encodeURIComponent(pe);Logger.log('items (bruto, mês anterior): %s',JSON.stringify(ecFetch_('/api/v1/billing/costs/'+org+'/items'+q)).slice(0,2500));}catch(e){Logger.log('items v1: %s',e.message);}
+  return b;
+}
+/* DIAGNÓSTICO — rode no editor: confere cada fonte da Eng. Detecção e lista as regras sem tecnologia ("Outros"). */
+function debugOperacional(){
+  var d=buildOperational_();
+  Logger.log('Erros por fonte: %s',JSON.stringify(d.errs));
+  d.elastic.slice(-4).forEach(function(e){Logger.log('%s · %s regras · técnicas %s/%s · subtéc. %s/%s · %s',e.m,e.prod,e.tecCov,e.tecTot,e.subCov,e.subTot,e.fonte);});
+  d.alertsByMonth.slice(-4).forEach(function(a){Logger.log('Alertas %s: %s (top: %s)',a.m,a.total,a.top[0]?a.top[0].k+' '+a.top[0].v:'—');});
+  Logger.log('Tecnologias (%s): %s',d.elastic[d.elastic.length-1].m,JSON.stringify(d.techByMonth[d.elastic[d.elastic.length-1].m]));
+  var outros=fetchRules_().filter(function(r){return r.enabled&&_opTec_(r)==='Outros';}).map(function(r){return r.name+' {idx: '+(r.index||[]).join(',')+' · tags: '+(r.tags||[]).join(',')+'}';});
+  Logger.log('Regras sem tecnologia (%s): %s',outros.length,outros.slice(0,40).join(' | '));
+  Logger.log('Servidores: %s · Fontes de log (top 10): %s',JSON.stringify(d.inv),JSON.stringify(d.logs.slice(0,10)));
+  Logger.log('Criticidade: %s · Licença: %s',JSON.stringify(d.criticidade),JSON.stringify(d.lic.slice(-2)));
+  return d;
+}
+function _isAdminMe_(){try{var mem=accFindUser_(accMembers_(),_me_());return !!(mem&&mem.ativo&&mem.papel==='Admin');}catch(e){return false;}}
+/** Chamado pelo cliente — salva a nota de Melhorias/Próximas ações do mês (só Admin). Vazio apaga. */
+function salvarNotaOp(ym,mel,prox){
+  if(!isAuthorized_()) throw new Error('Acesso restrito ao time de SOC/CSIRT.');
+  if(!_isAdminMe_()) throw new Error('Só Admin edita as notas.');
+  if(!/^\d{4}-\d{2}$/.test(String(ym))) throw new Error('Mês inválido.');
+  mel=String(mel||'').trim();prox=String(prox||'').trim();
+  var k='OP_NOTA_'+ym,rec={mel:mel,prox:prox,by:_me_(),at:new Date().toISOString()},s=JSON.stringify(rec);
+  if(Utilities.newBlob(s).getBytes().length>8500) throw new Error('Nota longa demais (limite ~8 KB por mês). Encurte o texto.');
+  if(!mel&&!prox)props_().deleteProperty(k);else props_().setProperty(k,s);
+  try{CacheService.getScriptCache().remove(OP_KEY+'_n');}catch(e){}
+  return rec;
+}
+/* MIGRAÇÃO (rode uma vez no editor): copia a aba Highlights da planilha antiga (SHEET_ID) para as notas do portal.
+ * Não sobrescreve nota que já exista. Depois disso a planilha pode ser desligada. */
+function importarNotasDaPlanilha(){
+  var id=props_().getProperty('SHEET_ID');if(!id)throw new Error('SHEET_ID não definida.');
+  var v=SpreadsheetApp.openById(id).getSheetByName('Highlights').getDataRange().getValues(),n=0,pulou=[];
+  for(var i=1;i<v.length;i++){if(!(v[i][0] instanceof Date))continue;
+    var ym=Utilities.formatDate(v[i][0],'America/Sao_Paulo','yyyy-MM'),k='OP_NOTA_'+ym;if(props_().getProperty(k)){pulou.push(ym);continue;}
+    var rec={mel:String(v[i][1]||'').trim(),prox:String(v[i][2]||'').trim(),by:'planilha',at:new Date().toISOString()};if(!rec.mel&&!rec.prox)continue;
+    var s=JSON.stringify(rec);if(Utilities.newBlob(s).getBytes().length>8500){Logger.log('%s: texto longo demais, cortado',ym);rec.mel=rec.mel.slice(0,2500);rec.prox=rec.prox.slice(0,1200);s=JSON.stringify(rec);}
+    props_().setProperty(k,s);n++;}
+  try{CacheService.getScriptCache().remove(OP_KEY+'_n');}catch(e){}
+  Logger.log('Notas importadas: %s · já existiam (mantidas): %s',n,pulou.join(', ')||'—');
 }
 
 function getOperational(){
@@ -989,7 +1203,10 @@ function refreshOperational(){var data=buildOperational_();try{opPut_(CacheServi
  *   Funil        = Triage: total, IA (Human Review?=falso), N1 (Human Review?=verdadeiro), CSIRT=incidentes
  *   Incidentes   = Detalhado por mês x severidade (linhas com severidade válida)
  */
-var CS_KEY = 'csirt_data_v1';
+var CS_KEY = 'csirt_data_v5'; // v5: + drill-down de IA/N1 (troca a chave p/ não servir cache sem os campos novos)
+// MTTA N1 = Criado -> N1 assumiu. A coluna ainda não vem no export da triagem; o primeiro destes
+// nomes que existir na aba Consolidado é usado. Sem nenhum, mtta_n1 volta vazio.
+var N1_ACK_COLS = ['N1 Assumido', 'Assumido em', 'Assigned at', 'Acknowledged at', 'Acknowledged'];
 var CS_TTL = 2 * 60 * 60; // 2h
 var CS_SEV = ['Critical','High','Medium','Low'];
 
@@ -1046,7 +1263,8 @@ function buildCsirt_(){
       dTipo=colOpt(D,'Tipo da taxonomia'), dTit=colOpt(D,'Título'), dOid=colOpt(D,'offense id');
   var _isManual=function(r){ if(dOid<0)return false; return /^WB-\d+-\d{8}-\d+$/.test(String(r[dOid]||'').trim()); };
   // ---- Eficiência: colunas extras + parser de data/hora (getDisplayValues => string) ----
-  var tImp=colOpt(T,'Impacto'), tCri=colOpt(T,'Criado');
+  var tImp=colOpt(T,'Impacto'), tCri=colOpt(T,'Criado'), tRes=colOpt(T,'Resolvido'), tAck=-1, tAckName=null;
+  N1_ACK_COLS.forEach(function(n){ if(tAck<0&&T.idx[n]!=null){tAck=T.idx[n];tAckName=n;} });
   var dCriE=colOpt(D,'Criado em'), dDet=colOpt(D,'Detectado em'), dRep=colOpt(D,'Reportado em'), dCat=colOpt(D,'Categorização');
   function _dt(v){
     if(v==null||v==='')return null;
@@ -1074,12 +1292,15 @@ function buildCsirt_(){
     return s;
   }
   var comps={}; // YYYY-MM -> {label, tri:[], det:[]}
-  function bucket(c,l){ if(!comps[c]) comps[c]={comp:c,label:l,tri:[],det:[]}; return comps[c]; }
+  // Rótulo do mês sempre "Out/2026", montado da Competência (a importação do Sheets pode virar "out./2026" ou data).
+  var _MLAB=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  function _lab(c,l){ var m=String(c).match(/^(\d{4})-(\d{2})$/); return m?_MLAB[+m[2]-1]+'/'+m[1]:String(l); }
+  function bucket(c,l){ if(!comps[c]) comps[c]={comp:c,label:_lab(c,l),tri:[],det:[]}; return comps[c]; }
   T.rows.forEach(function(r){ var c=r[tC],l=r[tL]; if((c==null||c==='')&&(l==null||l===''))return; bucket(_ym(c,l),String(l)).tri.push(r); });
   D.rows.forEach(function(r){ var c=r[dC],l=r[dL]; if((c==null||c==='')&&(l==null||l===''))return; bucket(_ym(c,l),String(l)).det.push(r); });
 
   var order=Object.keys(comps).sort();
-  var months=[], incidents=[], mttd=[], mtta=[], mttr=[], funnels=[], inc_detail=[];
+  var months=[], incidents=[], mttd=[], mtta=[], mttr=[], mttaN1=[], mttrN1=[], funnels=[], inc_detail=[], tri_detail=[];
   // "Human Review?" robusto a locale/tipo: boolean, "true/false", "VERDADEIRO/FALSO", "sim/não", "1/0".
   var _HRTRUE={'true':1,'verdadeiro':1,'v':1,'sim':1,'s':1,'yes':1,'y':1,'1':1};
   var N=order.length, _hr=function(r){var h=r[tHR]; if(h===true)return true; return !!_HRTRUE[String(h).trim().toLowerCase()];};
@@ -1116,15 +1337,32 @@ function buildCsirt_(){
     // MTTD AI (triage MTTA col)
     var triVals=g.tri.map(function(r){return _cmin(r[tMt]);});
     var o1=sevSeries(g.tri,tSev,function(r){return _cmin(r[tMt]);}); o1.m=ml; o1.ov=_r2(_avg(triVals)); mttd.push(o1);
+    // MTTR N1 (triage, só alertas com revisão humana): Criado -> Resolvido
+    var n1min=function(r){ if(!_hr(r)||tCri<0||tRes<0)return null; var v=_diffMin(r[tCri],r[tRes]); return (v!=null&&v>=0)?v:null; };
+    var o4=sevSeries(g.tri,tSev,n1min); o4.m=ml; o4.ov=_r2(_avg(g.tri.map(n1min))); mttrN1.push(o4);
+    // MTTA N1: Criado -> N1 assumiu (vazio enquanto o export não trouxer a coluna)
+    var n1ack=function(r){ if(!_hr(r)||tCri<0||tAck<0)return null; var v=_diffMin(r[tCri],r[tAck]); return (v!=null&&v>=0)?v:null; };
+    var o5=sevSeries(g.tri,tSev,n1ack); o5.m=ml; o5.ov=_r2(_avg(g.tri.map(n1ack))); mttaN1.push(o5);
     // MTTA / MTTR CSIRT (detalhado)
     var detA=g.det.map(function(r){return _cmin(r[dA]);}), detR=g.det.map(function(r){return _cmin(r[dR]);});
     var o2=sevSeries(g.det,dSev,function(r){return _cmin(r[dA]);}); o2.m=ml; o2.ov=_r2(_avg(detA)); mtta.push(o2);
     var o3=sevSeries(g.det,dSev,function(r){return _cmin(r[dR]);}); o3.m=ml; o3.ov=_r2(_avg(detR)); mttr.push(o3);
-    // funil do mês
-    var ftot=g.tri.length, fia=0, fn1=0;
-    g.tri.forEach(function(r){ if(_hr(r)) fn1++; else fia++; });
-    funnels.push({m:ml,total:ftot,ia:fia,n1:fn1,csirt:tot,
-      ia_pct:ftot?Math.round(fia/ftot*1000)/10:0, n1_pct:ftot?Math.round(fn1/ftot*1000)/10:0, csirt_pct:ftot?Math.round(tot/ftot*1000)/10:0});
+    // funil do mês + quebra por criticidade. Só conta linhas com severidade válida (o export traz
+    // algumas linhas vazias); o CSIRT separa os incidentes abertos manualmente (WB-…), que não vêm do funil.
+    var ftot=0, fia=0, fn1=0, fman=0, fsev={};
+    CS_SEV.forEach(function(s){ fsev[s]={ia:0,n1:0,cs:cnt[s]}; });
+    g.tri.forEach(function(r){ var s=r[tSev]; if(!fsev[s])return; ftot++; if(_hr(r)){fn1++;fsev[s].n1++;} else {fia++;fsev[s].ia++;} });
+    g.det.forEach(function(r){ if(CS_SEV.indexOf(r[dSev])>=0&&_isManual(r))fman++; });
+    // drill-down de IA e N1 do mês (mesma ideia do drill de incidentes, com as colunas da triagem);
+    // títulos limitados aos 100 mais frequentes de cada etapa no mês, para não pesar o cache
+    var _tdd=function(){return {tec:{},sev:{},ver:{},imp:{},titulos:{}};}, tdd={ia:_tdd(),n1:_tdd()};
+    g.tri.forEach(function(r){ if(!fsev[r[tSev]])return; var o=_hr(r)?tdd.n1:tdd.ia;
+      _inc(o.tec,r[tTec]); _inc(o.sev,r[tSev]); _inc(o.ver,r[tAV]); if(tImp>=0)_inc(o.imp,r[tImp]); _inc(o.titulos,r[tTit]); });
+    ['ia','n1'].forEach(function(k){ var t=tdd[k].titulos, top={};
+      Object.keys(t).sort(function(a,b){return t[b]-t[a];}).slice(0,100).forEach(function(x){top[x]=t[x];}); tdd[k].titulos=top; });
+    tri_detail.push({m:ml, ia:tdd.ia, n1:tdd.n1});
+    funnels.push({m:ml,total:ftot,ia:fia,n1:fn1,csirt:tot,csirt_manual:fman,sev:fsev,
+      ia_pct:ftot?Math.round(fia/ftot*10000)/100:0, n1_pct:ftot?Math.round(fn1/ftot*10000)/100:0, csirt_pct:ftot?Math.round(tot/ftot*10000)/100:0});
     // ---- FP do mês ----
     var nfp=0,ntp=0,nauto=0,automin=0;
     g.tri.forEach(function(r){
@@ -1170,15 +1408,11 @@ function buildCsirt_(){
     eff_td.push({m:ml,rows:td});
   });
 
-  // funil do último mês
-  var lc=order[order.length-1], g=comps[lc];
-  var tot=g.tri.length, ia=0, n1=0;
-  g.tri.forEach(function(r){ var hr=r[tHR]; if(hr===true||String(hr).toLowerCase()==='true'||String(hr).toLowerCase()==='sim') n1++; else ia++; });
-  var csirt=incidents[incidents.length-1].total;
-  var funnel={m:g.label,total:tot,ia:ia,n1:n1,csirt:csirt,
-    ia_pct:tot?Math.round(ia/tot*1000)/10:0, n1_pct:tot?Math.round(n1/tot*1000)/10:0, csirt_pct:tot?Math.round(csirt/tot*1000)/10:0};
+  // funil do último mês = o mesmo cálculo mensal acima (antes era refeito aqui com outra regra)
+  var funnel=funnels[funnels.length-1];
 
-  var cur={mttd:mttd.length?mttd[mttd.length-1].ov:null, mtta:mtta.length?mtta[mtta.length-1].ov:null, mttr:mttr.length?mttr[mttr.length-1].ov:null};
+  var cur={mttd:mttd.length?mttd[mttd.length-1].ov:null, mtta:mtta.length?mtta[mtta.length-1].ov:null, mttr:mttr.length?mttr[mttr.length-1].ov:null,
+    n1:mttrN1.length?mttrN1[mttrN1.length-1].ov:null, n1a:mttaN1.length?mttaN1[mttaN1.length-1].ov:null};
 
   // ---- Pontos Chave / Pontos de Atenção (derivados) ----
   var key=[], att=[];
@@ -1209,7 +1443,7 @@ function buildCsirt_(){
 
   return {updated:Utilities.formatDate(new Date(),'America/Sao_Paulo','dd/MM/yyyy HH:mm'),
     months:months, cur:cur, funnel:funnel, funnels:funnels, incidents:incidents,
-    mttd_ai:mttd, mtta_csirt:mtta, mttr_csirt:mttr, key_points:key, attention:att, fp:fp, inc_detail:inc_detail,
+    mttd_ai:mttd, mtta_n1:mttaN1, mtta_n1_col:tAckName, mttr_n1:mttrN1, mtta_csirt:mtta, mttr_csirt:mttr, key_points:key, attention:att, fp:fp, inc_detail:inc_detail, tri_detail:tri_detail,
     eff:{impacto:eff_imp, precisao:eff_prec, heat:eff_heat, threatcomp:eff_tc, tempo:eff_td, buckets:_BK, days:_ORD}};
 }
 
@@ -1413,22 +1647,36 @@ function buildClaroty_(){
       ev.push([ym,sb.key,db.key,nb.key||null,nb.doc_count]);});});});});
 
   /* 3) Saúde da coleta por data stream */
-  var rh=esSearch_(OT_ALL,{size:0,aggs:{ds:{terms:{field:'data_stream.dataset',size:10},aggs:{
-    last:{max:{field:'@timestamp'}},
-    lastok:{filter:{bool:{must_not:[{exists:{field:'error.message'}}]}},aggs:{t:{max:{field:'@timestamp'}}}},
-    cls:{filters:{filters:{
+  var CLS={
       ok:{bool:{must_not:[{exists:{field:'error.message'}}]}},
       cel:_mp_('no such overload'),
       api422:{bool:{minimum_should_match:1,should:[_mp_('422'),_mp_('valid dictionary')]}},
       auth:{bool:{minimum_should_match:1,should:[_mp_('1006'),_mp_('Invalid authentication')]}},
-      transient:{bool:{minimum_should_match:1,should:[_mp_('502'),_mp_('timeout'),_mp_('deadline'),_mp_('Internal server error')]}},
-      nodev:{bool:{filter:[{exists:{field:'claroty_xdome.alert.id'}}],must_not:[{exists:{field:'claroty_xdome.alert.device.name'}}]}}}}}}}}});
+      transient:{bool:{minimum_should_match:1,should:[_mp_('502'),_mp_('503'),_mp_('504'),_mp_('timeout'),_mp_('Client.Timeout exceeded'),_mp_('deadline'),_mp_('Internal server error'),_mp_('Bad Gateway')]}},
+      nodev:{bool:{filter:[{exists:{field:'claroty_xdome.alert.id'}}],must_not:[{exists:{field:'claroty_xdome.alert.device.name'}}]}}};
+  var rh=esSearch_(OT_ALL,{size:0,aggs:{ds:{terms:{field:'data_stream.dataset',size:10},aggs:{
+    first:{min:{field:'@timestamp'}},
+    last:{max:{field:'@timestamp'}},
+    lastok:{filter:CLS.ok,aggs:{t:{max:{field:'@timestamp'}}}},
+    lasterr:{filter:{exists:{field:'error.message'}},aggs:{t:{max:{field:'@timestamp'}},
+      top:{top_hits:{size:1,sort:[{'@timestamp':{order:'desc'}}],_source:{includes:['error.message','@timestamp']}}}}},
+    cls:{filters:{filters:CLS}},
+    r24:{filter:{range:{'@timestamp':{gte:'now-24h'}}},aggs:{cls:{filters:{filters:CLS}}}},
+    r7:{filter:{range:{'@timestamp':{gte:'now-7d'}}},aggs:{cls:{filters:{filters:CLS}}}}}}}});
+  function pack(total,c){var g=function(n){return (c&&c[n]&&c[n].doc_count)||0;};
+    var h={total:total,ok:g('ok'),cel:g('cel'),api422:g('api422'),auth:g('auth'),transient:g('transient'),nodev:g('nodev')};
+    h.other=Math.max(0,h.total-h.ok-h.cel-h.api422-h.auth-h.transient);return h;}
   var health={};
   (((rh.aggregations||{}).ds||{}).buckets||[]).forEach(function(b){
-    var k=String(b.key).replace('claroty_xdome.',''),c=(b.cls&&b.cls.buckets)||{},g=function(n){return (c[n]&&c[n].doc_count)||0;};
-    var h={total:b.doc_count,ok:g('ok'),cel:g('cel'),api422:g('api422'),auth:g('auth'),transient:g('transient'),nodev:g('nodev'),
-      last:(b.last&&b.last.value_as_string)||'',lastOk:(b.lastok&&b.lastok.t&&b.lastok.t.value_as_string)||''};
-    h.other=Math.max(0,h.total-h.ok-h.cel-h.api422-h.auth-h.transient);
+    var k=String(b.key).replace('claroty_xdome.','');
+    var h=pack(b.doc_count,b.cls&&b.cls.buckets);
+    h.first=(b.first&&b.first.value_as_string)||'';h.last=(b.last&&b.last.value_as_string)||'';
+    h.lastOk=(b.lastok&&b.lastok.t&&b.lastok.t.value_as_string)||'';
+    h.lastErr=(b.lasterr&&b.lasterr.t&&b.lasterr.t.value_as_string)||'';
+    var th=b.lasterr&&b.lasterr.top&&b.lasterr.top.hits&&b.lasterr.top.hits.hits;
+    h.lastErrMsg=th&&th.length?String(((th[0]._source||{}).error||{}).message||'').slice(0,240):'';
+    h.r24=pack(b.r24?b.r24.doc_count:0,b.r24&&b.r24.cls&&b.r24.cls.buckets);
+    h.r7=pack(b.r7?b.r7.doc_count:0,b.r7&&b.r7.cls&&b.r7.cls.buckets);
     health[k]=h;});
 
   return {alerts:alerts,ev:ev,evTypes:evTypes,health:health,updated:new Date().toISOString(),code_version:CODE_VERSION};
@@ -1455,5 +1703,105 @@ function debugClaroty(){var d=buildClaroty_();
   Logger.log('alertas únicos: %s (abertos: %s)', d.alerts.length, d.alerts.filter(function(a){return a.st!=='Resolved';}).length);
   d.alerts.forEach(function(a){Logger.log('#%s %s | %s | %s | ICS %s', a.id, a.nm, a.det, a.st, a.ics.join(' '));});
   var tot=d.ev.reduce(function(s,r){return s+r[4];},0);Logger.log('eventos OT: %s em %s linhas', tot, d.ev.length);
-  Object.keys(d.health).forEach(function(k){var h=d.health[k];Logger.log('saúde %s: total %s · ok %s · cel %s · 422 %s · auth %s · transit %s · outros %s · sem device %s', k,h.total,h.ok,h.cel,h.api422,h.auth,h.transient,h.other,h.nodev);});
+  Object.keys(d.health).forEach(function(k){var h=d.health[k];Logger.log('saúde %s: total %s · ok %s · cel %s · 422 %s · auth %s · transit %s · outros %s · sem device %s', k,h.total,h.ok,h.cel,h.api422,h.auth,h.transient,h.other,h.nodev);Logger.log('   24h: %s docs · ok %s · erros %s | 7d: ok %s · erros %s | última OK %s | último erro %s: %s', h.r24.total,h.r24.ok,h.r24.total-h.r24.ok,h.r7.ok,h.r7.total-h.r7.ok,h.lastOk||'—',h.lastErr||'—',h.lastErrMsg);});
   return d;}
+/* ================== INVENTÁRIO DE SERVIDORES — CMDB × Cortex XDR × SIEM (v25) ==================
+ * CMDB  : logs-servicenow.event-servicenow_cmdb (classes de servidor). A carga completa é eventual e os dias seguintes
+ *         trazem só os CIs alterados → janela INV_CMDB_WIN (30d) para pegar a última carga completa.
+ * Cortex: índice lookup cortex_endpoints_lookup (Propriedade CORTEX_INDEX para trocar); só agentes tipo SERVER
+ * SIEM  : hosts com TELEMETRIA PRÓPRIA na janela (Windows Event Log, Syslog, Elastic Agent, auditoria de BD).
+ *         Menções em integrações de terceiros (Cortex alerts, Tenable, Guardicore…) não contam.
+ * Chave de comparação: hostname em minúsculo, sem domínio (primeiro rótulo).
+ */
+var INV_CMDB  = 'logs-servicenow.event-servicenow_cmdb';
+var INV_SIEM  = 'logs-*,-logs-ti_misp*';
+var INV_CMDB_WIN = 'now-30d';
+var INV_KEY   = 'inv_data_' + CODE_VERSION;
+var INV_TTL   = 2 * 60 * 60; // 2h
+var INV_OWN_PREFIX = ['system.','windows.','winlog.','tcp.','udp.','elastic_agent','endpoint.'];
+var INV_OWN_EXACT  = ['ms_sql_audit','oracle.audit','generic'];
+var INV_CX_FIELDS = {
+  name:['endpoint_name','hostname','host_name','host.name','name','endpoint.name','cortex.endpoint_name'],
+  type:['endpoint_type','type','endpoint.type','cortex.endpoint_type'],
+  status:['endpoint_status','status','endpoint.status','cortex.endpoint_status'],
+  os:['operating_system','os','os_name','host.os.name','endpoint.os'],
+  ver:['endpoint_version','agent_version','version','endpoint.version'],
+  op:['operational_status','endpoint.operational_status'],
+  cs:['content_status','endpoint.content_status'],
+  last:['last_seen','endpoint.last_seen']
+};
+
+function _invNorm_(h){if(h==null)return '';var s=String(h).trim().toLowerCase();if(!s)return '';s=s.split('\\').pop();return s.split('.')[0];}
+function _invJunk_(n){return !n||n.indexOf('/')>=0||n==='unknown'||n==='localhost'||/^macbook/.test(n);}
+function _get_(o,path){if(!o)return undefined;if(o[path]!==undefined)return o[path];var p=path.split('.'),c=o;for(var i=0;i<p.length;i++){if(c==null)return undefined;c=c[p[i]];}return c;}
+function _pick_(src,cands){for(var i=0;i<cands.length;i++){var v=_get_(src,cands[i]);if(v!==undefined&&v!==null&&v!=='')return {f:cands[i],v:Array.isArray(v)?v[0]:v};}return null;}
+function _invOwnFam_(ds){var out={};ds.forEach(function(x){
+  if(/^(system|windows|winlog)\./.test(x))out['Windows']=1;else if(/^(tcp|udp)\./.test(x))out['Syslog']=1;
+  else if(/^(elastic_agent|endpoint\.)/.test(x))out['Elastic Agent']=1;else if(x==='ms_sql_audit'||x==='oracle.audit')out['DB audit']=1;else out[x]=1;});
+  return Object.keys(out).sort();}
+
+function _invCmdb_(){
+  var r=esSearch_(INV_CMDB,{size:0,query:{bool:{filter:[{range:{'@timestamp':{gte:INV_CMDB_WIN}}},{exists:{field:'servicenow.event.name.value'}}]}},
+    aggs:{n:{terms:{field:'servicenow.event.name.value',size:20000},aggs:{c:{terms:{field:'servicenow.event.sys_class_name.display_value',size:1,missing:'Servidor'}},t:{max:{field:'@timestamp'}}}}}});
+  var out={},last='';
+  (((r.aggregations||{}).n||{}).buckets||[]).forEach(function(b){var n=_invNorm_(b.key);if(_invJunk_(n))return;
+    var c=(b.c&&b.c.buckets&&b.c.buckets[0]&&b.c.buckets[0].key)||'Servidor';out[n]=c;var t=b.t&&b.t.value_as_string;if(t&&t>last)last=t;});
+  return {map:out,last:last};
+}
+function _invCortex_(){
+  var idx=props_().getProperty('CORTEX_INDEX')||'cortex_endpoints_lookup';
+  var r=esSearch_(idx,{size:10000,track_total_hits:true,query:{match_all:{}}});
+  var hits=(r.hits&&r.hits.hits)||[],out={},det={},hasType=false,total=hits.length,servers=0;
+  hits.forEach(function(h){var s=h._source||{},rec={};
+    Object.keys(INV_CX_FIELDS).forEach(function(k){var p=_pick_(s,INV_CX_FIELDS[k]);if(p){rec[k]=p.v;det[k]=det[k]||p.f;}});
+    if(rec.type!=null)hasType=true;
+    if(rec.type!=null&&String(rec.type).toUpperCase().indexOf('SERVER')<0)return;
+    var n=_invNorm_(rec.name);if(_invJunk_(n))return;servers++;
+    var st=String(rec.status||'').toUpperCase().replace(/^AGENT_STATUS_/,''),last=rec.last;
+    if(typeof last==='number')last=new Date(last).toISOString();
+    var cur={st:st||null,op:rec.op?String(rec.op).toUpperCase():null,os:rec.os||null,ver:rec.ver||null,cs:rec.cs?String(rec.cs).toUpperCase():null,last:last||''};
+    var old=out[n];if(!old||String(cur.last)>String(old.last))out[n]=cur;});
+  return {map:out,fields:det,typeFiltered:hasType,docs:total,servers:servers,index:idx};
+}
+function _invSiem_(win){
+  var should=INV_OWN_PREFIX.map(function(p){return {prefix:{'data_stream.dataset':p}};}).concat([{terms:{'data_stream.dataset':INV_OWN_EXACT}}]);
+  var r=esSearch_(INV_SIEM,{size:0,query:{bool:{filter:[{range:{'@timestamp':{gte:'now-'+win}}},{exists:{field:'host.name'}},{bool:{should:should,minimum_should_match:1}}]}},
+    aggs:{h:{terms:{field:'host.name',size:20000},aggs:{t:{max:{field:'@timestamp'}},ds:{terms:{field:'data_stream.dataset',size:20}}}}}});
+  var out={};
+  (((r.aggregations||{}).h||{}).buckets||[]).forEach(function(b){var n=_invNorm_(b.key);if(_invJunk_(n))return;
+    var o=out[n]||(out[n]={last:'',ds:{},docs:0});o.docs+=b.doc_count;var t=b.t&&b.t.value_as_string;if(t&&t>o.last)o.last=t;
+    ((b.ds&&b.ds.buckets)||[]).forEach(function(d){o.ds[d.key]=1;});});
+  return out;
+}
+function buildInventario_(win){
+  win=(win==='7d')?'7d':'24h';
+  var cm=_invCmdb_(),cx=_invCortex_(),sm=_invSiem_(win),names={};
+  [cm.map,cx.map,sm].forEach(function(m){Object.keys(m).forEach(function(n){names[n]=1;});});
+  var rows=Object.keys(names).sort().map(function(n){var c=cm.map[n]||null,x=cx.map[n]||null,s=sm[n]||null;
+    return [n,c,x?x.st:null,x?x.op:null,x?x.os:null,x?x.ver:null,s?s.last:null,s?_invOwnFam_(Object.keys(s.ds)):[],s?s.docs:0,x?x.cs:null];});
+  return {rows:rows,win:win,gen:new Date().toISOString(),cmdbLast:cm.last,cortex:{index:cx.index,docs:cx.docs,servers:cx.servers,fields:cx.fields,typeFiltered:cx.typeFiltered},code_version:CODE_VERSION};
+}
+function invPut_(cache,key,str){var n=Math.ceil(str.length/CHUNK),p={};for(var i=0;i<n;i++)p[key+'_'+i]=str.substr(i*CHUNK,CHUNK);p[key+'_n']=String(n);cache.putAll(p,INV_TTL);}
+function invGet_(cache,key){var ns=cache.get(key+'_n');if(!ns)return null;var n=parseInt(ns,10),ids=[];for(var i=0;i<n;i++)ids.push(key+'_'+i);var got=cache.getAll(ids),o='';for(var j=0;j<n;j++){var s=got[key+'_'+j];if(s==null)return null;o+=s;}return o;}
+
+/** Chamado pelo cliente — inventário de servidores (win: '24h' | '7d'). */
+function getInventario(win){
+  if(!isAuthorized_()) throw new Error('Acesso restrito ao time de SOC/CSIRT.');
+  win=(win==='7d')?'7d':'24h';var key=INV_KEY+'_'+win,cache=CacheService.getScriptCache();
+  var hit=invGet_(cache,key);if(hit){try{return JSON.parse(hit);}catch(e){}}
+  var data=buildInventario_(win);try{invPut_(cache,key,JSON.stringify(data));}catch(e){}
+  return data;
+}
+/* Gatilho de tempo: aquece o cache do inventário (agende a cada 2h). */
+function refreshInventario(){var c=CacheService.getScriptCache();['24h','7d'].forEach(function(w){try{invPut_(c,INV_KEY+'_'+w,JSON.stringify(buildInventario_(w)));}catch(e){Logger.log('refreshInventario %s: %s',w,e.message);}});}
+/* DIAGNÓSTICO — valida as 3 fontes e mostra os campos detectados no índice do Cortex. */
+function debugInventario(){
+  var idx=props_().getProperty('CORTEX_INDEX')||'cortex_endpoints_lookup';
+  try{var s=esSearch_(idx,{size:1});var h=(s.hits&&s.hits.hits&&s.hits.hits[0]);Logger.log('Cortex [%s] total: %s · campos do 1º doc: %s',idx,JSON.stringify(s.hits&&s.hits.total),h?Object.keys(h._source||{}).join(', '):'(vazio)');}
+  catch(e){Logger.log('Cortex [%s] ERRO: %s',idx,e.message);}
+  var d=buildInventario_('24h'),C=0,X=0,S=0,all=0;
+  d.rows.forEach(function(r){var c=!!r[1],x=!!r[2],s=!!r[6];if(c)C++;if(x)X++;if(s)S++;if(c&&x&&s)all++;});
+  Logger.log('universo %s · CMDB %s (última extração %s) · Cortex %s · SIEM 24h %s · nas 3 fontes %s',d.rows.length,C,d.cmdbLast,X,S,all);
+  Logger.log('Cortex: %s docs, %s servidores · filtro por tipo: %s · campos usados: %s',d.cortex.docs,d.cortex.servers,d.cortex.typeFiltered,JSON.stringify(d.cortex.fields));
+  return d;
+}
