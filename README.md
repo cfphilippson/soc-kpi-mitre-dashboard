@@ -3,13 +3,12 @@
 Painel **executivo/operacional de SOC/CSIRT** servido como **Google Apps Script Web App**. Reúne, em um único link:
 
 - **SOC + CSIRT** — KPIs de resposta a incidentes (MTTD, MTTA, MTTR), funil de atendimento (IA → N1 → CSIRT), incidentes por mês/severidade com drill-down, Falsos Positivos, Eficiência, evolutivos, termômetros de SLA e pontos-chave/atenção gerados automaticamente.
-- **Eng. Detecção** — 100% por API, sem planilha: casos de uso em produção e cobertura MITRE pelas regras do Elastic (com retrato mensal), alertas por mês, fontes de log e **licença pela API de Billing do Elastic Cloud**, com semáforo que explica o consumo (média por dia, máquinas × uso, camadas Hot/Warm/Cold/Frozen, IA).
+- **Eng. Detecção** — 100% por API, sem planilha: casos de uso em produção e cobertura MITRE pelas regras do Elastic (com retrato mensal), alertas por mês, fontes de log e **licença pela API de Billing do Elastic Cloud**, com semáforo que explica o consumo (média por dia, máquinas × uso, camadas Hot/Warm/Cold/Frozen, IA), **Top 5 de datasources por volume** e as regras ou eventos que mais geram log em cada um. Inclui a **Cobertura MITRE ATT&CK** ao vivo do Elastic Security (matriz, resumo por tática, gaps, casos do mês).
 - **Inventário** — servidores da CMDB (ServiceNow) × agentes do Cortex XDR × telemetria no SIEM, por hostname normalizado: quem está sem EDR, sem log ou fora da CMDB.
-- **Cobertura MITRE ATT&CK** — ao vivo do Elastic Security (matriz, resumo por tática, gaps, casos do mês).
 - **Vazamento de Credenciais** — credenciais expostas (Digital Risk Protection) lidas do data stream do Elastic, separadas em Corporativo × Externo, com recomendações por mês.
 - **Cyber OT** — alertas e eventos da integração **Claroty xDome** no Elastic, com matriz **MITRE ATT&CK for ICS v20.0** completa (78 técnicas + 26 subtécnicas), correlação ICS × Enterprise, exposição de ativos OT, atividade de Configuration Download, saúde da coleta e recomendações por período.
 
-Capa de apresentação, menu lateral expansível, carregador animado, **PT | EN**, tema **escuro | claro | sistema**, usuário logado com foto do Google Workspace e **gestão de acesso com aprovação** (portal + e-mail, com auditoria).
+Capa de apresentação, menu lateral expansível, carregador animado, botão **↻** para atualizar a tela aberta, **PT | EN**, tema **escuro | claro | sistema**, usuário logado com foto do Google Workspace e **gestão de acesso com aprovação** (portal + e-mail, com auditoria).
 
 > Stack: Google Apps Script (HtmlService, CacheService, PropertiesService, MailApp, LockService, SpreadsheetApp, People API) · Elastic Security Detection Engine API (Kibana) · Elasticsearch `_search` · Elastic Cloud Billing API · Google Sheets · MITRE ATT&CK Enterprise v19.1 (15 táticas) · MITRE ATT&CK for ICS v20.0 (12 táticas).
 
@@ -22,13 +21,16 @@ Capa de apresentação, menu lateral expansível, carregador animado, **PT | EN*
 *Menu lateral expansível, atalhos de idioma/tema no topo e usuário logado. Aba SOC + CSIRT com rótulos por severidade no gráfico de incidentes.*
 
 ![Eng. Detecção](docs/17_eng_deteccao.png)
-*Eng. Detecção › Visão geral — casos de uso em produção, cobertura MITRE, alertas do ano e consumo de licença pela API de Billing, com Melhorias/Próximas ações (fatos do Elastic + nota do Admin).*
+*Eng. Detecção › Visão geral — casos em produção, cobertura MITRE e alertas pela API do Elastic.*
 
 ![Semáforo da licença](docs/18_semaforo_licenca.png)
-*Semáforo da licença — "Por que estourou?": média por dia × limite diário, diferença separada em máquinas (custo fixo por hora) e uso, composição por categoria e camadas de dados.*
+*Semáforo da licença — por que o consumo mudou, para onde vai e Top 5 de datasources por volume.*
+
+![Top 5 de datasources](docs/20_top5_eventos.png)
+*Top 5 de datasources com uma linha aberta: as regras que mais geram log no firewall, com contagem exata dos últimos 7 dias.*
 
 ![Inventário](docs/19_inventario.png)
-*Inventário › Servidores — CMDB × Cortex XDR × SIEM: universo, cobertura por fonte e lacunas que pedem ação.*
+*Inventário — CMDB × Cortex XDR × SIEM por hostname.*
 
 ![Vazamento de Credenciais](docs/10_vazamento_credenciais.png)
 *Vazamento de Credenciais — KPIs Corporativo × Externo, recomendações por mês, evolução, fonte do vazamento, família de stealer e status dos findings.*
@@ -87,6 +89,7 @@ Capa de apresentação, menu lateral expansível, carregador animado, **PT | EN*
    (/exec)           │     │                                               │
                      │     ├─ getCsirt()        ─► SpreadsheetApp ─────────┼──► Triage_AI + Detalhados_INC
                      │     ├─ getOperational()  ─► Kibana + ES + Billing ──┼──► regras, alertas, logs, licença (ECU)
+                     │     ├─ getDsEventos()    ─► Elasticsearch _search ──┼──► regras/eventos por datasource
                      │     ├─ getInventario()   ─► Elasticsearch _search ──┼──► CMDB × Cortex XDR × SIEM
                      │     ├─ getCoverage()     ─► Kibana Detection Engine ┼──► Elastic Security
                      │     ├─ getResonant()     ─► Elasticsearch _search ──┼──► data stream de credenciais
@@ -108,8 +111,7 @@ Menu lateral (recolhe para só ícones):
 | Item | Conteúdo |
 |---|---|
 | **SOC + CSIRT** | Visão geral · Falsos Positivos · Eficiência (seletor de período multi-mês próprio). |
-| **Eng. Detecção** | Visão geral · Detecção · Alertas · Capacidade & Ativos. |
-| **Cobertura MITRE** | Matriz ATT&CK · Resumo por tática · Gaps prioritários · Casos do mês. |
+| **Eng. Detecção** | Visão geral · Detecção · Alertas · Capacidade & Ativos · **Cobertura MITRE** (Matriz ATT&CK, resumo por tática, gaps prioritários, casos do mês). |
 | **Vazamento de Credenciais** | Seletor Ago/Set/Out/Todos; Corporativo × Externo. |
 | **Cyber OT** | Submenu: **Visão geral** (KPIs, recomendações, táticas ICS) · **Alertas** · **MITRE ATT&CK ICS** · **Ativos & Atividade** · **Saúde da integração**. Seletor de período comum a todas (Todos, últimos 3/6 meses, mês, De/Até); última tela lembrada no navegador. |
 | **Inventário** | Servidores: plataforma (Windows/Linux/Hypervisor), janela do SIEM (24 h / 7 dias), KPIs, lacunas e tabela pesquisável. |
@@ -130,6 +132,8 @@ Menu lateral (recolhe para só ícones):
 - **Alertas por mês** (ano do mês selecionado) e regras mais ruidosas; **fontes de log** das últimas 24 h.
 - **Licença (ECU)** pela API de Billing do Elastic Cloud: consumo real (sem projeção), mês corrente "até dd/mm".
 - **Semáforo explicativo** ("Por que estourou?"): média por dia × limite diário (teto ÷ dias do mês), diferença vs mês anterior separada em **máquinas** (custo fixo por hora; mostra se alguma mudou de tamanho ou só rodou mais horas) e **uso** (tráfego entre nós, snapshots, saída), composição por categoria com tamanho de cada nó, camadas de dados e parcela de IA.
+- **Top 5 de datasources por volume**: a API de Billing não separa por fonte, então o volume vem do tamanho dos índices (`_cat/indices`), rateado pelos meses em que cada índice esteve ativo. O % é a fatia do volume, não da fatura. O **mês fechado fica congelado**: o primeiro cálculo depois da virada é gravado (`OP_DS_MES_<AAAA-MM>`) e não muda mais; se o congelamento vier mais de 3 dias depois do fechamento, a tela avisa.
+- **Regras e eventos que mais geram log**: cada linha do Top 5 abre e mostra os 5 maiores do datasource, com **contagem exata dos últimos 7 dias** (sem amostragem e sem a camada Frozen) e a data da apuração. Mostra quantidade de eventos, não GB, e não acompanha o mês selecionado. A contagem é pesada, então `refreshDsEventos` roda em segundo plano, grava em `OP_DSEV_<nome>` e a tela só lê. Fontes atendidas: lista `OP_DS_EVT` no `Code.gs`.
 - **Melhorias / Próximas ações**: fatos automáticos do Elastic (regras criadas/alteradas/desligadas, técnicas novas, regras ruidosas, gaps MITRE) + nota editável por Admin, guardada por mês nas Propriedades do script.
 
 **Inventário**
@@ -152,6 +156,7 @@ Menu lateral (recolhe para só ícones):
 
 **Plataforma**
 - **Capa de apresentação** com menu interativo.
+- **Botão ↻** ao lado do idioma: refaz só a aba aberta e grava o cache (`forcarAtualizacao`); nova chamada em menos de 1 minuto devolve o cache.
 - **Menu lateral** expansível; preferência lembrada no navegador.
 - **Carregador** animado com o selo do painel enquanto os dados chegam.
 - **Usuário logado** com nome e foto do diretório (People API) — cai nas iniciais se a foto não estiver disponível.
@@ -169,6 +174,8 @@ Menu lateral (recolhe para só ícones):
 | **Incidentes** | Detalhados_INC | Linhas com severidade válida, por mês × severidade. |
 | **Alertas OT** | `logs-claroty_xdome.alert-claroty` | Únicos por `alert.id`, estado do doc mais recente; mês por `detected_time` (America/Sao_Paulo). |
 | **Eventos OT** | `logs-claroty_xdome.event-claroty` | `date_histogram` mensal de `@timestamp` × `source.device.type` × `destination.device.type` × `source.device.name`. |
+| **Top 5 por volume** | `_cat/indices` | Tamanho dos índices por `data_stream.dataset`, rateado por mês; % = fatia do total do mês. Mês fechado congelado. |
+| **Eventos por datasource** | Elasticsearch `_search` | `terms` por regra/evento nos últimos 7 dias, sem o Frozen; `shard_size` alto para não haver margem de erro (`doc_count_error_upper_bound`). Se houver margem, a tela a informa. |
 | **Credenciais expostas** | data stream de credenciais | Mês por `credential.created_at`; identidades únicas = `cardinality(user.email)`; senha fraca = `password_length < 8`. |
 
 ## Estrutura do projeto
@@ -186,7 +193,7 @@ No editor do Apps Script devem existir: `Code.gs`, um HTML chamado `Index` e o m
 ## Pré-requisitos
 
 - Google Workspace (deploy restrito ao domínio).
-- API key do Elastic com leitura das regras de detecção (MITRE) e `read` no data stream de credenciais (Vazamento de Credenciais).
+- API key do Elastic com leitura das regras de detecção (MITRE), `read` no data stream de credenciais (Vazamento de Credenciais), `read` em `logs-*` e `monitor` nos índices (Top 5 de datasources).
 - **Planilhas Google nativas** (não `.xlsx`) com as abas do modelo de dados.
 
 ## Configuração
@@ -234,7 +241,8 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 | Função | Frequência |
 |---|---|
 | `refreshCsirt` | a cada 2 h |
-| `refreshOperational` | a cada 1 h (regras, alertas e Billing) |
+| `refreshOperational` | a cada 1 h (regras, alertas e Billing; congela o Top 5 na virada do mês) |
+| `refreshDsEventos` | diário (regras e eventos por datasource; pode levar alguns minutos) |
 | `refreshInventario` | a cada 1–2 h |
 | `refreshCache` (MITRE) | a cada 1–6 h |
 | `refreshResonant` (credenciais) | a cada 2–6 h |
@@ -269,6 +277,8 @@ Depois, para publicar mudanças: **Gerenciar implantações → Editar → Nova 
 | `debugMonth()` | Regras do mês na cobertura MITRE. |
 | `debugOperacional()` | Cada fonte da Eng. Detecção, erros por fonte e regras sem tecnologia. |
 | `debugBilling()` | Formato da API de Billing, consumo por mês e itens/categorias de cobrança. |
+| `debugDatasources()` | Top 5 de datasources dos últimos meses e se a chave tem o privilégio `monitor`. |
+| `refreshDsEventos()` | Refaz a contagem por datasource; o log mostra tempo, total e margem de cada fonte. |
 | `debugInventario()` | Contagens da CMDB, do Cortex e do SIEM usadas no Inventário. |
 
 ## Cache versionado
@@ -281,7 +291,7 @@ O resultado carrega `CODE_VERSION` e as chaves de cache derivam dela; o leitor s
 |---|---|
 | **Triage_AI_Consolidado** | `Competência` · `Mês_Ref` · `Severidade` · `AI Veredict` · `Human Review?` · `MTTA` · `Offense started at` · `Criado` · `Resolvido` |
 | **Detalhados_INC_Consolidado** | `Competência` · `Mês_Ref` · `Severidade` · `mtta` · `mttr` · `offense id` · `platforma` |
-| **Elastic (Eng. Detecção)** | regras (`/api/detection_engine/rules/_find`), alertas (`signals/search` ou `.alerts-security.alerts-<space>`), `data_stream.dataset` das últimas 24 h |
+| **Elastic (Eng. Detecção)** | regras (`/api/detection_engine/rules/_find`), alertas (`signals/search` ou `.alerts-security.alerts-<space>`), `data_stream.dataset` das últimas 24 h, `_cat/indices` (volume por datasource) |
 | **Elastic Cloud Billing** | `/api/v1/billing/costs/{org}/charts` (ECU por mês) e `/items` (máquinas: `price`, `price_per_hour`, `hours`; uso: tráfego, snapshots) |
 | **Claroty xDome** | `claroty_xdome.alert.{id,friendly_name,type_name,category,status,detected_time,devices_count,ot_devices_count,it_devices_count,mitre_technique.ics.ids,mitre_technique.enterprise.ids}` · `event.severity` · `claroty_xdome.event.{type,source.device.type,source.device.name,destination.device.type}` · `error.message` |
 | **Data stream de credenciais** | `credential.created_at`, `user.email`, `user.domain`, `credential.has_password`, `credential.password_length`, `credential.national_id.*`, `resonant.source`, `resonant.stealer_family`, `resonant.finding.status` |
